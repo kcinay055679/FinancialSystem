@@ -1,4 +1,4 @@
-package Supermarket;
+package SupermarketPackage;
 
 public class Schüppercard {
     int points;

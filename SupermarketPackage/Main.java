@@ -1,4 +1,4 @@
-package Supermarket;
+package SupermarketPackage;
 
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -17,8 +17,8 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
-        Main.coop.createSubsidiary("FoodPalace", "Yanick", 555, true,"Thun");
-        Main.coop.createSubsidiary("Rudi's Fress Bude", "Marc", 26, true,"Thun");
+        coop.createSubsidiary("FoodPalace", "Yanick", 555, true,"Thun");
+        coop.createSubsidiary("Rudi's Fress Bude", "Marc", 26, true,"Thun");
 
         Functions.createShelf("FoodPalace");
         Functions.createShelf("Rudi's Fress Bude");

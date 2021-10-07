@@ -1,6 +1,6 @@
-package Supermarket;
+package SupermarketPackage;
 
-import static Supermarket.Main.*;
+import static SupermarketPackage.Main.*;
 
 import org.javatuples.Pair;
 import java.io.BufferedReader;
