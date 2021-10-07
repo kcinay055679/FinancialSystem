@@ -12,9 +12,16 @@ public class GUI {
     private JLabel nameLabel;
     private JLabel passwortLabel;
     private JPasswordField passwortLogin;
+    private JButton bestätigenButton;
 
     public GUI() {
 
+        bestätigenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -23,8 +30,8 @@ public class GUI {
         frame.setContentPane(new GUI().panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-
         frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }
