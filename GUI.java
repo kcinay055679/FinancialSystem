@@ -1,3 +1,5 @@
+import SupermarketPackage.SupermarketHandler;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -5,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class GUI {
     private JPanel panelMain;
@@ -19,12 +22,15 @@ public class GUI {
         bestätigenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(passwortLogin.getText());
+                System.out.println(SupermarketHandler.login(nameLogin.getText(), passwortLogin.getText()));
 
             }
         });
     }
 
     public static void main(String[] args) {
+        SupermarketHandler.setUp();;
         JFrame frame = new JFrame("Login System");
         frame.setResizable(true);
         frame.setContentPane(new GUI().panelMain);

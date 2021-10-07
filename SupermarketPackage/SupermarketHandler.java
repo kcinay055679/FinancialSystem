@@ -28,11 +28,7 @@ public class SupermarketHandler {
         SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", 1);
 
         SupermarketHandler.addPerson("Yanick", "password", "password", 0);
-        System.out.println(SupermarketHandler.checkPassword("Yanick", "passwor"));
-        System.out.println(SupermarketHandler.checkPassword("Yanick", "password"));
-        SupermarketHandler.changePassword("Yanick", "password", "newPassword", "newPassword");
-        System.out.println(SupermarketHandler.checkPassword("Yanick", "newPassword"));
-        System.out.println(SupermarketHandler.checkPassword("Yanick", "newPasswor"));
+
     }
 
     public static void customerJoinSubsidary(String customer, String subsidiary) {
@@ -172,11 +168,18 @@ public class SupermarketHandler {
         shop.employeeList.put(p.getName(), p);
     }
 
-    public static void login(String name, String password) {
+    public static boolean login(String name, String password) {
         if (persons.get(name) != null) {
             if (persons.get(name).checkPassword(password)) {
                 selectedUser = persons.get(name);
+            }else{
+                return false;
             }
+        }else{
+            return false;
         }
+        return selectedUser.getName().equals(name);
+
+
     }
 }
