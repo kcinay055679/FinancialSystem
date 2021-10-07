@@ -1,0 +1,74 @@
+package Supermarket;
+
+import org.javatuples.Pair;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Shelf {
+    Map<String, Pair<Article, Integer>> articleList = new HashMap<>();
+    public Map<String, Pair<Article, Integer>> getArticleList() {
+        return articleList;
+    }
+    private int ID;
+
+
+    public Shelf(int ID) {
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void addArticle(Article article, int amount) {
+        Pair<Article, Integer> articlePair = new Pair<>(article, amount);
+        articleList.put(article.getName(), articlePair);
+    }
+
+    public void removeArticle(String name) {
+        articleList.remove(name);
+    }
+
+    public Article getArticle(String name) {
+        if (articleList.get(name) == null) {
+            return null;
+        }
+        return articleList.get(name).getValue0();
+    }
+
+    public Pair<Article, Integer> getArticlePair(String name) {
+        return articleList.get(name);
+    }
+
+    public Pair<Article, Integer> takeArticle(String name, int amount) {
+        if (getArticlePair(name).getValue1() > amount) {
+            articleList.put(name, getArticlePair(name).setAt1(getArticleAmount(name) - amount));
+            return new Pair<Article, Integer>(getArticle(name), amount);
+        } else {
+            Pair<Article, Integer> articlePair = new Pair<Article, Integer>(getArticle(name), getArticleAmount(name));
+            removeArticle(name);
+            return articlePair;
+        }
+    }
+
+    public int getArticleAmount(String name) {
+        return getArticlePair(name).getValue1();
+    }
+
+    public void setArticleAmount(String name, int amount) {
+        articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), amount));
+    }
+
+    public void increaseArticleAmount(String name, int amount,boolean barcode,String articleType, String shopName) {
+        if (getArticle(name) == null) {
+            Article article = Main.coop.articleOfSortiment.get(name);
+            Functions.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName, ID);
+        } else {
+            articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() + amount));
+        }
+    }
+
+    public void decreaceArticleAmount(String name, int amount) {
+        articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() - amount));
+    }
+}
