@@ -62,7 +62,7 @@ public class Shelf {
     public void increaseArticleAmount(String name, int amount,boolean barcode,String articleType, String shopName) {
         if (getArticle(name) == null) {
             Article article = Main.coop.articleOfSortiment.get(name);
-            Functions.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName, ID);
+            SupermarketHandler.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName, ID);
         } else {
             articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() + amount));
         }

@@ -20,18 +20,21 @@ public class Main {
         coop.createSubsidiary("FoodPalace", "Yanick", 555, true,"Thun");
         coop.createSubsidiary("Rudi's Fress Bude", "Marc", 26, true,"Thun");
 
-        Functions.createShelf("FoodPalace");
-        Functions.createShelf("Rudi's Fress Bude");
-        Functions.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", 1);
-        Functions.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", 1);
-        Functions.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", 1);
-        Functions.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", 1);
+        SupermarketHandler.createShelf("FoodPalace");
+        SupermarketHandler.createShelf("Rudi's Fress Bude");
+        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", 1);
 
-        Functions.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", 1);
+        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", 1);
 
-        while (true) {
-            login();
-        }
+        SupermarketHandler.addPerson("Yanick", "password","password",0);
+        System.out.println(SupermarketHandler.checkPassword("Yanick","passwor"));
+        System.out.println(SupermarketHandler.checkPassword("Yanick","password"));
+//        while (true) {
+//            login();
+//        }
     }
 
     public static void login() throws IOException {
@@ -53,7 +56,7 @@ public class Main {
                     return;
                 }
                 if (persons.get(input) == null) {
-                    Functions.addPerson(input, 0);
+                    SupermarketHandler.addPerson(input, "", "",0);
                     selectedUser = persons.get(input);
                     menu();
                 } else {
@@ -259,8 +262,8 @@ public class Main {
                         int salary = Integer.parseInt(br.readLine());
 
                         p.setSalary(salary);
-                        Functions.addEmployeeToCompany(p.getName());
-                        Functions.hireEmployeeForShop(p.getName(), coop.chiefs.get(id).getValue1().getName());
+                        SupermarketHandler.addEmployeeToCompany(p.getName());
+                        SupermarketHandler.hireEmployeeForShop(p.getName(), coop.chiefs.get(id).getValue1().getName());
                         System.out.println(input + " wurde erfolgreich eingestellt" + "und hat einen Lohn von " + salary + " CHF");
                     } else {
                         System.out.println("Bitte gib einen korrekten Namen ein");
@@ -274,7 +277,7 @@ public class Main {
                     shop.getEmployeeList().values().forEach(person -> System.out.println(person.getName()));
                     System.out.println("Geben sie den Namen der Person ein die sie feuern möchten");
                     input = br.readLine();
-                    Functions.employeeLeave(input);
+                    SupermarketHandler.employeeLeave(input);
                     coop.employees.remove(input);
                     shop.getEmployeeList().remove(input);
 
@@ -314,11 +317,11 @@ public class Main {
 
             switch (input) {
                 case "1": {
-                    Functions.employeeEnter(selectedUser.getName());
+                    SupermarketHandler.employeeEnter(selectedUser.getName());
                     break;
                 }
                 case "2": {
-                    Functions.employeeLeave(selectedUser.getName());
+                    SupermarketHandler.employeeLeave(selectedUser.getName());
                     selectedUser.receiveSalary();
                     break;
                 }
@@ -380,7 +383,7 @@ public class Main {
                         Tablet tablet = new Tablet();
                         int shelfId = tablet.findArticle(articelName, shopName);
                         try {
-                            Functions.takeArticle(selectedUser.getName(), articelName, amount, shelfId);
+                            SupermarketHandler.takeArticle(selectedUser.getName(), articelName, amount, shelfId);
                             break;
                         } catch (NullPointerException e) {
                             System.out.println("Bitte geben sie einen korrekten Namen an");
@@ -414,12 +417,12 @@ public class Main {
                     String input2 = br.readLine();
                     switch (input2) {
                         case "1": {
-                            Functions.checkOut(selectedUser.getName(), shopName);
+                            SupermarketHandler.checkOut(selectedUser.getName(), shopName);
                             break;
                         }
                         case "2": {
                             if(selectedUser.getCurrentShop().isSelfCheckout()){
-                                Functions.selfCheckOut(selectedUser.getName(), selectedUser.getCurrentShop().getName());
+                                SupermarketHandler.selfCheckOut(selectedUser.getName(), selectedUser.getCurrentShop().getName());
                             }else{
                                 System.out.println("Leider verfügt dieser Laden über keine Self-Checkout Station");
                             }

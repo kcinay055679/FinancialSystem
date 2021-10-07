@@ -11,14 +11,14 @@ public class Supermarkt {
     public Map<Integer, Pair<Person,Subsidiary>>chiefs = new HashMap<>();
     public Map<String, Pair<Person,Subsidiary>> employees = new HashMap<>();
 
-    static Person CEO = new Person("Yanick Nils Minder", Integer.MAX_VALUE);
+
 
     public void createSubsidiary(String shopName, String chiefName, int chiefId,boolean selfCheckout,String place) {
         if (subsidiaryList.get(shopName) == null) {
             if(chiefs.get(chiefId) == null){
-                chiefs.put(chiefId, new Pair<>(new Person(chiefName, Integer.MAX_VALUE), null));
+                chiefs.put(chiefId, new Pair<>(new Person(chiefName,  "","",Integer.MAX_VALUE), null));
                 subsidiaryList.put(shopName, new Subsidiary(shopName, selfCheckout,  Place.valueOf(place.toUpperCase())));
-                chiefs.put(chiefId, new Pair<>(new Person(chiefName, Integer.MAX_VALUE), subsidiaryList.get(shopName)));
+                chiefs.put(chiefId, new Pair<>(new Person(chiefName, "","", Integer.MAX_VALUE), subsidiaryList.get(shopName)));
             }
         }else{
             System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator");

@@ -11,15 +11,20 @@ import java.util.stream.Collectors;
 
 
 
-public class Functions {
+public class SupermarketHandler {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void customerJoinSubsidary(String customer, String subsidiary) {
         Main.persons.get(customer).setShop(Main.coop.subsidiaryList.get(subsidiary));
     }
 
-    public static void addPerson(String name, int salary) {
-        Main.persons.put(name, new Person(name, salary));
+    public static void addPerson(String name,String password, String repeatPassword,int salary) {
+        if (password.equals(repeatPassword)) {
+            Main.persons.put(name, new Person(name,password, repeatPassword,salary));
+        }
+    }
+    public static boolean checkPassword(String personName, String password){
+        return persons.get(personName).checkPassword(password);
     }
 
     public static void takeArticle(String personName, String articleName, int amount, int shelfId) {
