@@ -19,7 +19,7 @@ public class SystemHandler {
         Person p = personList.get(name);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
-        supermarketChainMap.get(companyName).employees.put(p.getName(), new Pair<>(p, supermarketChainMap.get(companyName).shopList.get(null)));
+        supermarketChainMap.get(companyName).getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChainMap.get(companyName).getShopMap().get(null)));
     }
 
     public static Person getSelectedUser() {

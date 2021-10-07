@@ -46,9 +46,9 @@ public class Shelf {
     public Pair<Article, Integer> takeArticle(String name, int amount) {
         if (getArticlePair(name).getValue1() > amount) {
             articleList.put(name, getArticlePair(name).setAt1(getArticleAmount(name) - amount));
-            return new Pair<Article, Integer>(getArticle(name), amount);
+            return new Pair<>(getArticle(name), amount);
         } else {
-            Pair<Article, Integer> articlePair = new Pair<Article, Integer>(getArticle(name), getArticleAmount(name));
+            Pair<Article, Integer> articlePair = new Pair<>(getArticle(name), getArticleAmount(name));
             removeArticle(name);
             return articlePair;
         }
@@ -59,19 +59,19 @@ public class Shelf {
     }
 
     public void setArticleAmount(String name, int amount) {
-        articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), amount));
+        articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), amount));
     }
 
     public void increaseArticleAmount(String name, int amount,boolean barcode,String articleType, String shopName) {
         if (getArticle(name) == null) {
-            Article article = supermarketChain.articleOfSortiment.get(name);
+            Article article = supermarketChain.getArticleMap().get(name);
             SupermarketHandler.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName,supermarketChain.getName(), ID);
         } else {
-            articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() + amount));
+            articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), getArticlePair(name).getValue1() + amount));
         }
     }
 
-    public void decreaceArticleAmount(String name, int amount) {
-        articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() - amount));
+    public void decreaseArticleAmount(String name, int amount) {
+        articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), getArticlePair(name).getValue1() - amount));
     }
 }

@@ -2,15 +2,15 @@ package SupermarketPackage;
 
 import GameHandlerPackage.SystemHandler;
 import org.javatuples.Pair;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import static GameHandlerPackage.SystemHandler.*;
 
 public class SupermarketHandler {
-    
+
     public static void setUp() {
         SystemHandler.createSupermarketChain("coop");
 
@@ -19,20 +19,20 @@ public class SupermarketHandler {
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
-        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", "coop",1);
-        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace","coop", 1);
-        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", "coop",1);
-        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", "coop",1);
+        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", "coop", 1);
+        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", "coop", 1);
+        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", "coop", 1);
+        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", "coop", 1);
 
-        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", "coop",1);
+        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", "coop", 1);
 
         SupermarketHandler.addPerson("Yanick", "password", "password", 0);
 
     }
 
-    public static void customerJoinSubsidary(String personName, String shop) {
+    public static void customerJoinShop(String personName, String shop) {
         SupermarketChain supermarketChain = getPersonList().get(personName).getCurrentShop().getSupermarketChain();
-        getPersonList().get(personName).setShop(supermarketChain.shopList.get(shop));
+        getPersonList().get(personName).setShop(supermarketChain.getShopMap().get(shop));
     }
 
     public static void addPerson(String name, String password, String repeatPassword, int salary) {
@@ -57,58 +57,55 @@ public class SupermarketHandler {
         return getPersonList().get(name);
     }
 
-    public static void createArticle(String articleName, float price, int amount, boolean barcode, String articleType, String shopName, String supermarketChainName,int shelfId) {
-        SupermarketChain supermarketChain =  getSupermarketChainMap().get(supermarketChainName);
+    public static void createArticle(String articleName, float price, int amount, boolean barcode, String articleType, String shopName, String supermarketChainName, int shelfId) {
+        SupermarketChain supermarketChain = getSupermarketChainMap().get(supermarketChainName);
         articleName = articleName.toLowerCase().replace(" ", "");
-        if (supermarketChain.shopList.get(shopName).getShelfById(shelfId).getArticle(articleName) == null) {
-            supermarketChain.shopList.get(shopName).getShelfById(shelfId).addArticle(new Article(articleName, price, barcode, articleType), amount);
-            supermarketChain.shopList.get(shopName).getArticlePositionList().put(articleName, shelfId);
-            supermarketChain.articleOfSortiment.put(articleName, new Article(articleName, price, barcode, articleType));
+        if (supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).getArticle(articleName) == null) {
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).addArticle(new Article(articleName, price, barcode, articleType), amount);
+            supermarketChain.getShopMap().get(shopName).getArticlePositionList().put(articleName, shelfId);
+            supermarketChain.getArticleMap().put(articleName, new Article(articleName, price, barcode, articleType));
         } else {
-            supermarketChain.shopList.get(shopName).getShelfById(shelfId).increaseArticleAmount(articleName, amount, barcode, articleType, shopName);
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).increaseArticleAmount(articleName, amount, barcode, articleType, shopName);
         }
     }
 
     public static void createShelf(String shopName, String supermarketChainName) {
-        Shop test = getSupermarketChainMap().get(supermarketChainName).shopList.get(shopName);
+        Shop test = getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName);
         test.createShelf();
     }
 
-    public static void checkOut(String customerName, String shopName, String supermarketChainName ) {
-        getPersonList().get(customerName).getCurrentShop().getSupermarketChain().shopList.get(shopName).checkOut(getPersonList().get(customerName));
+    public static void checkOut(String customerName, String shopName, String supermarketChainName) {
+        getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
     }
 
-    public static void selfCheckOut(String customerName, String shopName) throws IOException {
+    public static void selfCheckOut(String customerName, String shopName) {
         int scannedArticles = 0;
         String input;
         int fullPrice = 0;
         input = "2";
         while (true) {
             switch (input) {
-                case "1": {
-                    getPersonList().get(customerName).getCurrentShop().getSupermarketChain().shopList.get(getSelectedUser().getCurrentShop().getName()).selfCheckOut(getSelectedUser(), fullPrice);
+                case "1" -> {
+                    getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(getSelectedUser().getCurrentShop().getName()).selfCheckOut(getSelectedUser(), fullPrice);
                     System.out.println("Sie haben für " + fullPrice + " CHF bei uns eingekauft");
                     System.out.println("Falls sie eine Schüpperkarte besitzen wurden ihnen diese Punkte gutgeschrieben");
                     return;
                 }
-                case "2": {
+                case "2" -> {
                     fullPrice += scan();
                     scannedArticles++;
                     System.out.println("sie haben " + scannedArticles + " Artikel gescannt");
                     System.out.println("Um zu bezahlen drücken sie die 1");
                     System.out.println("Um weiter zu scannen drücken sie die 2");
-
-                    break;
                 }
-                default: {
+                default -> {
                     System.out.println("Bitte geben sie einen gültigen Befehl ein");
-                    break;
                 }
             }
         }
     }
 
-    public static int scan() throws IOException {
+    public static int scan() {
 
         String input;
         int fullPrice = 0;
@@ -130,7 +127,6 @@ public class SupermarketHandler {
         System.out.println("Um den Scanvorgang abzubrechen bitte \"exit\" eingeben");
 
 
-
         Pair<Article, Integer> articlePair = getSelectedUser().getCart().getArticleList().get("Artikel2");
         //add Article
 
@@ -141,26 +137,24 @@ public class SupermarketHandler {
     }
 
     public static void employeeEnter(String personName) {
-        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().employees.get(personName).getValue1();
+        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
         shop.employeeJoined(getPersonList().get(personName));
     }
 
     public static void employeeLeave(String personName) {
-        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().employees.get(personName).getValue1();
+        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
         shop.employeeLeaved(personName);
     }
 
     public static Person[] getEmployeesOfShop(String shopName, String supermarketChainName) {
-        return getSupermarketChainMap().get(supermarketChainName).shopList.get(shopName).getEmployeeList().values().toArray(Person[]::new);
+        return getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName).getEmployeeList().values().toArray(Person[]::new);
     }
 
     public static void hireEmployeeForShop(String name, String shopName) {
-        SupermarketChain supermarketChain =  getPersonList().get(name).getCurrentShop().getSupermarketChain();
-        Person p = supermarketChain.employees.get(name).getValue0();
-        Shop shop = supermarketChain.shopList.get(shopName);
-        supermarketChain.employees.put(p.getName(), new Pair<>(p, supermarketChain.shopList.get(shopName)));
+        SupermarketChain supermarketChain = getPersonList().get(name).getCurrentShop().getSupermarketChain();
+        Person p = supermarketChain.getEmployeeMap().get(name).getValue0();
+        Shop shop = supermarketChain.getShopMap().get(shopName);
+        supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
     }
-
-
 }
