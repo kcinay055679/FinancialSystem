@@ -7,15 +7,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUI {
-    private JLabel loginLabel;
     private JPanel panelMain;
+    private JTextField nameLogin;
+    private JLabel nameLabel;
+    private JTextField passwortLogin;
+    private JLabel passwortLabel;
 
     public GUI() {
 
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("GUI");
+        JFrame frame = new JFrame("Login System");
         frame.setResizable(true);
         frame.setContentPane(new GUI().panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
