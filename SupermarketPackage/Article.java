@@ -1,9 +1,9 @@
 package SupermarketPackage;
 
 public class Article {
-    private String name;
     private float price;
     private boolean barcode;
+    private String name;
     private ArticleType articleType;
 
     public Article(String name, float price, boolean barcode, String articleSort) {

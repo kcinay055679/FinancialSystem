@@ -1,5 +1,6 @@
 package SupermarketPackage;
 
+import GameHandlerPackage.Place;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
@@ -7,16 +8,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Subsidiary {
+public class Shop {
 
-    Map<String, Person> employeeList = new HashMap<>();
-    Map<String, Person> presentEmployees = new HashMap<>();
-    Map<String, Integer> articlePositions = new HashMap<>();
-    Map<Integer, Shelf> shelfList = new HashMap<>();
-
-    private final String name;
     private final boolean selfCheckout;
+    private final String name;
     private final Place place;
+    private final SupermarketChain supermarketChain;
+    private final Map<String, Person> employeeList = new HashMap<>();
+    private final Map<String, Person> presentEmployeeList = new HashMap<>();
+    private final Map<String, Integer> articlePositionList = new HashMap<>();
+    private final Map<Integer, Shelf> shelfList = new HashMap<>();
+
+    public SupermarketChain getSupermarketChain() {
+        return supermarketChain;
+    }
+
+    private Person chief;
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public Person getChief() {
+        return chief;
+    }
+
+    public void setChief(Person chief) {
+        this.chief = chief;
+    }
+
+    public Shop(String name, boolean selfCheckout, SupermarketChain supermarketChain, Place place, Person chief) {
+        this.name = name;
+        this.selfCheckout = selfCheckout;
+        this.supermarketChain = supermarketChain;
+        this.place = place;
+        this.chief = chief;
+    }
+
+    public Map<String, Person> getPresentEmployees() {
+        return presentEmployeeList;
+    }
+
+    public Map<String, Integer> getArticlePositionList() {
+        return articlePositionList;
+    }
+
+    public Map<Integer, Shelf> getShelfList() {
+        return shelfList;
+    }
 
     public boolean isSelfCheckout() {
         return selfCheckout;
@@ -26,12 +65,6 @@ public class Subsidiary {
         return name;
     }
 
-    public Subsidiary(String name, boolean selfCheckout, Place place) {
-        this.name = name;
-        this.selfCheckout = selfCheckout;
-        this.place = place;
-    }
-
     public void addArticle(Article article, int amount, int shelfId) {
         Pair<Article, Integer> articlePair = new Pair<>(article, amount);
         shelfList.get(shelfId).getArticleList().put(article.getName(), articlePair);
@@ -39,7 +72,7 @@ public class Subsidiary {
 
     public void createShelf() {
         int id = shelfList.size() + 1;
-        shelfList.put(id, new Shelf(id));
+        shelfList.put(id, new Shelf(id, this));
     }
 
     public Shelf getShelfById(int id) {
@@ -68,12 +101,12 @@ public class Subsidiary {
     }
 
     public void employeeJoined(Person employee) {
-        presentEmployees.putIfAbsent(employee.getName(), employee);
+        presentEmployeeList.putIfAbsent(employee.getName(), employee);
     }
 
     public void employeeLeaved(String employee) {
-        if(presentEmployees.get(employee).getName().equals(employee)) {
-            presentEmployees.remove(employee);
+        if (presentEmployeeList.get(employee).getName().equals(employee)) {
+            presentEmployeeList.remove(employee);
         }
     }
 

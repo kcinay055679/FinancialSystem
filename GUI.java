@@ -22,9 +22,12 @@ public class GUI {
         bestätigenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(passwortLogin.getText());
-                System.out.println(SupermarketHandler.login(nameLogin.getText(), passwortLogin.getText()));
+                StringBuilder out = new StringBuilder();
+                for (char word : passwortLogin.getPassword()) {
+                    out.append(word).append(" ");
+                }
 
+                System.out.println(SupermarketHandler.login(nameLogin.getText(), out.toString()));
             }
         });
     }

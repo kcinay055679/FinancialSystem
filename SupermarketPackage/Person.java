@@ -1,23 +1,27 @@
 package SupermarketPackage;
 
+import GameHandlerPackage.Company;
+import GameHandlerPackage.Rank;
 import org.javatuples.Pair;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class Person {
-    private final String name;
     private int salary;
     private int money;
-    private String password;
-    private Subsidiary currentShop;
+    private final String name;
+    private byte[] hashedPassword;
+
+    private Company company;
+    private Rank rank;
+    private Shop currentShop;
     private Schüppercard card;
     private final ShoppingCart cart = new ShoppingCart();
-    private byte[] hashedPassword;
-    MessageDigest digest;
+    private MessageDigest digest;
+
     {
         try {
             digest = MessageDigest.getInstance("SHA-256");
@@ -26,35 +30,51 @@ public class Person {
         }
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    public Company getWorkPlace() {
+        return company;
+    }
+
+    public void setWorkPlace(Company company) {
+        this.company = company;
+    }
+
     public Person(String name, String password, String repeatPassword, int salary) {
         this.name = name;
         this.salary = salary;
-        this.money = salary*5;
-
+        this.money = salary * 5;
         setPassword(password, repeatPassword);
-
     }
 
     public void setPassword(String password, String repeatPassword) {
-
+        if (password.equals(repeatPassword)) {
             hashedPassword = hashPassword(password);
+        } else {
+            throw new SecurityException();
+        }
+
     }
 
     public byte[] hashPassword(String password) {
         return digest.digest(password.getBytes(StandardCharsets.UTF_8));
     }
 
-    public void changePassword(String oldPassword, String newPassword, String newPasswordRepeat){
-        if (Arrays.equals(hashPassword(oldPassword), hashedPassword) && newPassword.equals(newPasswordRepeat)){
+    public void changePassword(String oldPassword, String newPassword, String newPasswordRepeat) {
+        if (Arrays.equals(hashPassword(oldPassword), hashedPassword) && newPassword.equals(newPasswordRepeat)) {
             hashedPassword = hashPassword(newPassword);
         }
     }
 
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password) {
         return Arrays.equals(hashPassword(password), hashedPassword);
     }
-
-
 
     public int getSalary() {
         return salary;
@@ -62,7 +82,7 @@ public class Person {
 
     public void setSalary(int salary) {
         this.salary = salary;
-        money += salary*5;
+        money += salary * 5;
     }
 
     public Schüppercard getCard() {
@@ -81,7 +101,7 @@ public class Person {
         this.money += money;
     }
 
-    public Subsidiary getCurrentShop() {
+    public Shop getCurrentShop() {
         return currentShop;
     }
 
@@ -110,7 +130,7 @@ public class Person {
         cart.addArticle(articlePair);
     }
 
-    public void setShop(Subsidiary shop) {
+    public void setShop(Shop shop) {
         currentShop = shop;
     }
 
@@ -122,8 +142,7 @@ public class Person {
         this.increaseMoney(getCard().getPoints() / 100);
     }
 
-    public void receiveSalary(){
-        money+=salary;
+    public void receiveSalary() {
+        money += salary;
     }
-
 }
