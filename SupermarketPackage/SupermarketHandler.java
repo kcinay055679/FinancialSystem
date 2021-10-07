@@ -13,6 +13,8 @@ public class SupermarketHandler {
 
     public static void setUp() {
         SystemHandler.createSupermarketChain("coop");
+        SystemHandler.createSupermarketChain("migros");
+        SystemHandler.createSupermarketChain("aldi");
 
         SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", "Yanick", 555, true, "Thun");
         SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", "Marc", 26, true, "Thun");

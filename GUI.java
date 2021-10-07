@@ -8,13 +8,7 @@ import SupermarketPackage.SupermarketHandler;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class GUI {
 
@@ -38,12 +32,15 @@ public class GUI {
     private JButton personalienAnzeigenButton;
     private JButton schüpercardButton;
     private JButton ausloggenButton;
+    private JRadioButton migrosRadioButton;
+    private JRadioButton coopRadioButton;
+    private JRadioButton aldiRadioButton;
+    private JPanel Filiale;
+    private JComboBox comboBox1;
 
     //Komponente des Panels 3
-    private JRadioButton migrosRadioButton1;
-    private JRadioButton migrosRadioButton2;
-    private JRadioButton migrosRadioButton3;
     public static JFrame frame = new JFrame("Login System");
+
 
     public GUI() {
         invisibler();
@@ -59,11 +56,41 @@ public class GUI {
 
             }
         });
+
+        //Der Kunde betritt die Filiale
+        //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
         filialeBetretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Filialebetreten.setVisible(true);
+            }
+        });
+
+        //Mit diesen Buttons bestimmt man den die gewollte Filiale
+        migrosRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Hier gehts ins Migros
+                String company = "Migros";
+            }
+        });
+
+        coopRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Hier gehts ins Coop
+                String company = "Coop";
+            }
+
+
+        });
+
+        aldiRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Hier gehts in den Aldi
+                String company = "Aldi";
             }
         });
     }
@@ -83,5 +110,11 @@ public class GUI {
         frame.setSize(600, 500);
         frame.setLocationRelativeTo((Component)null);
         frame.setVisible(true);
+    }
+
+    public void fillDropdown(String companyName) {
+        for(String key : SystemHandler.getCompanyMap().keySet()) {
+
+        }
     }
 }
