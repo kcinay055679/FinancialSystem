@@ -5,15 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Shelf {
-    Map<String, Pair<Article, Integer>> articleList = new HashMap<>();
+    private final int ID;
+    private final Shop shop;
+    public final SupermarketChain supermarketChain;
+    private final Map<String, Pair<Article, Integer>> articleList = new HashMap<>();
     public Map<String, Pair<Article, Integer>> getArticleList() {
         return articleList;
     }
-    private int ID;
 
-
-    public Shelf(int ID) {
+    public Shelf(int ID, Shop shop) {
         this.ID = ID;
+        this.shop = shop;
+        this.supermarketChain = shop.getSupermarketChain();
     }
 
     public int getID() {
@@ -61,8 +64,8 @@ public class Shelf {
 
     public void increaseArticleAmount(String name, int amount,boolean barcode,String articleType, String shopName) {
         if (getArticle(name) == null) {
-            Article article = Main.coop.articleOfSortiment.get(name);
-            SupermarketHandler.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName, ID);
+            Article article = supermarketChain.articleOfSortiment.get(name);
+            SupermarketHandler.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName,supermarketChain.getName(), ID);
         } else {
             articleList.put(getArticle(name).getName(), new Pair<Article, Integer>(getArticle(name), getArticlePair(name).getValue1() + amount));
         }
