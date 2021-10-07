@@ -17,24 +17,7 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
-        coop.createSubsidiary("FoodPalace", "Yanick", 555, true,"Thun");
-        coop.createSubsidiary("Rudi's Fress Bude", "Marc", 26, true,"Thun");
-
-        SupermarketHandler.createShelf("FoodPalace");
-        SupermarketHandler.createShelf("Rudi's Fress Bude");
-        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", 1);
-        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", 1);
-        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", 1);
-        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", 1);
-
-        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", 1);
-
-        SupermarketHandler.addPerson("Yanick", "password","password",0);
-        System.out.println(SupermarketHandler.checkPassword("Yanick","passwor"));
-        System.out.println(SupermarketHandler.checkPassword("Yanick","password"));
-        SupermarketHandler.changePassword("Yanick", "password","newPassword","newPassword");
-        System.out.println(SupermarketHandler.checkPassword("Yanick","newPassword"));
-        System.out.println(SupermarketHandler.checkPassword("Yanick","newPasswor"));
+        //SupermarketHandler.setUp();
 //        while (true) {
 //            login();
 //        }

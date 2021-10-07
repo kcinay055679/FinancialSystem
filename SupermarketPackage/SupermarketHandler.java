@@ -3,6 +3,7 @@ package SupermarketPackage;
 import static SupermarketPackage.Main.*;
 
 import org.javatuples.Pair;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,23 +11,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-
 public class SupermarketHandler {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    public static void setUp() {
+        coop.createSubsidiary("FoodPalace", "Yanick", 555, true, "Thun");
+        coop.createSubsidiary("Rudi's Fress Bude", "Marc", 26, true, "Thun");
+
+        SupermarketHandler.createShelf("FoodPalace");
+        SupermarketHandler.createShelf("Rudi's Fress Bude");
+        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", 1);
+        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", 1);
+
+        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", 1);
+
+        SupermarketHandler.addPerson("Yanick", "password", "password", 0);
+        System.out.println(SupermarketHandler.checkPassword("Yanick", "passwor"));
+        System.out.println(SupermarketHandler.checkPassword("Yanick", "password"));
+        SupermarketHandler.changePassword("Yanick", "password", "newPassword", "newPassword");
+        System.out.println(SupermarketHandler.checkPassword("Yanick", "newPassword"));
+        System.out.println(SupermarketHandler.checkPassword("Yanick", "newPasswor"));
+    }
 
     public static void customerJoinSubsidary(String customer, String subsidiary) {
         Main.persons.get(customer).setShop(Main.coop.subsidiaryList.get(subsidiary));
     }
 
-    public static void addPerson(String name,String password, String repeatPassword,int salary) {
+    public static void addPerson(String name, String password, String repeatPassword, int salary) {
         if (password.equals(repeatPassword)) {
-            Main.persons.put(name, new Person(name,password, repeatPassword,salary));
+            Main.persons.put(name, new Person(name, password, repeatPassword, salary));
         }
     }
-    public static boolean checkPassword(String personName, String password){
+
+    public static boolean checkPassword(String personName, String password) {
         return persons.get(personName).checkPassword(password);
     }
-    public static void changePassword(String personName, String oldPassword, String newPassword, String repeatNewPassword){
+
+    public static void changePassword(String personName, String oldPassword, String newPassword, String repeatNewPassword) {
         persons.get(personName).changePassword(oldPassword, newPassword, repeatNewPassword);
     }
 
@@ -147,5 +170,13 @@ public class SupermarketHandler {
         Subsidiary shop = coop.subsidiaryList.get(shopName);
         coop.employees.put(p.getName(), new Pair<>(p, coop.subsidiaryList.get(shopName)));
         shop.employeeList.put(p.getName(), p);
+    }
+
+    public static void login(String name, String password) {
+        if (persons.get(name) != null) {
+            if (persons.get(name).checkPassword(password)) {
+                selectedUser = persons.get(name);
+            }
+        }
     }
 }
