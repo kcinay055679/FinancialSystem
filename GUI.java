@@ -1,3 +1,4 @@
+import GameHandlerPackage.SystemHandler;
 import SupermarketPackage.SupermarketHandler;
 
 import javax.imageio.ImageIO;
@@ -27,7 +28,7 @@ public class GUI {
                     out.append(word).append(" ");
                 }
 
-                System.out.println(SupermarketHandler.login(nameLogin.getText(), out.toString()));
+                System.out.println(SystemHandler.login(nameLogin.getText(), out.toString()));
             }
         });
     }
