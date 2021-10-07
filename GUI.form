@@ -27,6 +27,7 @@
         </constraints>
         <properties>
           <background color="-5776138"/>
+          <font name="DejaVu Sans Mono" size="20"/>
           <labelFor value="60622"/>
           <text value="Passwort"/>
         </properties>
@@ -37,6 +38,7 @@
         </constraints>
         <properties>
           <background color="-7798781"/>
+          <font name="DejaVu Sans Mono" size="20"/>
           <labelFor value="b13a8"/>
           <text value="Benutzername"/>
         </properties>
@@ -49,7 +51,9 @@
             <maximum-size width="350" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
     </children>
   </grid>

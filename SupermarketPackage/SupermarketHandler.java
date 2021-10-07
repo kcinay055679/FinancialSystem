@@ -26,6 +26,10 @@ public class SupermarketHandler {
     public static boolean checkPassword(String personName, String password){
         return persons.get(personName).checkPassword(password);
     }
+    public static void changePassword(String personName, String oldPassword, String newPassword, String repeatNewPassword){
+        persons.get(personName).changePassword(oldPassword, newPassword, repeatNewPassword);
+    }
+
 
     public static void takeArticle(String personName, String articleName, int amount, int shelfId) {
         Main.persons.get(personName).takeArticle(articleName, amount, shelfId);

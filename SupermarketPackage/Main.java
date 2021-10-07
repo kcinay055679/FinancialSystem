@@ -32,6 +32,9 @@ public class Main {
         SupermarketHandler.addPerson("Yanick", "password","password",0);
         System.out.println(SupermarketHandler.checkPassword("Yanick","passwor"));
         System.out.println(SupermarketHandler.checkPassword("Yanick","password"));
+        SupermarketHandler.changePassword("Yanick", "password","newPassword","newPassword");
+        System.out.println(SupermarketHandler.checkPassword("Yanick","newPassword"));
+        System.out.println(SupermarketHandler.checkPassword("Yanick","newPasswor"));
 //        while (true) {
 //            login();
 //        }
