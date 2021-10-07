@@ -10,8 +10,8 @@ public class GUI {
     private JPanel panelMain;
     private JTextField nameLogin;
     private JLabel nameLabel;
-    private JTextField passwortLogin;
     private JLabel passwortLabel;
+    private JPasswordField passwortLogin;
 
     public GUI() {
 
