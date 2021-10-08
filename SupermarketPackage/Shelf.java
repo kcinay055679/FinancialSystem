@@ -52,7 +52,7 @@ public class Shelf {
             return new Pair<>(getArticle(name), amount);
         } else {
             Pair<Article, Integer> articlePair = new Pair<>(getArticle(name), getArticleAmount(name));
-            removeArticle(name);
+            articleList.put(name, getArticlePair(name).setAt1(0));
             return articlePair;
         }
     }
