@@ -6,14 +6,12 @@
 import GameHandlerPackage.*;
 import SupermarketPackage.*;
 
-import static GameHandlerPackage.SystemHandler.*;
-
+import SupermarketPackage.Articles.Article;
 import org.javatuples.Triplet;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -50,7 +48,7 @@ public class GUI {
     private JRadioButton aldiRadioButton;
     //private JPanel Filiale;
     private JComboBox comboBox1;
-    private JButton TabletArtikelFIliale;
+    private JButton TabletMenuArtikelFIliale;
     private JPanel Tablet;
     private JPanel TabletÜbersicht;
     private JPanel TabletArtikelSupermarkt;
@@ -61,6 +59,11 @@ public class GUI {
     private JLabel ArtikelFindenOutput;
     private JButton artikelInDenWarenkorbButton;
     private JButton bestätigenButton1;
+    private JComboBox TabletArtikelTypWählen;
+    private JButton TabletMenuArtikelName;
+    private JScrollBar scrollBar1;
+    private JComboBox TabletFilialeWählen;
+    private JButton TabletMenuArtikelTyp;
 
     //Hashmapp für die Produkte in einem Laden
     HashMap<String, Integer> produkte = new HashMap<String, Integer>();
@@ -112,7 +115,6 @@ public class GUI {
             }
         });
 
-
         //Der Kunde betritt die Filiale
         //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
         filialeBetretenButton.addActionListener(new ActionListener() {
@@ -144,8 +146,6 @@ public class GUI {
                 Filiale.setVisible(true);
                 fillDropdownWithShops(currentCompany, comboBox1);
             }
-
-
         });
 
         aldiRadioButton.addActionListener(new ActionListener() {
@@ -159,7 +159,6 @@ public class GUI {
             }
         });
 
-
         tabletBenutzenButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -167,7 +166,6 @@ public class GUI {
                 invisibler();
                 Tablet.setVisible(true);
                 TabletArtikelSupermarkt.setVisible(false);
-
             }
         });
 
@@ -178,24 +176,6 @@ public class GUI {
                 TabletArtikelSupermarkt.setVisible(true);
                 fillDropdownWithSupermarkets(TabletArtikelSupermarktSupermarktWählen);
                 //fillDropdownWithShops(currentCompany, );
-            }
-        });
-
-        //Dieser Button bestätigt die ausgewählte Filiale
-        bestätigenButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(comboBox1.getSelectedItem().toString());
-                generateProducts(comboBox1.getSelectedItem().toString());
-                invisibler();
-                Warenkorb.setVisible(true);
-            }
-        });
-
-        //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
-        artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
             }
         });
 
@@ -211,7 +191,6 @@ public class GUI {
         TabletArtikelSupermarktArtikelWählen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e){
-
             }
         });
 
@@ -232,10 +211,25 @@ public class GUI {
                 ArtikelFindenOutput.setText(output.toString());
             }
         });
+
+        //Dieser Button bestätigt die ausgewählte Filiale
+        bestätigenButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(comboBox1.getSelectedItem().toString());
+                generateProducts(comboBox1.getSelectedItem().toString());
+                invisibler();
+                Warenkorb.setVisible(true);
+            }
+        });
+
+        //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
+        artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
     }
-
-
-
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
@@ -314,6 +308,4 @@ public class GUI {
         Tablet.setVisible(false);
         Warenkorb.setVisible(false);
     }
-
-
 }

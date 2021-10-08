@@ -2,6 +2,7 @@ package SupermarketPackage;
 
 import GameHandlerPackage.Company;
 import GameHandlerPackage.Rank;
+import SupermarketPackage.Articles.Article;
 import org.javatuples.Pair;
 
 import java.nio.charset.StandardCharsets;

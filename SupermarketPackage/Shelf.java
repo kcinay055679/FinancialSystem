@@ -1,5 +1,8 @@
 package SupermarketPackage;
 
+import SupermarketPackage.Articles.Article;
+import SupermarketPackage.Articles.BuildingMaterial;
+import SupermarketPackage.Articles.Food;
 import org.javatuples.Pair;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,10 +65,19 @@ public class Shelf {
         articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), amount));
     }
 
-    public void increaseArticleAmount(String name, int amount,boolean barcode,String articleType, String shopName) {
+    public void increaseArticleAmountFood(String name, int amount) {
         if (getArticle(name) == null) {
-            Article article = supermarketChain.getArticleMap().get(name);
-            SupermarketHandler.createArticle(article.getName(), article.getPrice(), amount,barcode,articleType, shopName,supermarketChain.getName(), ID);
+            Food article = (Food) supermarketChain.getArticleMap().get(name);
+            SupermarketHandler.createFood(article.getName(), article.getPrice(), amount, article.isBarcode(),article.getGram(), article.getArticleType(), shop.getName(),supermarketChain.getName(), ID);
+        } else {
+            articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), getArticlePair(name).getValue1() + amount));
+        }
+    }
+
+    public void increaseArticleAmountBuildingMaterial(String name, int amount ) {
+        if (getArticle(name) == null) {
+            BuildingMaterial article = (BuildingMaterial) supermarketChain.getArticleMap().get(name);
+            SupermarketHandler.createBuildingMaterial(article.getName(), article.getPrice(), amount,article.isBarcode(), shop.getName(), article.getTons() ,article.getMaterial().toString(), supermarketChain.getName(), ID);
         } else {
             articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), getArticlePair(name).getValue1() + amount));
         }

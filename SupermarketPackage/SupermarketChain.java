@@ -2,6 +2,7 @@ package SupermarketPackage;
 
 import GameHandlerPackage.Company;
 import GameHandlerPackage.Place;
+import SupermarketPackage.Articles.Article;
 import org.javatuples.Pair;
 
 import java.util.HashMap;

@@ -1,5 +1,6 @@
 package SupermarketPackage;
 
+import SupermarketPackage.Articles.Article;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Tablet {
         for (Shop shop : getSupermarketChainMap().get(supermarketChainName).getShopMap().values()) {
             for (Shelf s : shop.getShelfList().values()) {
                 for (Pair<Article, Integer> a : s.getArticleList().values()) {
-                    if (a.getValue0().getArticleType() == ArticleType.valueOf(articleType.toUpperCase())) {
+                    if (a.getValue0().getArticleType().toUpperCase().equals(articleType.toUpperCase())) {
                         foundArticles.add(new Triplet<>(shop, a.getValue0(), a.getValue1()));
                     }
                 }

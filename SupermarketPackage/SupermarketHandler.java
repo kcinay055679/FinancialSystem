@@ -1,9 +1,11 @@
 package SupermarketPackage;
 
 import GameHandlerPackage.SystemHandler;
+import SupermarketPackage.Articles.Article;
+import SupermarketPackage.Articles.BuildingMaterial;
+import SupermarketPackage.Articles.Food;
 import org.javatuples.Pair;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +27,16 @@ public class SupermarketHandler {
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
-        SupermarketHandler.createArticle("Steak", 5F, 24, true, "food", "FoodPalace", "coop", 1);
-        SupermarketHandler.createArticle("Artikel2", 20F, 6, true, "food", "FoodPalace", "coop", 1);
-        SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", "coop", 1);
-        SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", "coop", 1);
+        SupermarketHandler.createFood("Steak", 5F, 12, true, 5000,"20/10/2021","FoodPalace", "coop", 1);
+        SupermarketHandler.createBuildingMaterial("Artikel2", 20F, 6, true , "FoodPalace", 2,"iron","coop", 1);
+        SupermarketHandler.createBuildingMaterial("Artikel3", 30F, 4, false , "FoodPalace", 2, "wood","coop", 1);
+        SupermarketHandler.createBuildingMaterial("Artikel4", 40F, 3, false, "FoodPalace",2, "wood", "coop", 1);
 
         SupermarketHandler.createShelf("FoodPalace", "migros");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "migros");
-        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "FoodPalace", "migros", 1);
+        SupermarketHandler.createFood("Steak", 5F, 12, true, 5000,"20/10/2021", "FoodPalace", "migros", 1);
 
-        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", "coop", 1);
+        SupermarketHandler.createFood("Steak", 5F, 12, true, 5000,"20/10/2021","Rudi's Fress Bude", "coop", 1);
 
         SupermarketHandler.addPerson("Yanick", "password", "password", 0);
         SupermarketHandler.addPerson("", "", "", 0);
@@ -68,15 +70,27 @@ public class SupermarketHandler {
         return getPersonList().get(name);
     }
 
-    public static void createArticle(String articleName, float price, int amount, boolean barcode, String articleType, String shopName, String supermarketChainName, int shelfId) {
+    public static void createFood(String articleName, float price, int amount, boolean barcode, int gram, String expirationDate, String shopName, String supermarketChainName, int shelfId) {
         SupermarketChain supermarketChain = getSupermarketChainMap().get(supermarketChainName);
         articleName = articleName.toLowerCase().replace(" ", "");
         if (supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).getArticle(articleName) == null) {
-            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).addArticle(new Article(articleName, price, barcode, articleType), amount);
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).addArticle(new Food(articleName, price, barcode, gram, expirationDate), amount);
             supermarketChain.getShopMap().get(shopName).getArticlePositionList().put(articleName, shelfId);
-            supermarketChain.getArticleMap().put(articleName, new Article(articleName, price, barcode, articleType));
+            supermarketChain.getArticleMap().put(articleName, new Food(articleName, price, barcode, gram, expirationDate));
         } else {
-            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).increaseArticleAmount(articleName, amount, barcode, articleType, shopName);
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).increaseArticleAmountFood(articleName, amount);
+        }
+    }
+
+    public static void createBuildingMaterial(String articleName, float price, int amount, boolean barcode, String shopName, int tons, String material, String supermarketChainName, int shelfId) {
+        SupermarketChain supermarketChain = getSupermarketChainMap().get(supermarketChainName);
+        articleName = articleName.toLowerCase().replace(" ", "");
+        if (supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).getArticle(articleName) == null) {
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).addArticle(new BuildingMaterial(articleName, price, barcode, tons, material), amount);
+            supermarketChain.getShopMap().get(shopName).getArticlePositionList().put(articleName, shelfId);
+            supermarketChain.getArticleMap().put(articleName, new BuildingMaterial(articleName, price, barcode, tons, material));
+        } else {
+            supermarketChain.getShopMap().get(shopName).getShelfById(shelfId).increaseArticleAmountBuildingMaterial(articleName, amount);
         }
     }
 

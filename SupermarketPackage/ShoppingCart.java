@@ -1,5 +1,6 @@
 package SupermarketPackage;
 
+import SupermarketPackage.Articles.Article;
 import org.javatuples.Pair;
 
 import java.util.HashMap;
