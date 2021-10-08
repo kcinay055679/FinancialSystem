@@ -86,6 +86,7 @@ public class GUI {
                 String company = "coop";
                 invisibler();
                 Filiale.setVisible(true);
+                fillDropdown(company);
             }
 
 
@@ -98,6 +99,7 @@ public class GUI {
                 String company = "aldi";
                 invisibler();
                 Filiale.setVisible(true);
+                fillDropdown(company);
             }
         });
     }
@@ -127,7 +129,7 @@ public class GUI {
                     comboBox1.addItem(key2);
                 }
             } else {
-                System.out.println("Andere Kette");
+                System.out.println("Ein Fehler ist aufgetreten Siuuuuu");
             }
         }
     }
