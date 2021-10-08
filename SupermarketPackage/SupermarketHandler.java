@@ -30,6 +30,10 @@ public class SupermarketHandler {
         SupermarketHandler.createArticle("Artikel3", 30F, 4, false, "food", "FoodPalace", "coop", 1);
         SupermarketHandler.createArticle("Artikel4", 40F, 3, false, "food", "FoodPalace", "coop", 1);
 
+        SupermarketHandler.createShelf("FoodPalace", "migros");
+        SupermarketHandler.createShelf("Rudi's Fress Bude", "migros");
+        SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "FoodPalace", "migros", 1);
+
         SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", "coop", 1);
 
         SupermarketHandler.addPerson("Yanick", "password", "password", 0);

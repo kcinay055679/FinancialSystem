@@ -4,10 +4,15 @@
 //
 
 import GameHandlerPackage.SystemHandler;
+import SupermarketPackage.Article;
 import SupermarketPackage.SupermarketHandler;
-import java.awt.Component;
+import org.javatuples.Pair;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 public class GUI {
@@ -24,6 +29,8 @@ public class GUI {
     private JPanel Loginpanel;
     private JPanel Dashboardpanel;
     private JPanel Filialebetreten;
+    private JPanel Filiale;
+    private JPanel Warenkorb;
 
     //Komponente des zweiten Panels
     private JLabel welcomeText;
@@ -35,20 +42,26 @@ public class GUI {
     private JRadioButton migrosRadioButton;
     private JRadioButton coopRadioButton;
     private JRadioButton aldiRadioButton;
-    private JPanel Filiale;
     private JComboBox comboBox1;
+    private JButton artikelInDenWarenkorbButton;
+    private JPanel ArtikelPanel;
+    private JButton bestätigenButton1;
+
+    //Globale Variabeln
+    private String currentCompany;
 
     //Komponente des Panels 3
-    public static JFrame frame = new JFrame("Yanick und Mars Wirtschaftspass");
+    public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftspass");
 
-
+    //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
         invisibler();
         this.Loginpanel.setVisible(true);
+
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(GUI.this.passwortLogin.getText());
-                if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                if(SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                     System.out.println("Hey hou let's go");
                     invisibler();
                     Dashboardpanel.setVisible(true);
@@ -56,6 +69,33 @@ public class GUI {
 
             }
         });
+
+        //Key listener wenn das Passwort angegeben wurde und Enter gedrückt wird
+        passwortLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    System.out.println("Hey hou let's go");
+                    invisibler();
+                    Dashboardpanel.setVisible(true);
+                }
+                super.keyPressed(e);
+            }
+        });
+
+        //Falls der Benutzer schon beim Benutzernamen Enter drückt, oder diesen noch ändern muss
+        nameLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    System.out.println("Hey hou let's go");
+                    invisibler();
+                    Dashboardpanel.setVisible(true);
+                }
+                super.keyPressed(e);
+            }
+        });
+
 
         //Der Kunde betritt die Filiale
         //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
@@ -72,10 +112,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Migros
-                String company = "migros";
+                currentCompany = "migros";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(company);
+                fillDropdown(currentCompany);
             }
         });
 
@@ -83,10 +123,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Coop
-                String company = "coop";
+                currentCompany = "coop";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(company);
+                fillDropdown(currentCompany);
             }
 
 
@@ -96,10 +136,21 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts in den Aldi
-                String company = "aldi";
+                currentCompany = "aldi";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(company);
+                fillDropdown(currentCompany);
+            }
+        });
+
+        //Dieser Button bestätigt die ausgewählte Filiale
+        bestätigenButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(comboBox1.getSelectedItem().toString());
+                generateProducts(comboBox1.getSelectedItem().toString());
+                invisibler();
+                Warenkorb.setVisible(true);
             }
         });
     }
@@ -109,6 +160,7 @@ public class GUI {
         Filialebetreten.setVisible(false);
         Loginpanel.setVisible(false);
         Filiale.setVisible(false);
+        Warenkorb.setVisible(false);
     }
 
     public static void main(String[] args) {
@@ -129,7 +181,19 @@ public class GUI {
                     comboBox1.addItem(key2);
                 }
             } else {
-                System.out.println("Ein Fehler ist aufgetreten Siuuuuu");
+                System.out.println("Nicht diese Filiale");
+            }
+        }
+    }
+
+    //Hier befüllen wir die Labels mit den Artikeln welche wir verkaufen
+    public void generateProducts(String shopname) {
+        for(int key : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(shopname).getShelfList().keySet()) {
+            for(String key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(shopname).getShelfList().get(key).getArticleList().keySet()) {
+                JLabel labelNew = new JLabel(key2);
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                labelNew.setHorizontalAlignment(JLabel.LEFT);
+                Warenkorb.add(labelNew);
             }
         }
     }
