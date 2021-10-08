@@ -3,14 +3,16 @@
 // (powered by FernFlower decompiler)
 //
 
-import GameHandlerPackage.SystemHandler;
-import SupermarketPackage.Article;
-import SupermarketPackage.SupermarketHandler;
-import org.javatuples.Pair;
+import GameHandlerPackage.*;
+import SupermarketPackage.*;
+import static GameHandlerPackage.SystemHandler.*;
+import org.javatuples.Triplet;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -42,7 +44,17 @@ public class GUI {
     private JRadioButton migrosRadioButton;
     private JRadioButton coopRadioButton;
     private JRadioButton aldiRadioButton;
+    //private JPanel Filiale;
     private JComboBox comboBox1;
+    private JButton TabletArtikelFIliale;
+    private JPanel Tablet;
+    private JPanel TabletÜbersicht;
+    private JPanel TabletArtikelSupermarkt;
+    private JComboBox TabletArtikelSupermarktSupermarktWählen;
+    private JButton BUttonArtikelSuchen;
+    private JComboBox TabletArtikelSupermarktArtikelWählen;
+    private JButton TabletMenuArtikelSupermarkt;
+    private JLabel ArtikelFindenOutput;
     private JButton artikelInDenWarenkorbButton;
     private JPanel ArtikelPanel;
     private JButton bestätigenButton1;
@@ -61,7 +73,7 @@ public class GUI {
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(GUI.this.passwortLogin.getText());
-                if(SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                     System.out.println("Hey hou let's go");
                     invisibler();
                     Dashboardpanel.setVisible(true);
@@ -74,7 +86,7 @@ public class GUI {
         passwortLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                     System.out.println("Hey hou let's go");
                     invisibler();
                     Dashboardpanel.setVisible(true);
@@ -87,7 +99,7 @@ public class GUI {
         nameLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                     System.out.println("Hey hou let's go");
                     invisibler();
                     Dashboardpanel.setVisible(true);
@@ -115,7 +127,7 @@ public class GUI {
                 currentCompany = "migros";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(currentCompany);
+                fillDropdownWithShops(currentCompany, comboBox1);
             }
         });
 
@@ -126,7 +138,7 @@ public class GUI {
                 currentCompany = "coop";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(currentCompany);
+                fillDropdownWithShops(currentCompany, comboBox1);
             }
 
 
@@ -139,7 +151,29 @@ public class GUI {
                 currentCompany = "aldi";
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdown(currentCompany);
+                fillDropdownWithShops(currentCompany, comboBox1);
+            }
+        });
+
+
+        tabletBenutzenButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                //Hier gehts in den Aldi
+                invisibler();
+                Tablet.setVisible(true);
+                TabletArtikelSupermarkt.setVisible(false);
+
+            }
+        });
+
+        TabletMenuArtikelSupermarkt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TabletÜbersicht.setVisible(false);
+                TabletArtikelSupermarkt.setVisible(true);
+                fillDropdownWithSupermarkets(TabletArtikelSupermarktSupermarktWählen);
+                //fillDropdownWithShops(currentCompany, );
             }
         });
 
@@ -153,32 +187,49 @@ public class GUI {
                 Warenkorb.setVisible(true);
             }
         });
-    }
 
-    public void invisibler() {
-        Dashboardpanel.setVisible(false);
-        Filialebetreten.setVisible(false);
-        Loginpanel.setVisible(false);
-        Filiale.setVisible(false);
-        Warenkorb.setVisible(false);
-    }
+        TabletArtikelSupermarktSupermarktWählen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String supermarket = (String) TabletArtikelSupermarktSupermarktWählen.getSelectedItem();
+                TabletArtikelSupermarktArtikelWählen.removeAllItems();
+                fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelSupermarktArtikelWählen);
+            }
+        });
 
-    public static void main(String[] args) {
-        SupermarketHandler.setUp();
-        frame.setResizable(true);
-        frame.setContentPane((new GUI()).panelMain);
-        frame.setDefaultCloseOperation(3);
-        frame.pack();
-        frame.setSize(600, 500);
-        frame.setLocationRelativeTo((Component)null);
-        frame.setVisible(true);
-    }
+        TabletArtikelSupermarktArtikelWählen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-    public void fillDropdown(String companyName) {
-        for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
-            if(key.equals(companyName)) {
-                for(String key2 :  SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                    comboBox1.addItem(key2);
+            }
+        });
+
+        BUttonArtikelSuchen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SupermarketPackage.Tablet Tablet1 = new Tablet();
+                String supermarketName = (String) TabletArtikelSupermarktSupermarktWählen.getSelectedItem();
+                String articleName = (String) TabletArtikelSupermarktArtikelWählen.getSelectedItem();
+                List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
+                StringBuilder output = new StringBuilder();
+                for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
+                    String shopName = t.getValue0().getName();
+                    int amount = t.getValue2();
+                    int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
+                    output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden \n");
+                }
+                ArtikelFindenOutput.setText(output.toString());
+            }
+        });
+
+
+
+    }
+    public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
+        for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+            if (key.equals(supermarketname)) {
+                for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                    comboBox.addItem(key2);
                 }
             } else {
                 System.out.println("Nicht diese Filiale");
@@ -197,4 +248,41 @@ public class GUI {
             }
         }
     }
+
+    public void fillDropdownWithSupermarkets(JComboBox comboBox) {
+        for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+            comboBox.addItem(key);
+        }
+    }
+    public void fillDropdownWithArticlesFromSupermarket(String supermarketname, JComboBox comboBox) {
+        SupermarketChain supermarketChain = SystemHandler.getSupermarketChainMap().get(supermarketname);
+        for (Article article : supermarketChain.getArticleMap().values()) {
+            comboBox.addItem(article.getName());
+        }
+
+    }
+
+
+    public static void main(String[] args) {
+        SupermarketHandler.setUp();
+        frame.setResizable(true);
+        frame.setContentPane((new GUI()).panelMain);
+        frame.setDefaultCloseOperation(3);
+        frame.pack();
+        frame.setSize(600, 500);
+        frame.setLocationRelativeTo((Component) null);
+        frame.setVisible(true);
+    }
+
+    public void invisibler() {
+        Dashboardpanel.setVisible(false);
+        Filialebetreten.setVisible(false);
+        Loginpanel.setVisible(false);
+        Filiale.setVisible(false);
+        Tablet.setVisible(false);
+        Warenkorb.setVisible(false);
+    }
+
+
+
 }

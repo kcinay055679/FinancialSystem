@@ -37,6 +37,7 @@ public class SupermarketHandler {
         SupermarketHandler.createArticle("Steak", 5F, 12, true, "food", "Rudi's Fress Bude", "coop", 1);
 
         SupermarketHandler.addPerson("Yanick", "password", "password", 0);
+        SupermarketHandler.addPerson("", "", "", 0);
 
     }
 
@@ -84,7 +85,7 @@ public class SupermarketHandler {
         test.createShelf();
     }
 
-    public static void checkOut(String customerName, String shopName, String supermarketChainName) {
+    public static void checkOut(String customerName, String shopName) {
         getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
     }
 
@@ -107,9 +108,11 @@ public class SupermarketHandler {
                     System.out.println("sie haben " + scannedArticles + " Artikel gescannt");
                     System.out.println("Um zu bezahlen drücken sie die 1");
                     System.out.println("Um weiter zu scannen drücken sie die 2");
+                    break;
                 }
                 default:{
                     System.out.println("Bitte geben sie einen gültigen Befehl ein");
+
                 }
             }
         }
