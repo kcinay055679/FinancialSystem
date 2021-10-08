@@ -16,8 +16,12 @@ public class SupermarketHandler {
         SystemHandler.createSupermarketChain("migros");
         SystemHandler.createSupermarketChain("aldi");
 
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", "Yanick", 555, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", "Marc", 26, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", "Yanick", 1, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", "Marc", 2, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("FoodPalace", "Yanick", 3, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("Rudi's Fress Bude", "Marc", 4, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("FoodPalace", "Yanick", 5, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("Rudi's Fress Bude", "Marc", 6, true, "Thun");
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
@@ -87,20 +91,20 @@ public class SupermarketHandler {
         input = "2";
         while (true) {
             switch (input) {
-                case "1" -> {
+                case "1": {
                     getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(getSelectedUser().getCurrentShop().getName()).selfCheckOut(getSelectedUser(), fullPrice);
                     System.out.println("Sie haben für " + fullPrice + " CHF bei uns eingekauft");
                     System.out.println("Falls sie eine Schüpperkarte besitzen wurden ihnen diese Punkte gutgeschrieben");
                     return;
                 }
-                case "2" -> {
+                case "2": {
                     fullPrice += scan();
                     scannedArticles++;
                     System.out.println("sie haben " + scannedArticles + " Artikel gescannt");
                     System.out.println("Um zu bezahlen drücken sie die 1");
                     System.out.println("Um weiter zu scannen drücken sie die 2");
                 }
-                default -> {
+                default:{
                     System.out.println("Bitte geben sie einen gültigen Befehl ein");
                 }
             }

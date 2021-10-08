@@ -39,7 +39,7 @@ public class GUI {
     private JComboBox comboBox1;
 
     //Komponente des Panels 3
-    public static JFrame frame = new JFrame("Login System");
+    public static JFrame frame = new JFrame("Yanick und Mars Wirtschaftspass");
 
 
     public GUI() {
@@ -72,7 +72,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Migros
-                String company = "Migros";
+                String company = "migros";
+                invisibler();
+                Filiale.setVisible(true);
+                fillDropdown(company);
             }
         });
 
@@ -81,6 +84,8 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Coop
                 String company = "Coop";
+                invisibler();
+                Filiale.setVisible(true);
             }
 
 
@@ -91,6 +96,8 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts in den Aldi
                 String company = "Aldi";
+                invisibler();
+                Filiale.setVisible(true);
             }
         });
     }
@@ -99,6 +106,7 @@ public class GUI {
         Dashboardpanel.setVisible(false);
         Filialebetreten.setVisible(false);
         Loginpanel.setVisible(false);
+        Filiale.setVisible(false);
     }
 
     public static void main(String[] args) {
@@ -113,8 +121,14 @@ public class GUI {
     }
 
     public void fillDropdown(String companyName) {
-        for(String key : SystemHandler.getCompanyMap().keySet()) {
-
+        for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
+            if(key.equals(companyName)) {
+                for(String key2 :  SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                    comboBox1.addItem(key2);
+                }
+            } else {
+                System.out.println("Andere Kette");
+            }
         }
     }
 }
