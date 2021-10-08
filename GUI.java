@@ -83,7 +83,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Coop
-                String company = "Coop";
+                String company = "coop";
                 invisibler();
                 Filiale.setVisible(true);
             }
@@ -95,7 +95,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts in den Aldi
-                String company = "Aldi";
+                String company = "aldi";
                 invisibler();
                 Filiale.setVisible(true);
             }
