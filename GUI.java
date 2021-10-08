@@ -39,33 +39,39 @@ public class GUI {
     private JPanel Filiale;
     private JPanel Warenkorb;
     private JPanel ArtikelPanel;
+    private JPanel Tablet;
+    private JPanel TabletÜbersicht;
+    private JPanel TabletArtikelSupermarkt;
+    private JPanel Kassen;
+    private JPanel Cart;
 
-    //Komponente des zweiten Panels
+    //Alle normalen Buttons
     private JLabel welcomeText;
     private JButton filialeBetretenButton;
     private JButton tabletBenutzenButton;
     private JButton personalienAnzeigenButton;
     private JButton schüpercardButton;
     private JButton ausloggenButton;
+    private JButton TabletArtikelFIliale;
+    private JButton artikelInDenWarenkorbButton;
+    private JButton bestätigenButton1;
+    private JButton anDieKasseGehenButton;
+    private JButton BUttonArtikelSuchen;
+    private JButton TabletMenuArtikelSupermarkt;
+
+    //Radiobuttons für die Supermarktketten-Auswahl
     private JRadioButton migrosRadioButton;
     private JRadioButton coopRadioButton;
     private JRadioButton aldiRadioButton;
-    //private JPanel Filiale;
+
+    //Dropdownmenü um die Artikel auszuwählen(Tablet)
     private JComboBox comboBox1;
     private JButton TabletMenuArtikelFIliale;
-    private JPanel Tablet;
-    private JPanel TabletÜbersicht;
-    private JPanel TabletArtikelSupermarkt;
     private JComboBox TabletArtikelSupermarktSupermarktWählen;
-    private JButton BUttonArtikelSuchen;
     private JComboBox TabletArtikelSupermarktArtikelWählen;
-    private JButton TabletMenuArtikelSupermarkt;
     private JLabel ArtikelFindenOutput;
-    private JButton artikelInDenWarenkorbButton;
-    private JButton bestätigenButton1;
     private JComboBox TabletArtikelTypWählen;
     private JButton TabletMenuArtikelName;
-    private JScrollBar scrollBar1;
     private JComboBox TabletFilialeWählen;
     private JButton TabletMenuArtikelTyp;
 
@@ -76,7 +82,6 @@ public class GUI {
     private String currentCompany;
     private String currentShop;
 
-    //Komponente des Panels 3
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
 
     //Konstruktor indem alle Funktionen verwaltet werden
@@ -87,8 +92,8 @@ public class GUI {
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                    System.out.println("Hey hou let's go");
+                if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                    //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                     invisibler();
                     Dashboardpanel.setVisible(true);
                 }
@@ -101,6 +106,11 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                        //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
+                        invisibler();
+                        Dashboardpanel.setVisible(true);
+                    }
                     invisibler();
                     Dashboardpanel.setVisible(true);
                 }
@@ -209,7 +219,7 @@ public class GUI {
                 for (int i : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
                     for (String j : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).getArticleList().keySet()) {
                         for (String key : produkte.keySet()) {
-                            SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue());
+                            getSelectedUser().getCart().addArticle(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue()));
                         }
                     }
                 }
@@ -240,6 +250,17 @@ public class GUI {
                     output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden \n");
                 }
                 ArtikelFindenOutput.setText(output.toString());
+            }
+        });
+
+        /*Der anDieKasseGehenButton ist ein äusserst komplizierter Button. Er ist kaum nachvollziehbar
+        * der Kunde wird gezwungen zu zahlen bar. Zahlt er mit Karte, landet er im Garte*/
+        anDieKasseGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                showPrice();
+                Kassen.setVisible(true);
             }
         });
 
@@ -292,12 +313,23 @@ public class GUI {
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
                 panelNew.add(spinnerNeu);
 
-
                 produkte.put(key2, spinnerNeu);
 
                 //Schlussendlich wird das erstellte Panel in das Artikelpanel gelegt
                 ArtikelPanel.add(panelNew);
             }
+        }
+    }
+
+    //Mit der showPrice Methode sorgen wir für die Darstellung des Preises an der Kasse
+    public void showPrice() {
+        for(String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+            JPanel panelNew = new JPanel();
+            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName()+ " " + getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice());
+            labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
+            labeNew.setVerticalAlignment(SwingConstants.CENTER);
+            panelNew.add(labeNew);
+            Cart.add(panelNew);
         }
     }
 
@@ -334,6 +366,7 @@ public class GUI {
         Filiale.setVisible(false);
         Tablet.setVisible(false);
         Warenkorb.setVisible(false);
+        Kassen.setVisible(false);
     }
 
 

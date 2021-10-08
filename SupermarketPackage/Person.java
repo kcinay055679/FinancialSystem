@@ -31,6 +31,8 @@ public class Person {
         }
     }
 
+
+
     public Rank getRank() {
         return rank;
     }
