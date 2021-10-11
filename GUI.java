@@ -86,6 +86,14 @@ public class GUI {
     private JPanel Gesamtwert;
     private JPanel Schüpercard;
     private JButton schüpercardErstellenButton;
+    private JButton zurückButton;
+    private JButton zurückButtonFiliale1;
+    private JButton zurückButtonWarenkorb;
+    private JButton zurückButtonKasse;
+    private JButton zurückButtonSchüpercard;
+    private JButton Zurück;
+    private JButton buttonZurückTablet;
+    private JButton zurückButton1;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -198,7 +206,7 @@ public class GUI {
                 //Hier gehts in den Aldi
                 invisibler();
                 Tablet.setVisible(true);
-                TabletSelect.setVisible(false);
+                TabletÜbersicht.setVisible(true);
 
             }
         });
@@ -325,7 +333,6 @@ public class GUI {
                 TabletArtikelWählen.setVisible(true);
                 TabletArtikelWählenLabel.setVisible(true);
 
-
                 TabletFilialeWählen.setVisible(false);
                 TabletFilialeWählenLabel.setVisible(false);
 
@@ -341,7 +348,6 @@ public class GUI {
                 SupermarketPackage.Tablet Tablet1 = new Tablet();
                 switch (currentTabletFuntion) {
                     case "supermarket": {
-
                         String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
                         String articleName = (String) TabletArtikelWählen.getSelectedItem();
                         List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
@@ -364,7 +370,6 @@ public class GUI {
                                 for (Shelf shelf : shop.getShelfList().values())
                                     for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
                                         if (articlePair.getValue0().getClass().getSimpleName().equals(typ)) {
-
                                             output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(articlePair.getValue0().getName()).append(" ").append(articlePair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
                                         }
                                     }
@@ -381,6 +386,65 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Schüpercard.setVisible(true);
+            }
+        });
+        ausloggenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Loginpanel.setVisible(true);
+            }
+        });
+
+        //Alle Zurückbuttons welche wir brauchen
+        zurückButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        zurückButtonFiliale1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filialebetreten.setVisible(true);
+            }
+        });
+        zurückButtonKasse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Warenkorb.setVisible(true);
+            }
+        });
+        zurückButtonWarenkorb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filiale.setVisible(true);
+            }
+        });
+        zurückButtonSchüpercard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        Zurück.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        buttonZurückTablet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Tablet.setVisible(true);
+                TabletÜbersicht.setVisible(true);
             }
         });
     }
@@ -491,6 +555,8 @@ public class GUI {
         Loginpanel.setVisible(false);
         Filiale.setVisible(false);
         Tablet.setVisible(false);
+        TabletÜbersicht.setVisible(false);
+        TabletSelect.setVisible(false);
         Warenkorb.setVisible(false);
         Kassen.setVisible(false);
         EinkaufAbschluss.setVisible(false);

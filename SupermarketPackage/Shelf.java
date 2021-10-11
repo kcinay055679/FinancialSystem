@@ -68,7 +68,7 @@ public class Shelf {
     public void increaseArticleAmountFood(String name, int amount) {
         if (getArticle(name) == null) {
             Food article = (Food) supermarketChain.getArticleMap().get(name);
-            SupermarketHandler.createFood(article.getName(), article.getPrice(), amount, article.isBarcode(),article.getGram(), article.getArticleType(), shop.getName(),supermarketChain.getName(), ID);
+            SupermarketHandler.createFood(article.getName(), article.getPrice(), amount, article.isBarcode(), article.getArticleType(), shop.getName(),supermarketChain.getName(), ID, article.getFleisch());
         } else {
             articleList.put(getArticle(name).getName(), new Pair<>(getArticle(name), getArticlePair(name).getValue1() + amount));
         }
