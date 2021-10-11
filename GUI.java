@@ -203,17 +203,7 @@ public class GUI {
         });
 
         //Dieser Button bestätigt die ausgewählte Filiale
-        bestätigenButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // System.out.println(comboBox1.getSelectedItem().toString());
-                setCurrentShop(comboBox1.getSelectedItem().toString());
-                generateProducts(comboBox1.getSelectedItem().toString());
 
-                invisibler();
-                Warenkorb.setVisible(true);
-            }
-        });
 
         //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
@@ -221,12 +211,12 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 for(String key : spinnerHashMap.keySet()) {
                     if((Integer) spinnerHashMap.get(key).getValue() != 0) {
-                        for(int key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
-                            for(String key3 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().keySet()) {
+                        for(int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
+                            for(String key3 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().keySet()) {
                                 if(key3.equals(key)) {
-                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
-                                    SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
-                                    greatValue += SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                                    SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
                                 }
                             }
                         }
@@ -251,11 +241,14 @@ public class GUI {
         });
 
         //Dieser Button bestätigt die ausgewählte Filiale
+
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // System.out.println(comboBox1.getSelectedItem().toString());
+                setCurrentShop(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
-                currentShop = comboBox1.getSelectedItem().toString();
+
                 invisibler();
                 Warenkorb.setVisible(true);
             }
