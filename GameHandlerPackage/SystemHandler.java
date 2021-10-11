@@ -65,6 +65,7 @@ public class SystemHandler {
     public static void setSelectedUser(Person selectedUser) {
         SystemHandler.selectedUser = selectedUser;
     }
+
     public static boolean login(String name, String password) {
         if (getPersonList().get(name) != null) {
             if (getPersonList().get(name).checkPassword(password)) {
@@ -78,5 +79,9 @@ public class SystemHandler {
         return getSelectedUser().getName().equals(name);
 
 
+    }
+
+    public static void logout(){
+        setSelectedUser(null);
     }
 }

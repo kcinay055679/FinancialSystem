@@ -318,7 +318,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="7306" class="javax.swing.JButton" binding="TabletMenuArtikelTyp">
+              <component id="7306" class="javax.swing.JButton" binding="TabletMenuTyp">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -326,7 +326,7 @@
                   <text value="Artikel nach Typ suchen"/>
                 </properties>
               </component>
-              <component id="1d015" class="javax.swing.JButton" binding="TabletMenuArtikelFIliale">
+              <component id="1d015" class="javax.swing.JButton" binding="TabletMenuFiliale">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -344,7 +344,7 @@
                   <text value="APPS"/>
                 </properties>
               </component>
-              <component id="72010" class="javax.swing.JButton" binding="TabletMenuArtikelSupermarkt">
+              <component id="72010" class="javax.swing.JButton" binding="TabletMenuSupermarkt">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -352,7 +352,7 @@
                   <text value="Artikel in Supermarktkette finden"/>
                 </properties>
               </component>
-              <component id="e9084" class="javax.swing.JButton" binding="TabletMenuArtikelName">
+              <component id="e9084" class="javax.swing.JButton" binding="TabletMenuName">
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -427,7 +427,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="tests \n"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="339d6" class="javax.swing.JComboBox" binding="TabletTypWählen">
