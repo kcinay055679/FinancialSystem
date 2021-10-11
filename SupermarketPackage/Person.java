@@ -17,7 +17,7 @@ public class Person {
     private byte[] hashedPassword;
 
     private Company company;
-    private Rank rank;
+    private Rank rank = Rank.UNEMPLOYED;
     private Shop currentShop;
     private Schüppercard card;
     private final ShoppingCart cart = new ShoppingCart();

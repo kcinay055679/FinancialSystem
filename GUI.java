@@ -1,10 +1,12 @@
-
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
 import GameHandlerPackage.*;
 import SupermarketPackage.*;
 
 import SupermarketPackage.Articles.Article;
-
 import static GameHandlerPackage.SystemHandler.*;
 
 import org.javatuples.Pair;
@@ -14,6 +16,7 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -43,6 +46,7 @@ public class GUI {
     private JPanel TabletSelect;
     private JPanel Kassen;
     private JPanel Cart;
+    private JPanel EinkaufAbschluss;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -57,6 +61,8 @@ public class GUI {
     private JButton anDieKasseGehenButton;
     private JButton ButtonArtikelSuchen;
     private JButton TabletMenuSupermarkt;
+    private JButton TabletMenuArtikelSupermarkt;
+    private JButton backButton;
 
     //Radiobuttons für die Supermarktketten-Auswahl
     private JRadioButton migrosRadioButton;
@@ -78,6 +84,8 @@ public class GUI {
     private JLabel TabletTypWählenLabel;
     private JButton bezahlButton;
     private JPanel Gesamtwert;
+    private JPanel Schüpercard;
+    private JButton schüpercardErstellenButton;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -106,6 +114,7 @@ public class GUI {
                     invisibler();
                     Dashboardpanel.setVisible(true);
                 }
+
             }
         });
 
@@ -138,6 +147,7 @@ public class GUI {
             }
         });
 
+
         //Der Kunde betritt die Filiale
         //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
         filialeBetretenButton.addActionListener(new ActionListener() {
@@ -169,6 +179,8 @@ public class GUI {
                 Filiale.setVisible(true);
                 fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
+
+
         });
 
         aldiRadioButton.addActionListener(new ActionListener() {
@@ -182,12 +194,15 @@ public class GUI {
             }
         });
 
+
         tabletBenutzenButton.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts in den Aldi
                 invisibler();
                 Tablet.setVisible(true);
                 TabletSelect.setVisible(false);
+
             }
         });
 
@@ -195,24 +210,30 @@ public class GUI {
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (String key : spinnerHashMap.keySet()) {
-                    if ((Integer) spinnerHashMap.get(key).getValue() != 0) {
-                        for (int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
-                            for (String key3 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().keySet()) {
-                                if (key3.equals(key)) {
-                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                for(String key : spinnerHashMap.keySet()) {
+                    if((Integer) spinnerHashMap.get(key).getValue() != 0) {
+                        for(int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
+                            for(Pair<Article, Integer> key3Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().values()) {
+                                Article key3 = key3Pair.getValue0();
+                                if(key3.getName().equals(key)) {
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
                                     SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
-                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
                                 }
                             }
                         }
                     }
                 }
+                generateProducts(getCurrentShop());
+                Gesamtwert.removeAll();
+                Gesamtwert.repaint();
+                Gesamtwert.revalidate();
                 JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
                 labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
                 Gesamtwert.add(labelNew);
             }
         });
+
 
         /*Der anDieKasseGehenButton ist ein äusserst komplizierter Button. Er ist kaum nachvollziehbar
          * der Kunde wird gezwungen zu zahlen bar. Zahlt er mit Karte, landet er im Garte*/
@@ -226,6 +247,7 @@ public class GUI {
         });
 
         //Dieser Button bestätigt die ausgewählte Filiale
+
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -237,6 +259,28 @@ public class GUI {
                 Warenkorb.setVisible(true);
             }
         });
+
+        bezahlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+
+                //Einkaufswert auf Null zurücksetzen
+                greatValue = 0;
+
+                //Abschluss wird sichtbar
+                EinkaufAbschluss.setVisible(true);
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+
 
         TabletSupermarktWählen.addActionListener(new ActionListener() {
             @Override
@@ -391,21 +435,36 @@ public class GUI {
                 }
             }
         });
+
+        schüpercardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Schüpercard.setVisible(true);
+            }
+        });
     }
 
+
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
-        for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
-            if (supermarket.getName().equals(supermarketname)) {
-                for (String shop : supermarket.getShopMap().keySet()) {
-                    System.out.println(shop);
-                    comboBox.addItem(shop);
+        comboBox.removeAllItems();
+        for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+            if (key.equals(supermarketname)) {
+                for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                    comboBox.addItem(key2);
+                    System.out.println("Item aded");
                 }
+            } else {
+                System.out.println("Nicht diese Filiale");
             }
         }
     }
 
     //Hier befüllen wir die Labels mit den Artikeln welche wir verkaufen
     public void generateProducts(String shopname) {
+        ArtikelPanel.removeAll();
+        ArtikelPanel.repaint();
+        ArtikelPanel.revalidate();
         for (int key : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().keySet()) {
             for (Pair<Article, Integer> key2Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().get(key).getArticleList().values()) {
                 String key2 = key2Pair.getValue0().getName();
@@ -435,8 +494,11 @@ public class GUI {
     //Mit der showPrice Methode sorgen wir für die Darstellung des Preises an der Kasse
     public void showPrice() {
         for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+            float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
             JPanel panelNew = new JPanel();
-            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + " " + getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice());
+            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                    + price);
+
             labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
@@ -481,6 +543,7 @@ public class GUI {
         }
     }
 
+
     public static void main(String[] args) {
         SupermarketHandler.setUp();
 
@@ -502,5 +565,9 @@ public class GUI {
         Tablet.setVisible(false);
         Warenkorb.setVisible(false);
         Kassen.setVisible(false);
+        EinkaufAbschluss.setVisible(false);
+        Schüpercard.setVisible(false);
     }
+
+
 }
