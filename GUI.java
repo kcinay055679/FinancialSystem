@@ -87,6 +87,9 @@ public class GUI {
     private JPanel Gesamtwert;
     private JPanel Schüpercard;
     private JButton schüpercardErstellenButton;
+    private JLabel name;
+    private JLabel schüpperpunkte;
+    private JLabel guthaben;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -114,8 +117,8 @@ public class GUI {
                     //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                     invisibler();
                     Dashboardpanel.setVisible(true);
+                    setDashboardInformation();
                 }
-
             }
         });
 
@@ -128,9 +131,8 @@ public class GUI {
                         //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                         invisibler();
                         Dashboardpanel.setVisible(true);
+                        setDashboardInformation();
                     }
-                    invisibler();
-                    Dashboardpanel.setVisible(true);
                 }
                 super.keyPressed(e);
             }
@@ -143,6 +145,7 @@ public class GUI {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                     invisibler();
                     Dashboardpanel.setVisible(true);
+                    setDashboardInformation();
                 }
                 super.keyPressed(e);
             }
@@ -636,6 +639,16 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    public void setDashboardInformation(){
+        name.setText("Name: "+getSelectedUser().getName());
+        guthaben.setText("Guthaben: "+getSelectedUser().getMoney());
+        if(getSelectedUser().getCard() !=null){
+            schüpperpunkte.setText("Schüpperpunkte: "+getSelectedUser().getCard().getPoints());
+        }else{
+            schüpperpunkte.setText("Keine Schüperkarte verfügbar");
+        }
+
+    }
     public void invisibler() {
         Dashboardpanel.setVisible(false);
         Filialebetreten.setVisible(false);
