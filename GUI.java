@@ -75,8 +75,11 @@ public class GUI {
     private JComboBox TabletFilialeWählen;
     private JButton TabletMenuArtikelTyp;
 
-    //Hashmapp für die Produkte in einem Laden
+    //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
+
+    //Hashmap um Spinner Komponente zu speichern
+    HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
 
     //Globale Variabeln
     private String currentCompany;
@@ -199,27 +202,19 @@ public class GUI {
             }
         });
 
-        //Dieser Button bestätigt die ausgewählte Filiale
-        bestätigenButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               // System.out.println(comboBox1.getSelectedItem().toString());
-                currentShop = comboBox1.getSelectedItem().toString();
-                generateProducts(comboBox1.getSelectedItem().toString());
-
-                invisibler();
-                Warenkorb.setVisible(true);
-            }
-        });
-
         //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
-                    for (String j : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).getArticleList().keySet()) {
-                        for (String key : produkte.keySet()) {
-                            getSelectedUser().getCart().addArticle(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue()));
+                for(String key : spinnerHashMap.keySet()) {
+                    if((Integer) spinnerHashMap.get(key).getValue() != 0) {
+                        for(int key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
+                            for(String key3 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().keySet()) {
+                                if(key3.equals(key)) {
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                                    SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
+                                }
+                            }
                         }
                     }
                 }
@@ -260,6 +255,15 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 showPrice();
+                for(String key : spinnerHashMap.keySet()) {
+                    if((Integer) spinnerHashMap.get(key).getValue() != 0) {
+                        for(int key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
+                            for(String key3 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().keySet()) {
+                                System.out.println(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue1());
+                            }
+                        }
+                    }
+                }
                 Kassen.setVisible(true);
             }
         });
@@ -268,17 +272,10 @@ public class GUI {
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
+                currentShop = comboBox1.getSelectedItem().toString();
                 invisibler();
                 Warenkorb.setVisible(true);
-            }
-        });
-
-        //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
-        artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
             }
         });
     }
@@ -311,6 +308,8 @@ public class GUI {
                 //Das Gleiche geschieht mit dem Spinner
                 JSpinner spinnerNeu = new JSpinner();
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
+                spinnerHashMap.put(key2, spinnerNeu);
+
                 panelNew.add(spinnerNeu);
 
                 produkte.put(key2, spinnerNeu);
@@ -330,6 +329,9 @@ public class GUI {
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
             Cart.add(panelNew);
+            for(String key : getSelectedUser().getCart().getArticleList().keySet()) {
+                System.out.println(getSelectedUser().getCart().getArticleList().get(key).getValue0().getName());
+            }
         }
     }
 

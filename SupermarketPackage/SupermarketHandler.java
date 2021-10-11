@@ -27,6 +27,7 @@ public class SupermarketHandler {
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
+
         SupermarketHandler.createFood("Steak", 5F, 12, true, 5000,"20/10/2021","FoodPalace", "coop", 1);
         SupermarketHandler.createBuildingMaterial("Artikel2", 20F, 6, true , "FoodPalace", 2,"iron","coop", 1);
         SupermarketHandler.createBuildingMaterial("Artikel3", 30F, 4, false , "FoodPalace", 2, "wood","coop", 1);
