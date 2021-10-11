@@ -66,8 +66,6 @@ public class GUI {
     private JButton TabletMenuSupermarkt;
     private JButton TabletMenuArtikelSupermarkt;
     private JButton backButton;
-    private JButton TabletMenuName;
-    private JButton TabletMenuSupermarkt;
     private JButton TabletMenuFiliale;
     private JButton schüpercardErstellenButton;
     private JButton zurückButton;
@@ -100,14 +98,11 @@ public class GUI {
     private JLabel TabletArtikelWählenLabel;
     private JLabel TabletFilialeWählenLabel;
     private JLabel TabletTypWählenLabel;
-    private JButton bezahlButton;
-    private JPanel Gesamtwert;
-    private JPanel Schüpercard;
-    private JButton schüpercardErstellenButton;
+
+
     private JLabel name;
     private JLabel schüpperpunkte;
     private JLabel guthaben;
-    private JLabel ArtikelFindenOutput;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -717,6 +712,7 @@ public class GUI {
     public void setDashboardInformation(){
         name.setText("Name: "+getSelectedUser().getName());
         guthaben.setText("Guthaben: "+getSelectedUser().getMoney());
+
         if(getSelectedUser().getCard() !=null){
             schüpperpunkte.setText("Schüpperpunkte: "+getSelectedUser().getCard().getPoints());
         }else{
