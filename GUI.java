@@ -48,6 +48,8 @@ public class GUI {
     private JPanel Kassen;
     private JPanel Cart;
     private JPanel EinkaufAbschluss;
+    private JPanel Gesamtwert;
+    private JPanel Schüpercard;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -64,6 +66,21 @@ public class GUI {
     private JButton TabletMenuSupermarkt;
     private JButton TabletMenuArtikelSupermarkt;
     private JButton backButton;
+    private JButton TabletMenuName;
+    private JButton TabletMenuSupermarkt;
+    private JButton TabletMenuFiliale;
+    private JButton schüpercardErstellenButton;
+    private JButton zurückButton;
+    private JButton zurückButtonFiliale1;
+    private JButton zurückButtonWarenkorb;
+    private JButton zurückButtonKasse;
+    private JButton zurückButtonSchüpercard;
+    private JButton Zurück;
+    private JButton buttonZurückTablet;
+    private JButton zurückButton1;
+    private JButton bezahlButton;
+    private JButton TabletMenuTyp;
+
 
     //Radiobuttons für die Supermarktketten-Auswahl
     private JRadioButton migrosRadioButton;
@@ -72,13 +89,13 @@ public class GUI {
 
     //Dropdownmenü um die Artikel auszuwählen(Tablet)
     private JComboBox comboBox1;
-    private JButton TabletMenuFiliale;
     private JComboBox TabletSupermarktWählen;
     private JComboBox TabletArtikelWählen;
     private JLabel ArtikelFindenOutput;
     private JComboBox TabletTypWählen;
     private JComboBox TabletFilialeWählen;
-    private JButton TabletMenuTyp;
+
+    //Label
     private JLabel TabletSupermarktWählenLabel;
     private JLabel TabletArtikelWählenLabel;
     private JLabel TabletFilialeWählenLabel;
@@ -90,6 +107,7 @@ public class GUI {
     private JLabel name;
     private JLabel schüpperpunkte;
     private JLabel guthaben;
+    private JLabel ArtikelFindenOutput;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -97,9 +115,6 @@ public class GUI {
 
     //Hashmap um Spinner Komponente zu speichern
     HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
-
-    //Globale Variabeln
-
 
     private int greatValue;
 
@@ -119,6 +134,7 @@ public class GUI {
                     Dashboardpanel.setVisible(true);
                     setDashboardInformation();
                 }
+
             }
         });
 
@@ -205,7 +221,7 @@ public class GUI {
                 //Hier gehts in den Aldi
                 invisibler();
                 Tablet.setVisible(true);
-                TabletSelect.setVisible(false);
+                TabletÜbersicht.setVisible(true);
 
             }
         });
@@ -253,7 +269,6 @@ public class GUI {
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // System.out.println(comboBox1.getSelectedItem().toString());
                 setCurrentShop(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
 
@@ -510,6 +525,66 @@ public class GUI {
                 Schüpercard.setVisible(true);
             }
         });
+        ausloggenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Loginpanel.setVisible(true);
+                SystemHandler.logout();
+            }
+        });
+
+        //Alle Zurückbuttons welche wir brauchen
+        zurückButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        zurückButtonFiliale1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filialebetreten.setVisible(true);
+            }
+        });
+        zurückButtonKasse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Warenkorb.setVisible(true);
+            }
+        });
+        zurückButtonWarenkorb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filiale.setVisible(true);
+            }
+        });
+        zurückButtonSchüpercard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        Zurück.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        buttonZurückTablet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Tablet.setVisible(true);
+                TabletÜbersicht.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -655,6 +730,8 @@ public class GUI {
         Loginpanel.setVisible(false);
         Filiale.setVisible(false);
         Tablet.setVisible(false);
+        TabletÜbersicht.setVisible(false);
+        TabletSelect.setVisible(false);
         Warenkorb.setVisible(false);
         Kassen.setVisible(false);
         EinkaufAbschluss.setVisible(false);

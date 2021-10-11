@@ -62,7 +62,6 @@ public class Person {
         } else {
             throw new SecurityException();
         }
-
     }
 
     public byte[] hashPassword(String password) {
