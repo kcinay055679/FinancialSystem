@@ -7,7 +7,6 @@ import GameHandlerPackage.*;
 import SupermarketPackage.*;
 
 import SupermarketPackage.Articles.Article;
-
 import static GameHandlerPackage.SystemHandler.*;
 
 import org.javatuples.Pair;
@@ -17,6 +16,7 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -80,13 +80,20 @@ public class GUI {
     private JLabel TabletArtikelWählenLabel;
     private JLabel TabletFilialeWählenLabel;
     private JLabel TabletTypWählenLabel;
+    private JButton bezahlButton;
+    private JPanel Gesamtwert;
 
-    //Hashmapp für die Produkte in einem Laden
+    //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
     String currentTabletFuntion;
 
+    //Hashmap um Spinner Komponente zu speichern
+    HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
+
     //Globale Variabeln
 
+  
+    private int greatValue;
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
 
@@ -168,6 +175,8 @@ public class GUI {
                 Filiale.setVisible(true);
                 fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
+
+
         });
 
         aldiRadioButton.addActionListener(new ActionListener() {
@@ -210,13 +219,22 @@ public class GUI {
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
-                    for (String j : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(i).getArticleList().keySet()) {
-                        for (String key : produkte.keySet()) {
-                            getSelectedUser().getCart().addArticle(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue()));
+                for(String key : spinnerHashMap.keySet()) {
+                    if((Integer) spinnerHashMap.get(key).getValue() != 0) {
+                        for(int key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
+                            for(String key3 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().keySet()) {
+                                if(key3.equals(key)) {
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                                    SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
+                                }
+                            }
                         }
                     }
                 }
+                JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
+                Gesamtwert.add(labelNew);
             }
         });
 
@@ -236,8 +254,8 @@ public class GUI {
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
+                currentShop = comboBox1.getSelectedItem().toString();
                 invisibler();
                 Warenkorb.setVisible(true);
             }
@@ -371,6 +389,8 @@ public class GUI {
                 //Das Gleiche geschieht mit dem Spinner
                 JSpinner spinnerNeu = new JSpinner();
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
+                spinnerHashMap.put(key2, spinnerNeu);
+
                 panelNew.add(spinnerNeu);
 
                 produkte.put(key2, spinnerNeu);
