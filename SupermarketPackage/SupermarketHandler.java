@@ -13,6 +13,8 @@ import static GameHandlerPackage.SystemHandler.*;
 
 public class SupermarketHandler {
 
+
+
     public static void setUp() {
         SystemHandler.createSupermarketChain("coop");
         SystemHandler.createSupermarketChain("migros");

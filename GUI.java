@@ -7,19 +7,21 @@ import GameHandlerPackage.*;
 import SupermarketPackage.*;
 
 import SupermarketPackage.Articles.Article;
+
 import static GameHandlerPackage.SystemHandler.*;
 
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
+import org.reflections.Reflections;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Set;
 import javax.swing.*;
 
 public class GUI {
@@ -41,7 +43,7 @@ public class GUI {
     private JPanel ArtikelPanel;
     private JPanel Tablet;
     private JPanel TabletÜbersicht;
-    private JPanel TabletArtikelSupermarkt;
+    private JPanel TabletSelect;
     private JPanel Kassen;
     private JPanel Cart;
 
@@ -56,7 +58,7 @@ public class GUI {
     private JButton artikelInDenWarenkorbButton;
     private JButton bestätigenButton1;
     private JButton anDieKasseGehenButton;
-    private JButton BUttonArtikelSuchen;
+    private JButton ButtonArtikelSuchen;
     private JButton TabletMenuArtikelSupermarkt;
 
     //Radiobuttons für die Supermarktketten-Auswahl
@@ -67,20 +69,24 @@ public class GUI {
     //Dropdownmenü um die Artikel auszuwählen(Tablet)
     private JComboBox comboBox1;
     private JButton TabletMenuArtikelFIliale;
-    private JComboBox TabletArtikelSupermarktSupermarktWählen;
-    private JComboBox TabletArtikelSupermarktArtikelWählen;
+    private JComboBox TabletSupermarktWählen;
+    private JComboBox TabletArtikelWählen;
     private JLabel ArtikelFindenOutput;
-    private JComboBox TabletArtikelTypWählen;
+    private JComboBox TabletTypWählen;
     private JButton TabletMenuArtikelName;
     private JComboBox TabletFilialeWählen;
     private JButton TabletMenuArtikelTyp;
+    private JLabel TabletSupermarktWählenLabel;
+    private JLabel TabletArtikelWählenLabel;
+    private JLabel TabletFilialeWählenLabel;
+    private JLabel TabletTypWählenLabel;
 
     //Hashmapp für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
+    String currentTabletFuntion;
 
     //Globale Variabeln
-    private String currentCompany;
-    private String currentShop;
+
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
 
@@ -146,10 +152,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Migros
-                currentCompany = "migros";
+                setCurrentCompany("migros");
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdownWithShops(currentCompany, comboBox1);
+                fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
         });
 
@@ -157,23 +163,21 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts ins Coop
-                currentCompany = "coop";
+                setCurrentCompany("coop");
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdownWithShops(currentCompany, comboBox1);
+                fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
-
-
         });
 
         aldiRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Hier gehts in den Aldi
-                currentCompany = "aldi";
+                setCurrentCompany("aldi");
                 invisibler();
                 Filiale.setVisible(true);
-                fillDropdownWithShops(currentCompany, comboBox1);
+                fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
         });
 
@@ -184,18 +188,8 @@ public class GUI {
                 //Hier gehts in den Aldi
                 invisibler();
                 Tablet.setVisible(true);
-                TabletArtikelSupermarkt.setVisible(false);
+                TabletSelect.setVisible(false);
 
-            }
-        });
-
-        TabletMenuArtikelSupermarkt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TabletÜbersicht.setVisible(false);
-                TabletArtikelSupermarkt.setVisible(true);
-                fillDropdownWithSupermarkets(TabletArtikelSupermarktSupermarktWählen);
-                //fillDropdownWithShops(currentCompany, );
             }
         });
 
@@ -203,8 +197,8 @@ public class GUI {
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // System.out.println(comboBox1.getSelectedItem().toString());
-                currentShop = comboBox1.getSelectedItem().toString();
+                // System.out.println(comboBox1.getSelectedItem().toString());
+                setCurrentShop(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
 
                 invisibler();
@@ -216,45 +210,19 @@ public class GUI {
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
-                    for (String j : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).getArticleList().keySet()) {
+                for (int i : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
+                    for (String j : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(i).getArticleList().keySet()) {
                         for (String key : produkte.keySet()) {
-                            getSelectedUser().getCart().addArticle(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue()));
+                            getSelectedUser().getCart().addArticle(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(i).takeArticle(key, (Integer) produkte.get(key).getValue()));
                         }
                     }
                 }
             }
         });
 
-        TabletArtikelSupermarktSupermarktWählen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                String supermarket = (String) TabletArtikelSupermarktSupermarktWählen.getSelectedItem();
-                TabletArtikelSupermarktArtikelWählen.removeAllItems();
-                fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelSupermarktArtikelWählen);
-            }
-        });
-
-        BUttonArtikelSuchen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SupermarketPackage.Tablet Tablet1 = new Tablet();
-                String supermarketName = (String) TabletArtikelSupermarktSupermarktWählen.getSelectedItem();
-                String articleName = (String) TabletArtikelSupermarktArtikelWählen.getSelectedItem();
-                List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
-                StringBuilder output = new StringBuilder();
-                for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
-                    String shopName = t.getValue0().getName();
-                    int amount = t.getValue2();
-                    int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
-                    output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden \n");
-                }
-                ArtikelFindenOutput.setText(output.toString());
-            }
-        });
 
         /*Der anDieKasseGehenButton ist ein äusserst komplizierter Button. Er ist kaum nachvollziehbar
-        * der Kunde wird gezwungen zu zahlen bar. Zahlt er mit Karte, landet er im Garte*/
+         * der Kunde wird gezwungen zu zahlen bar. Zahlt er mit Karte, landet er im Garte*/
         anDieKasseGehenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -275,13 +243,105 @@ public class GUI {
             }
         });
 
-        //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
-        artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
+        TabletSupermarktWählen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
+                TabletArtikelWählen.removeAllItems();
+                fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
+            }
+        });
+
+        TabletMenuArtikelTyp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "typ";
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
+
+                TabletTypWählen.setVisible(true);
+                TabletTypWählenLabel.setVisible(true);
+
+                TabletSupermarktWählen.setVisible(false);
+                TabletSupermarktWählenLabel.setVisible(false);
+
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
+
+                TabletArtikelWählen.setVisible(false);
+                TabletArtikelWählenLabel.setVisible(false);
+
+                fillDropdownWithArticlesFromType(TabletTypWählen);
+
+
+            }
+        });
+
+        TabletMenuArtikelSupermarkt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "supermarket";
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
+
+                TabletSupermarktWählen.setVisible(true);
+                TabletSupermarktWählenLabel.setVisible(true);
+
+                TabletArtikelWählen.setVisible(true);
+                TabletArtikelWählenLabel.setVisible(true);
+
+
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
+
+                TabletTypWählen.setVisible(false);
+                TabletTypWählenLabel.setVisible(false);
+                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+            }
+        });
+
+        ButtonArtikelSuchen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SupermarketPackage.Tablet Tablet1 = new Tablet();
+                switch (currentTabletFuntion) {
+                    case "supermarket": {
+
+                        String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
+                        String articleName = (String) TabletArtikelWählen.getSelectedItem();
+                        List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
+                            String shopName = t.getValue0().getName();
+                            int amount = t.getValue2();
+                            int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
+                            output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden <br/>");
+                        }
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                    }
+                    case "typ": {
+                        String typ = (String) TabletTypWählen.getSelectedItem();
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
+                            for (Shop shop : supermarket.getShopMap().values()) {
+                                for (Shelf shelf : shop.getShelfList().values())
+                                    for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
+                                        if (articlePair.getValue0().getClass().getSimpleName().equals(typ)) {
+
+                                            output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(articlePair.getValue0().getName()).append(" ").append(articlePair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
+                                        }
+                                    }
+                            }
+                        }
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                    }
+                }
             }
         });
     }
+
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
@@ -297,14 +357,14 @@ public class GUI {
 
     //Hier befüllen wir die Labels mit den Artikeln welche wir verkaufen
     public void generateProducts(String shopname) {
-        for (int key : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(shopname).getShelfList().keySet()) {
-            for (Pair<Article, Integer> key2Pair : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(shopname).getShelfList().get(key).getArticleList().values()) {
+        for (int key : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().keySet()) {
+            for (Pair<Article, Integer> key2Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().get(key).getArticleList().values()) {
                 String key2 = key2Pair.getValue0().getName();
                 //Neues Panel wird erstellt
                 JPanel panelNew = new JPanel();
 
                 //Danach gleichzeitig neue Labels welche in das erstellte Panel eingefügt werden
-                JLabel labelNew = new JLabel(key2 + " ("+key2Pair.getValue1()+"x)");
+                JLabel labelNew = new JLabel(key2 + " (" + key2Pair.getValue1() + "x)");
                 labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
                 panelNew.add(labelNew);
 
@@ -323,9 +383,9 @@ public class GUI {
 
     //Mit der showPrice Methode sorgen wir für die Darstellung des Preises an der Kasse
     public void showPrice() {
-        for(String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+        for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
             JPanel panelNew = new JPanel();
-            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName()+ " " + getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice());
+            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + " " + getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice());
             labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
@@ -344,12 +404,24 @@ public class GUI {
         for (Article article : supermarketChain.getArticleMap().values()) {
             comboBox.addItem(article.getName());
         }
+    }
 
+    public void fillDropdownWithArticlesFromType(JComboBox comboBox) {
+        Reflections reflections = new Reflections("SupermarketPackage.Articles");
+
+        Set<Class<? extends Article>> classes = reflections.getSubTypesOf(Article.class);
+
+        for (Class<? extends Article> subClass : classes) {
+            comboBox.addItem(subClass.getSimpleName());
+            System.out.println(subClass.getSimpleName());
+        }
     }
 
 
     public static void main(String[] args) {
         SupermarketHandler.setUp();
+
+
         frame.setResizable(true);
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);

@@ -11,6 +11,25 @@ public class SystemHandler {
 
     private static Person selectedUser;
 
+    private static String currentCompany;
+    private static String currentShop;
+
+    public static String getCurrentCompany() {
+        return currentCompany;
+    }
+
+    public static void setCurrentCompany(String currentCompany) {
+        SystemHandler.currentCompany = currentCompany;
+    }
+
+    public static String getCurrentShop() {
+        return currentShop;
+    }
+
+    public static void setCurrentShop(String currentShop) {
+        SystemHandler.currentShop = currentShop;
+    }
+
     private static final Map<String, Person> personList = new HashMap<>();
     private static Map<String, Company> companyMap = new HashMap<>();
     private static Map<String, SupermarketChain> supermarketChainMap = new HashMap<>();
