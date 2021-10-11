@@ -403,7 +403,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="tests \n"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="339d6" class="javax.swing.JComboBox" binding="TabletTypWählen">
