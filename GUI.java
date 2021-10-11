@@ -48,6 +48,8 @@ public class GUI {
     private JPanel Kassen;
     private JPanel Cart;
     private JPanel EinkaufAbschluss;
+    private JPanel Gesamtwert;
+    private JPanel Schüpercard;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -63,28 +65,9 @@ public class GUI {
     private JButton ButtonArtikelSuchen;
     private JButton TabletMenuArtikelSupermarkt;
     private JButton backButton;
-
-    //Radiobuttons für die Supermarktketten-Auswahl
-    private JRadioButton migrosRadioButton;
-    private JRadioButton coopRadioButton;
-    private JRadioButton aldiRadioButton;
-
-    //Dropdownmenü um die Artikel auszuwählen(Tablet)
-    private JComboBox comboBox1;
+    private JButton TabletMenuName;
+    private JButton TabletMenuSupermarkt;
     private JButton TabletMenuFiliale;
-    private JComboBox TabletSupermarktWählen;
-    private JComboBox TabletArtikelWählen;
-    private JLabel ArtikelFindenOutput;
-    private JComboBox TabletTypWählen;
-    private JComboBox TabletFilialeWählen;
-    private JButton TabletMenuTyp;
-    private JLabel TabletSupermarktWählenLabel;
-    private JLabel TabletArtikelWählenLabel;
-    private JLabel TabletFilialeWählenLabel;
-    private JLabel TabletTypWählenLabel;
-    private JButton bezahlButton;
-    private JPanel Gesamtwert;
-    private JPanel Schüpercard;
     private JButton schüpercardErstellenButton;
     private JButton zurückButton;
     private JButton zurückButtonFiliale1;
@@ -94,6 +77,28 @@ public class GUI {
     private JButton Zurück;
     private JButton buttonZurückTablet;
     private JButton zurückButton1;
+    private JButton bezahlButton;
+    private JButton TabletMenuTyp;
+
+
+    //Radiobuttons für die Supermarktketten-Auswahl
+    private JRadioButton migrosRadioButton;
+    private JRadioButton coopRadioButton;
+    private JRadioButton aldiRadioButton;
+
+    //Dropdownmenü um die Artikel auszuwählen(Tablet)
+    private JComboBox comboBox1;
+    private JComboBox TabletSupermarktWählen;
+    private JComboBox TabletArtikelWählen;
+    private JComboBox TabletTypWählen;
+    private JComboBox TabletFilialeWählen;
+
+    //Label
+    private JLabel TabletSupermarktWählenLabel;
+    private JLabel TabletArtikelWählenLabel;
+    private JLabel TabletFilialeWählenLabel;
+    private JLabel TabletTypWählenLabel;
+    private JLabel ArtikelFindenOutput;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -515,6 +520,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Loginpanel.setVisible(true);
+                SystemHandler.logout();
             }
         });
 
