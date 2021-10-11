@@ -435,7 +435,7 @@ public class GUI {
             comboBox.addItem(article.getName());
         }
     }
-
+/* org.reflections:reflections:0.10.1*/
     public void fillDropdownWithArticlesFromType(JComboBox comboBox) {
         Reflections reflections = new Reflections("SupermarketPackage.Articles");
 
