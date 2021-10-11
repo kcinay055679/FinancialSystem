@@ -84,6 +84,8 @@ public class GUI {
     private JLabel TabletTypWählenLabel;
     private JButton bezahlButton;
     private JPanel Gesamtwert;
+    private JPanel Schüpercard;
+    private JButton schüpercardErstellenButton;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -373,6 +375,14 @@ public class GUI {
                 }
             }
         });
+
+        schüpercardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Schüpercard.setVisible(true);
+            }
+        });
     }
 
 
@@ -484,6 +494,7 @@ public class GUI {
         Warenkorb.setVisible(false);
         Kassen.setVisible(false);
         EinkaufAbschluss.setVisible(false);
+        Schüpercard.setVisible(false);
     }
 
 
