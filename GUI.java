@@ -15,11 +15,15 @@ import org.javatuples.Triplet;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GUI {
@@ -76,6 +80,8 @@ public class GUI {
     private JButton TabletMenuArtikelTyp;
     private JButton bezahlButton;
     private JPanel Gesamtwert;
+    private JPanel EinkaufAbschluss;
+    private JButton backButton;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -223,7 +229,7 @@ public class GUI {
                     }
                 }
                 JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
-                labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 25));
                 Gesamtwert.add(labelNew);
             }
         });
@@ -274,6 +280,22 @@ public class GUI {
                 currentShop = comboBox1.getSelectedItem().toString();
                 invisibler();
                 Warenkorb.setVisible(true);
+            }
+        });
+
+        bezahlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                EinkaufAbschluss.setVisible(true);
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
             }
         });
     }
@@ -364,6 +386,7 @@ public class GUI {
         Tablet.setVisible(false);
         Warenkorb.setVisible(false);
         Kassen.setVisible(false);
+        EinkaufAbschluss.setVisible(false);
     }
 
 
