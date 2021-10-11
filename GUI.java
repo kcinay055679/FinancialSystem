@@ -46,6 +46,7 @@ public class GUI {
     private JPanel TabletSelect;
     private JPanel Kassen;
     private JPanel Cart;
+    private JPanel EinkaufAbschluss;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -60,6 +61,7 @@ public class GUI {
     private JButton anDieKasseGehenButton;
     private JButton ButtonArtikelSuchen;
     private JButton TabletMenuArtikelSupermarkt;
+    private JButton backButton;
 
     //Radiobuttons für die Supermarktketten-Auswahl
     private JRadioButton migrosRadioButton;
@@ -89,9 +91,6 @@ public class GUI {
 
     //Hashmap um Spinner Komponente zu speichern
     HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
-
-    //Globale Variabeln
-
 
     private int greatValue;
 
@@ -202,9 +201,6 @@ public class GUI {
             }
         });
 
-        //Dieser Button bestätigt die ausgewählte Filiale
-
-
         //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
         artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
             @Override
@@ -212,16 +208,21 @@ public class GUI {
                 for(String key : spinnerHashMap.keySet()) {
                     if((Integer) spinnerHashMap.get(key).getValue() != 0) {
                         for(int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
-                            for(String key3 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().keySet()) {
-                                if(key3.equals(key)) {
-                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                            for(Pair<Article, Integer> key3Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().values()) {
+                                Article key3 = key3Pair.getValue0();
+                                if(key3.getName().equals(key)) {
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
                                     SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
-                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
                                 }
                             }
                         }
                     }
                 }
+                generateProducts(getCurrentShop());
+                Gesamtwert.removeAll();
+                Gesamtwert.repaint();
+                Gesamtwert.revalidate();
                 JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
                 labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
                 Gesamtwert.add(labelNew);
@@ -245,7 +246,6 @@ public class GUI {
         bestätigenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // System.out.println(comboBox1.getSelectedItem().toString());
                 setCurrentShop(comboBox1.getSelectedItem().toString());
                 generateProducts(comboBox1.getSelectedItem().toString());
 
@@ -258,6 +258,11 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+
+                //Einkaufswert auf Null zurücksetzen
+                greatValue = 0;
+
+                //Abschluss wird sichtbar
                 EinkaufAbschluss.setVisible(true);
             }
         });
@@ -269,7 +274,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
-    }
+
 
         TabletSupermarktWählen.addActionListener(new ActionListener() {
             @Override
@@ -372,10 +377,12 @@ public class GUI {
 
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
+        comboBox.removeAllItems();
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
             if (key.equals(supermarketname)) {
                 for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
                     comboBox.addItem(key2);
+                    System.out.println("Item aded");
                 }
             } else {
                 System.out.println("Nicht diese Filiale");
@@ -385,9 +392,13 @@ public class GUI {
 
     //Hier befüllen wir die Labels mit den Artikeln welche wir verkaufen
     public void generateProducts(String shopname) {
+        ArtikelPanel.removeAll();
+        ArtikelPanel.repaint();
+        ArtikelPanel.revalidate();
         for (int key : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().keySet()) {
             for (Pair<Article, Integer> key2Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(shopname).getShelfList().get(key).getArticleList().values()) {
                 String key2 = key2Pair.getValue0().getName();
+
                 //Neues Panel wird erstellt
                 JPanel panelNew = new JPanel();
 
@@ -414,8 +425,11 @@ public class GUI {
     //Mit der showPrice Methode sorgen wir für die Darstellung des Preises an der Kasse
     public void showPrice() {
         for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+            float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
             JPanel panelNew = new JPanel();
-            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + " " + getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice());
+            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                    + price);
+
             labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
