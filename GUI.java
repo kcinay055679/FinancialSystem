@@ -74,6 +74,8 @@ public class GUI {
     private JButton TabletMenuArtikelName;
     private JComboBox TabletFilialeWählen;
     private JButton TabletMenuArtikelTyp;
+    private JButton bezahlButton;
+    private JPanel Gesamtwert;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -84,6 +86,7 @@ public class GUI {
     //Globale Variabeln
     private String currentCompany;
     private String currentShop;
+    private int greatValue;
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
 
@@ -213,11 +216,15 @@ public class GUI {
                                 if(key3.equals(key)) {
                                     getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
                                     SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
                                 }
                             }
                         }
                     }
                 }
+                JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
+                Gesamtwert.add(labelNew);
             }
         });
 
@@ -255,15 +262,6 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 showPrice();
-                for(String key : spinnerHashMap.keySet()) {
-                    if((Integer) spinnerHashMap.get(key).getValue() != 0) {
-                        for(int key2 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().keySet()) {
-                            for(String key3 : SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().keySet()) {
-                                System.out.println(SystemHandler.getSupermarketChainMap().get(currentCompany).getShopMap().get(currentShop).getShelfList().get(key2).getArticleList().get(key3).getValue1());
-                            }
-                        }
-                    }
-                }
                 Kassen.setVisible(true);
             }
         });
@@ -329,9 +327,6 @@ public class GUI {
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
             Cart.add(panelNew);
-            for(String key : getSelectedUser().getCart().getArticleList().keySet()) {
-                System.out.println(getSelectedUser().getCart().getArticleList().get(key).getValue0().getName());
-            }
         }
     }
 
