@@ -712,7 +712,7 @@ public class GUI {
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
                 spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
-                Dimension dimension = new Dimension(600,35) ;
+                Dimension dimension = new Dimension(800,35);
                 SpinnerPanelProdukte.removeAll();
                 spinnerRegal.setPreferredSize(dimension);
                 SpinnerPanelProdukte.add(spinnerRegal);
@@ -823,7 +823,8 @@ public class GUI {
                 //Das Gleiche geschieht mit dem Spinner
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, (int) key2Pair.getValue1(), 1); //default value,lower bound,upper bound,increment by
 
-                JSpinner spinnerNeu = new JSpinner(sm);
+                JSpinner spinnerNeu = new JSpinner();
+
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
                 spinnerHashMap.put(key2, spinnerNeu);
 
@@ -910,10 +911,10 @@ public class GUI {
 
 
         frame.setResizable(true);
-        frame.setContentPane((new GUI()).panelMain);
+        frame.setContentPane((new GUI()). panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
-        frame.setSize(800, 600);
+        frame.setSize(1000, 600);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
     }
