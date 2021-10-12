@@ -7,6 +7,7 @@ import SupermarketPackage.Articles.Article;
 
 import static GameHandlerPackage.SystemHandler.*;
 
+import SupermarketPackage.Articles.Material;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import org.reflections.Reflections;
@@ -14,11 +15,17 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import javax.swing.*;
+import java.util.*;
+import java.util.Timer;
 
 public class GUI {
 
@@ -45,6 +52,11 @@ public class GUI {
     private JPanel EinkaufAbschluss;
     private JPanel Gesamtwert;
     private JPanel Schüpercard;
+    private JPanel ProduktHinzufügen;
+    private JPanel Employeepanel;
+
+    private JPanel Food;
+    private JPanel Mitarbeiter;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -70,9 +82,14 @@ public class GUI {
     private JButton zurückButtonSchüpercard;
     private JButton Zurück;
     private JButton buttonZurückTablet;
-    private JButton zurückButton1;
+    private JButton zurückButtonSchüpperkarteErstellt;
     private JButton bezahlButton;
     private JButton TabletMenuTyp;
+
+    private JButton arbeitenGehenButton;
+    private JButton kündenButton;
+    private JButton regalHinzufügenButton;
+    private JButton produktHinzufügenButton;
 
 
     //Radiobuttons für die Supermarktketten-Auswahl
@@ -84,20 +101,21 @@ public class GUI {
     private JComboBox comboBox1;
     private JComboBox TabletSupermarktWählen;
     private JComboBox TabletArtikelWählen;
-    private JLabel ArtikelFindenOutput;
     private JComboBox TabletTypWählen;
     private JComboBox TabletFilialeWählen;
 
-    //Label
+    //Label / Texte
     private JLabel TabletSupermarktWählenLabel;
     private JLabel TabletArtikelWählenLabel;
     private JLabel TabletFilialeWählenLabel;
     private JLabel TabletTypWählenLabel;
-
+    private JPanel SchüperkarteErstellt;
+    private JPanel SchüpercardNummer;
 
     private JLabel name;
     private JLabel schüpperpunkte;
     private JLabel guthaben;
+    private JLabel ArtikelFindenOutput;
     private DigitalClock.SimpleDigitalClock clock;
     private JButton ChiefMenu;
     private JPanel ChiefPanel;
@@ -106,6 +124,17 @@ public class GUI {
     private JButton mitarbeiterZumChefBefördernButton;
     private JButton zurückZumMenuButton;
 
+    private JLabel labelFalsch;
+    private JSpinner spinnerRegal;
+    private JButton erstellungAbschliessenButton;
+    private JTextField chipsÄpfelUswTextField;
+    private JTextField a500CHFTextField;
+    private JTextField trueFalseTextField;
+    private JLabel labelFalschProdukt;
+    private JSpinner spinnerMenge;
+    private JTextField textField1;
+    private JComboBox comboBoxProduktart;
+    private JButton eingebenButton;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -120,13 +149,14 @@ public class GUI {
 
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
+        labelFalsch.setVisible(false);
         invisibler();
 
         Loginpanel.setVisible(true);
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
         clock.setBounds(0,0,200,200);
-
+        ChiefMenu.setVisible(false);
 
 //
 
@@ -137,8 +167,11 @@ public class GUI {
                 if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
                     //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                     invisibler();
+                    labelFalsch.setVisible(false);
                     Dashboardpanel.setVisible(true);
                     setDashboardInformation();
+                } else {
+                    labelFalsch.setVisible(true);
                     showSpecialButtons();
                 }
 
@@ -149,14 +182,14 @@ public class GUI {
         passwortLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
-                    if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
-                        //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if(SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                         invisibler();
                         showSpecialButtons();
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
-
+                    }else {
+                        labelFalsch.setVisible(true);
                     }
                 }
                 super.keyPressed(e);
@@ -168,11 +201,15 @@ public class GUI {
         nameLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER && SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
-                    invisibler();
-                    Dashboardpanel.setVisible(true);
-                    setDashboardInformation();
-                    showSpecialButtons();
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                        invisibler();
+                        Dashboardpanel.setVisible(true);
+                        setDashboardInformation();
+                        showSpecialButtons();
+                    } else {
+                        labelFalsch.setVisible(true);
+                    }
                 }
                 super.keyPressed(e);
             }
@@ -542,11 +579,14 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Loginpanel.setVisible(true);
+                labelFalsch.setVisible(false);
+                nameLogin.setText("");
+                passwortLogin.setText("");
                 SystemHandler.logout();
             }
         });
 
-        //Alle Zurückbuttons welche wir brauchen
+        //Alle Zurückbuttons welche wir brauchen um das Programm dynamisch zu gestalten
         zurückButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -595,6 +635,110 @@ public class GUI {
                 invisibler();
                 Tablet.setVisible(true);
                 TabletÜbersicht.setVisible(true);
+            }
+        });
+
+        schüpercardErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SchüpercardNummer.removeAll();
+                getSelectedUser().addSchüppercard();
+
+                JLabel labelNew = new JLabel("Ihre Schüpercardnummer: " + getSelectedUser().getCard().getCardnumber());
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                labelNew.setHorizontalAlignment(SwingConstants.CENTER);
+
+                SchüpercardNummer.repaint();
+                SchüpercardNummer.revalidate();
+
+                invisibler();
+                SchüpercardNummer.add(labelNew);
+                SchüperkarteErstellt.setVisible(true);
+            }
+        });
+        zurückButtonSchüpperkarteErstellt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Schüpercard.setVisible(true);
+            }
+        });
+
+//        arbeitenGehenButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            }
+//        });
+
+        kündenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSelectedUser().setRank(Rank.UNEMPLOYED);
+                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if(getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
+                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().remove(key3);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        regalHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+//
+        produktHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Arrays.asList(Fleischsorten.values())
+                        .forEach(fleisch -> comboBoxProduktart.addItem(fleisch));
+                Arrays.asList(Material.values()).forEach(material -> comboBoxProduktart.addItem(material));
+                SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShop().getShelfList().size(), 1);
+                spinnerRegal = new JSpinner(sm);
+                ProduktHinzufügen.setVisible(true);
+            }
+        });
+
+//        erstellungAbschliessenButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
+//                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+//                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+//                            if(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+//                                try {
+//                                    SupermarketHandler.createFood(chipsÄpfelUswTextField.getText(),Integer.parseInt(a500CHFTextField.getText()),(Integer)spinnerRegal.getValue(),
+//                                            Boolean.parseBoolean(trueFalseTextField.getText()),"",getCurrentShop(),getCurrentCompany(),(Integer)spinnerRegal.getValue(),Fleischsorten.COW);
+//                                    labelFalschProdukt.setVisible(false);
+//                                } catch(Exception a) {
+//                                    labelFalschProdukt.setVisible(true);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        });
+        eingebenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(comboBoxProduktart.equals(Fleischsorten.COW)) {
+                    System.out.println("siuuuu");
+                }
             }
         });
     }
@@ -719,18 +863,12 @@ public class GUI {
 
 
         frame.setResizable(true);
-
-
-        frame.setContentPane(new GUI().panelMain);
-
+        frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setSize(600, 500);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
-
-
-
     }
 
     public void setDashboardInformation() {
@@ -758,6 +896,12 @@ public class GUI {
         EinkaufAbschluss.setVisible(false);
         Schüpercard.setVisible(false);
         ChiefPanel.setVisible(false);
+            SchüperkarteErstellt.setVisible(false);
+            Mitarbeiter.setVisible(false);
+            ProduktHinzufügen.setVisible(false);
+//        Food.setVisible(false);
+
+            clock.setVisible(false);
         ChiefMenu.setVisible(false);
     }
 

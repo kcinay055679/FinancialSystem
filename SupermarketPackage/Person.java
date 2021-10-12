@@ -23,6 +23,10 @@ public class Person {
     private final ShoppingCart cart = new ShoppingCart();
     private MessageDigest digest;
 
+    public void setCurrentShop(Shop currentShop) {
+        this.currentShop = currentShop;
+    }
+
     {
         try {
             digest = MessageDigest.getInstance("SHA-256");
@@ -124,7 +128,7 @@ public class Person {
     }
 
     public void addSchüppercard() {
-        this.card = new Schüppercard();
+        this.card = new Schüppercard(1000 + (int)(Math.random() * ((9999 - 1000) + 1)));
     }
 
     public void takeArticle(String articleName, int amount, int shelfId) {

@@ -38,6 +38,7 @@ public class SystemHandler {
         Person p = personList.get(name);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
+        p.setWorkPlace(companyMap.get(companyName));
         supermarketChainMap.get(companyName).getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChainMap.get(companyName).getShopMap().get(null)));
     }
 
