@@ -1,10 +1,7 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
 import GameHandlerPackage.*;
 import SupermarketPackage.*;
+import GameHandlerPackage.DigitalClock;
 
 import SupermarketPackage.Articles.Article;
 
@@ -17,12 +14,10 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 import javax.swing.*;
 
 public class GUI {
@@ -103,6 +98,8 @@ public class GUI {
     private JLabel name;
     private JLabel schüpperpunkte;
     private JLabel guthaben;
+    private DigitalClock.SimpleDigitalClock clock;
+
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -118,7 +115,21 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
         invisibler();
-        this.Loginpanel.setVisible(true);
+
+        Loginpanel.setVisible(true);
+        //panelMain.add(clock1, 0);
+        clock.setBackground(null);
+        clock.setBounds(0,0,200,200);
+//        JPanel glassPane = new JPanel(null);
+//        glassPane.setBackground(Color.gray);
+//        glassPane.setSize(222, 380);
+//        glassPane.setLocation(0, 150);
+//        glassPane.add(clock,0);
+//        frame.setGlassPane(glassPane);
+//        System.out.println(frame.getGlassPane().getClass());
+//        glassPane.requestFocusInWindow();
+
+
 
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -490,7 +501,8 @@ public class GUI {
 
                         ArtikelFindenOutput.setText(output.append("</html>").toString());
                         break;
-                    } case "name":{
+                    }
+                    case "name": {
                         String articleName = (String) TabletArtikelWählen.getSelectedItem();
                         StringBuilder output = new StringBuilder();
                         output.append("<html>");
@@ -499,7 +511,7 @@ public class GUI {
                                 for (Shelf shelf : shop.getShelfList().values()) {
                                     for (Pair<Article, Integer> pair : shelf.getArticleList().values()) {
                                         assert articleName != null;
-                                        if(articleName.equals(pair.getValue0().getName())){
+                                        if (articleName.equals(pair.getValue0().getName())) {
                                             output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(pair.getValue0().getName()).append(" ").append(pair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
                                         }
                                     }
@@ -619,6 +631,7 @@ public class GUI {
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
                 spinnerHashMap.put(key2, spinnerNeu);
 
+
                 panelNew.add(spinnerNeu);
 
                 produkte.put(key2, spinnerNeu);
@@ -686,7 +699,7 @@ public class GUI {
             for (Shop shop : supermarket.getShopMap().values()) {
                 for (Shelf shelf : shop.getShelfList().values()) {
                     for (Pair<Article, Integer> pair : shelf.getArticleList().values()) {
-                        if(((DefaultComboBoxModel)comboBox.getModel()).getIndexOf(pair.getValue0().getName()) == -1) {
+                        if (((DefaultComboBoxModel) comboBox.getModel()).getIndexOf(pair.getValue0().getName()) == -1) {
                             comboBox.addItem(pair.getValue0().getName());
                         }
                     }
@@ -701,25 +714,32 @@ public class GUI {
 
 
         frame.setResizable(true);
-        frame.setContentPane((new GUI()).panelMain);
+
+
+        frame.setContentPane(new GUI().panelMain);
+
         frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setSize(600, 500);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
+
+
+
     }
 
-    public void setDashboardInformation(){
-        name.setText("Name: "+getSelectedUser().getName());
-        guthaben.setText("Guthaben: "+getSelectedUser().getMoney());
+    public void setDashboardInformation() {
+        name.setText("Name: " + getSelectedUser().getName());
+        guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
 
-        if(getSelectedUser().getCard() !=null){
-            schüpperpunkte.setText("Schüpperpunkte: "+getSelectedUser().getCard().getPoints());
-        }else{
+        if (getSelectedUser().getCard() != null) {
+            schüpperpunkte.setText("Schüpperpunkte: " + getSelectedUser().getCard().getPoints());
+        } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
 
     }
+
     public void invisibler() {
         Dashboardpanel.setVisible(false);
         Filialebetreten.setVisible(false);
@@ -733,4 +753,6 @@ public class GUI {
         EinkaufAbschluss.setVisible(false);
         Schüpercard.setVisible(false);
     }
+
+
 }
