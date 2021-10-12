@@ -1,6 +1,7 @@
 package SupermarketPackage;
 
 import GameHandlerPackage.Place;
+import GameHandlerPackage.Rank;
 import GameHandlerPackage.SystemHandler;
 import SupermarketPackage.Articles.Article;
 import SupermarketPackage.Articles.BuildingMaterial;
@@ -196,6 +197,7 @@ public class SupermarketHandler {
 
     public static void createShop(String supermarketChain, String shopName, String name,String password, String repeatPassword, boolean selfCheckout, String place){
         addPerson(name, password, repeatPassword, Integer.MAX_VALUE);
+        getPersonList().get(name).setRank(Rank.CHIEF);
         SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name),  selfCheckout, place);
     }
 }

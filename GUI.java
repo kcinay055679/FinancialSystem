@@ -126,7 +126,7 @@ public class GUI {
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
         clock.setBounds(0,0,200,200);
-        ChiefMenu.setVisible(false);
+
 
 //
 
@@ -758,12 +758,14 @@ public class GUI {
         EinkaufAbschluss.setVisible(false);
         Schüpercard.setVisible(false);
         ChiefPanel.setVisible(false);
+        ChiefMenu.setVisible(false);
     }
 
     public void showSpecialButtons(){
+        System.out.println(getSelectedUser().getRank());
         if(getSelectedUser().getRank() == Rank.CHIEF){
-            invisibler();
-            ChiefPanel.setVisible(true);
+
+            ChiefMenu.setVisible(true);
         }
     }
 
