@@ -100,8 +100,11 @@ public class GUI {
     private JLabel guthaben;
     private DigitalClock.SimpleDigitalClock clock;
     private JButton EmployeeMenu;
-    private JLabel EmployeeMenuPanel;
     private JPanel Employeepanel;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
 
 
     //Hashmap für die Produkte in einem Laden
