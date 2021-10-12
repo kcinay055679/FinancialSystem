@@ -20,12 +20,12 @@ public class SupermarketHandler {
         SystemHandler.createSupermarketChain("migros");
         SystemHandler.createSupermarketChain("aldi");
 
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", "Yanick", 1, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", "Marc", 2, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("FoodPalace", "Yanick", 3, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("Rudi's Fress Bude", "Marc", 4, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("FoodPalace", "Yanick", 5, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("Rudi's Fress Bude", "Marc", 6, true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", new Person("Yanick1", "", "", Integer.MAX_VALUE),  true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", new Person("Yanick2", "", "", Integer.MAX_VALUE) , true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("FoodPalace", new Person("Yanick3", "", "", Integer.MAX_VALUE),  true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("Rudi's Fress Bude", new Person("YanickM4", "", "", Integer.MAX_VALUE), true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("FoodPalace", new Person("Yanick5", "", "", Integer.MAX_VALUE),  true, "Thun");
+        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("Rudi's Fress Bude", new Person("Yanick6", "", "", Integer.MAX_VALUE),  true, "Thun");
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");

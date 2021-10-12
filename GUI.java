@@ -99,8 +99,8 @@ public class GUI {
     private JLabel schüpperpunkte;
     private JLabel guthaben;
     private DigitalClock.SimpleDigitalClock clock;
-    private JButton EmployeeMenu;
-    private JPanel Employeepanel;
+    private JButton ChiefMenu;
+    private JPanel ChiefPanel;
     private JButton HireEmployee;
     private JButton mitarbeiterKündigenButton;
     private JButton mitarbeiterZumChefBefördernButton;
@@ -126,15 +126,9 @@ public class GUI {
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
         clock.setBounds(0,0,200,200);
-//        JPanel glassPane = new JPanel(null);
-//        glassPane.setBackground(Color.gray);
-//        glassPane.setSize(222, 380);
-//        glassPane.setLocation(0, 150);
-//        glassPane.add(clock,0);
-//        frame.setGlassPane(glassPane);
-//        System.out.println(frame.getGlassPane().getClass());
-//        glassPane.requestFocusInWindow();
+        ChiefMenu.setVisible(false);
 
+//
 
 
         this.bestätigenButton.addActionListener(new ActionListener() {
@@ -145,6 +139,7 @@ public class GUI {
                     invisibler();
                     Dashboardpanel.setVisible(true);
                     setDashboardInformation();
+                    showSpecialButtons();
                 }
 
             }
@@ -158,11 +153,14 @@ public class GUI {
                     if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
                         //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                         invisibler();
+                        showSpecialButtons();
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
+
                     }
                 }
                 super.keyPressed(e);
+
             }
         });
 
@@ -174,6 +172,7 @@ public class GUI {
                     invisibler();
                     Dashboardpanel.setVisible(true);
                     setDashboardInformation();
+                    showSpecialButtons();
                 }
                 super.keyPressed(e);
             }
@@ -758,6 +757,14 @@ public class GUI {
         Kassen.setVisible(false);
         EinkaufAbschluss.setVisible(false);
         Schüpercard.setVisible(false);
+        ChiefPanel.setVisible(false);
+    }
+
+    public void showSpecialButtons(){
+        if(getSelectedUser().getRank() == Rank.CHIEF){
+            invisibler();
+            ChiefPanel.setVisible(true);
+        }
     }
 
 
