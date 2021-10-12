@@ -15,8 +15,6 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -24,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import javax.swing.*;
-import java.util.*;
-import java.util.Timer;
 
 public class GUI {
 
@@ -125,7 +121,8 @@ public class GUI {
     private JButton zurückZumMenuButton;
 
     private JLabel labelFalsch;
-    private JSpinner spinnerRegal;
+
+    public JSpinner spinnerRegal;
     private JButton erstellungAbschliessenButton;
     private JTextField chipsÄpfelUswTextField;
     private JTextField a500CHFTextField;
@@ -137,6 +134,7 @@ public class GUI {
     private JButton eingebenButton;
     private JButton employeeMenuButton;
     private JButton zurückButtonHinzufügen;
+    private JPanel SpinnerPanelProdukte;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -707,9 +705,16 @@ public class GUI {
                 Arrays.asList(Fleischsorten.values())
                         .forEach(fleisch -> comboBoxProduktart.addItem(fleisch));
                 Arrays.asList(Material.values()).forEach(material -> comboBoxProduktart.addItem(material));
-                SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShop().getShelfList().size(), 1);
+                System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
+                SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
+                spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
+                Dimension dimension = new Dimension(600,35) ;
+                spinnerRegal.setPreferredSize(dimension);
+                SpinnerPanelProdukte.add(spinnerRegal);
                 ProduktHinzufügen.setVisible(true);
+                ProduktHinzufügen.repaint();
+                ProduktHinzufügen.revalidate();
             }
         });
 

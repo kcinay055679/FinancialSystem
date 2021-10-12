@@ -33,6 +33,7 @@ public class SupermarketHandler {
 
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
+        SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
 
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","FoodPalace", "coop", 1, Fleischsorten.FISH);
@@ -42,6 +43,7 @@ public class SupermarketHandler {
 
         SupermarketHandler.createShelf("FoodPalace", "migros");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "migros");
+        SupermarketHandler.createShelf("FoodPalace", "migros");
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021", "FoodPalace", "migros", 1, Fleischsorten.CHICKEN);
 
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
@@ -55,7 +57,7 @@ public class SupermarketHandler {
     }
 
     public static void customerJoinShop(String personName, String shop) {
-        SupermarketChain supermarketChain = getPersonList().get(personName).getCurrentShop().getSupermarketChain();
+        SupermarketChain supermarketChain = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain();
         getPersonList().get(personName).setShop(supermarketChain.getShopMap().get(shop));
     }
 
@@ -112,7 +114,7 @@ public class SupermarketHandler {
     }
 
     public static void checkOut(String customerName, String shopName) {
-        getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
+        getPersonList().get(customerName).getCurrentShopWork().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
     }
 
     public static void selfCheckOut(String customerName, String shopName) {
@@ -123,7 +125,7 @@ public class SupermarketHandler {
         while (true) {
             switch (input) {
                 case "1": {
-                    getPersonList().get(customerName).getCurrentShop().getSupermarketChain().getShopMap().get(getSelectedUser().getCurrentShop().getName()).selfCheckOut(getSelectedUser(), fullPrice);
+                    getPersonList().get(customerName).getCurrentShopWork().getSupermarketChain().getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).selfCheckOut(getSelectedUser(), fullPrice);
                     System.out.println("Sie haben für " + fullPrice + " CHF bei uns eingekauft");
                     System.out.println("Falls sie eine Schüpperkarte besitzen wurden ihnen diese Punkte gutgeschrieben");
                     return;
@@ -176,12 +178,12 @@ public class SupermarketHandler {
     }
 
     public static void employeeEnter(String personName) {
-        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
+        Shop shop = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
         shop.employeeJoined(getPersonList().get(personName));
     }
 
     public static void employeeLeave(String personName) {
-        Shop shop = getPersonList().get(personName).getCurrentShop().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
+        Shop shop = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
         shop.employeeLeaved(personName);
     }
 
@@ -193,7 +195,7 @@ public class SupermarketHandler {
         SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
         Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
         Shop shop = supermarketChain.getShopMap().get(shopName);
-        p.setCurrentShop(shop);
+        p.setCurrentShopWork(shop);
         p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
