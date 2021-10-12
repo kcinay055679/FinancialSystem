@@ -41,14 +41,16 @@ public class SupermarketChain extends Company {
     }
 
     public void createSubsidiary(String shopName, Person chief, boolean selfCheckout, String place) {
-        if (shopMap.get(shopName) == null) {
-            if (chiefMap.get(chief.getName()) == null) {
+        if (shopMap.get(shopName) == null && chief != null && chiefMap.get(chief.getName()) == null) {
+
+
                 chiefMap.put(chief.getName(), new Pair<>(chief, null));
                 shopMap.put(shopName, new Shop(shopName, selfCheckout, this, Place.valueOf(place.toUpperCase()), chiefMap.get(chief.getName()).getValue0()));
                 chiefMap.put(chief.getName(), new Pair<>(chief, shopMap.get(shopName)));
-            }
+
         } else {
-            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator");
+            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+shopName+" "+name);
         }
     }
 }
+
