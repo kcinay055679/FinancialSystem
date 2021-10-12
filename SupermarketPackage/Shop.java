@@ -81,7 +81,7 @@ public class Shop {
     }
 
     public void checkOut(Person p) {
-        if (p.getCurrentShop() == this) {
+        if (p.getCurrentShopWork() == this) {
             p.decreaseMoney(p.getCartPrice());
             if (p.getCard() != null) {
                 p.getCard().increasePoints(p.getCartPrice());
@@ -93,7 +93,7 @@ public class Shop {
     }
 
     public void selfCheckOut(Person p, int price) {
-        if (p.getCurrentShop() == this && this.selfCheckout) {
+        if (p.getCurrentShopWork() == this && this.selfCheckout) {
             p.decreaseMoney(price);
             if (p.getCard() != null) {
                 p.getCard().increasePoints(p.getCartPrice());

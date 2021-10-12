@@ -15,17 +15,12 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 import javax.swing.*;
-import java.util.*;
-import java.util.Timer;
+
 
 public class GUI {
 
@@ -123,7 +118,8 @@ public class GUI {
     private JButton mitarbeiterKündigenButton;
 
     private JLabel labelFalsch;
-    private JSpinner spinnerRegal;
+
+    public JSpinner spinnerRegal;
     private JButton erstellungAbschliessenButton;
     private JTextField chipsÄpfelUswTextField;
     private JTextField a500CHFTextField;
@@ -137,6 +133,9 @@ public class GUI {
     private JButton GetAllEmployeesOfShop;
     private JButton mitarbeiterZumChefBefördernButton;
     private JLabel ChiefOutput;
+    private JButton employeeMenuButton;
+    private JButton zurückButtonHinzufügen;
+    private JPanel SpinnerPanelProdukte;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -159,9 +158,7 @@ public class GUI {
         clock.setBackground(null);
         clock.setBounds(0,0,200,200);
         ChiefMenu.setVisible(false);
-
-//
-
+        employeeMenuButton.setVisible(false);
 
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -710,9 +707,16 @@ public class GUI {
                 Arrays.asList(Fleischsorten.values())
                         .forEach(fleisch -> comboBoxProduktart.addItem(fleisch));
                 Arrays.asList(Material.values()).forEach(material -> comboBoxProduktart.addItem(material));
-                SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShop().getShelfList().size(), 1);
+                System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
+                SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
+                spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
+                Dimension dimension = new Dimension(600,35) ;
+                spinnerRegal.setPreferredSize(dimension);
+                SpinnerPanelProdukte.add(spinnerRegal);
                 ProduktHinzufügen.setVisible(true);
+                ProduktHinzufügen.repaint();
+                ProduktHinzufügen.revalidate();
             }
         });
 
@@ -764,6 +768,20 @@ public class GUI {
                         }
                     }
                 }
+            }
+        });
+        employeeMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+        zurückButtonHinzufügen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
             }
         });
     }
@@ -891,7 +909,7 @@ public class GUI {
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
-        frame.setSize(600, 500);
+        frame.setSize(800, 600);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
     }
@@ -935,6 +953,9 @@ public class GUI {
         if(getSelectedUser().getRank() == Rank.CHIEF){
 
             ChiefMenu.setVisible(true);
+        }
+        if(getSelectedUser().getRank() == Rank.EMPLOYEE) {
+            employeeMenuButton.setVisible(true);
         }
     }
 

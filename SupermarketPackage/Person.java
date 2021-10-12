@@ -18,13 +18,13 @@ public class Person {
 
     private Company company;
     private Rank rank = Rank.UNEMPLOYED;
-    private Shop currentShop;
+    private Shop currentShopWork;
     private Schüppercard card;
     private final ShoppingCart cart = new ShoppingCart();
     private MessageDigest digest;
 
-    public void setCurrentShop(Shop currentShop) {
-        this.currentShop = currentShop;
+    public void setCurrentShopWork(Shop currentShopWork) {
+        this.currentShopWork = currentShopWork;
     }
 
     {
@@ -107,8 +107,8 @@ public class Person {
         this.money += money;
     }
 
-    public Shop getCurrentShop() {
-        return currentShop;
+    public Shop getCurrentShopWork() {
+        return currentShopWork;
     }
 
     public void decreaseMoney(float money) {
@@ -132,12 +132,12 @@ public class Person {
     }
 
     public void takeArticle(String articleName, int amount, int shelfId) {
-        Pair<Article, Integer> articlePair = currentShop.getShelfById(shelfId).takeArticle(articleName, amount);
+        Pair<Article, Integer> articlePair = currentShopWork.getShelfById(shelfId).takeArticle(articleName, amount);
         cart.addArticle(articlePair);
     }
 
     public void setShop(Shop shop) {
-        currentShop = shop;
+        currentShopWork = shop;
     }
 
     public float getCartPrice() {
