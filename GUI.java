@@ -710,11 +710,13 @@ public class GUI {
                 spinnerRegal = new JSpinner(sm);
                 spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
                 Dimension dimension = new Dimension(600,35) ;
+                SpinnerPanelProdukte.removeAll();
                 spinnerRegal.setPreferredSize(dimension);
                 SpinnerPanelProdukte.add(spinnerRegal);
                 ProduktHinzufügen.setVisible(true);
                 ProduktHinzufügen.repaint();
                 ProduktHinzufügen.revalidate();
+                System.out.println("test");
             }
         });
 
