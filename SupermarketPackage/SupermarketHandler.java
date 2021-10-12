@@ -48,11 +48,21 @@ public class SupermarketHandler {
 
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
 
-        SupermarketHandler.addPerson("Marc", "password", "password", 0);
+
         SupermarketHandler.addPerson("Yanick", "", "", 0);
         SupermarketHandler.addPerson("", "", "", 0);
+
+        SupermarketHandler.addPerson("Marc", "password", "password", 0);
         addEmployeeToCompany("Marc", "coop");
         hireEmployeeForShop("Marc", "FoodPalace");
+        employeeEnter("Marc");
+
+        SupermarketHandler.addPerson("Mar1", "password", "password", 0);
+        addEmployeeToCompany("Mar1", "coop");
+        hireEmployeeForShop("Mar1", "FoodPalace");
+        employeeEnter("Mar1");
+
+
 
     }
 

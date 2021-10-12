@@ -19,6 +19,7 @@ import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.*;
 
 
@@ -777,6 +778,7 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+
         zurückButtonHinzufügen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
