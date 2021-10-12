@@ -99,6 +99,9 @@ public class GUI {
     private JLabel schüpperpunkte;
     private JLabel guthaben;
     private DigitalClock.SimpleDigitalClock clock;
+    private JButton EmployeeMenu;
+    private JLabel EmployeeMenuPanel;
+    private JPanel Employeepanel;
 
 
     //Hashmap für die Produkte in einem Laden
