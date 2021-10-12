@@ -170,9 +170,10 @@ public class GUI {
                     labelFalsch.setVisible(false);
                     Dashboardpanel.setVisible(true);
                     setDashboardInformation();
+                    showSpecialButtons();
                 } else {
                     labelFalsch.setVisible(true);
-                    showSpecialButtons();
+
                 }
 
             }
