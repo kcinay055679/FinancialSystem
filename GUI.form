@@ -199,7 +199,7 @@
               <text value="Guthaben"/>
             </properties>
           </component>
-          <component id="8a4a8" class="javax.swing.JButton" binding="EmployeeMenu">
+          <component id="8a4a8" class="javax.swing.JButton" binding="ChiefMenu">
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
@@ -209,7 +209,7 @@
             </constraints>
             <properties>
               <font size="16"/>
-              <text value="Mitarbeiter Menu"/>
+              <text value="Chef Menu"/>
             </properties>
           </component>
         </children>
@@ -683,7 +683,7 @@
         </constraints>
         <properties/>
       </component>
-      <grid id="aeacd" binding="Employeepanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="aeacd" binding="ChiefPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -697,39 +697,39 @@
             </constraints>
             <properties>
               <font size="24"/>
-              <text value="Sie befinden sich im Mitarbeiter Menu"/>
+              <text value="Sie befinden sich im Chef Menu"/>
             </properties>
           </component>
-          <component id="75d05" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="75d05" class="javax.swing.JButton" binding="HireEmployee">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Mitarbeiter EInstellen"/>
             </properties>
           </component>
-          <component id="e0225" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="e0225" class="javax.swing.JButton" binding="mitarbeiterKündigenButton" default-binding="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Mitarbeiter kündigen"/>
             </properties>
           </component>
-          <component id="47545" class="javax.swing.JButton" binding="button3" default-binding="true">
+          <component id="47545" class="javax.swing.JButton" binding="mitarbeiterZumChefBefördernButton" default-binding="true">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Mitarbeiter zum Chef befördern"/>
             </properties>
           </component>
-          <component id="1cf79" class="javax.swing.JButton" binding="button4" default-binding="true">
+          <component id="1cf79" class="javax.swing.JButton" binding="zurückZumMenuButton" default-binding="true">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Zurück zum Menu"/>
             </properties>
           </component>
         </children>

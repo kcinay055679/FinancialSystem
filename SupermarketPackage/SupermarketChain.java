@@ -12,7 +12,7 @@ public class SupermarketChain extends Company {
     private final String name;
     private final Map<String, Shop> shopMap = new HashMap<>();
     private final Map<String, Article> articleMap = new HashMap<>();
-    private final Map<Integer, Pair<Person, Shop>> chiefMap = new HashMap<>();
+    private final Map<String, Pair<Person, Shop>> chiefMap = new HashMap<>();
     private final Map<String, Pair<Person, Shop>> employeeMap = new HashMap<>();
 
 
@@ -24,7 +24,7 @@ public class SupermarketChain extends Company {
         return articleMap;
     }
 
-    public Map<Integer, Pair<Person, Shop>> getChiefMap() {
+    public Map<String, Pair<Person, Shop>> getChiefMap() {
         return chiefMap;
     }
 
@@ -40,15 +40,17 @@ public class SupermarketChain extends Company {
         this.name = name;
     }
 
-    public void createSubsidiary(String shopName, String chiefName, int chiefId, boolean selfCheckout, String place) {
-        if (shopMap.get(shopName) == null) {
-            if (chiefMap.get(chiefId) == null) {
-                chiefMap.put(chiefId, new Pair<>(new Person(chiefName, "", "", Integer.MAX_VALUE), null));
-                shopMap.put(shopName, new Shop(shopName, selfCheckout, this, Place.valueOf(place.toUpperCase()), chiefMap.get(chiefId).getValue0()));
-                chiefMap.put(chiefId, new Pair<>(new Person(chiefName, "", "", Integer.MAX_VALUE), shopMap.get(shopName)));
-            }
+    public void createSubsidiary(String shopName, Person chief, boolean selfCheckout, String place) {
+        if (shopMap.get(shopName) == null && chief != null && chiefMap.get(chief.getName()) == null) {
+
+
+                chiefMap.put(chief.getName(), new Pair<>(chief, null));
+                shopMap.put(shopName, new Shop(shopName, selfCheckout, this, Place.valueOf(place.toUpperCase()), chiefMap.get(chief.getName()).getValue0()));
+                chiefMap.put(chief.getName(), new Pair<>(chief, shopMap.get(shopName)));
+
         } else {
-            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator");
+            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+shopName+" "+name);
         }
     }
 }
+

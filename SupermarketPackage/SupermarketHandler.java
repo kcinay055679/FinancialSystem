@@ -1,5 +1,6 @@
 package SupermarketPackage;
 
+import GameHandlerPackage.Place;
 import GameHandlerPackage.SystemHandler;
 import SupermarketPackage.Articles.Article;
 import SupermarketPackage.Articles.BuildingMaterial;
@@ -20,12 +21,16 @@ public class SupermarketHandler {
         SystemHandler.createSupermarketChain("migros");
         SystemHandler.createSupermarketChain("aldi");
 
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("FoodPalace", "Yanick", 1, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("coop").createSubsidiary("Rudi's Fress Bude", "Marc", 2, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("FoodPalace", "Yanick", 3, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("migros").createSubsidiary("Rudi's Fress Bude", "Marc", 4, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("FoodPalace", "Yanick", 5, true, "Thun");
-        SystemHandler.getSupermarketChainMap().get("aldi").createSubsidiary("Rudi's Fress Bude", "Marc", 6, true, "Thun");
+        createShop("coop","FoodPalace","Yanick1", "", "",true,"Thun");
+        createShop("coop","Rudi's Fress Bude","Yanick2", "", "",true,"Thun");
+
+        createShop("migros","Rudi's Fress Bude","Yanick3", "", "",true,"Thun");
+        createShop("migros","FoodPalace","Yanick4", "", "",true,"Thun");
+
+        createShop("aldi","Rudi's Fress Bude","Yanick5", "", "",true,"Thun");
+        createShop("aldi","FoodPalace","Yanick6", "", "",true,"Thun");
+
+
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
@@ -98,8 +103,9 @@ public class SupermarketHandler {
     }
 
     public static void createShelf(String shopName, String supermarketChainName) {
-        Shop test = getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName);
-        test.createShelf();
+        SupermarketChain supermarket = getSupermarketChainMap().get(supermarketChainName);
+        Shop shop = supermarket.getShopMap().get(shopName);
+        shop.createShelf();
     }
 
     public static void checkOut(String customerName, String shopName) {
@@ -186,5 +192,10 @@ public class SupermarketHandler {
         Shop shop = supermarketChain.getShopMap().get(shopName);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
+    }
+
+    public static void createShop(String supermarketChain, String shopName, String name,String password, String repeatPassword, boolean selfCheckout, String place){
+        addPerson(name, password, repeatPassword, Integer.MAX_VALUE);
+        SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name),  selfCheckout, place);
     }
 }
