@@ -46,8 +46,11 @@ public class SupermarketHandler {
 
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
 
-        SupermarketHandler.addPerson("Yanick", "password", "password", 0);
+        SupermarketHandler.addPerson("Marc", "password", "password", 0);
+        SupermarketHandler.addPerson("Yanick", "", "", 0);
         SupermarketHandler.addPerson("", "", "", 0);
+        addEmployeeToCompany("Marc", "coop");
+        hireEmployeeForShop("Marc", "FoodPalace");
 
     }
 
@@ -186,10 +189,11 @@ public class SupermarketHandler {
         return getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName).getEmployeeList().values().toArray(Person[]::new);
     }
 
-    public static void hireEmployeeForShop(String name, String shopName) {
-        SupermarketChain supermarketChain = getPersonList().get(name).getCurrentShop().getSupermarketChain();
-        Person p = supermarketChain.getEmployeeMap().get(name).getValue0();
+    public static void hireEmployeeForShop(String personName, String shopName) {
+        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
+        Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
         Shop shop = supermarketChain.getShopMap().get(shopName);
+        p.setCurrentShop(shop);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
     }
