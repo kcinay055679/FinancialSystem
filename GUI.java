@@ -135,6 +135,8 @@ public class GUI {
     private JTextField textField1;
     private JComboBox comboBoxProduktart;
     private JButton eingebenButton;
+    private JButton employeeMenuButton;
+    private JButton zurückButtonHinzufügen;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -151,15 +153,12 @@ public class GUI {
     public GUI() {
         labelFalsch.setVisible(false);
         invisibler();
-
         Loginpanel.setVisible(true);
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
         clock.setBounds(0,0,200,200);
         ChiefMenu.setVisible(false);
-
-//
-
+        employeeMenuButton.setVisible(false);
 
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -742,6 +741,20 @@ public class GUI {
                 }
             }
         });
+        employeeMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+        zurückButtonHinzufügen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -867,7 +880,7 @@ public class GUI {
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
-        frame.setSize(600, 500);
+        frame.setSize(800, 600);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
     }
@@ -881,7 +894,6 @@ public class GUI {
         } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
-
     }
 
     public void invisibler() {
@@ -909,8 +921,10 @@ public class GUI {
     public void showSpecialButtons(){
         System.out.println(getSelectedUser().getRank());
         if(getSelectedUser().getRank() == Rank.CHIEF){
-
             ChiefMenu.setVisible(true);
+        }
+        if(getSelectedUser().getRank() == Rank.EMPLOYEE) {
+            employeeMenuButton.setVisible(true);
         }
     }
 

@@ -1,6 +1,5 @@
 package SupermarketPackage;
 
-import GameHandlerPackage.Place;
 import GameHandlerPackage.Rank;
 import GameHandlerPackage.SystemHandler;
 import SupermarketPackage.Articles.Article;
@@ -195,6 +194,7 @@ public class SupermarketHandler {
         Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
         Shop shop = supermarketChain.getShopMap().get(shopName);
         p.setCurrentShop(shop);
+        p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
     }
