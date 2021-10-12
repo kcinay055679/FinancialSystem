@@ -20,8 +20,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import javax.swing.*;
+
 
 public class GUI {
 
@@ -117,8 +117,6 @@ public class GUI {
     private JPanel ChiefPanel;
     private JButton HireEmployee;
     private JButton mitarbeiterKündigenButton;
-    private JButton mitarbeiterZumChefBefördernButton;
-    private JButton zurückZumMenuButton;
 
     private JLabel labelFalsch;
 
@@ -132,6 +130,10 @@ public class GUI {
     private JTextField textField1;
     private JComboBox comboBoxProduktart;
     private JButton eingebenButton;
+    private JButton zurückZumMenuButton;
+    private JButton GetAllEmployeesOfShop;
+    private JButton mitarbeiterZumChefBefördernButton;
+    private JLabel ChiefOutput;
     private JButton employeeMenuButton;
     private JButton zurückButtonHinzufügen;
     private JPanel SpinnerPanelProdukte;
@@ -151,6 +153,7 @@ public class GUI {
     public GUI() {
         labelFalsch.setVisible(false);
         invisibler();
+
         Loginpanel.setVisible(true);
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
@@ -748,6 +751,28 @@ public class GUI {
                 }
             }
         });
+
+        ChiefMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ChiefPanel.setVisible(true);
+            }
+        });
+        GetAllEmployeesOfShop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
+                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
+                        if(pair.getValue0() == getSelectedUser()) {
+                            for(String p : pair.getValue1().getPresentEmployees().keySet()){
+                                ChiefOutput.setText(ChiefOutput.getText() + p + "\n");
+                            }
+                        }
+                    }
+                }
+            }
+        });
         employeeMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -755,6 +780,7 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+
         zurückButtonHinzufügen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -901,6 +927,7 @@ public class GUI {
         } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
+
     }
 
     public void invisibler() {
@@ -928,6 +955,7 @@ public class GUI {
     public void showSpecialButtons(){
         System.out.println(getSelectedUser().getRank());
         if(getSelectedUser().getRank() == Rank.CHIEF){
+
             ChiefMenu.setVisible(true);
         }
         if(getSelectedUser().getRank() == Rank.EMPLOYEE) {

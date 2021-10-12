@@ -74,7 +74,7 @@ public class DigitalClock {
         }
         @Override
         public Dimension getPreferredSize() {
-            return new Dimension(200, 200);
+            return new Dimension(100, 50);
         }
 
     }
