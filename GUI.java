@@ -101,10 +101,10 @@ public class GUI {
     private DigitalClock.SimpleDigitalClock clock;
     private JButton EmployeeMenu;
     private JPanel Employeepanel;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
+    private JButton HireEmployee;
+    private JButton mitarbeiterKündigenButton;
+    private JButton mitarbeiterZumChefBefördernButton;
+    private JButton zurückZumMenuButton;
 
 
     //Hashmap für die Produkte in einem Laden
