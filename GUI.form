@@ -890,7 +890,9 @@
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="16"/>
+            </properties>
           </component>
           <component id="ab881" class="javax.swing.JLabel">
             <constraints>
@@ -907,7 +909,9 @@
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="16"/>
+            </properties>
           </component>
           <component id="f627d" class="javax.swing.JButton" binding="eingebenButton" default-binding="true">
             <constraints>
@@ -915,6 +919,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <font size="16"/>
               <text value="eingeben"/>
             </properties>
           </component>
@@ -924,6 +929,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <font size="16"/>
               <text value="Zurück"/>
             </properties>
           </component>
