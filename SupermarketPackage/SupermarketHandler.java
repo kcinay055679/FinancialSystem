@@ -51,18 +51,14 @@ public class SupermarketHandler {
         SupermarketHandler.addPerson("", "", "", 0);
 
         SupermarketHandler.addPerson("Marc", "password", "password", 0);
-        hireEmployee("Marc", "coop", "FoodPalace");
+        hireEmployee("Marc", "coop", "FoodPalace", 0);
         employeeEnter("Marc");
 
         SupermarketHandler.addPerson("Mar1", "password", "password", 0);
-        hireEmployee("Mar1", "coop", "FoodPalace");
+        hireEmployee("Mar1", "coop", "FoodPalace", 0);
 
     }
 
-    public static void customerJoinShop(String personName, String shop) {
-        SupermarketChain supermarketChain = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain();
-        getPersonList().get(personName).setShop(supermarketChain.getShopMap().get(shop));
-    }
 
     public static void addPerson(String name, String password, String repeatPassword, int salary) {
         if (password.equals(repeatPassword)) {

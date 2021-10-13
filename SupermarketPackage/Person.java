@@ -91,6 +91,7 @@ public class Person {
     public void setSalary(int salary) {
         this.salary = salary;
         money += salary * 5;
+        System.out.println(money);
     }
 
     public Schüppercard getCard() {

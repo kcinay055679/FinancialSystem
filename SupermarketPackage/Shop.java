@@ -138,7 +138,7 @@ public class Shop {
         collect.getValue0().setRank(Rank.EMPLOYEE);
 
         //Alter Chef wird als Mitarbeiter angestellt
-        hireEmployee(collect.getValue0().getName(),supermarketChain.getName(), this.name);
+        hireEmployee(collect.getValue0().getName(),supermarketChain.getName(), this.name, collect.getValue0().getSalary());
 
         //Neuer Chef wird aus den Mitarbeiterlisten entfernt
         supermarketChain.getEmployeeMap().remove(collect.getValue0().getName());

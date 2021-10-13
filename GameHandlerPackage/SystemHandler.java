@@ -37,7 +37,7 @@ public class SystemHandler {
     private static Map<String, Company> companyMap = new HashMap<>();
     private static Map<String, SupermarketChain> supermarketChainMap = new HashMap<>();
 
-    public static void hireEmployee(String personName, String companyName, String shopName) {
+    public static void hireEmployee(String personName, String companyName, String shopName, int salary) {
         Person p = personList.get(personName);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
@@ -52,6 +52,7 @@ public class SystemHandler {
         p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
+        p.setSalary(salary);
     }
 
     public static void fireEmployee(String person, Shop shop){

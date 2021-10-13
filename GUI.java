@@ -15,11 +15,14 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 
 
 public class GUI {
@@ -162,6 +165,8 @@ public class GUI {
     private JLabel labelUnkorrektFleisch;
     private JLabel labelFalschBuild;
     private JLabel labelInkorrektBuild;
+    private JFormattedTextField ChiefSalaryField;
+    private JLabel ChiefHireSalaryLabel;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -625,6 +630,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+
         zurückButtonFiliale1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -632,6 +638,7 @@ public class GUI {
                 Filialebetreten.setVisible(true);
             }
         });
+
         zurückButtonKasse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -639,6 +646,7 @@ public class GUI {
                 Warenkorb.setVisible(true);
             }
         });
+
         zurückButtonWarenkorb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -646,6 +654,7 @@ public class GUI {
                 Filiale.setVisible(true);
             }
         });
+
         zurückButtonSchüpercard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -653,6 +662,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+
         Zurück.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -660,6 +670,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+
         buttonZurückTablet.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -687,6 +698,7 @@ public class GUI {
                 SchüperkarteErstellt.setVisible(true);
             }
         });
+
         zurückButtonSchüpperkarteErstellt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -765,8 +777,8 @@ public class GUI {
                 } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
                     Arrays.asList(Material.values())
                             .forEach(material -> comboBoxMaterial.addItem(material));
-                invisibler();
-                BuildingMatPanel.setVisible(true);
+                    invisibler();
+                    BuildingMatPanel.setVisible(true);
                 } else {
                     System.out.println("Siuuur");
                 }
@@ -779,6 +791,8 @@ public class GUI {
                 invisibler();
                 ChiefPanel.setVisible(true);
                 ChiefMenuActionPanel.setVisible(false);
+                ChiefSalaryField.setVisible(false);
+                ChiefHireSalaryLabel.setVisible(false);
             }
         });
 
@@ -828,7 +842,7 @@ public class GUI {
         produktErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(produktnameTextField.getText().equals("") || PreisTextField.getText().equals("")
+                if (produktnameTextField.getText().equals("") || PreisTextField.getText().equals("")
                         || trueFalseTextField.getText().equals("") || DatumTextField.getText().equals("") ||
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
@@ -839,11 +853,11 @@ public class GUI {
                         boolean barcode = Boolean.parseBoolean(trueFalseTextField.getText());
                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
                         String date = DatumTextField.getText();
-                        SupermarketHandler.createFood(produktname, preis,(Integer) spinnerMengeFleisch.getValue(), barcode, date,
-                                getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(),(Integer) spinnerRegal.getValue() , fleisch);
+                        SupermarketHandler.createFood(produktname, preis, (Integer) spinnerMengeFleisch.getValue(), barcode, date,
+                                getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue(), fleisch);
                         invisibler();
                         ProduktErstellt.setVisible(true);
-                    }catch(Exception a) {
+                    } catch (Exception a) {
                         labelUnkorrektFleisch.setVisible(true);
                     }
                 }
@@ -861,8 +875,19 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ChiefOutput.setVisible(false);
+                ChiefHireSalaryLabel.setVisible(true);
                 ChiefMenuActionPanel.setVisible(true);
                 ChiefMenuComboBox.removeAllItems();
+                ChiefSalaryField.setVisible(true);
+                NumberFormat format = NumberFormat.getIntegerInstance();
+                NumberFormatter formatter = new NumberFormatter(format);
+                formatter.setValueClass(Integer.class);
+                formatter.setMinimum(0);
+                formatter.setMaximum(Integer.MAX_VALUE);
+                formatter.setAllowsInvalid(false);
+                DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
+                ChiefSalaryField.setFormatterFactory(factory);
+
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
                 getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
             }
@@ -881,15 +906,19 @@ public class GUI {
                         }
                     }
                 }
+
                 if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
-                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), company.getName(), shop.getName());
+                    System.out.println(ChiefSalaryField.getHorizontalVisibility().getValue());
+                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), company.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
                     ChiefMenuActionPanel.setVisible(false);
+                    ChiefSalaryField.setVisible(false);
+                    ChiefHireSalaryLabel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
                     fireEmployee((String) ChiefMenuComboBox.getSelectedItem(), shop);
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
-                }else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
+                } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
                     getSelectedUser().getCurrentShopWork().promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
 
                     ChiefOutput.setVisible(false);
@@ -922,6 +951,7 @@ public class GUI {
                 shop.getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
             }
         });
+
         zurückButtonMaterial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -951,6 +981,7 @@ public class GUI {
                 ChiefOutput.setText(ChiefOutput.getText() + "</html>");
             }
         });
+
         zurückZumMenüButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -962,22 +993,22 @@ public class GUI {
         produktErstellenBuildingMat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(produktnamenBuild.getText().equals("") || PreisFeld.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
-                || trueFalseTextBuild.getText().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
+                if (produktnamenBuild.getText().equals("") || PreisFeld.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
+                        || trueFalseTextBuild.getText().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
                     labelInkorrektBuild.setVisible(true);
                 } else {
 //                    try {
-                        String produktname = produktnamenBuild.getText();
-                        float preis = Float.parseFloat(PreisFeld.getText());
-                        int menge = (Integer) spinnerMengeMat.getValue();
-                        boolean barcode = Boolean.parseBoolean(trueFalseTextBuild.getText());
-                        int tonnen = (Integer) spinnerTonnen.getValue();
-                        String mat = comboBoxMaterial.getSelectedItem().toString();
+                    String produktname = produktnamenBuild.getText();
+                    float preis = Float.parseFloat(PreisFeld.getText());
+                    int menge = (Integer) spinnerMengeMat.getValue();
+                    boolean barcode = Boolean.parseBoolean(trueFalseTextBuild.getText());
+                    int tonnen = (Integer) spinnerTonnen.getValue();
+                    String mat = comboBoxMaterial.getSelectedItem().toString();
 
-                        SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode,getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
-                                getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
-                        invisibler();
-                        ProduktErstellt.setVisible(true);
+                    SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
+                            getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
+                    invisibler();
+                    ProduktErstellt.setVisible(true);
 //                    }catch(Exception a) {
 //                        System.out.println("Moin");
 //                        labelFalschBuild.setVisible(true);
@@ -994,7 +1025,6 @@ public class GUI {
                 ChiefMenuComboBox.removeAllItems();
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
                 getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
-
             }
         });
     }
@@ -1036,7 +1066,6 @@ public class GUI {
 
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
                 spinnerHashMap.put(key2, spinnerNeu);
-
 
                 panelNew.add(spinnerNeu);
 
@@ -1114,7 +1143,6 @@ public class GUI {
         }
     }
 
-
     public static void main(String[] args) {
         SupermarketHandler.setUp();
         frame.setResizable(true);
@@ -1172,7 +1200,4 @@ public class GUI {
             employeeMenuButton.setVisible(true);
         }
     }
-
-
-
 }

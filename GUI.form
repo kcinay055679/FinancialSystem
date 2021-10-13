@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="19" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="883" height="4133"/>
+      <xy x="20" y="20" width="883" height="4194"/>
     </constraints>
     <properties>
       <background color="-10859669"/>
@@ -830,7 +830,7 @@
               <text value=""/>
             </properties>
           </component>
-          <grid id="7edf9" binding="ChiefMenuActionPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="7edf9" binding="ChiefMenuActionPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -852,7 +852,7 @@
               </component>
               <component id="73c0d" class="javax.swing.JButton" binding="ChiefMenuEnter">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                     <minimum-size width="350" height="30"/>
                     <preferred-size width="350" height="30"/>
                     <maximum-size width="350" height="30"/>
@@ -871,6 +871,27 @@
                   <foreground color="-16774066"/>
                   <labelFor value="81d5a"/>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="aed9f" class="javax.swing.JFormattedTextField" binding="ChiefSalaryField">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="350" height="30"/>
+                    <preferred-size width="350" height="30"/>
+                    <maximum-size width="350" height="30"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="6299b" class="javax.swing.JLabel" binding="ChiefHireSalaryLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="15"/>
+                  <foreground color="-16774066"/>
+                  <labelFor value="aed9f"/>
+                  <text value="Bitte wählen sie das Gehalt des neuen Mitarbeiters"/>
                 </properties>
               </component>
             </children>
