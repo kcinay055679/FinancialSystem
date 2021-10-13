@@ -58,7 +58,6 @@ public class GUI {
     private JLabel welcomeText;
     private JButton filialeBetretenButton;
     private JButton tabletBenutzenButton;
-    private JButton personalienAnzeigenButton;
     private JButton schüpercardButton;
     private JButton ausloggenButton;
     private JButton TabletMenuName;
@@ -165,6 +164,13 @@ public class GUI {
     private JLabel labelUnkorrektFleisch;
     private JLabel labelFalschBuild;
     private JLabel labelInkorrektBuild;
+    private JPanel Arbeiten;
+    private JButton arbeitVerlassenButton;
+    private JPanel RegalHinzufügen;
+    private JSpinner spinnerAnzRegale;
+    private JButton gewählteAnzahlHinzufügenButton;
+    private JPanel RegaleErstellt;
+    private JButton zurückZumMenüButton1;
     private JFormattedTextField ChiefSalaryField;
     private JLabel ChiefHireSalaryLabel;
 
@@ -696,6 +702,7 @@ public class GUI {
                 invisibler();
                 SchüpercardNummer.add(labelNew);
                 SchüperkarteErstellt.setVisible(true);
+                showSpecialButtons();
             }
         });
 
@@ -703,15 +710,17 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Schüpercard.setVisible(true);
+                Dashboardpanel.setVisible(true);
             }
         });
 
-//        arbeitenGehenButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
+        arbeitenGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Arbeiten.setVisible(true);
+            }
+        });
 
         kündenButton.addActionListener(new ActionListener() {
             @Override
@@ -731,15 +740,8 @@ public class GUI {
         regalHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
-                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
-                            }
-                        }
-                    }
-                }
+                invisibler();
+                RegalHinzufügen.setVisible(true);
             }
         });
 
@@ -768,20 +770,20 @@ public class GUI {
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (comboBoxProduktart.getSelectedItem().equals("Food")) {
-                    Arrays.asList(Fleischsorten.values())
-                            .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
-                    invisibler();
-                    FoodPanel.setVisible(true);
+                    if (comboBoxProduktart.getSelectedItem().equals("Food")) {
+                        Arrays.asList(Fleischsorten.values())
+                                .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
+                        invisibler();
+                        FoodPanel.setVisible(true);
 
-                } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
-                    Arrays.asList(Material.values())
-                            .forEach(material -> comboBoxMaterial.addItem(material));
-                    invisibler();
-                    BuildingMatPanel.setVisible(true);
-                } else {
-                    System.out.println("Siuuur");
-                }
+                    } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
+                        Arrays.asList(Material.values())
+                                .forEach(material -> comboBoxMaterial.addItem(material));
+                        invisibler();
+                        BuildingMatPanel.setVisible(true);
+                    } else {
+                        System.out.println("Siuuur");
+                    }
             }
         });
 
@@ -846,7 +848,7 @@ public class GUI {
                         || trueFalseTextField.getText().equals("") || DatumTextField.getText().equals("") ||
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
-                } else {
+                }else {
                     try {
                         String produktname = produktnameTextField.getText();
                         float preis = Float.parseFloat(PreisTextField.getText());
@@ -997,22 +999,21 @@ public class GUI {
                         || trueFalseTextBuild.getText().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
                     labelInkorrektBuild.setVisible(true);
                 } else {
-//                    try {
-                    String produktname = produktnamenBuild.getText();
-                    float preis = Float.parseFloat(PreisFeld.getText());
-                    int menge = (Integer) spinnerMengeMat.getValue();
-                    boolean barcode = Boolean.parseBoolean(trueFalseTextBuild.getText());
-                    int tonnen = (Integer) spinnerTonnen.getValue();
-                    String mat = comboBoxMaterial.getSelectedItem().toString();
+                    try {
+                        String produktname = produktnamenBuild.getText();
+                        float preis = Float.parseFloat(PreisFeld.getText());
+                        int menge = (Integer) spinnerMengeMat.getValue();
+                        boolean barcode = Boolean.parseBoolean(trueFalseTextBuild.getText());
+                        int tonnen = (Integer) spinnerTonnen.getValue();
+                        String mat = comboBoxMaterial.getSelectedItem().toString();
 
-                    SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
-                            getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
-                    invisibler();
-                    ProduktErstellt.setVisible(true);
-//                    }catch(Exception a) {
-//                        System.out.println("Moin");
-//                        labelFalschBuild.setVisible(true);
-//                    }
+                        SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode,getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
+                                getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
+                        invisibler();
+                        ProduktErstellt.setVisible(true);
+                    }catch(Exception a) {
+                        labelFalschBuild.setVisible(true);
+                    }
                 }
             }
         });
@@ -1025,6 +1026,49 @@ public class GUI {
                 ChiefMenuComboBox.removeAllItems();
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
                 getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
+
+            }
+        });
+        kündenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireEmployee(getSelectedUser().getName(), getSelectedUser().getCurrentShopWork());
+                invisibler();
+                showSpecialButtons();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+        arbeitVerlassenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+        gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+                                for(int i = 0; i<(Integer) spinnerAnzRegale.getValue(); i++) {
+                                    SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
+                                    System.out.println("Regal erstellt");
+                                }
+                            }
+                        }
+                    }
+                }
+                invisibler();
+                RegaleErstellt.setVisible(true);
+            }
+        });
+        zurückZumMenüButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
             }
         });
     }
@@ -1159,7 +1203,7 @@ public class GUI {
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
 
         if (getSelectedUser().getCard() != null) {
-            schüpperpunkte.setText("Schüpperpunkte: " + getSelectedUser().getCard().getPoints());
+            schüpperpunkte.setText("<html>Ihre Schüperkarteennummer ist: "+ getSelectedUser().getCard().getCardnumber()+" <br/><br/> Schüpperpunkte: " + getSelectedUser().getCard().getPoints()  +"</html>");
         } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
@@ -1188,16 +1232,25 @@ public class GUI {
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
+        Arbeiten.setVisible(false);
+        RegalHinzufügen.setVisible(false);
+        RegaleErstellt.setVisible(false);
+        if(getSelectedUser() !=null){
+            setDashboardInformation();
+            showSpecialButtons();
+        }
+
     }
 
     public void showSpecialButtons() {
-        System.out.println(getSelectedUser().getRank());
         if (getSelectedUser().getRank() == Rank.CHIEF) {
-
             ChiefMenu.setVisible(true);
         }
         if (getSelectedUser().getRank() == Rank.EMPLOYEE) {
             employeeMenuButton.setVisible(true);
+        }
+        if(getSelectedUser().getCard() != null) {
+            schüpercardButton.setVisible(false);
         }
     }
 }
