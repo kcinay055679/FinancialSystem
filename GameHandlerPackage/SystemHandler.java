@@ -48,6 +48,7 @@ public class SystemHandler {
         Shop shop = supermarketChain.getShopMap().get(shopName);
 
         p.setCurrentShopWork(shop);
+
         p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);

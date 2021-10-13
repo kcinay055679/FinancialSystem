@@ -15,38 +15,36 @@ import static GameHandlerPackage.SystemHandler.*;
 public class SupermarketHandler {
 
 
-
     public static void setUp() {
         SystemHandler.createSupermarketChain("coop");
         SystemHandler.createSupermarketChain("migros");
         SystemHandler.createSupermarketChain("aldi");
 
-        createShop("coop","FoodPalace","Yanick1", "", "",true,"Thun");
-        createShop("coop","Rudi's Fress Bude","Yanick2", "", "",true,"Thun");
+        createShop("coop", "FoodPalace", "Yanick1", "", "", true, "Thun");
+        createShop("coop", "Rudi's Fress Bude", "Yanick2", "", "", true, "Thun");
 
-        createShop("migros","Rudi's Fress Bude","Yanick3", "", "",true,"Thun");
-        createShop("migros","FoodPalace","Yanick4", "", "",true,"Thun");
+        createShop("migros", "Rudi's Fress Bude", "Yanick3", "", "", true, "Thun");
+        createShop("migros", "FoodPalace", "Yanick4", "", "", true, "Thun");
 
-        createShop("aldi","Rudi's Fress Bude","Yanick5", "", "",true,"Thun");
-        createShop("aldi","FoodPalace","Yanick6", "", "",true,"Thun");
-
+        createShop("aldi", "Rudi's Fress Bude", "Yanick5", "", "", true, "Thun");
+        createShop("aldi", "FoodPalace", "Yanick6", "", "", true, "Thun");
 
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("FoodPalace", "coop");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "coop");
 
-        SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","FoodPalace", "coop", 1, Fleischsorten.FISH);
-        SupermarketHandler.createBuildingMaterial("Artikel2", 20F, 6, true , "FoodPalace", 2,"iron","coop", 1);
-        SupermarketHandler.createBuildingMaterial("Artikel3", 30F, 4, false , "FoodPalace", 2, "wood","coop", 1);
-        SupermarketHandler.createBuildingMaterial("Artikel4", 40F, 3, false, "FoodPalace",2, "wood", "coop", 1);
+        SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021", "FoodPalace", "coop", 1, Fleischsorten.FISH);
+        SupermarketHandler.createBuildingMaterial("Artikel2", 20F, 6, true, "FoodPalace", 2, "iron", "coop", 1);
+        SupermarketHandler.createBuildingMaterial("Artikel3", 30F, 4, false, "FoodPalace", 2, "wood", "coop", 1);
+        SupermarketHandler.createBuildingMaterial("Artikel4", 40F, 3, false, "FoodPalace", 2, "wood", "coop", 1);
 
         SupermarketHandler.createShelf("FoodPalace", "migros");
         SupermarketHandler.createShelf("Rudi's Fress Bude", "migros");
         SupermarketHandler.createShelf("FoodPalace", "migros");
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021", "FoodPalace", "migros", 1, Fleischsorten.CHICKEN);
 
-        SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021","Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
+        SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021", "Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
 
 
         SupermarketHandler.addPerson("Yanick", "", "", 0);
@@ -58,7 +56,7 @@ public class SupermarketHandler {
 
         SupermarketHandler.addPerson("Mar1", "password", "password", 0);
         hireEmployee("Mar1", "coop", "FoodPalace");
-        employeeEnter("Mar1");
+
     }
 
     public static void customerJoinShop(String personName, String shop) {
@@ -143,7 +141,7 @@ public class SupermarketHandler {
                     System.out.println("Um weiter zu scannen drücken sie die 2");
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Bitte geben sie einen gültigen Befehl ein");
 
                 }
@@ -206,9 +204,12 @@ public class SupermarketHandler {
 //        shop.getEmployeeList().put(p.getName(), p);
 //    }
 
-    public static void createShop(String supermarketChain, String shopName, String name,String password, String repeatPassword, boolean selfCheckout, String place){
+    public static void createShop(String supermarketChain, String shopName, String name, String password, String repeatPassword, boolean selfCheckout, String place) {
         addPerson(name, password, repeatPassword, Integer.MAX_VALUE);
+
         getPersonList().get(name).setRank(Rank.CHIEF);
-        SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name),  selfCheckout, place);
+        SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name), selfCheckout, place);
+        Shop shop = SystemHandler.getSupermarketChainMap().get(supermarketChain).getShopMap().get(shopName);
+        getPersonList().get(name).setCurrentShopWork(shop);
     }
 }

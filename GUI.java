@@ -925,6 +925,8 @@ public class GUI {
                 ChiefOutput.setVisible(true);
                 ChiefMenuActionPanel.setVisible(false);
                 ChiefOutput.setText("<html>");
+                System.out.println(getSelectedUser().getCurrentShopWork());
+                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person ->  System.out.println(person.getName()));
                 getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
                 ChiefOutput.setText(ChiefOutput.getText() + "</html>");
             }
