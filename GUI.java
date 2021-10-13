@@ -86,6 +86,8 @@ public class GUI {
     private JButton kündenButton;
     private JButton regalHinzufügenButton;
     private JButton produktHinzufügenButton;
+    private JButton eingebenButton;
+    private JButton erstellungAbschliessenButton;
 
 
     //Radiobuttons für die Supermarktketten-Auswahl
@@ -121,7 +123,6 @@ public class GUI {
     private JLabel labelFalsch;
 
     public JSpinner spinnerRegal;
-    private JButton erstellungAbschliessenButton;
     private JTextField chipsÄpfelUswTextField;
     private JTextField a500CHFTextField;
     private JTextField trueFalseTextField;
@@ -129,7 +130,6 @@ public class GUI {
     private JSpinner spinnerMenge;
     private JTextField textField1;
     private JComboBox comboBoxProduktart;
-    private JButton eingebenButton;
     private JButton zurückZumMenuButton;
     private JButton GetAllEmployeesOfShop;
     private JButton mitarbeiterZumChefBefördernButton;
@@ -705,9 +705,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Arrays.asList(Fleischsorten.values())
-                        .forEach(fleisch -> comboBoxProduktart.addItem(fleisch));
-                Arrays.asList(Material.values()).forEach(material -> comboBoxProduktart.addItem(material));
+                fillDropdownWithArticlesByType(comboBoxProduktart);
+
                 System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
@@ -746,8 +745,12 @@ public class GUI {
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(comboBoxProduktart.equals(Fleischsorten.COW)) {
-                    System.out.println("siuuuu");
+                if(comboBoxProduktart.getSelectedItem().equals("Food")) {
+
+                } else if(comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
+
+                } else {
+                    System.out.println("Siuuur");
                 }
             }
         });
