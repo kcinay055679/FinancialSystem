@@ -8,6 +8,8 @@ import org.javatuples.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
+import static SupermarketPackage.SupermarketHandler.*;
+
 public class SystemHandler {
 
     private static Person selectedUser;
@@ -39,15 +41,23 @@ public class SystemHandler {
         Person p = personList.get(personName);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
-        p.setWorkPlace(companyMap.get(companyName));
-        supermarketChainMap.get(companyName).getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChainMap.get(companyName).getShopMap().get(null)));
-        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
+        p.setCurrentCompanyWork(companyMap.get(companyName));
+
+        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getCurrentCompanyWork();
 
         Shop shop = supermarketChain.getShopMap().get(shopName);
         p.setCurrentShopWork(shop);
         p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
+    }
+
+    public static void fireEmployee(String person, Shop shop){
+        Person p = personList.get(person);
+        employeeLeave(person);
+        p.setRank(Rank.UNEMPLOYED);
+        shop.getSupermarketChain().getEmployeeMap().remove(person);
+        shop.getEmployeeList().remove(person);
     }
 
     public static Person getSelectedUser() {

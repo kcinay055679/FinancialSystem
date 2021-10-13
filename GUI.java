@@ -764,12 +764,15 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 ChiefPanel.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
             }
         });
 
         GetAllEmployeesOfShop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
                 ChiefOutput.setText("<html>");
                 for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
                     for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
@@ -803,6 +806,8 @@ public class GUI {
         HireEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(true);
                 ChiefMenuComboBox.removeAllItems();
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
                 getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
@@ -818,15 +823,40 @@ public class GUI {
                     for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
                         if (pair.getValue0() == getSelectedUser()) {
                             shop = pair.getValue1();
-                           company = shop.getSupermarketChain();
+                            company = shop.getSupermarketChain();
                         }
                     }
                 }
-                if(ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() >0){
-                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(),company.getName(), shop.getName() );
-                    ChiefMenuActionPanelLabel.setVisible(false);
+                if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
+                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), company.getName(), shop.getName());
+                    ChiefMenuActionPanel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
+                    fireEmployee((String) ChiefMenuComboBox.getSelectedItem(), shop);
+                    ChiefMenuActionPanel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 }
+            }
+        });
+
+        mitarbeiterKündigenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(true);
+                ChiefMenuComboBox.removeAllItems();
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um ihr zu kündigen");
+                Company company = null;
+                Shop shop = null;
+                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
+                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
+                        if (pair.getValue0() == getSelectedUser()) {
+                            shop = pair.getValue1();
+                            company = shop.getSupermarketChain();
+                        }
+                    }
+                }
+                shop.getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
             }
         });
     }

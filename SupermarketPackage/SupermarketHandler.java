@@ -189,7 +189,7 @@ public class SupermarketHandler {
 
     public static void employeeLeave(String personName) {
         Shop shop = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
-        shop.employeeLeaved(personName);
+        shop.employeeLeft(personName);
     }
 
     public static Person[] getEmployeesOfShop(String shopName, String supermarketChainName) {

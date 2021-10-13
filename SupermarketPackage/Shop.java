@@ -105,8 +105,8 @@ public class Shop {
         presentEmployeeList.putIfAbsent(employee.getName(), employee);
     }
 
-    public void employeeLeaved(String employee) {
-        if (presentEmployeeList.get(employee).getName().equals(employee)) {
+    public void employeeLeft(String employee) {
+        if (presentEmployeeList.get(employee) !=null) {
             presentEmployeeList.remove(employee);
         }
     }

@@ -16,16 +16,12 @@ public class Person {
     private final String name;
     private byte[] hashedPassword;
 
-    private Company company;
-    private Rank rank = Rank.UNEMPLOYED;
+    private Company currenCompanyWork;
     private Shop currentShopWork;
+    private Rank rank = Rank.UNEMPLOYED;
     private Schüppercard card;
     private final ShoppingCart cart = new ShoppingCart();
     private MessageDigest digest;
-
-    public void setCurrentShopWork(Shop currentShopWork) {
-        this.currentShopWork = currentShopWork;
-    }
 
     {
         try {
@@ -35,8 +31,6 @@ public class Person {
         }
     }
 
-
-
     public Rank getRank() {
         return rank;
     }
@@ -45,12 +39,20 @@ public class Person {
         this.rank = rank;
     }
 
-    public Company getWorkPlace() {
-        return company;
+    public Company getCurrentCompanyWork() {
+        return currenCompanyWork;
     }
 
-    public void setWorkPlace(Company company) {
-        this.company = company;
+    public void setCurrentCompanyWork(Company company) {
+        this.currenCompanyWork = company;
+    }
+
+    public Shop getCurrentShopWork() {
+        return currentShopWork;
+    }
+
+    public void setCurrentShopWork(Shop currentShopWork) {
+        this.currentShopWork = currentShopWork;
     }
 
     public Person(String name, String password, String repeatPassword, int salary) {
@@ -105,10 +107,6 @@ public class Person {
 
     public void increaseMoney(int money) {
         this.money += money;
-    }
-
-    public Shop getCurrentShopWork() {
-        return currentShopWork;
     }
 
     public void decreaseMoney(float money) {
