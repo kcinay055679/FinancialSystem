@@ -823,20 +823,19 @@ public class GUI {
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
                 } else {
-                    try {
+//                    try {
                         String produktname = produktnameTextField.getText();
-                        System.out.println(produktname);
                         float preis = Float.parseFloat(PreisTextField.getText());
-                        boolean barcode = Boolean.parseBoolean(DatumTextField.getText());
+                        boolean barcode = Boolean.parseBoolean(trueFalseTextField.getText());
                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
                         String date = DatumTextField.getText();
+                        System.out.println(date);
                         SupermarketHandler.createFood(produktname, preis,(Integer) spinnerMengeFleisch.getValue(), barcode, date,
-                                SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getName(),
-                                SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getName(),(Integer) spinnerRegal.getValue() , fleisch);
-                    }catch(Exception a) {
-                        System.out.println(a);
-                        System.out.println("Es ist ein unerwarteter Fehler eingetreten: Sie sind unfähig");
-                    }
+                                getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(),(Integer) spinnerRegal.getValue() , Fleischsorten.CHICKEN);
+//                    }catch(Exception a) {
+//                        System.out.println(a);
+//                        System.out.println("Es ist ein unerwarteter Fehler eingetreten: Sie sind unfähig");
+//                    }
                 }
             }
         });
