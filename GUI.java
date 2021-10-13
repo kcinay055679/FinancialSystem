@@ -7,7 +7,6 @@ import SupermarketPackage.Articles.Article;
 
 import static GameHandlerPackage.SystemHandler.*;
 
-import SupermarketPackage.Articles.BuildingMaterial;
 import SupermarketPackage.Articles.Material;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -130,7 +129,7 @@ public class GUI {
     private JComboBox comboBoxProduktart;
     private JButton zurückZumMenuButton;
     private JButton GetAllEmployeesOfShop;
-    private JButton mitarbeiterZumChefBefördernButton;
+    private JButton promoteEmployeeButton;
     private JLabel ChiefOutput;
     private JButton employeeMenuButton;
     private JButton zurückButtonHinzufügen;
@@ -890,6 +889,15 @@ public class GUI {
                     fireEmployee((String) ChiefMenuComboBox.getSelectedItem(), shop);
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
+                }else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
+                    getSelectedUser().getCurrentShopWork().promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
+
+                    ChiefOutput.setVisible(false);
+                    ChiefMenuActionPanel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                    invisibler();
+                    Dashboardpanel.setVisible(true);
+                    showSpecialButtons();
                 }
             }
         });
@@ -925,7 +933,11 @@ public class GUI {
         zurückZumMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefMenuComboBox.removeAllItems();
+                invisibler();
+                Dashboardpanel.setVisible(true);
             }
         });
 
@@ -971,6 +983,18 @@ public class GUI {
 //                        labelFalschBuild.setVisible(true);
 //                    }
                 }
+            }
+        });
+
+        promoteEmployeeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(true);
+                ChiefMenuComboBox.removeAllItems();
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
+                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
+
             }
         });
     }
@@ -1135,6 +1159,7 @@ public class GUI {
         clock.setVisible(false);
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
+        employeeMenuButton.setVisible(false);
     }
 
     public void showSpecialButtons() {
