@@ -137,6 +137,10 @@ public class GUI {
     private JButton employeeMenuButton;
     private JButton zurückButtonHinzufügen;
     private JPanel SpinnerPanelProdukte;
+    private JComboBox ChiefMenuComboBox;
+    private JButton ChiefMenuEnter;
+    private JPanel ChiefMenuActionPanel;
+    private JLabel ChiefMenuActionPanelLabel;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -157,7 +161,7 @@ public class GUI {
         Loginpanel.setVisible(true);
         //panelMain.add(clock1, 0);
         clock.setBackground(null);
-        clock.setBounds(0,0,200,200);
+        clock.setBounds(0, 0, 200, 200);
         ChiefMenu.setVisible(false);
         employeeMenuButton.setVisible(false);
 
@@ -184,12 +188,12 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if(SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
                         invisibler();
                         showSpecialButtons();
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
-                    }else {
+                    } else {
                         labelFalsch.setVisible(true);
                     }
                 }
@@ -675,10 +679,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getSelectedUser().setRank(Rank.UNEMPLOYED);
-                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                            if(getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if (getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
                                 SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().remove(key3);
                             }
                         }
@@ -689,10 +693,10 @@ public class GUI {
         regalHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                            if(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
                                 SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
                             }
                         }
@@ -711,7 +715,7 @@ public class GUI {
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
                 spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
-                Dimension dimension = new Dimension(800,35);
+                Dimension dimension = new Dimension(800, 35);
                 SpinnerPanelProdukte.removeAll();
                 spinnerRegal.setPreferredSize(dimension);
                 SpinnerPanelProdukte.add(spinnerRegal);
@@ -745,9 +749,9 @@ public class GUI {
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(comboBoxProduktart.getSelectedItem().equals("Food")) {
+                if (comboBoxProduktart.getSelectedItem().equals("Food")) {
 
-                } else if(comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
+                } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
 
                 } else {
                     System.out.println("Siuuur");
@@ -762,20 +766,24 @@ public class GUI {
                 ChiefPanel.setVisible(true);
             }
         });
+
         GetAllEmployeesOfShop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setText("<html>");
                 for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
                     for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
-                        if(pair.getValue0() == getSelectedUser()) {
-                            for(String p : pair.getValue1().getPresentEmployees().keySet()){
-                                ChiefOutput.setText(ChiefOutput.getText() + p + "\n");
+                        if (pair.getValue0() == getSelectedUser()) {
+                            for (String p : pair.getValue1().getPresentEmployees().keySet()) {
+                                ChiefOutput.setText(ChiefOutput.getText() + p + "<br/>");
                             }
                         }
                     }
                 }
+                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
             }
         });
+
         employeeMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -789,6 +797,36 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Mitarbeiter.setVisible(true);
+            }
+        });
+
+        HireEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefMenuComboBox.removeAllItems();
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
+                getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
+            }
+        });
+
+        ChiefMenuEnter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Company company = null;
+                Shop shop = null;
+                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
+                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
+                        if (pair.getValue0() == getSelectedUser()) {
+                            shop = pair.getValue1();
+                           company = shop.getSupermarketChain();
+                        }
+                    }
+                }
+                if(ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() >0){
+                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(),company.getName(), shop.getName() );
+                    ChiefMenuActionPanelLabel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                }
             }
         });
     }
@@ -914,7 +952,7 @@ public class GUI {
 
 
         frame.setResizable(true);
-        frame.setContentPane((new GUI()). panelMain);
+        frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setSize(1000, 600);
@@ -947,22 +985,22 @@ public class GUI {
         EinkaufAbschluss.setVisible(false);
         Schüpercard.setVisible(false);
         ChiefPanel.setVisible(false);
-            SchüperkarteErstellt.setVisible(false);
-            Mitarbeiter.setVisible(false);
-            ProduktHinzufügen.setVisible(false);
+        SchüperkarteErstellt.setVisible(false);
+        Mitarbeiter.setVisible(false);
+        ProduktHinzufügen.setVisible(false);
 //        Food.setVisible(false);
 
-            clock.setVisible(false);
+        clock.setVisible(false);
         ChiefMenu.setVisible(false);
     }
 
-    public void showSpecialButtons(){
+    public void showSpecialButtons() {
         System.out.println(getSelectedUser().getRank());
-        if(getSelectedUser().getRank() == Rank.CHIEF){
+        if (getSelectedUser().getRank() == Rank.CHIEF) {
 
             ChiefMenu.setVisible(true);
         }
-        if(getSelectedUser().getRank() == Rank.EMPLOYEE) {
+        if (getSelectedUser().getRank() == Rank.EMPLOYEE) {
             employeeMenuButton.setVisible(true);
         }
     }

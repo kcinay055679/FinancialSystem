@@ -1,6 +1,7 @@
 package GameHandlerPackage;
 
 import SupermarketPackage.Person;
+import SupermarketPackage.Shop;
 import SupermarketPackage.SupermarketChain;
 import org.javatuples.Pair;
 
@@ -34,12 +35,19 @@ public class SystemHandler {
     private static Map<String, Company> companyMap = new HashMap<>();
     private static Map<String, SupermarketChain> supermarketChainMap = new HashMap<>();
 
-    public static void addEmployeeToCompany(String name, String companyName) {
-        Person p = personList.get(name);
+    public static void hireEmployee(String personName, String companyName, String shopName) {
+        Person p = personList.get(personName);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
         p.setWorkPlace(companyMap.get(companyName));
         supermarketChainMap.get(companyName).getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChainMap.get(companyName).getShopMap().get(null)));
+        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
+
+        Shop shop = supermarketChain.getShopMap().get(shopName);
+        p.setCurrentShopWork(shop);
+        p.setRank(Rank.EMPLOYEE);
+        supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
+        shop.getEmployeeList().put(p.getName(), p);
     }
 
     public static Person getSelectedUser() {

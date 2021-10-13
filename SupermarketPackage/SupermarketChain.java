@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SupermarketChain extends Company {
-    private final String name;
     private final Map<String, Shop> shopMap = new HashMap<>();
     private final Map<String, Article> articleMap = new HashMap<>();
     private final Map<String, Pair<Person, Shop>> chiefMap = new HashMap<>();
@@ -32,12 +31,11 @@ public class SupermarketChain extends Company {
         return employeeMap;
     }
 
-    public String getName() {
-        return name;
-    }
+
 
     public SupermarketChain(String name) {
-        this.name = name;
+        super(name);
+
     }
 
     public void createSubsidiary(String shopName, Person chief, boolean selfCheckout, String place) {
@@ -47,7 +45,7 @@ public class SupermarketChain extends Company {
                 chiefMap.put(chief.getName(), new Pair<>(chief, shopMap.get(shopName)));
 
         } else {
-            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+shopName+" "+name);
+            System.out.println("Shop konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+shopName+" "+getName());
         }
     }
 }

@@ -53,17 +53,12 @@ public class SupermarketHandler {
         SupermarketHandler.addPerson("", "", "", 0);
 
         SupermarketHandler.addPerson("Marc", "password", "password", 0);
-        addEmployeeToCompany("Marc", "coop");
-        hireEmployeeForShop("Marc", "FoodPalace");
+        hireEmployee("Marc", "coop", "FoodPalace");
         employeeEnter("Marc");
 
         SupermarketHandler.addPerson("Mar1", "password", "password", 0);
-        addEmployeeToCompany("Mar1", "coop");
-        hireEmployeeForShop("Mar1", "FoodPalace");
+        hireEmployee("Mar1", "coop", "FoodPalace");
         employeeEnter("Mar1");
-
-
-
     }
 
     public static void customerJoinShop(String personName, String shop) {
@@ -201,15 +196,15 @@ public class SupermarketHandler {
         return getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName).getEmployeeList().values().toArray(Person[]::new);
     }
 
-    public static void hireEmployeeForShop(String personName, String shopName) {
-        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
-        Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
-        Shop shop = supermarketChain.getShopMap().get(shopName);
-        p.setCurrentShopWork(shop);
-        p.setRank(Rank.EMPLOYEE);
-        supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
-        shop.getEmployeeList().put(p.getName(), p);
-    }
+//    public static void hireEmployeeForShop(String personName, String shopName) {
+//        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
+//        Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
+//        Shop shop = supermarketChain.getShopMap().get(shopName);
+//        p.setCurrentShopWork(shop);
+//        p.setRank(Rank.EMPLOYEE);
+//        supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
+//        shop.getEmployeeList().put(p.getName(), p);
+//    }
 
     public static void createShop(String supermarketChain, String shopName, String name,String password, String repeatPassword, boolean selfCheckout, String place){
         addPerson(name, password, repeatPassword, Integer.MAX_VALUE);
