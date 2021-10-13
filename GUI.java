@@ -161,6 +161,13 @@ public class GUI {
     private JLabel labelUnkorrektFleisch;
     private JLabel labelFalschBuild;
     private JLabel labelInkorrektBuild;
+    private JPanel Arbeiten;
+    private JButton arbeitVerlassenButton;
+    private JPanel RegalHinzufügen;
+    private JSpinner spinnerAnzRegale;
+    private JButton gewählteAnzahlHinzufügenButton;
+    private JPanel RegaleErstellt;
+    private JButton zurückZumMenüButton1;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -695,11 +702,13 @@ public class GUI {
             }
         });
 
-//        arbeitenGehenButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
+        arbeitenGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Arbeiten.setVisible(true);
+            }
+        });
 
         kündenButton.addActionListener(new ActionListener() {
             @Override
@@ -719,15 +728,8 @@ public class GUI {
         regalHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
-                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
-                            }
-                        }
-                    }
-                }
+                invisibler();
+                RegalHinzufügen.setVisible(true);
             }
         });
 
@@ -1005,6 +1007,39 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+        arbeitVerlassenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+        gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+                                for(int i = 0; i<(Integer) spinnerAnzRegale.getValue(); i++) {
+                                    SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
+                                    System.out.println("Regal erstellt");
+                                }
+                            }
+                        }
+                    }
+                }
+                invisibler();
+                RegaleErstellt.setVisible(true);
+            }
+        });
+        zurückZumMenüButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1168,6 +1203,9 @@ public class GUI {
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
+        Arbeiten.setVisible(false);
+        RegalHinzufügen.setVisible(false);
+        RegaleErstellt.setVisible(false);
         if(getSelectedUser() !=null){
             setDashboardInformation();
             showSpecialButtons();
@@ -1176,7 +1214,6 @@ public class GUI {
     }
 
     public void showSpecialButtons() {
-        System.out.println(getSelectedUser().getRank());
         if (getSelectedUser().getRank() == Rank.CHIEF) {
             ChiefMenu.setVisible(true);
         }
