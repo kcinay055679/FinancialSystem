@@ -41,11 +41,12 @@ public class SystemHandler {
         Person p = personList.get(personName);
         //ToDo
         // "supermarketChainMap.get()" zu Company änderen
-        p.setCurrentCompanyWork(companyMap.get(companyName));
 
+        p.setCurrentCompanyWork(companyMap.get(companyName));
         SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getCurrentCompanyWork();
 
         Shop shop = supermarketChain.getShopMap().get(shopName);
+
         p.setCurrentShopWork(shop);
         p.setRank(Rank.EMPLOYEE);
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
@@ -53,11 +54,14 @@ public class SystemHandler {
     }
 
     public static void fireEmployee(String person, Shop shop){
+
         Person p = personList.get(person);
         employeeLeave(person);
         p.setRank(Rank.UNEMPLOYED);
         shop.getSupermarketChain().getEmployeeMap().remove(person);
         shop.getEmployeeList().remove(person);
+        p.setCurrentCompanyWork(null);
+        p.setCurrentShopWork(null);
     }
 
     public static Person getSelectedUser() {

@@ -7,6 +7,7 @@ import SupermarketPackage.Articles.Article;
 
 import static GameHandlerPackage.SystemHandler.*;
 
+import SupermarketPackage.Articles.BuildingMaterial;
 import SupermarketPackage.Articles.Material;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -50,8 +51,6 @@ public class GUI {
     private JPanel Schüpercard;
     private JPanel ProduktHinzufügen;
     private JPanel Employeepanel;
-
-    private JPanel Food;
     private JPanel Mitarbeiter;
 
     //Alle normalen Buttons
@@ -128,7 +127,7 @@ public class GUI {
     private JTextField trueFalseTextField;
     private JLabel labelFalschProdukt;
     private JSpinner spinnerMenge;
-    private JTextField textField1;
+    private JTextField produktnameTextField;
     private JComboBox comboBoxProduktart;
     private JButton zurückZumMenuButton;
     private JButton GetAllEmployeesOfShop;
@@ -137,10 +136,28 @@ public class GUI {
     private JButton employeeMenuButton;
     private JButton zurückButtonHinzufügen;
     private JPanel SpinnerPanelProdukte;
+    private JPanel FoodPanel;
+    private JTextField PreisTextField;
+    private JTextField DatumTextField;
+    private JComboBox comboBoxFleisch;
+    private JButton produktErstellenButton;
+    private JButton zurückButtonFleisch;
+    private JButton zurückButton1;
+    private JLabel labelFalschFleisch;
     private JComboBox ChiefMenuComboBox;
     private JButton ChiefMenuEnter;
     private JPanel ChiefMenuActionPanel;
     private JLabel ChiefMenuActionPanelLabel;
+    private JSpinner spinnerMengeFleisch;
+    private JPanel BuildingMatPanel;
+    private JTextField produktnamenBuild;
+    private JTextField PreisFeld;
+    private JSpinner spinner1;
+    private JTextField trueFalseTextField1;
+    private JSpinner spinner2;
+    private JComboBox comboBoxMaterial;
+    private JButton zurückButtonMaterial;
+    private JButton produktErstellenBuildingMat;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
@@ -156,6 +173,7 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
         labelFalsch.setVisible(false);
+        labelFalschFleisch.setVisible(false);
         invisibler();
 
         Loginpanel.setVisible(true);
@@ -726,33 +744,20 @@ public class GUI {
             }
         });
 
-//        erstellungAbschliessenButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
-//                    for(String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-//                        for(String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-//                            if(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
-//                                try {
-//                                    SupermarketHandler.createFood(chipsÄpfelUswTextField.getText(),Integer.parseInt(a500CHFTextField.getText()),(Integer)spinnerRegal.getValue(),
-//                                            Boolean.parseBoolean(trueFalseTextField.getText()),"",getCurrentShop(),getCurrentCompany(),(Integer)spinnerRegal.getValue(),Fleischsorten.COW);
-//                                    labelFalschProdukt.setVisible(false);
-//                                } catch(Exception a) {
-//                                    labelFalschProdukt.setVisible(true);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        });
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (comboBoxProduktart.getSelectedItem().equals("Food")) {
+                    Arrays.asList(Fleischsorten.values())
+                            .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
+                    invisibler();
+                    FoodPanel.setVisible(true);
 
                 } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
-
+                    Arrays.asList(Material.values())
+                            .forEach(material -> comboBoxMaterial.addItem(material));
+                invisibler();
+                BuildingMatPanel.setVisible(true);
                 } else {
                     System.out.println("Siuuur");
                 }
@@ -800,6 +805,46 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Mitarbeiter.setVisible(true);
+            }
+        });
+        zurückButtonFleisch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ProduktHinzufügen.setVisible(true);
+            }
+        });
+
+        produktErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(produktnameTextField.getText().equals("") || PreisTextField.getText().equals("")
+                        || trueFalseTextField.getText().equals("") || DatumTextField.getText().equals("") ||
+                        comboBoxFleisch.getSelectedItem() == null) {
+                    labelFalschFleisch.setVisible(true);
+                } else {
+                    try {
+                        String produktname = produktnameTextField.getText();
+                        System.out.println(produktname);
+                        float preis = Float.parseFloat(PreisTextField.getText());
+                        boolean barcode = Boolean.parseBoolean(DatumTextField.getText());
+                        Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
+                        String date = DatumTextField.getText();
+                        SupermarketHandler.createFood(produktname, preis,(Integer) spinnerMengeFleisch.getValue(), barcode, date,
+                                SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getName(),
+                                SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getName(),(Integer) spinnerRegal.getValue() , fleisch);
+                    }catch(Exception a) {
+                        System.out.println(a);
+                        System.out.println("Es ist ein unerwarteter Fehler eingetreten: Sie sind unfähig");
+                    }
+                }
+            }
+        });
+        zurückButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
             }
         });
 
@@ -857,6 +902,13 @@ public class GUI {
                     }
                 }
                 shop.getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
+            }
+        });
+        zurückButtonMaterial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ProduktHinzufügen.setVisible(true);
             }
         });
     }
@@ -979,8 +1031,6 @@ public class GUI {
 
     public static void main(String[] args) {
         SupermarketHandler.setUp();
-
-
         frame.setResizable(true);
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
@@ -1018,8 +1068,8 @@ public class GUI {
         SchüperkarteErstellt.setVisible(false);
         Mitarbeiter.setVisible(false);
         ProduktHinzufügen.setVisible(false);
-//        Food.setVisible(false);
-
+        FoodPanel.setVisible(false);
+        BuildingMatPanel.setVisible(false);
         clock.setVisible(false);
         ChiefMenu.setVisible(false);
     }
