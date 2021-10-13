@@ -758,20 +758,20 @@ public class GUI {
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (comboBoxProduktart.getSelectedItem().equals("Food")) {
-                    Arrays.asList(Fleischsorten.values())
-                            .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
-                    invisibler();
-                    FoodPanel.setVisible(true);
+                    if (comboBoxProduktart.getSelectedItem().equals("Food")) {
+                        Arrays.asList(Fleischsorten.values())
+                                .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
+                        invisibler();
+                        FoodPanel.setVisible(true);
 
-                } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
-                    Arrays.asList(Material.values())
-                            .forEach(material -> comboBoxMaterial.addItem(material));
-                invisibler();
-                BuildingMatPanel.setVisible(true);
-                } else {
-                    System.out.println("Siuuur");
-                }
+                    } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
+                        Arrays.asList(Material.values())
+                                .forEach(material -> comboBoxMaterial.addItem(material));
+                        invisibler();
+                        BuildingMatPanel.setVisible(true);
+                    } else {
+                        System.out.println("Siuuur");
+                    }
             }
         });
 
@@ -834,7 +834,7 @@ public class GUI {
                         || trueFalseTextField.getText().equals("") || DatumTextField.getText().equals("") ||
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
-                } else {
+                }else {
                     try {
                         String produktname = produktnameTextField.getText();
                         float preis = Float.parseFloat(PreisTextField.getText());
