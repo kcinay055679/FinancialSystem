@@ -55,7 +55,6 @@ public class GUI {
     private JLabel welcomeText;
     private JButton filialeBetretenButton;
     private JButton tabletBenutzenButton;
-    private JButton personalienAnzeigenButton;
     private JButton schüpercardButton;
     private JButton ausloggenButton;
     private JButton TabletMenuName;
@@ -685,13 +684,14 @@ public class GUI {
                 invisibler();
                 SchüpercardNummer.add(labelNew);
                 SchüperkarteErstellt.setVisible(true);
+                showSpecialButtons();
             }
         });
         zurückButtonSchüpperkarteErstellt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Schüpercard.setVisible(true);
+                Dashboardpanel.setVisible(true);
             }
         });
 
@@ -966,7 +966,7 @@ public class GUI {
                 || trueFalseTextBuild.getText().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
                     labelInkorrektBuild.setVisible(true);
                 } else {
-//                    try {
+                    try {
                         String produktname = produktnamenBuild.getText();
                         float preis = Float.parseFloat(PreisFeld.getText());
                         int menge = (Integer) spinnerMengeMat.getValue();
@@ -978,10 +978,9 @@ public class GUI {
                                 getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
                         invisibler();
                         ProduktErstellt.setVisible(true);
-//                    }catch(Exception a) {
-//                        System.out.println("Moin");
-//                        labelFalschBuild.setVisible(true);
-//                    }
+                    }catch(Exception a) {
+                        labelFalschBuild.setVisible(true);
+                    }
                 }
             }
         });
@@ -995,6 +994,15 @@ public class GUI {
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
                 getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
 
+            }
+        });
+        kündenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireEmployee(getSelectedUser().getName(), getSelectedUser().getCurrentShopWork());
+                invisibler();
+                showSpecialButtons();
+                Dashboardpanel.setVisible(true);
             }
         });
     }
@@ -1131,7 +1139,7 @@ public class GUI {
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
 
         if (getSelectedUser().getCard() != null) {
-            schüpperpunkte.setText("Schüpperpunkte: " + getSelectedUser().getCard().getPoints());
+            schüpperpunkte.setText("<html>Ihre Schüperkarteennummer ist: "+ getSelectedUser().getCard().getCardnumber()+" <br/><br/> Schüpperpunkte: " + getSelectedUser().getCard().getPoints()  +"</html>");
         } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
@@ -1160,16 +1168,23 @@ public class GUI {
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
+        if(getSelectedUser() !=null){
+            setDashboardInformation();
+            showSpecialButtons();
+        }
+
     }
 
     public void showSpecialButtons() {
         System.out.println(getSelectedUser().getRank());
         if (getSelectedUser().getRank() == Rank.CHIEF) {
-
             ChiefMenu.setVisible(true);
         }
         if (getSelectedUser().getRank() == Rank.EMPLOYEE) {
             employeeMenuButton.setVisible(true);
+        }
+        if(getSelectedUser().getCard() != null) {
+            schüpercardButton.setVisible(false);
         }
     }
 
