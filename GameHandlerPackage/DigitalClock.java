@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 public class DigitalClock {
-    public static void main(String[] args) {
+    public static void main() {
         JFrame frm = new JFrame();
         frm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         SimpleDigitalClock clock1 = new SimpleDigitalClock();
@@ -74,7 +74,7 @@ public class DigitalClock {
         }
         @Override
         public Dimension getPreferredSize() {
-            return new Dimension(100, 50);
+            return new Dimension(200, 200);
         }
 
     }
