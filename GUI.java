@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 
@@ -148,6 +147,7 @@ public class GUI {
     private JButton ChiefMenuEnter;
     private JPanel ChiefMenuActionPanel;
     private JLabel ChiefMenuActionPanelLabel;
+    private JButton ChiefMenuALLEmployees;
     private JSpinner spinnerMengeFleisch;
     private JPanel BuildingMatPanel;
     private JTextField produktnamenBuild;
@@ -789,6 +789,7 @@ public class GUI {
                     }
                 }
                 ChiefOutput.setText(ChiefOutput.getText() + "</html>");
+
             }
         });
 
@@ -908,6 +909,24 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 ProduktHinzufügen.setVisible(true);
+            }
+        });
+
+        zurückZumMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        ChiefMenuALLEmployees.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefOutput.setText("<html>");
+                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
+                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
             }
         });
     }
@@ -1085,4 +1104,7 @@ public class GUI {
     }
 
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
