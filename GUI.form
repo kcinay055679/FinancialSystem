@@ -95,7 +95,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-14071929"/>
+          <background color="-13869401"/>
         </properties>
         <border type="none"/>
         <children>
@@ -306,20 +306,22 @@
         <children>
           <component id="4c17a" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="50"/>
-                <preferred-size width="-1" height="50"/>
-                <maximum-size width="-1" height="50"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="450" height="50"/>
+                <preferred-size width="450" height="50"/>
+                <maximum-size width="450" height="50"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="20"/>
+            </properties>
           </component>
           <component id="4b94b" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font size="20"/>
+              <font size="26"/>
               <text value="Definieren Sie den Namen der Filiale"/>
             </properties>
           </component>
@@ -328,15 +330,21 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <horizontalTextPosition value="0"/>
               <text value="Bestätigen"/>
             </properties>
           </component>
           <component id="54369" class="javax.swing.JButton" binding="zurückButtonFiliale1">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="350" height="-1"/>
+                <preferred-size width="350" height="-1"/>
+                <maximum-size width="350" height="-1"/>
+              </grid>
             </constraints>
             <properties>
+              <font size="18"/>
               <text value="Zurück"/>
             </properties>
           </component>
@@ -524,12 +532,14 @@
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-13391270"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="66c2c" class="javax.swing.JLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
@@ -543,6 +553,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <text value="Artikel in den Warenkorb legen"/>
             </properties>
           </component>
@@ -551,7 +562,9 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-13391270"/>
+            </properties>
             <border type="none"/>
             <children/>
           </grid>
@@ -561,6 +574,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <text value="An die Kasse gehen"/>
             </properties>
           </component>
@@ -570,6 +584,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <font size="18"/>
               <text value="Zurück"/>
             </properties>
           </component>
@@ -1745,7 +1760,7 @@
           <grid row="23" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-4170212"/>
+          <background color="-14910516"/>
         </properties>
         <border type="none"/>
         <children>

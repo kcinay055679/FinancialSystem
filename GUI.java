@@ -1077,6 +1077,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if(ProdukteWarenkorbComb.getSelectedItem() == null) {
                     ErrorMessageScan.setVisible(true);
+                    model.clear();
                 } else {
                     produkteGescanntList.removeAll();
                     model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
@@ -1102,6 +1103,10 @@ public class GUI {
         bezahlenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                produkteGescanntList.removeAll();
+                ProdukteWarenkorbComb.removeAllItems();
+                model.clear();
+                getSelectedUser().getCart().getArticleList().clear();
                 invisibler();
                 EinkaufAbschluss.setVisible(true);
             }
