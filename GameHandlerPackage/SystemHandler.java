@@ -97,15 +97,13 @@ public class SystemHandler implements java.io.Serializable{
         if (getPersonList().get(name) != null) {
             if (getPersonList().get(name).checkPassword(password)) {
                 setSelectedUser(getPersonList().get(name));
+                return true;
             } else {
                 return false;
             }
         } else {
             return false;
         }
-        return getSelectedUser().getName().equals(name);
-
-
     }
 
     public static void logout() {

@@ -25,10 +25,6 @@ public class Person implements java.io.Serializable{
     private final ShoppingCart cart = new ShoppingCart();
     private transient MessageDigest digest;
 
-    {
-
-    }
-
     public Rank getRank() {
         return rank;
     }
@@ -80,9 +76,14 @@ public class Person implements java.io.Serializable{
         return digest.digest(password.getBytes(StandardCharsets.UTF_8));
     }
 
-    public void changePassword(String oldPassword, String newPassword, String newPasswordRepeat) {
+    public boolean changePassword(String oldPassword, String newPassword, String newPasswordRepeat) {
         if (Arrays.equals(hashPassword(oldPassword), hashedPassword) && newPassword.equals(newPasswordRepeat)) {
             hashedPassword = hashPassword(newPassword);
+            pw = newPassword;
+            System.out.println("Dein Passwort wurde geändert");
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -153,9 +154,7 @@ public class Person implements java.io.Serializable{
     }
 
     public int receiveSalary(long hour) {
-        System.out.println(hour);
         money += (((salary/30)/8)*hour);
-        System.out.println(money);
         return (int) (((salary/30)/8)*hour);
     }
 }

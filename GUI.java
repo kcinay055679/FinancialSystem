@@ -224,6 +224,10 @@ public class GUI {
     private JButton backToDashboardPw;
     private JLabel passwordOutput;
     private JButton changePasswordSubmit;
+    private JButton changePasswordButton;
+    private JTextField oldPassword;
+    private JTextField newPassword;
+    private JTextField repeatPassword;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -265,7 +269,7 @@ public class GUI {
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                if (SystemHandler.login(nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
                     //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                     invisibler();
                     labelFalsch.setVisible(false);
@@ -283,7 +287,7 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
                         showSpecialButtons();
                         Dashboardpanel.setVisible(true);
@@ -302,7 +306,7 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), GUI.this.passwortLogin.getText())) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
@@ -1214,7 +1218,7 @@ public class GUI {
             }
         });
 
-        changePassword.addActionListener(new ActionListener() {
+        changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
@@ -1312,6 +1316,17 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Admin.setVisible(true);
+            }
+        });
+
+        changePasswordSubmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())){
+                    passwordOutput.setText("Dein Passwort wurde geändert");
+                }else{
+                    passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
+                }
             }
         });
     }

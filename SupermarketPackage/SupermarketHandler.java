@@ -68,13 +68,9 @@ public class SupermarketHandler implements java.io.Serializable{
         }
     }
 
-    public static boolean checkPassword(String personName, String password) {
-        return getPersonList().get(personName).checkPassword(password);
-    }
 
-    public static void changePassword(String personName, String oldPassword, String newPassword, String repeatNewPassword) {
-        getPersonList().get(personName).changePassword(oldPassword, newPassword, repeatNewPassword);
-    }
+
+
 
     public static void takeArticle(String personName, String articleName, int amount, int shelfId) {
         getPersonList().get(personName).takeArticle(articleName, amount, shelfId);
