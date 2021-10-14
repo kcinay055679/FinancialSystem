@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static GameHandlerPackage.SystemHandler.*;
 
-public class SupermarketHandler {
+public class SupermarketHandler implements java.io.Serializable{
 
 
     public static void setUp() {
