@@ -1,9 +1,12 @@
 package GameHandlerPackage;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class DigitalClock {
@@ -17,14 +20,12 @@ public class DigitalClock {
     }
 
     public static class SimpleDigitalClock extends JPanel {
-        String stringTime;
-        int hour, minute, second;
-        String aHour = "";
-        String bMinute = "";
-        String cSecond = "";
+        Thread t = new Thread();
+        String timeString = "";
+        LocalDateTime realTime = LocalDateTime.from(LocalDateTime.of(1, 1, 1, 5, 1, 1));
 
         public void setStringTime(String abc) {
-            this.stringTime = abc;
+            this.timeString = abc;
         }
 
         public int Number(int a, int b) {
@@ -32,7 +33,7 @@ public class DigitalClock {
         }
 
         public SimpleDigitalClock() {
-            Timer t = new Timer(1000, new ActionListener() {
+            Timer t = new Timer(0, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     repaint();
                 }
@@ -43,41 +44,30 @@ public class DigitalClock {
         @Override
         public void paintComponent(Graphics v) {
             super.paintComponent(v);
-            Calendar rite = Calendar.getInstance();
-            hour = rite.get(Calendar.HOUR_OF_DAY);
-            minute = rite.get(Calendar.MINUTE);
-            second = rite.get(Calendar.SECOND);
-            if (hour < 10) {
-                this.aHour = "0";
-            }
-            if (hour >= 10) {
-                this.aHour = "";
-            }
-            if (minute < 10) {
-                this.bMinute = "0";
-            }
-            if (minute >= 10) {
-                this.bMinute = "";
-            }
-            if (second < 10) {
-                this.cSecond = "0";
-            }
-            if (second >= 10) {
-                this.cSecond = "";
-            }
-            setStringTime(aHour + hour + ":" + bMinute + minute + ":" + cSecond + second);
+
+            realTime = realTime.plusSeconds(1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            timeString = formatter.format(realTime);
+
+            setStringTime(timeString);
             v.setColor(Color.BLACK);
             int length = Number(this.getWidth(), this.getHeight());
             Font Font1 = new Font("SansSerif", Font.PLAIN, length / 6);
             v.setFont(Font1);
-            v.drawString(stringTime, (int) length / 6, length / 2);
+            v.drawString(timeString, (int) length / 6, length / 2);
+            this.setBackground(null);
+            try {
+                t.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         @Override
         public Dimension getPreferredSize() {
             return new Dimension(200, 200);
         }
-
     }
 
 
 }
+

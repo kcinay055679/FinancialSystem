@@ -1,7 +1,7 @@
 
 import GameHandlerPackage.*;
 import SupermarketPackage.*;
-import GameHandlerPackage.DigitalClock;
+
 
 import SupermarketPackage.Articles.Article;
 
@@ -113,7 +113,6 @@ public class GUI {
     private JLabel schüpperpunkte;
     private JLabel guthaben;
     private JLabel ArtikelFindenOutput;
-    private DigitalClock.SimpleDigitalClock clock;
     private JButton ChiefMenu;
     private JPanel ChiefPanel;
     private JButton HireEmployee;
@@ -189,7 +188,6 @@ public class GUI {
     public GUI() {
 
 
-
         labelFalsch.setVisible(false);
         labelUnkorrektFleisch.setVisible(false);
         labelFalschBuild.setVisible(false);
@@ -199,9 +197,6 @@ public class GUI {
         invisibler();
 
         Loginpanel.setVisible(true);
-        //panelMain.add(clock1, 0);
-        clock.setBackground(null);
-        clock.setBounds(0, 0, 200, 200);
         ChiefMenu.setVisible(false);
         employeeMenuButton.setVisible(false);
 
@@ -1202,9 +1197,15 @@ public class GUI {
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo((Component) null);
         frame.setVisible(true);
-DigitalClock.main();
+        DigitalClock.main();
 
-//        f
+        Container glassPane = (Container) frame.getGlassPane();
+        DigitalClock.SimpleDigitalClock simpleDigitalClock = new DigitalClock.SimpleDigitalClock();
+
+        glassPane.add(simpleDigitalClock);
+        glassPane.setVisible(false);
+
+
     }
 
     public void setDashboardInformation() {
@@ -1237,7 +1238,6 @@ DigitalClock.main();
         ProduktHinzufügen.setVisible(false);
         FoodPanel.setVisible(false);
         BuildingMatPanel.setVisible(false);
-        clock.setVisible(false);
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
