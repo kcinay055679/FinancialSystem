@@ -78,7 +78,7 @@ public class GUI {
     private JButton Zurück;
     private JButton buttonZurückTablet;
     private JButton zurückButtonSchüpperkarteErstellt;
-    private JButton bezahlButton;
+    private JButton bezahlButtonKasse;
     private JButton TabletMenuTyp;
 
     private JButton arbeitenGehenButton;
@@ -182,14 +182,17 @@ public class GUI {
     private JFormattedTextField ChiefSalaryField;
     private JLabel ChiefHireSalaryLabel;
     private JLabel ErrorMessageScan;
-    private JButton bezahlenButton;
+    private JButton bezahlenButtonScan;
     private JPanel produkteGescanntList;
     private JButton auswählenButton;
     private JLabel labelFalschRadio;
     private JButton zurückButton2;
     private JButton schüpercardMitPunktenAufladenButton;
-    private JTextField textField1;
+    private JTextField textFieldSchüpercard;
+    private JLabel labelFalschSchüp;
+    private JLabel labelRichtigSchüp;
     private JButton convertSchüpperpointsButton;
+    private JPanel SpinnerPanelRegal;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -209,6 +212,8 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
+        labelRichtigSchüp.setVisible(false);
+        labelFalschSchüp.setVisible(false);
         labelFalschRadio.setVisible(false);
         ErrorMessageScan.setVisible(false);
         labelFalsch.setVisible(false);
@@ -295,7 +300,6 @@ public class GUI {
                 invisibler();
                 Tablet.setVisible(true);
                 TabletÜbersicht.setVisible(true);
-
             }
         });
 
@@ -350,15 +354,11 @@ public class GUI {
             }
         });
 
-        bezahlButton.addActionListener(new ActionListener() {
+        bezahlButtonKasse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-
-                //Einkaufswert auf Null zurücksetzen
-                greatValue = 0;
-
-                //Abschluss wird sichtbar
+                getSelectedUser().getCart().getArticleList().clear();
                 EinkaufAbschluss.setVisible(true);
             }
         });
@@ -366,7 +366,12 @@ public class GUI {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                getSelectedUser().decreaseMoney(greatValue);
                 invisibler();
+                greatValue = 0;
+                labelRichtigSchüp.setVisible(false);
+                labelFalschSchüp.setVisible(false);
+                schüpercardMitPunktenAufladenButton.setVisible(true);
                 Dashboardpanel.setVisible(true);
             }
         });
@@ -379,9 +384,7 @@ public class GUI {
                 if (TabletFilialeWählen.getItemCount() > 0) {
                     TabletFilialeWählen.removeAllItems();
                 }
-
                 fillDropdownWithShops(supermarket, TabletFilialeWählen);
-
                 fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
 
             }
@@ -725,6 +728,13 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, 20, 1);
+                spinnerAnzRegale = new JSpinner(sm);
+                Component mySpinnerEditor = spinnerAnzRegale.getEditor();
+                JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
+               jftf.setColumns(25);
+                spinnerAnzRegale.setFont(new Font("Serif", Font.PLAIN, 22));
+                SpinnerPanelRegal.add(spinnerAnzRegale);
                 RegalHinzufügen.setVisible(true);
             }
         });
@@ -1028,7 +1038,6 @@ public class GUI {
                             if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
                                 for (int i = 0; i < (Integer) spinnerAnzRegale.getValue(); i++) {
                                     SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
-                                    System.out.println("Regal erstellt");
                                 }
                             }
                         }
@@ -1042,6 +1051,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                SpinnerPanelRegal.removeAll();
                 Mitarbeiter.setVisible(true);
             }
         });
@@ -1096,7 +1106,7 @@ public class GUI {
                 }
             }
         });
-        bezahlenButton.addActionListener(new ActionListener() {
+        bezahlenButtonScan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 produkteGescanntList.removeAll();
@@ -1132,6 +1142,7 @@ public class GUI {
         zurückButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SpinnerPanelRegal.removeAll();
                 invisibler();
                 Mitarbeiter.setVisible(true);
             }
@@ -1140,6 +1151,34 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getSelectedUser().convertSchüpperPoints();
+                setDashboardInformation();
+            }
+        });
+
+        schüpercardMitPunktenAufladenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(textFieldSchüpercard.getText().equals("")) {
+                    labelFalschSchüp.setVisible(true);
+                }else {
+                    try {
+                        if((Integer.parseInt(textFieldSchüpercard.getText()) > 9999 || Integer.parseInt(textFieldSchüpercard.getText()) < 1000)) {
+                            labelFalschSchüp.setVisible(true);
+                        } else {
+                            if(getSelectedUser().getCard().getCardnumber() == Integer.parseInt(textFieldSchüpercard.getText())) {
+                                getSelectedUser().getCard().increasePoints(greatValue);
+                                schüpercardMitPunktenAufladenButton.setVisible(false);
+                                labelFalschSchüp.setVisible(false);
+                                labelRichtigSchüp.setVisible(true);
+
+                            }else {
+                                labelFalschSchüp.setVisible(true);
+                            }
+                        }
+                    }catch(Exception a) {
+                        labelFalschSchüp.setVisible(true);
+                    }
+                }
             }
         });
 
@@ -1182,7 +1221,7 @@ public class GUI {
                 //Das Gleiche geschieht mit dem Spinner
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, (int) key2Pair.getValue1(), 1); //default value,lower bound,upper bound,increment by
 
-                JSpinner spinnerNeu = new JSpinner();
+                JSpinner spinnerNeu = new JSpinner(sm);
                 Component mySpinnerEditor = spinnerNeu.getEditor();
                 JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
                 jftf.setColumns(3);
@@ -1347,7 +1386,6 @@ public class GUI {
             setDashboardInformation();
             showSpecialButtons();
         }
-
     }
 
     public void showSpecialButtons() {
