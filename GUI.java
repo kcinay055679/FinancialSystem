@@ -185,6 +185,8 @@ public class GUI {
     private JButton bezahlenButton;
     private JPanel produkteGescanntList;
     private JButton auswählenButton;
+    private JLabel labelFalschRadio;
+    private JButton zurückButton2;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -203,7 +205,7 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
-
+        labelFalschRadio.setVisible(false);
         ErrorMessageScan.setVisible(false);
         labelFalsch.setVisible(false);
         labelUnkorrektFleisch.setVisible(false);
@@ -1120,10 +1122,21 @@ public class GUI {
                 }else if(coopRadioButton.isSelected()) {
                     setCurrentCompany("coop");
                 }
-                System.out.println(getCurrentCompany());
+                if(getCurrentCompany() == null) {
+                    labelFalschRadio.setVisible(true);
+                }else {
+                    invisibler();
+                    Filiale.setVisible(true);
+                    fillDropdownWithShops(getCurrentCompany(), comboBox1);
+                    labelFalschRadio.setVisible(false);
+                }
+            }
+        });
+        zurückButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Filiale.setVisible(true);
-                fillDropdownWithShops(getCurrentCompany(), comboBox1);
+                Mitarbeiter.setVisible(true);
             }
         });
     }
@@ -1165,6 +1178,7 @@ public class GUI {
                 JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
                 jftf.setColumns(3);
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
+
                 spinnerHashMap.put(key2, spinnerNeu);
 
                 panelNew.add(spinnerNeu);
@@ -1311,6 +1325,7 @@ public class GUI {
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
         Arbeiten.setVisible(false);
+
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
 
