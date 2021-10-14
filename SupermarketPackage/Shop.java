@@ -20,6 +20,7 @@ public class Shop implements java.io.Serializable{
     private final boolean selfCheckout;
     private final String name;
     private final Place place;
+    private int earnings;
     private final SupermarketChain supermarketChain;
     private final Map<String, Person> employeeList = new HashMap<>();
     private final Map<String, Person> presentEmployeeList = new HashMap<>();
@@ -44,12 +45,13 @@ public class Shop implements java.io.Serializable{
         this.chief = chief;
     }
 
-    public Shop(String name, boolean selfCheckout, SupermarketChain supermarketChain, Place place, Person chief) {
+    public Shop(String name, boolean selfCheckout, SupermarketChain supermarketChain, Place place, Person chief, int earnings) {
         this.name = name;
         this.selfCheckout = selfCheckout;
         this.supermarketChain = supermarketChain;
         this.place = place;
         this.chief = chief;
+        this.earnings = earnings;
     }
 
     public Map<String, Person> getPresentEmployees() {
@@ -70,6 +72,18 @@ public class Shop implements java.io.Serializable{
 
     public String getName() {
         return name;
+    }
+
+    public int getEarnings() {
+        return earnings;
+    }
+
+    public void increaseEarnings(int value) {
+        this.earnings += value;
+    }
+
+    public void decreaseEarnings(int value) {
+        this.earnings -= value;
     }
 
     public void addArticle(Article article, int amount, int shelfId) {

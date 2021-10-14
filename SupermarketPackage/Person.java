@@ -152,9 +152,10 @@ public class Person implements java.io.Serializable{
         this.increaseMoney(getCard().getPoints() / 100);
     }
 
-    public void receiveSalary(long hour) {
+    public int receiveSalary(long hour) {
         System.out.println(hour);
         money += (((salary/30)/8)*hour);
         System.out.println(money);
+        return (int) (((salary/30)/8)*hour);
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="23" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="27" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="883" height="4956"/>
+      <xy x="20" y="20" width="883" height="5622"/>
     </constraints>
     <properties>
       <background color="-10859669"/>
@@ -89,7 +89,7 @@
           </component>
         </children>
       </grid>
-      <grid id="42f03" binding="Dashboardpanel" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="42f03" binding="Dashboardpanel" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -154,7 +154,7 @@
           </component>
           <component id="5e5ce" class="javax.swing.JButton" binding="schüpercardButton" default-binding="true">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -167,7 +167,7 @@
           </component>
           <component id="aa513" class="javax.swing.JButton" binding="ausloggenButton" default-binding="true">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -211,7 +211,7 @@
           </component>
           <component id="33f23" class="javax.swing.JButton" binding="arbeitenGehenButton">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -220,6 +220,14 @@
             <properties>
               <font size="16"/>
               <text value="Arbeiten Gehen"/>
+            </properties>
+          </component>
+          <component id="5e2e1" class="javax.swing.JButton" binding="testTest">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Testbutton"/>
             </properties>
           </component>
         </children>
@@ -1640,7 +1648,11 @@
           </component>
           <component id="fcbc8" class="javax.swing.JButton" binding="zurückZumMenüButton" default-binding="true">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="350" height="-1"/>
+                <preferred-size width="350" height="-1"/>
+                <maximum-size width="350" height="-1"/>
+              </grid>
             </constraints>
             <properties>
               <font size="20"/>
@@ -1923,6 +1935,397 @@
             <properties>
               <font size="18"/>
               <text value="Normale Kasse"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="541e6" binding="Admin" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="23" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-13391270"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="78b74" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="26"/>
+              <text value="Willkommen Admin"/>
+            </properties>
+          </component>
+          <component id="a2d72" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Mögliche Aktionen"/>
+            </properties>
+          </component>
+          <component id="15287" class="javax.swing.JButton" binding="personHinzufügenButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="450" height="-1"/>
+                <preferred-size width="450" height="-1"/>
+                <maximum-size width="450" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Person Hinzufügen"/>
+            </properties>
+          </component>
+          <component id="4e013" class="javax.swing.JButton" binding="shopErstellenButton" default-binding="true">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="450" height="-1"/>
+                <preferred-size width="450" height="-1"/>
+                <maximum-size width="450" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Shop Erstellen"/>
+            </properties>
+          </component>
+          <component id="87485" class="javax.swing.JButton" binding="supermarktketteErstellenButton" default-binding="true">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="450" height="-1"/>
+                <preferred-size width="450" height="-1"/>
+                <maximum-size width="450" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Supermarktkette Erstellen"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="bed6c" binding="PersonenHInzufügen" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="24" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14910516"/>
+          <foreground color="-1835019"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="f85c5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="24"/>
+              <text value="Person Hinzufügen"/>
+            </properties>
+          </component>
+          <component id="ee7c8" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Benutzernamen:"/>
+            </properties>
+          </component>
+          <component id="549a1" class="javax.swing.JTextField" binding="textFieldBenutzernamen">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="8a617" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Passwort: "/>
+            </properties>
+          </component>
+          <component id="6863d" class="javax.swing.JTextField" binding="textFieldPasswort">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="ae983" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Passwort Wiederholen"/>
+            </properties>
+          </component>
+          <component id="f58c0" class="javax.swing.JTextField" binding="textFieldPasswortRep">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="162e3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Bitte tätigen Sie folgende Angaben um einen Benutzer zu erstellen"/>
+            </properties>
+          </component>
+          <component id="cf56d" class="javax.swing.JButton" binding="benutzerHinzufügenButton" default-binding="true">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Benutzer Hinzufügen"/>
+            </properties>
+          </component>
+          <component id="e90fe" class="javax.swing.JButton" binding="zurückButton1" default-binding="true">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Zurück"/>
+            </properties>
+          </component>
+          <component id="e3a8a" class="javax.swing.JLabel" binding="benutzerLabelRichtig">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <foreground color="-15379671"/>
+              <text value="Benutzer konnte erstellt werden!"/>
+            </properties>
+          </component>
+          <component id="297b6" class="javax.swing.JLabel" binding="benutzerLabelFalsch">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <foreground color="-3866618"/>
+              <text value="Passwörter stimmen nicht überein!"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="50645" binding="ShopHinzufügen" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="25" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14910516"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="14711" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="26"/>
+              <text value="Shop Hinzufügen"/>
+            </properties>
+          </component>
+          <component id="36aa4" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Um einen Shop hinzuzufügen, tätigen Sie die folgenden Angaben"/>
+            </properties>
+          </component>
+          <component id="e1cdd" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Shopname"/>
+            </properties>
+          </component>
+          <component id="858f8" class="javax.swing.JTextField" binding="textFieldShopname">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="ade5d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Chief"/>
+            </properties>
+          </component>
+          <component id="43e52" class="javax.swing.JTextField" binding="textFieldChief">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="dd7e3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="SelfCheckout"/>
+            </properties>
+          </component>
+          <component id="7db84" class="javax.swing.JTextField" binding="selfCheckout">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="c83fb" class="javax.swing.JTextField" binding="textFieldPlace">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="62cc7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Ort"/>
+            </properties>
+          </component>
+          <component id="5ca5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Starteinkommen"/>
+            </properties>
+          </component>
+          <component id="75d54" class="javax.swing.JTextField" binding="textFieldEarnings">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="9e2be" class="javax.swing.JButton" binding="shopErstellenButton1" default-binding="true">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Shop Erstellen"/>
+            </properties>
+          </component>
+          <component id="c3826" class="javax.swing.JButton" binding="zurückButton3" default-binding="true">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Zurück"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="ca469" binding="SupermarktketteHinzufügen" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="26" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14910516"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="21604" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="26"/>
+              <text value="Supermarktkette Hinzufügen"/>
+            </properties>
+          </component>
+          <component id="ab0b3" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+              <text value="Um eine Supermarktkette zu erstellen, tätigen Sie folgende Eingaben"/>
+            </properties>
+          </component>
+          <component id="86908" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="22"/>
+              <text value="Supermarktkettenname:"/>
+            </properties>
+          </component>
+          <component id="28d6e" class="javax.swing.JTextField" binding="textFieldSupermarktkettenName">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="11af1" class="javax.swing.JButton" binding="ketteErstellenButton" default-binding="true">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Kette Erstellen"/>
+            </properties>
+          </component>
+          <component id="24b78" class="javax.swing.JButton" binding="zurückButton4" default-binding="true">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Zurück"/>
             </properties>
           </component>
         </children>
