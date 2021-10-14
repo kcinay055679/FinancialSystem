@@ -1,6 +1,6 @@
 package SupermarketPackage;
 
-public class Schüppercard {
+public class Schüppercard implements java.io.Serializable {
     int points;
     int cardnumber;
 

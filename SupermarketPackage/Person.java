@@ -9,26 +9,24 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.io.Serializable;
 
-public class Person {
+public class Person implements java.io.Serializable{
     private int salary;
     private int money;
     private final String name;
     private byte[] hashedPassword;
+    private String pw;
 
     private Company currenCompanyWork;
     private Shop currentShopWork;
     private Rank rank = Rank.UNEMPLOYED;
     private Schüppercard card;
     private final ShoppingCart cart = new ShoppingCart();
-    private MessageDigest digest;
+    private transient MessageDigest digest;
 
     {
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public Rank getRank() {
@@ -62,7 +60,11 @@ public class Person {
     }
 
     public void setPassword(String password, String repeatPassword) {
+
+        //Todo: pw wieder entfernen
+
         if (password.equals(repeatPassword)) {
+            pw = password;
             hashedPassword = hashPassword(password);
         } else {
             throw new SecurityException();
@@ -70,6 +72,11 @@ public class Person {
     }
 
     public byte[] hashPassword(String password) {
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         return digest.digest(password.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -90,7 +97,6 @@ public class Person {
     public void setSalary(int salary) {
         this.salary = salary;
         money += salary * 5;
-        System.out.println(money);
     }
 
     public Schüppercard getCard() {

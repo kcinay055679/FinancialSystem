@@ -8,7 +8,7 @@ import java.util.List;
 
 import static GameHandlerPackage.SystemHandler.*;
 
-public class Tablet {
+public class Tablet implements java.io.Serializable{
 
     public int findArticle(String articleName, String shopName, String supermarketChainName) {
         Shop shop = getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName);

@@ -6,7 +6,7 @@ import org.javatuples.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShoppingCart {
+public class ShoppingCart implements java.io.Serializable{
     Map<String, Pair<Article, Integer>> articleList = new HashMap<>();
     float fullPrice = 0;
 

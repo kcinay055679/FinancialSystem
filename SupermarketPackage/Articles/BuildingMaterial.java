@@ -1,6 +1,6 @@
 package SupermarketPackage.Articles;
 
-public class BuildingMaterial extends Article {
+public class BuildingMaterial extends Article  implements java.io.Serializable{
 
     private int tons;
     Material material;

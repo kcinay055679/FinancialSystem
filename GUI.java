@@ -14,14 +14,11 @@ import org.javatuples.Triplet;
 import org.reflections.Reflections;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.text.DefaultFormatterFactory;
@@ -1145,6 +1142,12 @@ public class GUI {
                 getSelectedUser().convertSchüpperPoints();
             }
         });
+
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent winEvt) {
+                safeToFile();
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1278,7 +1281,8 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-        SupermarketHandler.setUp();
+        //SupermarketHandler.setUp();
+        loadFromFile();
         frame.setResizable(true);
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
@@ -1296,6 +1300,9 @@ public class GUI {
 
 
     }
+
+
+
 
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());

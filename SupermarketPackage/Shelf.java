@@ -7,7 +7,7 @@ import org.javatuples.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Shelf {
+public class Shelf implements java.io.Serializable{
     private final int ID;
     private final Shop shop;
     public final SupermarketChain supermarketChain;

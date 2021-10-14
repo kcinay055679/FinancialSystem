@@ -5,7 +5,7 @@ import SupermarketPackage.Fleischsorten;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Food extends Article {
+public class Food extends Article  implements java.io.Serializable{
     private Fleischsorten fleisch;
     private LocalDate expirationDate;
     public Food(String name, float price, boolean barcode, String expirationDate, Fleischsorten fleisch) {

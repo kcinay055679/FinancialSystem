@@ -5,6 +5,7 @@ import SupermarketPackage.Shop;
 import SupermarketPackage.SupermarketChain;
 import org.javatuples.Pair;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class SystemHandler {
         SystemHandler.currentShop = currentShop;
     }
 
-    private static final Map<String, Person> personList = new HashMap<>();
+    private static Map<String, Person> personList = new HashMap<>();
     private static Map<String, Company> companyMap = new HashMap<>();
     private static Map<String, SupermarketChain> supermarketChainMap = new HashMap<>();
 
@@ -55,7 +56,7 @@ public class SystemHandler {
         p.setSalary(salary);
     }
 
-    public static void fireEmployee(String person){
+    public static void fireEmployee(String person) {
 
         Person p = personList.get(person);
         Shop shop = p.getCurrentShopWork();
@@ -96,10 +97,10 @@ public class SystemHandler {
         if (getPersonList().get(name) != null) {
             if (getPersonList().get(name).checkPassword(password)) {
                 setSelectedUser(getPersonList().get(name));
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
         return getSelectedUser().getName().equals(name);
@@ -107,7 +108,55 @@ public class SystemHandler {
 
     }
 
-    public static void logout(){
+    public static void logout() {
         setSelectedUser(null);
+    }
+
+    public static void safeToFile() {
+        try {
+            //persons
+            FileOutputStream fileOutPerson = new FileOutputStream("Data/persons.ser");
+            ObjectOutputStream outPerson = new ObjectOutputStream(fileOutPerson);
+            outPerson.writeObject(personList);
+
+            //supermarkets
+            FileOutputStream fileOutSupermarkets = new FileOutputStream("Data/supermarketChains.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOutSupermarkets);
+            out.writeObject(supermarketChainMap);
+            out.close();
+            fileOutSupermarkets.close();
+            outPerson.close();
+            fileOutPerson.close();
+            System.out.println("Serialized data is saved");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadFromFile() {
+
+        try {
+            FileInputStream fileInPerson = new FileInputStream("Data/persons.ser");
+            ObjectInputStream inPerson = new ObjectInputStream(fileInPerson);
+            personList = (Map<String, Person>) inPerson.readObject();
+
+
+            FileInputStream fileInSupermarket = new FileInputStream("Data/persons.ser");
+            ObjectInputStream inSupermarket = new ObjectInputStream(fileInSupermarket);
+            supermarketChainMap = (Map<String, SupermarketChain>) inSupermarket.readObject();
+            inSupermarket.close();
+            fileInSupermarket.close();
+            inPerson.close();
+            fileInPerson.close();
+            System.out.println("Data is loaded");
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 package GameHandlerPackage;
 
-public enum Rank {
+public enum Rank implements java.io.Serializable{
     UNEMPLOYED ,EMPLOYEE, CHIEF,
 }

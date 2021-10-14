@@ -4,7 +4,7 @@ import SupermarketPackage.SupermarketChain;
 
 import static GameHandlerPackage.SystemHandler.getSupermarketChainMap;
 
-public class Article {
+public class Article implements java.io.Serializable{
     private final float price;
     private final boolean barcode;
     private final String name;

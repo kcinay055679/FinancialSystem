@@ -15,7 +15,7 @@ import static GameHandlerPackage.SystemHandler.getPersonList;
 import static GameHandlerPackage.SystemHandler.hireEmployee;
 
 
-public class Shop {
+public class Shop implements java.io.Serializable{
 
     private final boolean selfCheckout;
     private final String name;
