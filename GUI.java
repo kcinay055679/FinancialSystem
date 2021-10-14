@@ -221,7 +221,7 @@ public class GUI {
 
         Loginpanel.setVisible(true);
         ChiefMenu.setVisible(false);
-        employeeMenuButton.setVisible(false);
+        arbeitenGehenButton.setVisible(false);
 
 
         this.bestätigenButton.addActionListener(new ActionListener() {
@@ -701,7 +701,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Arbeiten.setVisible(true);
+                Mitarbeiter.setVisible(true);
                 startWorkTime = DigitalClock.SimpleDigitalClock.realTime;
             }
         });
@@ -798,14 +798,6 @@ public class GUI {
                 }
                 ChiefOutput.setText(ChiefOutput.getText() + "</html>");
 
-            }
-        });
-
-        employeeMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                Mitarbeiter.setVisible(true);
             }
         });
 
@@ -1018,7 +1010,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Mitarbeiter.setVisible(true);
+                Dashboardpanel.setVisible(true);
 
                 long minutes = ChronoUnit.MINUTES.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
@@ -1328,7 +1320,6 @@ public class GUI {
         BuildingMatPanel.setVisible(false);
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
-        employeeMenuButton.setVisible(false);
 
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
@@ -1348,7 +1339,7 @@ public class GUI {
             ChiefMenu.setVisible(true);
         }
         if (getSelectedUser().getRank() == Rank.EMPLOYEE) {
-            employeeMenuButton.setVisible(true);
+            arbeitenGehenButton.setVisible(true);
         }
         if (getSelectedUser().getCard() != null) {
             schüpercardButton.setVisible(false);
