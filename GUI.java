@@ -693,14 +693,6 @@ public class GUI {
             }
         });
 
-        arbeitenGehenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                Arbeiten.setVisible(true);
-            }
-        });
-
         kündenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -841,13 +833,6 @@ public class GUI {
                         labelUnkorrektFleisch.setVisible(true);
                     }
                 }
-            }
-        });
-        zurückButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                Dashboardpanel.setVisible(true);
             }
         });
 
@@ -1020,7 +1005,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                Mitarbeiter.setVisible(true);
+               Dashboardpanel.setVisible(true);
             }
         });
         gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
@@ -1324,7 +1309,6 @@ public class GUI {
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
-        Arbeiten.setVisible(false);
 
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
