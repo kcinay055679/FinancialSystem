@@ -1232,13 +1232,15 @@ public class GUI {
         benutzerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(textFieldPasswort.equals(textFieldPasswortRep)) {
+                if(textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
+                    getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
+                            textFieldPasswort.getText(), textFieldPasswortRep.getText()));
                     textFieldPasswort.setText("");
                     textFieldPasswortRep.setText("");
                     textFieldBenutzernamen.setText("");
                     benutzerLabelRichtig.setVisible(true);
-                    getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
-                            textFieldPasswort.getText(), textFieldPasswortRep.getText()));
+                }else {
+                    benutzerLabelFalsch.setVisible(true);
                 }
             }
         });
