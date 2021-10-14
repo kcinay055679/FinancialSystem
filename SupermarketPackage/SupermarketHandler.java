@@ -57,6 +57,8 @@ public class SupermarketHandler implements java.io.Serializable{
         SupermarketHandler.addPerson("Mar1", "password", "password");
         hireEmployee("Mar1", "coop", "FoodPalace", 4500);
 
+        System.out.println("Error: All Variables are resettet");
+        safeToFile();
     }
 
 
@@ -207,5 +209,9 @@ public class SupermarketHandler implements java.io.Serializable{
         SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name), selfCheckout, place);
         Shop shop = SystemHandler.getSupermarketChainMap().get(supermarketChain).getShopMap().get(shopName);
         getPersonList().get(name).setCurrentShopWork(shop);
+        getPersonList().get(name).setCurrentCompanyWork(SystemHandler.getSupermarketChainMap().get(supermarketChain));
+        System.out.println(getPersonList().get(name).getCurrentCompanyWork());
+
+
     }
 }

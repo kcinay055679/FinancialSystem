@@ -15,6 +15,8 @@ import org.reflections.Reflections;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.StreamCorruptedException;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -193,6 +195,11 @@ public class GUI {
     private JLabel labelRichtigSchüp;
     private JButton convertSchüpperpointsButton;
     private JPanel SpinnerPanelRegal;
+    private JButton changePassword;
+    private JPanel changePasswordPanel;
+    private JButton backToDashboardPw;
+    private JLabel passwordOutput;
+    private JButton changePasswordSubmit;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -226,7 +233,6 @@ public class GUI {
 
         Loginpanel.setVisible(true);
         ChiefMenu.setVisible(false);
-
 
 
         this.bestätigenButton.addActionListener(new ActionListener() {
@@ -732,7 +738,7 @@ public class GUI {
                 spinnerAnzRegale = new JSpinner(sm);
                 Component mySpinnerEditor = spinnerAnzRegale.getEditor();
                 JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
-               jftf.setColumns(25);
+                jftf.setColumns(25);
                 spinnerAnzRegale.setFont(new Font("Serif", Font.PLAIN, 22));
                 SpinnerPanelRegal.add(spinnerAnzRegale);
                 RegalHinzufügen.setVisible(true);
@@ -876,20 +882,13 @@ public class GUI {
         ChiefMenuEnter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Company company = null;
-                Shop shop = null;
-                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
-                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
-                        if (pair.getValue0() == getSelectedUser()) {
-                            shop = pair.getValue1();
-                            company = shop.getSupermarketChain();
-                        }
-                    }
-                }
+
+                Shop shop = getSelectedUser().getCurrentShopWork();
+                SupermarketChain supermarket = shop.getSupermarketChain();
 
                 if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
-                    System.out.println(ChiefSalaryField.getHorizontalVisibility().getValue());
-                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), company.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
+                    System.out.println((Integer) ChiefSalaryField.getValue());
+                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefSalaryField.setVisible(false);
                     ChiefHireSalaryLabel.setVisible(false);
@@ -1158,24 +1157,24 @@ public class GUI {
         schüpercardMitPunktenAufladenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(textFieldSchüpercard.getText().equals("")) {
+                if (textFieldSchüpercard.getText().equals("")) {
                     labelFalschSchüp.setVisible(true);
-                }else {
+                } else {
                     try {
-                        if((Integer.parseInt(textFieldSchüpercard.getText()) > 9999 || Integer.parseInt(textFieldSchüpercard.getText()) < 1000)) {
+                        if ((Integer.parseInt(textFieldSchüpercard.getText()) > 9999 || Integer.parseInt(textFieldSchüpercard.getText()) < 1000)) {
                             labelFalschSchüp.setVisible(true);
                         } else {
-                            if(getSelectedUser().getCard().getCardnumber() == Integer.parseInt(textFieldSchüpercard.getText())) {
+                            if (getSelectedUser().getCard().getCardnumber() == Integer.parseInt(textFieldSchüpercard.getText())) {
                                 getSelectedUser().getCard().increasePoints(greatValue);
                                 schüpercardMitPunktenAufladenButton.setVisible(false);
                                 labelFalschSchüp.setVisible(false);
                                 labelRichtigSchüp.setVisible(true);
 
-                            }else {
+                            } else {
                                 labelFalschSchüp.setVisible(true);
                             }
                         }
-                    }catch(Exception a) {
+                    } catch (Exception a) {
                         labelFalschSchüp.setVisible(true);
                     }
                 }
@@ -1185,6 +1184,22 @@ public class GUI {
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent winEvt) {
                 safeToFile();
+            }
+        });
+
+        changePassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                changePasswordPanel.setVisible(true);
+            }
+        });
+
+        backToDashboardPw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
             }
         });
     }
@@ -1320,8 +1335,22 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-        //SupermarketHandler.setUp();
-        loadFromFile();
+        if(!new File("Data").isDirectory()){
+            new File("Data").mkdirs();
+        }
+
+        if (new File("Data/persons.ser").exists() && new File("Data/supermarketChains.ser").exists()) {
+
+            try {
+                loadFromFile();
+            } catch (Exception e) {
+                SupermarketHandler.setUp();
+            }
+        } else {
+            SupermarketHandler.setUp();
+        }
+
+
         frame.setResizable(true);
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
@@ -1336,12 +1365,7 @@ public class GUI {
 
         glassPane.add(simpleDigitalClock);
         glassPane.setVisible(false);
-
-
     }
-
-
-
 
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
@@ -1378,6 +1402,7 @@ public class GUI {
         arbeitenGehenButton.setVisible(false);
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
+        changePasswordPanel.setVisible(false);
 
         Selfscanner.setVisible(false);
 
