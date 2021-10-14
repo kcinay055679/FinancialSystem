@@ -171,25 +171,38 @@ public class GUI {
     private JButton gewählteAnzahlHinzufügenButton;
     private JPanel RegaleErstellt;
     private JButton zurückZumMenüButton1;
+    private JPanel Selfscanner;
+    private JPanel Entscheidung;
+    private JButton selfscannerButton;
+    private JButton normaleKasseButton;
+    private JPanel PreisGesamt;
+    private JPanel ProdukteWarenkorb;
+    private JPanel ProdukteGescannt;
+    private JButton scanButton;
+    private JComboBox ProdukteWarenkorbComb;
     private JFormattedTextField ChiefSalaryField;
     private JLabel ChiefHireSalaryLabel;
+    private JLabel ErrorMessageScan;
+    private JButton bezahlenButton;
+    private JPanel produkteGescanntList;
+    private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
     HashMap<String, JSpinner> produkte = new HashMap<>();
     String currentTabletFuntion;
+    float greatPrice = 0;
 
     //Hashmap um Spinner Komponente zu speichern
     HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
 
     private int greatValue;
+    private DefaultListModel model = new DefaultListModel();
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
 
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
-
-
-
+        ErrorMessageScan.setVisible(false);
         labelFalsch.setVisible(false);
         labelUnkorrektFleisch.setVisible(false);
         labelFalschBuild.setVisible(false);
@@ -218,7 +231,6 @@ public class GUI {
                     showSpecialButtons();
                 } else {
                     labelFalsch.setVisible(true);
-
                 }
 
             }
@@ -355,7 +367,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 showPrice();
-                Kassen.setVisible(true);
+                Entscheidung.setVisible(true);
             }
         });
 
@@ -767,7 +779,6 @@ public class GUI {
                 ProduktHinzufügen.setVisible(true);
                 ProduktHinzufügen.repaint();
                 ProduktHinzufügen.revalidate();
-                System.out.println("test");
             }
         });
 
@@ -1075,8 +1086,63 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+        normaleKasseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Kassen.setVisible(true);
+            }
+        });
+        selfscannerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+                    float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
+                    JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                            + price + ", ");
 
+                   String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                           + price + ", ";
+                    ProdukteWarenkorbComb.addItem(value);
+                }
+                Selfscanner.setVisible(true);
+            }
+        });
+        scanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ProdukteWarenkorbComb.getSelectedItem() == null) {
+                    ErrorMessageScan.setVisible(true);
+                } else {
+                    produkteGescanntList.removeAll();
+                    model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
+                    JList listNew = new JList(model);
+                    listNew.setFont(new Font("Serif", Font.PLAIN, 24));
+                    produkteGescanntList.add(listNew);
 
+                    PreisGesamt.removeAll();
+                    greatPrice += getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
+                            ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
+                            ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue1();
+
+                    ProdukteWarenkorbComb.removeItem(ProdukteWarenkorbComb.getSelectedItem());
+                    JLabel labelNew = new JLabel("Kosten Betragen: " + greatPrice);
+                    labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                    labelNew.setVerticalAlignment(SwingConstants.CENTER);
+                    PreisGesamt.add(labelNew);
+                    ProdukteWarenkorbComb.repaint();
+                    ProdukteWarenkorbComb.revalidate();
+                }
+            }
+        });
+        bezahlenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                EinkaufAbschluss.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1085,7 +1151,6 @@ public class GUI {
             if (key.equals(supermarketname)) {
                 for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
                     comboBox.addItem(key2);
-                    System.out.println("Item aded");
                 }
             } else {
                 System.out.println("Nicht diese Filiale");
@@ -1113,8 +1178,11 @@ public class GUI {
                 SpinnerModel sm = new SpinnerNumberModel(0, 0, (int) key2Pair.getValue1(), 1); //default value,lower bound,upper bound,increment by
 
                 JSpinner spinnerNeu = new JSpinner();
-
+                Component mySpinnerEditor = spinnerNeu.getEditor();
+                JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
+                jftf.setColumns(3);
                 spinnerNeu.setFont(new Font("Serif", Font.PLAIN, 20));
+
                 spinnerHashMap.put(key2, spinnerNeu);
 
                 panelNew.add(spinnerNeu);
@@ -1139,6 +1207,20 @@ public class GUI {
             labeNew.setVerticalAlignment(SwingConstants.CENTER);
             panelNew.add(labeNew);
             Cart.add(panelNew);
+        }
+    }
+
+    public void showPriceSelfScanner() {
+        for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+            float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
+            JPanel panelNew = new JPanel();
+            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                    + price);
+
+            labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
+            labeNew.setVerticalAlignment(SwingConstants.CENTER);
+            panelNew.add(labeNew);
+            PreisGesamt.add(panelNew);
         }
     }
 
@@ -1242,9 +1324,14 @@ DigitalClock.main();
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
         Arbeiten.setVisible(false);
+
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
-        if (getSelectedUser() != null) {
+
+        Selfscanner.setVisible(false);
+
+        Entscheidung.setVisible(false);
+        if(getSelectedUser() !=null){
             setDashboardInformation();
             showSpecialButtons();
         }
