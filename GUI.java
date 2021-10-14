@@ -185,6 +185,7 @@ public class GUI {
     private JLabel ErrorMessageScan;
     private JButton bezahlenButton;
     private JPanel produkteGescanntList;
+    private JButton auswählenButton;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -282,43 +283,6 @@ public class GUI {
                 Filialebetreten.setVisible(true);
             }
         });
-
-        //Mit diesen Buttons bestimmt man den die gewollte Filiale
-        migrosRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Hier gehts ins Migros
-                setCurrentCompany("migros");
-                invisibler();
-                Filiale.setVisible(true);
-                fillDropdownWithShops(getCurrentCompany(), comboBox1);
-            }
-        });
-
-        coopRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Hier gehts ins Coop
-                setCurrentCompany("coop");
-                invisibler();
-                Filiale.setVisible(true);
-                fillDropdownWithShops(getCurrentCompany(), comboBox1);
-            }
-
-
-        });
-
-        aldiRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Hier gehts in den Aldi
-                setCurrentCompany("aldi");
-                invisibler();
-                Filiale.setVisible(true);
-                fillDropdownWithShops(getCurrentCompany(), comboBox1);
-            }
-        });
-
 
         tabletBenutzenButton.addActionListener(new ActionListener() {
 
@@ -1140,6 +1104,23 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 EinkaufAbschluss.setVisible(true);
+            }
+        });
+
+        auswählenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(aldiRadioButton.isSelected()) {
+                    setCurrentCompany("aldi");
+                }else if(migrosRadioButton.isSelected()) {
+                    setCurrentCompany("migros");
+                }else if(coopRadioButton.isSelected()) {
+                    setCurrentCompany("coop");
+                }
+                System.out.println(getCurrentCompany());
+                invisibler();
+                Filiale.setVisible(true);
+                fillDropdownWithShops(getCurrentCompany(), comboBox1);
             }
         });
     }
