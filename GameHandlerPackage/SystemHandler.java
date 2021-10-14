@@ -55,9 +55,10 @@ public class SystemHandler {
         p.setSalary(salary);
     }
 
-    public static void fireEmployee(String person, Shop shop){
+    public static void fireEmployee(String person){
 
         Person p = personList.get(person);
+        Shop shop = p.getCurrentShopWork();
         employeeLeave(person);
         p.setRank(Rank.UNEMPLOYED);
         shop.getSupermarketChain().getEmployeeMap().remove(person);

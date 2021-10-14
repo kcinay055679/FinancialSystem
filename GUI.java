@@ -7,6 +7,7 @@ import SupermarketPackage.Articles.Article;
 
 import static GameHandlerPackage.SystemHandler.*;
 
+
 import SupermarketPackage.Articles.Material;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
@@ -206,6 +207,7 @@ public class GUI {
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
     LocalDateTime startWorkTime;
+
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
@@ -221,7 +223,7 @@ public class GUI {
 
         Loginpanel.setVisible(true);
         ChiefMenu.setVisible(false);
-        arbeitenGehenButton.setVisible(false);
+
 
 
         this.bestätigenButton.addActionListener(new ActionListener() {
@@ -706,21 +708,21 @@ public class GUI {
             }
         });
 
-        kündenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getSelectedUser().setRank(Rank.UNEMPLOYED);
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                            if (getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
-                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().remove(key3);
-                            }
-                        }
-                    }
-                }
-            }
-        });
+//        kündenButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                getSelectedUser().setRank(Rank.UNEMPLOYED);
+//                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+//                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+//                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+//                            if (getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
+//                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().remove(key3);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        });
         regalHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -885,7 +887,7 @@ public class GUI {
                     ChiefHireSalaryLabel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
-                    fireEmployee((String) ChiefMenuComboBox.getSelectedItem(), shop);
+                    fireEmployee((String) ChiefMenuComboBox.getSelectedItem());
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
@@ -1000,7 +1002,7 @@ public class GUI {
         kündenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fireEmployee(getSelectedUser().getName(), getSelectedUser().getCurrentShopWork());
+                fireEmployee(getSelectedUser().getName());
                 invisibler();
                 showSpecialButtons();
                 Dashboardpanel.setVisible(true);
@@ -1016,7 +1018,7 @@ public class GUI {
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 long seconds = ChronoUnit.SECONDS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 getSelectedUser().receiveSalary(hours);
-               Dashboardpanel.setVisible(true);
+                Dashboardpanel.setVisible(true);
             }
         });
         gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
@@ -1061,8 +1063,8 @@ public class GUI {
                     JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
                             + price + ", ");
 
-                   String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
-                           + price + ", ";
+                    String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                            + price + ", ";
                     ProdukteWarenkorbComb.addItem(value);
                 }
                 Selfscanner.setVisible(true);
@@ -1071,7 +1073,7 @@ public class GUI {
         scanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(ProdukteWarenkorbComb.getSelectedItem() == null) {
+                if (ProdukteWarenkorbComb.getSelectedItem() == null) {
                     ErrorMessageScan.setVisible(true);
                     model.clear();
                 } else {
@@ -1112,16 +1114,16 @@ public class GUI {
         auswählenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(aldiRadioButton.isSelected()) {
+                if (aldiRadioButton.isSelected()) {
                     setCurrentCompany("aldi");
-                }else if(migrosRadioButton.isSelected()) {
+                } else if (migrosRadioButton.isSelected()) {
                     setCurrentCompany("migros");
-                }else if(coopRadioButton.isSelected()) {
+                } else if (coopRadioButton.isSelected()) {
                     setCurrentCompany("coop");
                 }
-                if(getCurrentCompany() == null) {
+                if (getCurrentCompany() == null) {
                     labelFalschRadio.setVisible(true);
-                }else {
+                } else {
                     invisibler();
                     Filiale.setVisible(true);
                     fillDropdownWithShops(getCurrentCompany(), comboBox1);
@@ -1320,14 +1322,14 @@ public class GUI {
         BuildingMatPanel.setVisible(false);
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
-
+        arbeitenGehenButton.setVisible(false);
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
 
         Selfscanner.setVisible(false);
 
         Entscheidung.setVisible(false);
-        if(getSelectedUser() !=null){
+        if (getSelectedUser() != null) {
             setDashboardInformation();
             showSpecialButtons();
         }
