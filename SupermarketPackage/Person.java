@@ -55,10 +55,9 @@ public class Person {
         this.currentShopWork = currentShopWork;
     }
 
-    public Person(String name, String password, String repeatPassword, int salary) {
+    public Person(String name, String password, String repeatPassword) {
         this.name = name;
         this.salary = salary;
-        this.money = salary * 5;
         setPassword(password, repeatPassword);
     }
 
@@ -147,7 +146,9 @@ public class Person {
         this.increaseMoney(getCard().getPoints() / 100);
     }
 
-    public void receiveSalary() {
-        money += salary;
+    public void receiveSalary(long hour) {
+        System.out.println(hour);
+        money += (((salary/30)/8)*hour);
+        System.out.println(money);
     }
 }

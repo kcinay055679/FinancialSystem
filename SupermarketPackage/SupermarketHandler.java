@@ -47,22 +47,22 @@ public class SupermarketHandler {
         SupermarketHandler.createFood("Steak", 5F, 12, true, "20/10/2021", "Rudi's Fress Bude", "coop", 1, Fleischsorten.COW);
 
 
-        SupermarketHandler.addPerson("Yanick", "", "", 0);
-        SupermarketHandler.addPerson("", "", "", 0);
+        SupermarketHandler.addPerson("Yanick", "", "");
+        SupermarketHandler.addPerson("", "", "");
 
-        SupermarketHandler.addPerson("Marc", "password", "password", 0);
-        hireEmployee("Marc", "coop", "FoodPalace", 0);
+        SupermarketHandler.addPerson("Marc", "password", "password");
+        hireEmployee("Marc", "coop", "FoodPalace", 4500);
         employeeEnter("Marc");
 
-        SupermarketHandler.addPerson("Mar1", "password", "password", 0);
-        hireEmployee("Mar1", "coop", "FoodPalace", 0);
+        SupermarketHandler.addPerson("Mar1", "password", "password");
+        hireEmployee("Mar1", "coop", "FoodPalace", 4500);
 
     }
 
 
-    public static void addPerson(String name, String password, String repeatPassword, int salary) {
+    public static void addPerson(String name, String password, String repeatPassword) {
         if (password.equals(repeatPassword)) {
-            getPersonList().put(name, new Person(name, password, repeatPassword, salary));
+            getPersonList().put(name, new Person(name, password, repeatPassword));
         }
     }
 
@@ -201,8 +201,8 @@ public class SupermarketHandler {
 //    }
 
     public static void createShop(String supermarketChain, String shopName, String name, String password, String repeatPassword, boolean selfCheckout, String place) {
-        addPerson(name, password, repeatPassword, Integer.MAX_VALUE);
-
+        addPerson(name, password, repeatPassword);
+        getPersonList().get(name).setSalary(7000);
         getPersonList().get(name).setRank(Rank.CHIEF);
         SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name), selfCheckout, place);
         Shop shop = SystemHandler.getSupermarketChainMap().get(supermarketChain).getShopMap().get(shopName);
