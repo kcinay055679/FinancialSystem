@@ -846,13 +846,6 @@ public class GUI {
                 }
             }
         });
-        zurückButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                Dashboardpanel.setVisible(true);
-            }
-        });
 
         HireEmployee.addActionListener(new ActionListener() {
             @Override
@@ -1029,6 +1022,7 @@ public class GUI {
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 long seconds = ChronoUnit.SECONDS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 getSelectedUser().receiveSalary(hours);
+               Dashboardpanel.setVisible(true);
             }
         });
         gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
@@ -1295,6 +1289,8 @@ public class GUI {
 
         glassPane.add(simpleDigitalClock);
         glassPane.setVisible(false);
+
+
     }
 
     public void setDashboardInformation() {
@@ -1330,7 +1326,6 @@ public class GUI {
         ChiefMenu.setVisible(false);
         ProduktErstellt.setVisible(false);
         employeeMenuButton.setVisible(false);
-        Arbeiten.setVisible(false);
 
         RegalHinzufügen.setVisible(false);
         RegaleErstellt.setVisible(false);
