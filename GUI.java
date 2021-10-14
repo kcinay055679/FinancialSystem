@@ -195,6 +195,7 @@ public class GUI {
     private JLabel labelFalschSchüp;
     private JLabel labelRichtigSchüp;
     private JButton convertSchüpperpointsButton;
+    private JPanel SpinnerPanelRegal;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -302,7 +303,6 @@ public class GUI {
                 invisibler();
                 Tablet.setVisible(true);
                 TabletÜbersicht.setVisible(true);
-
             }
         });
 
@@ -376,7 +376,6 @@ public class GUI {
                 labelFalschSchüp.setVisible(false);
                 schüpercardMitPunktenAufladenButton.setVisible(true);
                 Dashboardpanel.setVisible(true);
-
             }
         });
 
@@ -732,6 +731,13 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, 20, 1);
+                spinnerAnzRegale = new JSpinner(sm);
+                Component mySpinnerEditor = spinnerAnzRegale.getEditor();
+                JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
+               jftf.setColumns(25);
+                spinnerAnzRegale.setFont(new Font("Serif", Font.PLAIN, 22));
+                SpinnerPanelRegal.add(spinnerAnzRegale);
                 RegalHinzufügen.setVisible(true);
             }
         });
@@ -1035,7 +1041,6 @@ public class GUI {
                             if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
                                 for (int i = 0; i < (Integer) spinnerAnzRegale.getValue(); i++) {
                                     SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
-                                    System.out.println("Regal erstellt");
                                 }
                             }
                         }
@@ -1049,6 +1054,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                SpinnerPanelRegal.removeAll();
                 Mitarbeiter.setVisible(true);
             }
         });
@@ -1139,6 +1145,7 @@ public class GUI {
         zurückButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SpinnerPanelRegal.removeAll();
                 invisibler();
                 Mitarbeiter.setVisible(true);
             }
