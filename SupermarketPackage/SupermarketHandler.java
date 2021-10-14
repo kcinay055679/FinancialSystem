@@ -20,14 +20,14 @@ public class SupermarketHandler implements java.io.Serializable{
         SystemHandler.createSupermarketChain("migros");
         SystemHandler.createSupermarketChain("aldi");
 
-        createShop("coop", "FoodPalace", "Yanick1", "", "", true, "Thun");
-        createShop("coop", "Rudi's Fress Bude", "Yanick2", "", "", true, "Thun");
+        createShop("coop", "FoodPalace", "Yanick1", "", "", true, "Thun", 5000);
+        createShop("coop", "Rudi's Fress Bude", "Yanick2", "", "", true, "Thun", 5000);
 
-        createShop("migros", "Rudi's Fress Bude", "Yanick3", "", "", true, "Thun");
-        createShop("migros", "FoodPalace", "Yanick4", "", "", true, "Thun");
+        createShop("migros", "Rudi's Fress Bude", "Yanick3", "", "", true, "Thun", 5000);
+        createShop("migros", "FoodPalace", "Yanick4", "", "", true, "Thun", 5000);
 
-        createShop("aldi", "Rudi's Fress Bude", "Yanick5", "", "", true, "Thun");
-        createShop("aldi", "FoodPalace", "Yanick6", "", "", true, "Thun");
+        createShop("aldi", "Rudi's Fress Bude", "Yanick5", "", "", true, "Thun", 5000);
+        createShop("aldi", "FoodPalace", "Yanick6", "", "", true, "Thun", 5000);
 
 
         SupermarketHandler.createShelf("FoodPalace", "coop");
@@ -202,11 +202,11 @@ public class SupermarketHandler implements java.io.Serializable{
 //        shop.getEmployeeList().put(p.getName(), p);
 //    }
 
-    public static void createShop(String supermarketChain, String shopName, String name, String password, String repeatPassword, boolean selfCheckout, String place) {
+    public static void createShop(String supermarketChain, String shopName, String name, String password, String repeatPassword, boolean selfCheckout, String place, int earnings) {
         addPerson(name, password, repeatPassword);
         getPersonList().get(name).setSalary(7000);
         getPersonList().get(name).setRank(Rank.CHIEF);
-        SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name), selfCheckout, place);
+        SystemHandler.getSupermarketChainMap().get(supermarketChain).createSubsidiary(shopName, getPersonList().get(name), selfCheckout, place, earnings);
         Shop shop = SystemHandler.getSupermarketChainMap().get(supermarketChain).getShopMap().get(shopName);
         getPersonList().get(name).setCurrentShopWork(shop);
         getPersonList().get(name).setCurrentCompanyWork(SystemHandler.getSupermarketChainMap().get(supermarketChain));

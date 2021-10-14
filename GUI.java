@@ -195,6 +195,30 @@ public class GUI {
     private JLabel labelRichtigSchüp;
     private JButton convertSchüpperpointsButton;
     private JPanel SpinnerPanelRegal;
+    private JPanel Admin;
+    private JButton personHinzufügenButton;
+    private JButton shopErstellenButton;
+    private JButton supermarktketteErstellenButton;
+    private JPanel PersonenHInzufügen;
+    private JTextField textFieldBenutzernamen;
+    private JTextField textFieldPasswort;
+    private JTextField textFieldPasswortRep;
+    private JButton benutzerHinzufügenButton;
+    private JPanel ShopHinzufügen;
+    private JTextField textFieldShopname;
+    private JTextField textFieldChief;
+    private JTextField selfCheckout;
+    private JTextField textFieldPlace;
+    private JTextField textFieldEarnings;
+    private JButton shopErstellenButton1;
+    private JButton zurückButton3;
+    private JPanel SupermarktketteHinzufügen;
+    private JTextField textFieldSupermarktkettenName;
+    private JButton ketteErstellenButton;
+    private JButton zurückButton4;
+    private JLabel benutzerLabelRichtig;
+    private JLabel benutzerLabelFalsch;
+    private JButton testTest;
     private JButton changePassword;
     private JPanel changePasswordPanel;
     private JButton backToDashboardPw;
@@ -219,6 +243,8 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
+        benutzerLabelRichtig.setVisible(false);
+        benutzerLabelFalsch.setVisible(false);
         labelRichtigSchüp.setVisible(false);
         labelFalschSchüp.setVisible(false);
         labelFalschRadio.setVisible(false);
@@ -233,6 +259,7 @@ public class GUI {
 
         Loginpanel.setVisible(true);
         ChiefMenu.setVisible(false);
+
 
 
         this.bestätigenButton.addActionListener(new ActionListener() {
@@ -373,6 +400,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getSelectedUser().decreaseMoney(greatValue);
+                getSelectedUser().getCurrentShopWork().increaseEarnings(greatValue);
+                System.out.println(getSelectedUser().getCurrentShopWork().getEarnings());
                 invisibler();
                 greatValue = 0;
                 labelRichtigSchüp.setVisible(false);
@@ -734,7 +763,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                SpinnerModel sm = new SpinnerNumberModel(1, 1, 20, 1);
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
                 spinnerAnzRegale = new JSpinner(sm);
                 Component mySpinnerEditor = spinnerAnzRegale.getEditor();
                 JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
@@ -1020,11 +1049,9 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Dashboardpanel.setVisible(true);
-
-                long minutes = ChronoUnit.MINUTES.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
-                long seconds = ChronoUnit.SECONDS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
-                getSelectedUser().receiveSalary(hours);
+                int test = getSelectedUser().receiveSalary(hours);
+                getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
                 Dashboardpanel.setVisible(true);
             }
         });
@@ -1200,6 +1227,91 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Dashboardpanel.setVisible(true);
+            }
+        });
+
+        personHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                PersonenHInzufügen.setVisible(true);
+            }
+        });
+        zurückButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                benutzerLabelRichtig.setVisible(false);
+                benutzerLabelFalsch.setVisible(false);
+                Admin.setVisible(true);
+            }
+        });
+        benutzerHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
+                    getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
+                            textFieldPasswort.getText(), textFieldPasswortRep.getText()));
+                    textFieldPasswort.setText("");
+                    textFieldPasswortRep.setText("");
+                    textFieldBenutzernamen.setText("");
+                    benutzerLabelRichtig.setVisible(true);
+                }else {
+                    benutzerLabelFalsch.setVisible(true);
+                }
+            }
+        });
+
+        shopErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ShopHinzufügen.setVisible(true);
+            }
+        });
+
+        supermarktketteErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                SupermarktketteHinzufügen.setVisible(true);
+            }
+        });
+
+        zurückButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Admin.setVisible(true);
+            }
+        });
+
+        shopErstellenButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        zurückButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Admin.setVisible(true);
+            }
+        });
+        ketteErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        testTest.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Admin.setVisible(true);
             }
         });
     }
@@ -1405,6 +1517,10 @@ public class GUI {
         changePasswordPanel.setVisible(false);
 
         Selfscanner.setVisible(false);
+        Admin.setVisible(false);
+        PersonenHInzufügen.setVisible(false);
+        ShopHinzufügen.setVisible(false);
+        SupermarktketteHinzufügen.setVisible(false);
 
         Entscheidung.setVisible(false);
         if (getSelectedUser() != null) {
