@@ -16,6 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -203,7 +205,7 @@ public class GUI {
     private DefaultListModel model = new DefaultListModel();
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
-
+    LocalDateTime startWorkTime;
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
@@ -695,6 +697,15 @@ public class GUI {
             }
         });
 
+        arbeitenGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Arbeiten.setVisible(true);
+                startWorkTime = DigitalClock.SimpleDigitalClock.realTime;
+            }
+        });
+
         kündenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1007,6 +1018,12 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                Mitarbeiter.setVisible(true);
+
+                long minutes = ChronoUnit.MINUTES.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
+                long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
+                long seconds = ChronoUnit.SECONDS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
+                getSelectedUser().receiveSalary(hours);
                Dashboardpanel.setVisible(true);
             }
         });
