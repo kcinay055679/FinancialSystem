@@ -232,7 +232,6 @@ public class GUI {
                 } else {
                     labelFalsch.setVisible(true);
                 }
-
             }
         });
 
@@ -709,7 +708,7 @@ public class GUI {
                 getSelectedUser().addSchüppercard();
 
                 JLabel labelNew = new JLabel("Ihre Schüpercardnummer: " + getSelectedUser().getCard().getCardnumber());
-                labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 26));
                 labelNew.setHorizontalAlignment(SwingConstants.CENTER);
 
                 SchüpercardNummer.repaint();
