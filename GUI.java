@@ -192,6 +192,7 @@ public class GUI {
     private JButton zurückButton2;
     private JButton schüpercardMitPunktenAufladenButton;
     private JTextField textField1;
+    private JButton convertSchüpperpointsButton;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -683,7 +684,7 @@ public class GUI {
 
                 SchüpercardNummer.repaint();
                 SchüpercardNummer.revalidate();
-
+                schüpercardErstellenButton.setVisible(false);
                 invisibler();
                 SchüpercardNummer.add(labelNew);
                 SchüperkarteErstellt.setVisible(true);
@@ -1138,6 +1139,12 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+        convertSchüpperpointsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSelectedUser().convertSchüpperPoints();
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1342,9 +1349,6 @@ public class GUI {
         }
         if (getSelectedUser().getRank() == Rank.EMPLOYEE) {
             arbeitenGehenButton.setVisible(true);
-        }
-        if (getSelectedUser().getCard() != null) {
-            schüpercardButton.setVisible(false);
         }
     }
 }
