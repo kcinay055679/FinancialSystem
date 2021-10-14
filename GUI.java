@@ -187,6 +187,8 @@ public class GUI {
     private JButton auswählenButton;
     private JLabel labelFalschRadio;
     private JButton zurückButton2;
+    private JButton schüpercardMitPunktenAufladenButton;
+    private JTextField textField1;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -1093,6 +1095,7 @@ public class GUI {
                 model.clear();
                 getSelectedUser().getCart().getArticleList().clear();
                 invisibler();
+
                 EinkaufAbschluss.setVisible(true);
             }
         });
