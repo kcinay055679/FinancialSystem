@@ -114,65 +114,6 @@ public class SupermarketHandler implements java.io.Serializable{
         getPersonList().get(customerName).getCurrentShopWork().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
     }
 
-    public static void selfCheckOut(String customerName, String shopName) {
-        int scannedArticles = 0;
-        String input;
-        int fullPrice = 0;
-        input = "2";
-        while (true) {
-            switch (input) {
-                case "1": {
-                    getPersonList().get(customerName).getCurrentShopWork().getSupermarketChain().getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).selfCheckOut(getSelectedUser(), fullPrice);
-                    System.out.println("Sie haben für " + fullPrice + " CHF bei uns eingekauft");
-                    System.out.println("Falls sie eine Schüpperkarte besitzen wurden ihnen diese Punkte gutgeschrieben");
-                    return;
-                }
-                case "2": {
-                    fullPrice += scan();
-                    scannedArticles++;
-                    System.out.println("sie haben " + scannedArticles + " Artikel gescannt");
-                    System.out.println("Um zu bezahlen drücken sie die 1");
-                    System.out.println("Um weiter zu scannen drücken sie die 2");
-                    break;
-                }
-                default: {
-                    System.out.println("Bitte geben sie einen gültigen Befehl ein");
-
-                }
-            }
-        }
-    }
-
-    public static int scan() {
-
-        String input;
-        int fullPrice = 0;
-        System.out.println("Sie haben folgende Artikel in ihrem Warenkorb");
-        getSelectedUser().getCart().getArticleList().values().forEach(s -> System.out.println(s.getValue0().getName() + "  " + s.getValue1() + "x"));
-
-        List<Pair<Article, Integer>> articlesWithBarcode = getSelectedUser().getCart().getArticleList().values().stream().filter(s -> s.getValue0().isBarcode()).collect(Collectors.toList());
-        if (articlesWithBarcode.size() > 0) {
-            System.out.println("Zuerst werden die Artikel mit Barcode gescannt");
-            System.out.println("Bitte drücken sie Enter damit alle Artikel mit Barcode automatisch gescannt werden");
-
-            fullPrice = articlesWithBarcode.stream().mapToInt(pair -> (int) (pair.getValue0().getPrice() * pair.getValue1())).sum();
-            articlesWithBarcode.forEach(pair -> getSelectedUser().getCart().articleList.remove(pair.getValue0().getName()));
-            return fullPrice;
-        }
-
-        System.out.println("Jetzt werden die Artikel ohne Barcode gescannt");
-        System.out.println("Um einen Artikel zu scannen, bitte den Artikel Namen eingeben");
-        System.out.println("Um den Scanvorgang abzubrechen bitte \"exit\" eingeben");
-
-
-        Pair<Article, Integer> articlePair = getSelectedUser().getCart().getArticleList().get("Artikel2");
-        //add Article
-
-        fullPrice += articlePair.getValue0().getPrice() * articlePair.getValue1();
-        getSelectedUser().getCart().articleList.remove("Artikel2");
-
-        return fullPrice;
-    }
 
     public static void employeeEnter(String personName) {
         Shop shop = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
@@ -188,16 +129,6 @@ public class SupermarketHandler implements java.io.Serializable{
         return getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName).getEmployeeList().values().toArray(Person[]::new);
     }
 
-//    public static void hireEmployeeForShop(String personName, String shopName) {
-//        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getWorkPlace();
-//        Person p = supermarketChain.getEmployeeMap().get(personName).getValue0();
-//        Shop shop = supermarketChain.getShopMap().get(shopName);
-//        p.setCurrentShopWork(shop);
-//        p.setRank(Rank.EMPLOYEE);
-//        supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
-//        shop.getEmployeeList().put(p.getName(), p);
-//    }
-
     public static void createShop(String supermarketChain, String shopName, String name, String password, String repeatPassword, boolean selfCheckout, String place, int earnings) {
         addPerson(name, password, repeatPassword);
         getPersonList().get(name).setSalary(7000);
@@ -206,8 +137,5 @@ public class SupermarketHandler implements java.io.Serializable{
         Shop shop = SystemHandler.getSupermarketChainMap().get(supermarketChain).getShopMap().get(shopName);
         getPersonList().get(name).setCurrentShopWork(shop);
         getPersonList().get(name).setCurrentCompanyWork(SystemHandler.getSupermarketChainMap().get(supermarketChain));
-        System.out.println(getPersonList().get(name).getCurrentCompanyWork());
-
-
     }
 }
