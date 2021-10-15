@@ -235,6 +235,7 @@ public class GUI {
     private JLabel labelKetteRichtig;
     private JLabel labelKetteFalsch;
     private JButton ausloggenButtonAdmin;
+    private JPanel PanelRadios;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -350,6 +351,14 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                ButtonGroup g = new ButtonGroup();
+                PanelRadios.removeAll();
+                for(String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    JRadioButton radioButtonNew = new JRadioButton(key);
+                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                    g.add(radioButtonNew);
+                    PanelRadios.add(radioButtonNew);
+                }
                 Filialebetreten.setVisible(true);
             }
         });

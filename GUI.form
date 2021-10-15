@@ -268,18 +268,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="dc38a" class="javax.swing.JRadioButton" binding="coopRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Coop"/>
-            </properties>
-          </component>
           <component id="a8738" class="javax.swing.JButton" binding="zurückButton" default-binding="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -291,30 +279,6 @@
             <properties>
               <font size="20"/>
               <text value="Zurück"/>
-            </properties>
-          </component>
-          <component id="47472" class="javax.swing.JRadioButton" binding="migrosRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Migros"/>
-            </properties>
-          </component>
-          <component id="1bf61" class="javax.swing.JRadioButton" binding="aldiRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Aldi"/>
             </properties>
           </component>
           <component id="6d66c" class="javax.swing.JButton" binding="auswählenButton" default-binding="true">
@@ -336,6 +300,16 @@
               <text value="Bitte wählen Sie eine Filiale!"/>
             </properties>
           </component>
+          <grid id="c600c" binding="PanelRadios" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1266463"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </grid>
       <grid id="22c89" binding="Filiale" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
