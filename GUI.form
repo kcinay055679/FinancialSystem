@@ -1361,17 +1361,6 @@
               <text value="Barcode"/>
             </properties>
           </component>
-          <component id="fe808" class="javax.swing.JTextField" binding="trueFalseTextField" default-binding="true">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="true / false"/>
-            </properties>
-          </component>
           <component id="50f9b" class="javax.swing.JLabel">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -1464,6 +1453,12 @@
               <text value="Bitte achten Sie auf korrekte Werte in den Feldern!"/>
             </properties>
           </component>
+          <component id="7a973" class="javax.swing.JComboBox" binding="comboBoxBarcodeFleisch">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
         </children>
       </grid>
       <grid id="db1e" binding="BuildingMatPanel" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1542,17 +1537,6 @@
               <text value="Barcode"/>
             </properties>
           </component>
-          <component id="b0845" class="javax.swing.JTextField" binding="trueFalseTextBuild">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="22"/>
-              <text value="true / false"/>
-            </properties>
-          </component>
           <component id="41da0" class="javax.swing.JLabel">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -1624,6 +1608,12 @@
               <foreground color="-3861213"/>
               <text value="Füllen sie alle Felder mit Werten!"/>
             </properties>
+          </component>
+          <component id="1709c" class="javax.swing.JComboBox" binding="comboBoxBarcode">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>
@@ -2222,16 +2212,6 @@
               <text value="SelfCheckout"/>
             </properties>
           </component>
-          <component id="7db84" class="javax.swing.JTextField" binding="selfCheckout">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="18"/>
-            </properties>
-          </component>
           <component id="c83fb" class="javax.swing.JTextField" binding="textFieldPlace">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -2322,6 +2302,12 @@
               <foreground color="-3866618"/>
               <text value="Der Shop konnte nicht erstellt werden"/>
             </properties>
+          </component>
+          <component id="33075" class="javax.swing.JComboBox" binding="comboBoxSelfCheckout">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>

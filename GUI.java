@@ -236,6 +236,9 @@ public class GUI {
     private JLabel labelKetteFalsch;
     private JButton ausloggenButtonAdmin;
     private JPanel PanelRadios;
+    private JComboBox comboBoxBarcode;
+    private JComboBox comboBoxBarcodeFleisch;
+    private JComboBox comboBoxSelfCheckout;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -835,6 +838,7 @@ public class GUI {
         eingebenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fillDropdownsTrueFalsePro();
                 if (comboBoxProduktart.getSelectedItem().equals("Food")) {
                     Arrays.asList(Fleischsorten.values())
                             .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
@@ -893,6 +897,7 @@ public class GUI {
         zurückButtonFleisch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                clearDropdownsTrueFalsePro();
                 invisibler();
                 ProduktHinzufügen.setVisible(true);
             }
@@ -902,20 +907,22 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (produktnameTextField.getText().equals("") || PreisTextField.getText().equals("")
-                        || trueFalseTextField.getText().equals("") || DatumTextField.getText().equals("") ||
+                        || comboBoxBarcodeFleisch.getSelectedItem().equals("") || DatumTextField.getText().equals("") ||
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
                 } else {
                     try {
                         String produktname = produktnameTextField.getText();
                         float preis = Float.parseFloat(PreisTextField.getText());
-                        boolean barcode = Boolean.parseBoolean(trueFalseTextField.getText());
+                        boolean barcode = Boolean.parseBoolean(comboBoxBarcodeFleisch.getSelectedItem().toString());
                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
                         String date = DatumTextField.getText();
                         SupermarketHandler.createFood(produktname, preis, (Integer) spinnerMengeFleisch.getValue(), barcode, date,
                                 getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue(), fleisch);
                         invisibler();
                         ProduktErstellt.setVisible(true);
+                        clearDropdownsTrueFalsePro();
+                        labelFalschFleisch.setVisible(false);
                     } catch (Exception a) {
                         labelUnkorrektFleisch.setVisible(true);
                     }
@@ -1039,14 +1046,14 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (produktnamenBuild.getText().equals("") || PreisFeld.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
-                        || trueFalseTextBuild.getText().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
+                        || comboBoxBarcode.getSelectedItem().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
                     labelInkorrektBuild.setVisible(true);
                 } else {
                     try {
                         String produktname = produktnamenBuild.getText();
                         float preis = Float.parseFloat(PreisFeld.getText());
                         int menge = (Integer) spinnerMengeMat.getValue();
-                        boolean barcode = Boolean.parseBoolean(trueFalseTextBuild.getText());
+                        boolean barcode = Boolean.parseBoolean(comboBoxBarcode.getSelectedItem().toString());
                         int tonnen = (Integer) spinnerTonnen.getValue();
                         String mat = comboBoxMaterial.getSelectedItem().toString();
 
@@ -1054,6 +1061,8 @@ public class GUI {
                                 getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
                         invisibler();
                         ProduktErstellt.setVisible(true);
+                        clearDropdownsTrueFalsePro();
+                        labelFalschBuild.setVisible(false);
                     } catch (Exception a) {
                         labelFalschBuild.setVisible(true);
                     }
@@ -1304,6 +1313,8 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
+                comboBoxSelfCheckout.addItem(true);
+                comboBoxSelfCheckout.addItem(false);
                 ShopHinzufügen.setVisible(true);
             }
         });
@@ -1319,6 +1330,7 @@ public class GUI {
         zurückButton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                comboBoxSelfCheckout.removeAllItems();
                 invisibler();
                 labelFalschShop.setVisible(false);
                 labelRichtigShop.setVisible(false);
@@ -1468,20 +1480,6 @@ public class GUI {
         }
     }
 
-    public void showPriceSelfScanner() {
-        for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
-            float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
-            JPanel panelNew = new JPanel();
-            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
-                    + price);
-
-            labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
-            labeNew.setVerticalAlignment(SwingConstants.CENTER);
-            panelNew.add(labeNew);
-            PreisGesamt.add(panelNew);
-        }
-    }
-
     public void fillDropdownWithSupermarkets(JComboBox comboBox) {
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
             comboBox.addItem(key);
@@ -1575,6 +1573,18 @@ public class GUI {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
 
+    }
+
+    public void fillDropdownsTrueFalsePro() {
+        comboBoxBarcode.addItem(true);
+        comboBoxBarcode.addItem(false);
+        comboBoxBarcodeFleisch.addItem(true);
+        comboBoxBarcodeFleisch.addItem(false);
+    }
+
+    public void clearDropdownsTrueFalsePro() {
+        comboBoxBarcode.removeAllItems();;
+        comboBoxBarcodeFleisch.removeAllItems();
     }
 
     public void invisibler() {
