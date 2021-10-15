@@ -231,6 +231,7 @@ public class GUI {
     private JTextField oldPassword;
     private JTextField newPassword;
     private JTextField repeatPassword;
+    private JButton resetButton;
     private JLabel labelKetteRichtig;
     private JLabel labelKetteFalsch;
     private JButton ausloggenButtonAdmin;
@@ -1364,6 +1365,15 @@ public class GUI {
                 }else{
                     passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
                 }
+            }
+        });
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getPersonList().clear();
+                getSupermarketChainMap().clear();
+                SupermarketHandler.setUp();
+                safeToFile();
             }
         });
         ausloggenButtonAdmin.addActionListener(new ActionListener() {
