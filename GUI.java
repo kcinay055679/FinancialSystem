@@ -275,19 +275,21 @@ public class GUI {
         ChiefMenu.setVisible(false);
 
 
-
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                if (SystemHandler.login(nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
-                    //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
+                if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                     invisibler();
-                    labelFalsch.setVisible(false);
-                    Dashboardpanel.setVisible(true);
-                    setDashboardInformation();
-                    showSpecialButtons();
+                    Admin.setVisible(true);
                 } else {
-                    labelFalsch.setVisible(true);
+                    if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                        invisibler();
+                        labelFalsch.setVisible(false);
+                        Dashboardpanel.setVisible(true);
+                        setDashboardInformation();
+                        showSpecialButtons();
+                    }else {
+                        labelFalsch.setVisible(true);
+                    }
                 }
             }
         });
@@ -296,13 +298,17 @@ public class GUI {
         passwortLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
+                if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                    invisibler();
+                    Admin.setVisible(true);
+                } else {
+                    if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
-                        showSpecialButtons();
+                        labelFalsch.setVisible(false);
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
-                    } else {
+                        showSpecialButtons();
+                    }else {
                         labelFalsch.setVisible(true);
                     }
                 }
@@ -315,13 +321,17 @@ public class GUI {
         nameLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
+                if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                    invisibler();
+                    Admin.setVisible(true);
+                } else {
+                    if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
+                        labelFalsch.setVisible(false);
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
                         showSpecialButtons();
-                    } else {
+                    }else {
                         labelFalsch.setVisible(true);
                     }
                 }
@@ -1263,14 +1273,14 @@ public class GUI {
         benutzerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
+                if (textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
                     getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
                             textFieldPasswort.getText(), textFieldPasswortRep.getText()));
                     textFieldPasswort.setText("");
                     textFieldPasswortRep.setText("");
                     textFieldBenutzernamen.setText("");
                     benutzerLabelRichtig.setVisible(true);
-                }else {
+                } else {
                     benutzerLabelFalsch.setVisible(true);
                 }
             }
@@ -1314,14 +1324,14 @@ public class GUI {
                     int earnings = Integer.parseInt(textFieldEarnings.getText());
                     String chiefname = textFieldChief.getText();
                     Person chief = new Person(chiefname, "123", "123");
-                    if(getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)){
+                    if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
-                    }else{
+                    } else {
                         labelFalschShop.setVisible(false);
                         labelRichtigShop.setVisible(false);
                     }
-                }catch(Exception a) {
+                } catch (Exception a) {
                     labelRichtigShop.setVisible(false);
                     labelFalschShop.setVisible(true);
                 }
@@ -1339,10 +1349,10 @@ public class GUI {
         ketteErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
                     labelKetteRichtig.setVisible(true);
                     labelKetteFalsch.setVisible(false);
-                }else {
+                } else {
                     labelKetteFalsch.setVisible(true);
                     labelKetteRichtig.setVisible(false);
                 }
@@ -1360,9 +1370,9 @@ public class GUI {
         changePasswordSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())){
+                if (getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())) {
                     passwordOutput.setText("Dein Passwort wurde geändert");
-                }else{
+                } else {
                     passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
                 }
             }
@@ -1380,6 +1390,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                nameLogin.setText("");
+                passwortLogin.setText("");
                 logout();
                 Loginpanel.setVisible(true);
             }
@@ -1517,7 +1529,7 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-        if(!new File("Data").isDirectory()){
+        if (!new File("Data").isDirectory()) {
             new File("Data").mkdirs();
         }
 
