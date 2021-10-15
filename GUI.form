@@ -1341,17 +1341,6 @@
               <text value="Preis"/>
             </properties>
           </component>
-          <component id="de6db" class="javax.swing.JTextField" binding="PreisTextField">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="5, 4.5, 3.5"/>
-            </properties>
-          </component>
           <component id="77d78" class="javax.swing.JLabel">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -1457,7 +1446,19 @@
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="31029" class="javax.swing.JFormattedTextField" binding="formattedTextFieldPreisFleisch">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
           </component>
         </children>
       </grid>
@@ -1498,17 +1499,6 @@
             <properties>
               <font size="22"/>
               <text value="Preis"/>
-            </properties>
-          </component>
-          <component id="d0014" class="javax.swing.JTextField" binding="PreisFeld">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="22"/>
-              <text value="20, 10, 5 usw."/>
             </properties>
           </component>
           <component id="3d61b" class="javax.swing.JLabel">
@@ -1613,7 +1603,19 @@
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="aa93f" class="javax.swing.JFormattedTextField" binding="formattedTextFieldPreisMat">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
           </component>
         </children>
       </grid>

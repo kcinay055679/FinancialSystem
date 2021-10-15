@@ -17,6 +17,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.StreamCorruptedException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -24,6 +26,7 @@ import java.util.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.InternationalFormatter;
 import javax.swing.text.NumberFormatter;
 
 
@@ -239,6 +242,8 @@ public class GUI {
     private JComboBox comboBoxBarcode;
     private JComboBox comboBoxBarcodeFleisch;
     private JComboBox comboBoxSelfCheckout;
+    private JFormattedTextField formattedTextFieldPreisFleisch;
+    private JFormattedTextField formattedTextFieldPreisMat;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -853,6 +858,19 @@ public class GUI {
                 } else {
                     System.out.println("Siuuur");
                 }
+                //Preisfelder formatieren
+                NumberFormat format = DecimalFormat.getInstance();
+                format.setMinimumFractionDigits(2);
+                format.setMaximumFractionDigits(2);
+                format.setRoundingMode(RoundingMode.HALF_UP);
+                InternationalFormatter formatter = new InternationalFormatter(format);
+                formatter.setAllowsInvalid(false);
+                formatter.setMinimum(0.0);
+                formatter.setMaximum(1000.00);
+                DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
+                formattedTextFieldPreisFleisch.setFormatterFactory(factory);
+                formattedTextFieldPreisMat.setFormatterFactory(factory);
+
             }
         });
 
@@ -906,14 +924,14 @@ public class GUI {
         produktErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (produktnameTextField.getText().equals("") || PreisTextField.getText().equals("")
+                if (produktnameTextField.getText().equals("") || formattedTextFieldPreisFleisch.getText().equals("")
                         || comboBoxBarcodeFleisch.getSelectedItem().equals("") || DatumTextField.getText().equals("") ||
                         comboBoxFleisch.getSelectedItem() == null) {
                     labelFalschFleisch.setVisible(true);
                 } else {
                     try {
                         String produktname = produktnameTextField.getText();
-                        float preis = Float.parseFloat(PreisTextField.getText());
+                        float preis = Float.parseFloat(formattedTextFieldPreisFleisch.getText());
                         boolean barcode = Boolean.parseBoolean(comboBoxBarcodeFleisch.getSelectedItem().toString());
                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
                         String date = DatumTextField.getText();
@@ -946,7 +964,6 @@ public class GUI {
                 formatter.setAllowsInvalid(false);
                 DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
                 ChiefSalaryField.setFormatterFactory(factory);
-
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
                 getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
             }
@@ -955,7 +972,6 @@ public class GUI {
         ChiefMenuEnter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 Shop shop = getSelectedUser().getCurrentShopWork();
                 SupermarketChain supermarket = shop.getSupermarketChain();
 
@@ -1045,13 +1061,13 @@ public class GUI {
         produktErstellenBuildingMat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (produktnamenBuild.getText().equals("") || PreisFeld.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
+                if (produktnamenBuild.getText().equals("") || formattedTextFieldPreisMat.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
                         || comboBoxBarcode.getSelectedItem().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
                     labelInkorrektBuild.setVisible(true);
                 } else {
                     try {
                         String produktname = produktnamenBuild.getText();
-                        float preis = Float.parseFloat(PreisFeld.getText());
+                        float preis = Float.parseFloat(formattedTextFieldPreisMat.getText());
                         int menge = (Integer) spinnerMengeMat.getValue();
                         boolean barcode = Boolean.parseBoolean(comboBoxBarcode.getSelectedItem().toString());
                         int tonnen = (Integer) spinnerTonnen.getValue();
@@ -1059,6 +1075,7 @@ public class GUI {
 
                         SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
                                 getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
+
                         invisibler();
                         ProduktErstellt.setVisible(true);
                         clearDropdownsTrueFalsePro();
