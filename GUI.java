@@ -247,6 +247,7 @@ public class GUI {
     private JComboBox comboBoxSelfCheckout;
     private JFormattedTextField formattedTextFieldPreisFleisch;
     private JFormattedTextField formattedTextFieldPreisMat;
+    private JLabel lohn;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -820,21 +821,6 @@ public class GUI {
             }
         });
 
-//        kündenButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                getSelectedUser().setRank(Rank.UNEMPLOYED);
-//                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-//                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-//                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-//                            if (getSelectedUser().getName().equals(SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3))) {
-//                                SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().remove(key3);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        });
         regalHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1643,11 +1629,11 @@ public class GUI {
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
+        frame.setResizable(false);
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         DigitalClock.main();
-
         Container glassPane = (Container) frame.getGlassPane();
         DigitalClock.SimpleDigitalClock simpleDigitalClock = new DigitalClock.SimpleDigitalClock();
 
@@ -1658,6 +1644,7 @@ public class GUI {
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
+        lohn.setText("Lohn: " + getSelectedUser().getSalary());
 
         if (getSelectedUser().getCard() != null) {
             schüpperpunkte.setText("<html>Ihre Schüperkarteennummer ist: " + getSelectedUser().getCard().getCardnumber() + " <br/><br/> Schüpperpunkte: " + getSelectedUser().getCard().getPoints() + "</html>");
