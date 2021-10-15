@@ -370,7 +370,7 @@ public class GUI {
                 }
 
             }
-    });
+        });
 
 
         //Falls der Benutzer schon beim Benutzernamen Enter drückt, oder diesen noch ändern muss
@@ -427,7 +427,7 @@ public class GUI {
                 }
             }
 
-                                         });
+        });
 
         //Der Kunde betritt die Filiale
         //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
@@ -657,34 +657,33 @@ public class GUI {
         });
 
         TabletTypWählen.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            currentTabletFuntion = "typ";
-            TabletÜbersicht.setVisible(false);
-            TabletSelect.setVisible(true);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "typ";
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
 
-            TabletSupermarktWählen.setVisible(false);
-            TabletSupermarktWählenLabel.setVisible(false);
+                TabletSupermarktWählen.setVisible(false);
+                TabletSupermarktWählenLabel.setVisible(false);
 
-            TabletArtikelWählen.setVisible(false);
-            TabletArtikelWählenLabel.setVisible(false);
+                TabletArtikelWählen.setVisible(false);
+                TabletArtikelWählenLabel.setVisible(false);
 
-            TabletFilialeWählen.setVisible(false);
-            TabletFilialeWählenLabel.setVisible(false);
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
 
-            TabletTypWählen.setVisible(true);
-            TabletTypWählenLabel.setVisible(true);
+                TabletTypWählen.setVisible(true);
+                TabletTypWählenLabel.setVisible(true);
 
-            fillDropdownWithArticlesByType(TabletTypWählen);
-        }
-    });
+                fillDropdownWithArticlesByType(TabletTypWählen);
+            }
+        });
 
         TabletFilialeWählen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
                 String shopName = (String) TabletFilialeWählen.getSelectedItem();
-                System.out.println("tsets " + shopName);
                 TabletArtikelWählen.removeAllItems();
 
                 if (currentTabletFuntion.equals("shop") && shopName != null) {
@@ -1084,7 +1083,6 @@ public class GUI {
                 SupermarketChain supermarket = shop.getSupermarketChain();
 
                 if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
-                    System.out.println(ChiefSalaryField.getValue());
                     hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefSalaryField.setVisible(false);
@@ -1561,8 +1559,6 @@ public class GUI {
                 for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
                     comboBox.addItem(key2);
                 }
-            } else {
-                System.out.println("Nicht diese Filiale");
             }
         }
     }
@@ -1621,13 +1617,11 @@ public class GUI {
 
 
     public void fillDropdownWithSupermarkets(JComboBox comboBox) {
-        System.out.println(comboBox);
         if (comboBox.getItemCount() > 0) {
             comboBox.removeAllItems();
         }
 
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-            System.out.println(key);
             comboBox.addItem(key);
             addItemIfNotExists(key, comboBox);
         }
@@ -1657,7 +1651,6 @@ public class GUI {
         }
 
         SupermarketChain supermarketChain = SystemHandler.getSupermarketChainMap().get(supermarketname);
-        System.out.println(supermarketname + " " + shopName);
         for (Shelf shelf : supermarketChain.getShopMap().get(shopName).getShelfList().values()) {
             for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
                 addItemIfNotExists(articlePair.getValue0().getName(), comboBox);
@@ -1677,8 +1670,8 @@ public class GUI {
             for (Class<? extends Article> subClass : classes) {
                 addItemIfNotExists(subClass.getSimpleName(), comboBox);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ignored) {
+
         }
     }
 
