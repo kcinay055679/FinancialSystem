@@ -57,6 +57,7 @@ public class GUI {
     private JPanel ProduktHinzufügen;
     private JPanel Employeepanel;
     private JPanel Mitarbeiter;
+    private JPanel keineGeldNoch;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -246,6 +247,12 @@ public class GUI {
     private JComboBox comboBoxSelfCheckout;
     private JFormattedTextField formattedTextFieldPreisFleisch;
     private JFormattedTextField formattedTextFieldPreisMat;
+    private JLabel lohn;
+    private JLabel EinkommenLaden;
+    private JLabel ShopChief;
+    private JButton zurückButton5;
+    private JComboBox comboBoxOhneBarcode;
+    private JButton manuelHinzufügenButton;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -366,30 +373,20 @@ public class GUI {
         filialeBetretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                invisibler();
-                PanelRadios.removeAll();
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    JRadioButton radioButtonNew = new JRadioButton(key);
-                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                    g.add(radioButtonNew);
-                    PanelRadios.add(radioButtonNew);
+                if(getSelectedUser().getMoney() > 0) {
+                    invisibler();
+                    PanelRadios.removeAll();
+                    for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                        JRadioButton radioButtonNew = new JRadioButton(key);
+                        radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                        g.add(radioButtonNew);
+                        PanelRadios.add(radioButtonNew);
+                    }
+                    Filialebetreten.setVisible(true);
+                } else {
+                    invisibler();
+                    keineGeldNoch.setVisible(true);
                 }
-                Filialebetreten.setVisible(true);
-            }
-        });
-        filialeBetretenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                ButtonGroup g = new ButtonGroup();
-                PanelRadios.removeAll();
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    JRadioButton radioButtonNew = new JRadioButton(key);
-                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                    g.add(radioButtonNew);
-                    PanelRadios.add(radioButtonNew);
-                }
-                Filialebetreten.setVisible(true);
             }
         });
 
@@ -1144,6 +1141,7 @@ public class GUI {
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 int test = getSelectedUser().receiveSalary(hours);
                 getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
+                setDashboardInformation();
                 Dashboardpanel.setVisible(true);
             }
         });
@@ -1195,9 +1193,37 @@ public class GUI {
 
                     String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
                             + price + ", ";
-                    ProdukteWarenkorbComb.addItem(value);
+                    if(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getBarcode()) {
+                        comboBoxOhneBarcode.addItem(value);
+                    } else {
+                        ProdukteWarenkorbComb.addItem(value);
+                    }
                 }
                 Selfscanner.setVisible(true);
+            }
+        });
+
+        manuelHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (comboBoxOhneBarcode.getSelectedItem() == null) {
+                    ErrorMessageScan.setVisible(true);
+                } else {
+                    produkteGescanntList.removeAll();
+                    model.addElement(comboBoxOhneBarcode.getSelectedItem().toString());
+                    JList listNew = new JList(model);
+                    listNew.setFont(new Font("Serif", Font.PLAIN, 24));
+                    produkteGescanntList.add(listNew);
+                    PreisGesamt.removeAll();
+                    greatPrice += Float.parseFloat(comboBoxOhneBarcode.getSelectedItem().toString().substring(comboBoxOhneBarcode.getSelectedItem().toString().indexOf(" "), comboBoxOhneBarcode.getSelectedItem().toString().indexOf(",")));
+                    comboBoxOhneBarcode.removeItem(comboBoxOhneBarcode.getSelectedItem());
+                    JLabel labelNew = new JLabel("Kosten Betragen: " + greatPrice);
+                    labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                    labelNew.setVerticalAlignment(SwingConstants.CENTER);
+                    PreisGesamt.add(labelNew);
+                    comboBoxOhneBarcode.repaint();
+                    comboBoxOhneBarcode.revalidate();
+                }
             }
         });
 
@@ -1206,7 +1232,6 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if (ProdukteWarenkorbComb.getSelectedItem() == null) {
                     ErrorMessageScan.setVisible(true);
-                    model.clear();
                 } else {
                     produkteGescanntList.removeAll();
                     model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
@@ -1233,6 +1258,7 @@ public class GUI {
         bezahlenButtonScan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                model.clear();
                 produkteGescanntList.removeAll();
                 ProdukteWarenkorbComb.removeAllItems();
                 model.clear();
@@ -1471,6 +1497,13 @@ public class GUI {
                 Loginpanel.setVisible(true);
             }
         });
+        zurückButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1629,11 +1662,11 @@ public class GUI {
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
         frame.pack();
-        frame.setSize(1000, 600);
+        frame.setResizable(false);
+        frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         DigitalClock.main();
-
         Container glassPane = (Container) frame.getGlassPane();
         DigitalClock.SimpleDigitalClock simpleDigitalClock = new DigitalClock.SimpleDigitalClock();
 
@@ -1644,7 +1677,11 @@ public class GUI {
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
-
+        if(getSelectedUser().getRank() == Rank.CHIEF) {
+            ShopChief.setText("Shop ihrer Zuständigkeit: " + getSelectedUser().getCurrentShopWork().getName());
+            EinkommenLaden.setText("Einkommen ihres Ladens: " + getSelectedUser().getCurrentShopWork().getEarnings());
+        }
+        lohn.setText("Lohn: " + getSelectedUser().getSalary());
         if (getSelectedUser().getCard() != null) {
             schüpperpunkte.setText("<html>Ihre Schüperkarteennummer ist: " + getSelectedUser().getCard().getCardnumber() + " <br/><br/> Schüpperpunkte: " + getSelectedUser().getCard().getPoints() + "</html>");
         } else {
@@ -1696,6 +1733,7 @@ public class GUI {
         PersonenHInzufügen.setVisible(false);
         ShopHinzufügen.setVisible(false);
         SupermarktketteHinzufügen.setVisible(false);
+        keineGeldNoch.setVisible(false);
 
         Entscheidung.setVisible(false);
         if (getSelectedUser() != null) {
