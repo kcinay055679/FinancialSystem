@@ -31,5 +31,9 @@ public class Article implements java.io.Serializable{
         return this.getClass().getSimpleName();
     }
 
+    public boolean getBarcode() {
+        return this.barcode;
+    }
+
 
 }

@@ -251,6 +251,8 @@ public class GUI {
     private JLabel EinkommenLaden;
     private JLabel ShopChief;
     private JButton zurückButton5;
+    private JComboBox comboBoxOhneBarcode;
+    private JButton manuelHinzufügenButton;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -1187,9 +1189,37 @@ public class GUI {
 
                     String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
                             + price + ", ";
-                    ProdukteWarenkorbComb.addItem(value);
+                    if(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getBarcode()) {
+                        comboBoxOhneBarcode.addItem(value);
+                    } else {
+                        ProdukteWarenkorbComb.addItem(value);
+                    }
                 }
                 Selfscanner.setVisible(true);
+            }
+        });
+
+        manuelHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (comboBoxOhneBarcode.getSelectedItem() == null) {
+                    ErrorMessageScan.setVisible(true);
+                } else {
+                    produkteGescanntList.removeAll();
+                    model.addElement(comboBoxOhneBarcode.getSelectedItem().toString());
+                    JList listNew = new JList(model);
+                    listNew.setFont(new Font("Serif", Font.PLAIN, 24));
+                    produkteGescanntList.add(listNew);
+                    PreisGesamt.removeAll();
+                    greatPrice += Float.parseFloat(comboBoxOhneBarcode.getSelectedItem().toString().substring(comboBoxOhneBarcode.getSelectedItem().toString().indexOf(" "), comboBoxOhneBarcode.getSelectedItem().toString().indexOf(",")));
+                    comboBoxOhneBarcode.removeItem(comboBoxOhneBarcode.getSelectedItem());
+                    JLabel labelNew = new JLabel("Kosten Betragen: " + greatPrice);
+                    labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                    labelNew.setVerticalAlignment(SwingConstants.CENTER);
+                    PreisGesamt.add(labelNew);
+                    comboBoxOhneBarcode.repaint();
+                    comboBoxOhneBarcode.revalidate();
+                }
             }
         });
 
@@ -1198,7 +1228,6 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 if (ProdukteWarenkorbComb.getSelectedItem() == null) {
                     ErrorMessageScan.setVisible(true);
-                    model.clear();
                 } else {
                     produkteGescanntList.removeAll();
                     model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
@@ -1225,6 +1254,7 @@ public class GUI {
         bezahlenButtonScan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                model.clear();
                 produkteGescanntList.removeAll();
                 ProdukteWarenkorbComb.removeAllItems();
                 model.clear();
