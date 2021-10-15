@@ -1,7 +1,6 @@
 //Todo
 
 Im Tablet wird ein Teil des Output Labels absgeschnitten
-Im MItarbeitermenu beim Hinzufügen eines neuen Artikels im Preis Feld nur Zahlen akzeptieren
 Im MItarbeitermenu beim Hinzufügen eines neuen Artikels Minus Werte in Spinne verhindern
 Im MItarbeitermenu beim Hinzufügen eines neuen Artikels Standartwerte setzen
 Im MItarbeitermenu beim Hinzufügen eines neuen Artikels mit Platzhalter arbeiten anstatt die Information direkt in das Feld zu schreiben

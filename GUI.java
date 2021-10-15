@@ -871,6 +871,12 @@ public class GUI {
                 formattedTextFieldPreisFleisch.setFormatterFactory(factory);
                 formattedTextFieldPreisMat.setFormatterFactory(factory);
 
+                //Spinnermodel mit spinnern
+                SpinnerModel sm = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
+                spinnerMengeFleisch.setModel(sm);
+                spinnerMengeMat.setModel(sm);
+                spinnerTonnen.setModel(sm);
+
             }
         });
 
