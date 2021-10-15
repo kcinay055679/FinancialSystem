@@ -93,6 +93,9 @@ public class GUI {
     private JButton eingebenButton;
     private JButton erstellungAbschliessenButton;
 
+    //ButtonGroups
+    ButtonGroup g = new ButtonGroup();
+
 
     //Radiobuttons für die Supermarktketten-Auswahl
     private JRadioButton migrosRadioButton;
@@ -432,7 +435,6 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
-                ButtonGroup g = new ButtonGroup();
                 PanelRadios.removeAll();
                 for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
                     JRadioButton radioButtonNew = new JRadioButton(key);
@@ -1325,12 +1327,12 @@ public class GUI {
         auswählenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (aldiRadioButton.isSelected()) {
-                    setCurrentCompany("aldi");
-                } else if (migrosRadioButton.isSelected()) {
-                    setCurrentCompany("migros");
-                } else if (coopRadioButton.isSelected()) {
-                    setCurrentCompany("coop");
+                for (Enumeration<AbstractButton> buttons = g.getElements(); buttons.hasMoreElements();) {
+                    AbstractButton button = buttons.nextElement();
+
+                    if(button.isSelected()) {
+                        setCurrentCompany(button.getText());
+                    }
                 }
                 if (getCurrentCompany() == null) {
                     labelFalschRadio.setVisible(true);
