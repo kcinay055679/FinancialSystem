@@ -48,7 +48,7 @@ public class SupermarketHandler implements java.io.Serializable{
 
 
         SupermarketHandler.addPerson("Yanick", "", "");
-        SupermarketHandler.addPerson("", "", "");
+        SupermarketHandler.addPerson("unknownUser", "", "");
 
         SupermarketHandler.addPerson("Rudi", "Traube", "Traube");
         SystemHandler.getPersonList().get("Rudi").setRank(Rank.ADMIN);
@@ -118,7 +118,7 @@ public class SupermarketHandler implements java.io.Serializable{
 
 
     public static void employeeEnter(String personName) {
-        Shop shop = getPersonList().get(personName).getCurrentShopWork().getSupermarketChain().getEmployeeMap().get(personName).getValue1();
+        Shop shop = getPersonList().get(personName).getCurrentShopWork();
         shop.employeeJoined(getPersonList().get(personName));
     }
 

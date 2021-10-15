@@ -1,8 +1,8 @@
 package SupermarketPackage;
 
-import GameHandlerPackage.Place;
-import GameHandlerPackage.Rank;
-import SupermarketPackage.Articles.Article;
+import static GameHandlerPackage.SystemHandler.*;
+import GameHandlerPackage.*;
+import SupermarketPackage.Articles.*;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static GameHandlerPackage.SystemHandler.getPersonList;
-import static GameHandlerPackage.SystemHandler.hireEmployee;
+
 
 
 public class Shop implements java.io.Serializable{
@@ -158,6 +157,7 @@ public class Shop implements java.io.Serializable{
         hireEmployee(chiefPair.getValue0().getName(),supermarketChain.getName(), this.name, chiefPair.getValue0().getSalary());
 
         //Neuer Chef wird aus den Mitarbeiterlisten entfernt
+        supermarketChain.getEmployeeMap().remove(name);
 
 
         //Alter Chef wird aus der Chef Map entfernt

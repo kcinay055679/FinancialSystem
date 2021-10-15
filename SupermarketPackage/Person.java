@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.io.Serializable;
 
 public class Person implements java.io.Serializable{
     private int salary;
@@ -18,7 +17,7 @@ public class Person implements java.io.Serializable{
     private byte[] hashedPassword;
     private String pw;
 
-    private Company currenCompanyWork;
+    private Company currentCompanyWork;
     private Shop currentShopWork;
     private Rank rank = Rank.UNEMPLOYED;
     private Schüppercard card;
@@ -34,11 +33,11 @@ public class Person implements java.io.Serializable{
     }
 
     public Company getCurrentCompanyWork() {
-        return currenCompanyWork;
+        return currentCompanyWork;
     }
 
     public void setCurrentCompanyWork(Company company) {
-        this.currenCompanyWork = company;
+        this.currentCompanyWork = company;
     }
 
     public Shop getCurrentShopWork() {

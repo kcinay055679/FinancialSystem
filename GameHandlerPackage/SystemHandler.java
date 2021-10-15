@@ -40,20 +40,19 @@ public class SystemHandler implements java.io.Serializable{
 
     public static void hireEmployee(String personName, String companyName, String shopName, int salary) {
         Person p = personList.get(personName);
-        //ToDo
-        // "supermarketChainMap.get()" zu Company änderen
 
-        p.setCurrentCompanyWork(companyMap.get(companyName));
-        SupermarketChain supermarketChain = (SupermarketChain) getPersonList().get(personName).getCurrentCompanyWork();
-
+        SupermarketChain supermarketChain = getSupermarketChainMap().get(companyName);
         Shop shop = supermarketChain.getShopMap().get(shopName);
 
+        p.setCurrentCompanyWork(companyMap.get(companyName));
         p.setCurrentShopWork(shop);
 
         p.setRank(Rank.EMPLOYEE);
+
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
         p.setSalary(salary);
+        System.out.println(shop +" hire "+personName);
     }
 
     public static void fireEmployee(String person) {
@@ -166,19 +165,14 @@ public class SystemHandler implements java.io.Serializable{
             FileInputStream fileInSupermarket = new FileInputStream("Data/supermarketChains.ser");
             ObjectInputStream inSupermarket = new ObjectInputStream(fileInSupermarket);
             supermarketChainMap = (Map<String, SupermarketChain>) inSupermarket.readObject();
+
             inSupermarket.close();
             fileInSupermarket.close();
             inPerson.close();
             fileInPerson.close();
             System.out.println("Data is loaded");
-        } catch (IOException i) {
+        } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
-            return;
-        } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
-            return;
         }
-
     }
 }
