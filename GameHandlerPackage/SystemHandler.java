@@ -94,8 +94,6 @@ public class SystemHandler implements java.io.Serializable{
             System.out.println("Kette konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+name);
             return false;
         }
-//        supermarketChainMap.put(name, new SupermarketChain(name));
-//        companyMap.put(name, supermarketChainMap.get(name));
     }
 
     public static void setSelectedUser(Person selectedUser) {
@@ -111,6 +109,23 @@ public class SystemHandler implements java.io.Serializable{
                 return false;
             }
         } else {
+            return false;
+        }
+    }
+
+    public static boolean adminCheck(String name, String password) {
+        if (getPersonList().get(name) != null) {
+            if (getPersonList().get(name).checkPassword(password)) {
+                setSelectedUser(getPersonList().get(name));
+                if (getSelectedUser().getRank() == Rank.ADMIN) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }else {
             return false;
         }
     }

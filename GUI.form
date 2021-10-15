@@ -97,7 +97,7 @@
           </component>
         </children>
       </grid>
-      <grid id="42f03" binding="Dashboardpanel" layout-manager="GridLayoutManager" row-count="13" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="42f03" binding="Dashboardpanel" layout-manager="GridLayoutManager" row-count="12" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -162,7 +162,7 @@
           </component>
           <component id="5e5ce" class="javax.swing.JButton" binding="schüpercardButton" default-binding="true">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -175,7 +175,7 @@
           </component>
           <component id="aa513" class="javax.swing.JButton" binding="ausloggenButton" default-binding="true">
             <constraints>
-              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -219,7 +219,7 @@
           </component>
           <component id="33f23" class="javax.swing.JButton" binding="arbeitenGehenButton">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -232,7 +232,7 @@
           </component>
           <component id="92ecf" class="javax.swing.JButton" binding="changePassword">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -243,17 +243,9 @@
               <text value="Passwort ändern"/>
             </properties>
           </component>
-          <component id="5e2e1" class="javax.swing.JButton" binding="testTest">
-            <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Testbutton"/>
-            </properties>
-          </component>
           <component id="fd9fc" class="javax.swing.JButton" binding="changePasswordButton">
             <constraints>
-              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -276,18 +268,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="dc38a" class="javax.swing.JRadioButton" binding="coopRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Coop"/>
-            </properties>
-          </component>
           <component id="a8738" class="javax.swing.JButton" binding="zurückButton" default-binding="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -299,30 +279,6 @@
             <properties>
               <font size="20"/>
               <text value="Zurück"/>
-            </properties>
-          </component>
-          <component id="47472" class="javax.swing.JRadioButton" binding="migrosRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Migros"/>
-            </properties>
-          </component>
-          <component id="1bf61" class="javax.swing.JRadioButton" binding="aldiRadioButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="150"/>
-                <preferred-size width="150" height="-1"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Aldi"/>
             </properties>
           </component>
           <component id="6d66c" class="javax.swing.JButton" binding="auswählenButton" default-binding="true">
@@ -344,6 +300,16 @@
               <text value="Bitte wählen Sie eine Filiale!"/>
             </properties>
           </component>
+          <grid id="c600c" binding="PanelRadios" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1266463"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </grid>
       <grid id="22c89" binding="Filiale" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1375,17 +1341,6 @@
               <text value="Preis"/>
             </properties>
           </component>
-          <component id="de6db" class="javax.swing.JTextField" binding="PreisTextField">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="5, 4.5, 3.5"/>
-            </properties>
-          </component>
           <component id="77d78" class="javax.swing.JLabel">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -1393,17 +1348,6 @@
             <properties>
               <font size="22"/>
               <text value="Barcode"/>
-            </properties>
-          </component>
-          <component id="fe808" class="javax.swing.JTextField" binding="trueFalseTextField" default-binding="true">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="true / false"/>
             </properties>
           </component>
           <component id="50f9b" class="javax.swing.JLabel">
@@ -1498,6 +1442,24 @@
               <text value="Bitte achten Sie auf korrekte Werte in den Feldern!"/>
             </properties>
           </component>
+          <component id="7a973" class="javax.swing.JComboBox" binding="comboBoxBarcodeFleisch">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="31029" class="javax.swing.JFormattedTextField" binding="formattedTextFieldPreisFleisch">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="db1e" binding="BuildingMatPanel" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1539,17 +1501,6 @@
               <text value="Preis"/>
             </properties>
           </component>
-          <component id="d0014" class="javax.swing.JTextField" binding="PreisFeld">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="22"/>
-              <text value="20, 10, 5 usw."/>
-            </properties>
-          </component>
           <component id="3d61b" class="javax.swing.JLabel">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -1574,17 +1525,6 @@
             <properties>
               <font size="22"/>
               <text value="Barcode"/>
-            </properties>
-          </component>
-          <component id="b0845" class="javax.swing.JTextField" binding="trueFalseTextBuild">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="22"/>
-              <text value="true / false"/>
             </properties>
           </component>
           <component id="41da0" class="javax.swing.JLabel">
@@ -1657,6 +1597,24 @@
               <font size="16"/>
               <foreground color="-3861213"/>
               <text value="Füllen sie alle Felder mit Werten!"/>
+            </properties>
+          </component>
+          <component id="1709c" class="javax.swing.JComboBox" binding="comboBoxBarcode">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="18"/>
+            </properties>
+          </component>
+          <component id="aa93f" class="javax.swing.JFormattedTextField" binding="formattedTextFieldPreisMat">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="18"/>
             </properties>
           </component>
         </children>
@@ -2256,16 +2214,6 @@
               <text value="SelfCheckout"/>
             </properties>
           </component>
-          <component id="7db84" class="javax.swing.JTextField" binding="selfCheckout">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <font size="18"/>
-            </properties>
-          </component>
           <component id="c83fb" class="javax.swing.JTextField" binding="textFieldPlace">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -2356,6 +2304,12 @@
               <foreground color="-3866618"/>
               <text value="Der Shop konnte nicht erstellt werden"/>
             </properties>
+          </component>
+          <component id="33075" class="javax.swing.JComboBox" binding="comboBoxSelfCheckout">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>
