@@ -320,13 +320,12 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
                             if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                                 invisibler();
                                 Admin.setVisible(true);
                             } else {
-                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
                                     invisibler();
                                     labelFalsch.setVisible(false);
                                     Dashboardpanel.setVisible(true);
@@ -336,7 +335,6 @@ public class GUI {
                                     labelFalsch.setVisible(true);
                                 }
                             }
-                        }
                     }
                 }
                 super.keyPressed(e);
