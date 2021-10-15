@@ -373,7 +373,7 @@ public class GUI {
         filialeBetretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getSelectedUser().getMoney() > 0) {
+                if (getSelectedUser().getMoney() > 0) {
                     invisibler();
                     PanelRadios.removeAll();
                     for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
@@ -841,7 +841,7 @@ public class GUI {
                 fillDropdownWithArticlesByType(comboBoxProduktart);
 
                 System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
-                SpinnerModel sm = new SpinnerNumberModel(1, 1, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).getShelfList().size(), 1);
                 spinnerRegal = new JSpinner(sm);
                 spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
                 Dimension dimension = new Dimension(800, 35);
@@ -911,7 +911,7 @@ public class GUI {
                 ChiefOutput.setVisible(true);
                 ChiefMenuActionPanel.setVisible(false);
                 ChiefOutput.setText("<html>");
-                Shop shop = getSelectedUser().getCurrentShopWork();
+                Shop shop = getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName());
                 ChiefHireSalaryLabel.setVisible(false);
                 ChiefSalaryField.setVisible(false);
 
@@ -955,7 +955,7 @@ public class GUI {
                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
                         String date = DatumTextField.getText();
                         SupermarketHandler.createFood(produktname, preis, (Integer) spinnerMengeFleisch.getValue(), barcode, date,
-                                getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue(), fleisch);
+                                getSelectedUser().getCurrentShopWork().getName(), getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName(), (Integer) spinnerRegal.getValue(), fleisch);
                         invisibler();
                         ProduktErstellt.setVisible(true);
                         clearDropdownsTrueFalsePro();
@@ -993,7 +993,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Shop shop = getSelectedUser().getCurrentShopWork();
+                Shop shop = getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName());
                 SupermarketChain supermarket = shop.getSupermarketChain();
 
                 if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person, um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
@@ -1007,7 +1007,7 @@ public class GUI {
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person, um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
-                    getSelectedUser().getCurrentShopWork().promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
+                    getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
 
                     ChiefOutput.setVisible(false);
                     ChiefMenuActionPanel.setVisible(false);
@@ -1030,7 +1030,7 @@ public class GUI {
                 ChiefMenuComboBox.removeAllItems();
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person, um ihr zu kündigen");
 
-                Shop shop = getSelectedUser().getCurrentShopWork();
+                Shop shop = getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName());
                 SupermarketChain supermarket = shop.getSupermarketChain();
 
 
@@ -1065,7 +1065,7 @@ public class GUI {
                 ChiefOutput.setVisible(true);
                 ChiefMenuActionPanel.setVisible(false);
                 ChiefOutput.setText("<html>");
-                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
+                getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
                 ChiefOutput.setText(ChiefOutput.getText() + "</html>");
             }
         });
@@ -1094,7 +1094,7 @@ public class GUI {
                         String mat = comboBoxMaterial.getSelectedItem().toString();
 
                         SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
-                                getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
+                                getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName(), (Integer) spinnerRegal.getValue());
 
                         invisibler();
                         ProduktErstellt.setVisible(true);
@@ -1115,11 +1115,13 @@ public class GUI {
                 ChiefOutput.setVisible(false);
                 ChiefMenuActionPanel.setVisible(true);
                 ChiefMenuComboBox.removeAllItems();
-                System.out.println(getSelectedUser().getCurrentShopWork()+" promote");
+                System.out.println(getSelectedUser().getCurrentShopWork() + " promote");
                 ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person, um sie zum Chef zu befördern");
                 System.out.println(getSelectedUser());
-                getSelectedUser().getCurrentShopWork().getEmployeeList().keySet().forEach(person -> ChiefMenuComboBox.addItem(person));
 
+                Shop shop = getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName());
+                SupermarketChain supermarket = getSupermarketChainMap().get(getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getName());
+                shop.getEmployeeList().keySet().forEach(person -> ChiefMenuComboBox.addItem(person));
             }
         });
 
@@ -1140,7 +1142,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 int test = getSelectedUser().receiveSalary(hours);
-                getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
+                getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).decreaseEarnings(test);
                 setDashboardInformation();
                 Dashboardpanel.setVisible(true);
             }
@@ -1193,7 +1195,7 @@ public class GUI {
 
                     String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
                             + price + ", ";
-                    if(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getBarcode()) {
+                    if (getSelectedUser().getCart().getArticleList().get(key2).getValue0().getBarcode()) {
                         comboBoxOhneBarcode.addItem(value);
                     } else {
                         ProdukteWarenkorbComb.addItem(value);
@@ -1677,9 +1679,9 @@ public class GUI {
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
-        if(getSelectedUser().getRank() == Rank.CHIEF) {
+        if (getSelectedUser().getRank() == Rank.CHIEF) {
             ShopChief.setText("Shop ihrer Zuständigkeit: " + getSelectedUser().getCurrentShopWork().getName());
-            EinkommenLaden.setText("Einkommen ihres Ladens: " + getSelectedUser().getCurrentShopWork().getEarnings());
+            EinkommenLaden.setText("Einkommen ihres Ladens: " + getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName()).getEarnings());
         }
         lohn.setText("Lohn: " + getSelectedUser().getSalary());
         if (getSelectedUser().getCard() != null) {
