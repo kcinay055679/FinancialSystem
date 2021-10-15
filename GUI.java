@@ -248,6 +248,8 @@ public class GUI {
     private JFormattedTextField formattedTextFieldPreisFleisch;
     private JFormattedTextField formattedTextFieldPreisMat;
     private JLabel lohn;
+    private JLabel EinkommenLaden;
+    private JLabel ShopChief;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -1142,6 +1144,7 @@ public class GUI {
                 long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
                 int test = getSelectedUser().receiveSalary(hours);
                 getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
+                setDashboardInformation();
                 Dashboardpanel.setVisible(true);
             }
         });
@@ -1644,8 +1647,12 @@ public class GUI {
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
+        System.out.println("uh ih uhah ting tang walawala bing bäng");
+        if(getSelectedUser().getRank() == Rank.CHIEF) {
+            ShopChief.setText("Shop ihrer Zuständigkeit: " + getSelectedUser().getCurrentShopWork().getName());
+            EinkommenLaden.setText("Einkommen ihres Ladens: " + getSelectedUser().getCurrentShopWork().getEarnings());
+        }
         lohn.setText("Lohn: " + getSelectedUser().getSalary());
-
         if (getSelectedUser().getCard() != null) {
             schüpperpunkte.setText("<html>Ihre Schüperkarteennummer ist: " + getSelectedUser().getCard().getCardnumber() + " <br/><br/> Schüpperpunkte: " + getSelectedUser().getCard().getPoints() + "</html>");
         } else {
