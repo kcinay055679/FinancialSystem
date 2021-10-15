@@ -16,7 +16,6 @@ import org.reflections.Reflections;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.StreamCorruptedException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -58,6 +57,7 @@ public class GUI {
     private JPanel ProduktHinzufügen;
     private JPanel Employeepanel;
     private JPanel Mitarbeiter;
+    private JPanel keineGeldNoch;
 
     //Alle normalen Buttons
     private JLabel welcomeText;
@@ -250,6 +250,7 @@ public class GUI {
     private JLabel lohn;
     private JLabel EinkommenLaden;
     private JLabel ShopChief;
+    private JButton zurückButton5;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -370,30 +371,20 @@ public class GUI {
         filialeBetretenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                invisibler();
-                PanelRadios.removeAll();
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    JRadioButton radioButtonNew = new JRadioButton(key);
-                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                    g.add(radioButtonNew);
-                    PanelRadios.add(radioButtonNew);
+                if(getSelectedUser().getMoney() > 0) {
+                    invisibler();
+                    PanelRadios.removeAll();
+                    for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                        JRadioButton radioButtonNew = new JRadioButton(key);
+                        radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                        g.add(radioButtonNew);
+                        PanelRadios.add(radioButtonNew);
+                    }
+                    Filialebetreten.setVisible(true);
+                } else {
+                    invisibler();
+                    keineGeldNoch.setVisible(true);
                 }
-                Filialebetreten.setVisible(true);
-            }
-        });
-        filialeBetretenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                ButtonGroup g = new ButtonGroup();
-                PanelRadios.removeAll();
-                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                    JRadioButton radioButtonNew = new JRadioButton(key);
-                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                    g.add(radioButtonNew);
-                    PanelRadios.add(radioButtonNew);
-                }
-                Filialebetreten.setVisible(true);
             }
         });
 
@@ -1472,6 +1463,13 @@ public class GUI {
                 Loginpanel.setVisible(true);
             }
         });
+        zurückButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1633,7 +1631,7 @@ public class GUI {
         frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setResizable(false);
-        frame.setSize(1000, 600);
+        frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         DigitalClock.main();
@@ -1647,7 +1645,6 @@ public class GUI {
     public void setDashboardInformation() {
         name.setText("Name: " + getSelectedUser().getName());
         guthaben.setText("Guthaben: " + getSelectedUser().getMoney());
-        System.out.println("uh ih uhah ting tang walawala bing bäng");
         if(getSelectedUser().getRank() == Rank.CHIEF) {
             ShopChief.setText("Shop ihrer Zuständigkeit: " + getSelectedUser().getCurrentShopWork().getName());
             EinkommenLaden.setText("Einkommen ihres Ladens: " + getSelectedUser().getCurrentShopWork().getEarnings());
@@ -1704,6 +1701,7 @@ public class GUI {
         PersonenHInzufügen.setVisible(false);
         ShopHinzufügen.setVisible(false);
         SupermarktketteHinzufügen.setVisible(false);
+        keineGeldNoch.setVisible(false);
 
         Entscheidung.setVisible(false);
         if (getSelectedUser() != null) {

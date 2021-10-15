@@ -53,6 +53,8 @@ public class SupermarketHandler implements java.io.Serializable{
         SupermarketHandler.addPerson("Rudi", "Traube", "Traube");
         SystemHandler.getPersonList().get("Rudi").setRank(Rank.ADMIN);
 
+        SupermarketHandler.addPerson("Glöschu", "keineGeld", "keineGeld");
+
         SupermarketHandler.addPerson("Marc", "password", "password");
         hireEmployee("Marc", "coop", "FoodPalace", 4500);
         employeeEnter("Marc");
