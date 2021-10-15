@@ -228,6 +228,7 @@ public class GUI {
     private JTextField oldPassword;
     private JTextField newPassword;
     private JTextField repeatPassword;
+    private JButton resetButton;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -1327,6 +1328,15 @@ public class GUI {
                 }else{
                     passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
                 }
+            }
+        });
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getPersonList().clear();
+                getSupermarketChainMap().clear();
+                SupermarketHandler.setUp();
+                safeToFile();
             }
         });
     }
