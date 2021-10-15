@@ -424,8 +424,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getSelectedUser().decreaseMoney(greatValue);
-                getSelectedUser().getCurrentShopWork().increaseEarnings(greatValue);
-                System.out.println(getSelectedUser().getCurrentShopWork().getEarnings());
+                getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).increaseEarnings(greatValue);
+                System.out.println(getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getEarnings());
                 invisibler();
                 greatValue = 0;
                 labelRichtigSchüp.setVisible(false);
@@ -1507,7 +1507,6 @@ public class GUI {
             Set<Class<? extends Article>> classes = reflections.getSubTypesOf(Article.class);
             for (Class<? extends Article> subClass : classes) {
                 comboBox.addItem(subClass.getSimpleName());
-                System.out.println(subClass.getSimpleName());
             }
         } catch (Exception e) {
             System.out.println(e);
