@@ -61,7 +61,6 @@ public class SupermarketHandler implements java.io.Serializable{
         hireEmployee("Mar1", "coop", "FoodPalace", 4500);
 
         System.out.println("Error: All Variables are resettet");
-        safeToFile();
     }
 
 
