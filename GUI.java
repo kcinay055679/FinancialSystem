@@ -1000,6 +1000,7 @@ public class GUI {
                     hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefSalaryField.setVisible(false);
+                    ChiefSalaryField.setText(" ");
                     ChiefHireSalaryLabel.setVisible(false);
                     ChiefMenuComboBox.removeAllItems();
                 } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person, um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
