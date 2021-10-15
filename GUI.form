@@ -154,7 +154,7 @@
           </component>
           <component id="5e5ce" class="javax.swing.JButton" binding="schüpercardButton" default-binding="true">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="350" height="-1"/>
                 <preferred-size width="350" height="-1"/>
                 <maximum-size width="350" height="-1"/>
@@ -920,7 +920,7 @@
                   <background color="-15187615"/>
                   <font size="14"/>
                   <foreground color="-8346947"/>
-                  <text value="Mitarbeiter EInstellen"/>
+                  <text value="Mitarbeiter Einstellen"/>
                 </properties>
               </component>
               <component id="e0225" class="javax.swing.JButton" binding="mitarbeiterKündigenButton" default-binding="true">
