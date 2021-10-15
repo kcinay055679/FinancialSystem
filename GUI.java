@@ -246,7 +246,7 @@ public class GUI {
     HashMap<String, JSpinner> spinnerHashMap = new HashMap<>();
 
     private int greatValue;
-    private DefaultListModel model = new DefaultListModel();
+    private final DefaultListModel model = new DefaultListModel();
 
     public static JFrame frame = new JFrame("Yanick und Marcs Wirtschaftsspass");
     LocalDateTime startWorkTime;
@@ -275,11 +275,9 @@ public class GUI {
         ChiefMenu.setVisible(false);
 
 
-
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                if (SystemHandler.login(nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
+                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                     //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
                     invisibler();
                     labelFalsch.setVisible(false);
@@ -297,7 +295,7 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
                         showSpecialButtons();
                         Dashboardpanel.setVisible(true);
@@ -307,7 +305,6 @@ public class GUI {
                     }
                 }
                 super.keyPressed(e);
-
             }
         });
 
@@ -316,7 +313,7 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String (GUI.this.passwortLogin.getPassword()))) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
                         Dashboardpanel.setVisible(true);
                         setDashboardInformation();
@@ -425,38 +422,14 @@ public class GUI {
             }
         });
 
-        TabletSupermarktWählen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
-                TabletArtikelWählen.removeAllItems();
-                if (TabletFilialeWählen.getItemCount() > 0) {
-                    TabletFilialeWählen.removeAllItems();
-                }
-                fillDropdownWithShops(supermarket, TabletFilialeWählen);
-                fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
 
-            }
-        });
-
-        TabletFilialeWählen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
-                String shopName = (String) TabletFilialeWählen.getSelectedItem();
-                System.out.println("tsets " + shopName);
-                TabletArtikelWählen.removeAllItems();
-
-                if (currentTabletFuntion.equals("shop") && shopName != null) {
-                    fillDropdownWithArticlesFromSupermarketFromShop(supermarket, shopName, TabletArtikelWählen);
-                }
-            }
-        });
-
+        //Tablet start
         TabletMenuSupermarkt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentTabletFuntion = "supermarket";
+                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+
                 TabletÜbersicht.setVisible(false);
                 TabletSelect.setVisible(true);
 
@@ -471,7 +444,7 @@ public class GUI {
 
                 TabletTypWählen.setVisible(false);
                 TabletTypWählenLabel.setVisible(false);
-                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+
             }
         });
 
@@ -479,6 +452,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentTabletFuntion = "typ";
+                fillDropdownWithArticlesByType(TabletTypWählen);
                 TabletÜbersicht.setVisible(false);
                 TabletSelect.setVisible(true);
 
@@ -494,7 +468,7 @@ public class GUI {
                 TabletArtikelWählen.setVisible(false);
                 TabletArtikelWählenLabel.setVisible(false);
 
-                fillDropdownWithArticlesByType(TabletTypWählen);
+
             }
         });
 
@@ -502,6 +476,10 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentTabletFuntion = "shop";
+                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+                fillDropdownWithShops((String) TabletSupermarktWählen.getSelectedItem(), TabletFilialeWählen);
+                fillDropdownWithArticlesFromSupermarketFromShop((String) TabletSupermarktWählen.getSelectedItem(), (String) TabletFilialeWählen.getSelectedItem(), TabletArtikelWählen);
+
                 TabletÜbersicht.setVisible(false);
                 TabletSelect.setVisible(true);
 
@@ -516,7 +494,42 @@ public class GUI {
 
                 TabletTypWählen.setVisible(false);
                 TabletTypWählenLabel.setVisible(false);
-                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+
+
+            }
+        });
+
+        TabletMenuName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "name";
+                fillDropdownWithAllArticles(TabletArtikelWählen);
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
+
+                TabletSupermarktWählen.setVisible(false);
+                TabletSupermarktWählenLabel.setVisible(false);
+
+                TabletArtikelWählen.setVisible(true);
+                TabletArtikelWählenLabel.setVisible(true);
+
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
+
+                TabletTypWählen.setVisible(false);
+                TabletTypWählenLabel.setVisible(false);
+
+
+            }
+        });
+
+
+        TabletSupermarktWählen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
+
+                fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
             }
         });
 
@@ -543,26 +556,17 @@ public class GUI {
             }
         });
 
-        TabletMenuName.addActionListener(new ActionListener() {
+        TabletFilialeWählen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentTabletFuntion = "name";
-                TabletÜbersicht.setVisible(false);
-                TabletSelect.setVisible(true);
+                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
+                String shopName = (String) TabletFilialeWählen.getSelectedItem();
+                System.out.println("tsets " + shopName);
+                TabletArtikelWählen.removeAllItems();
 
-                TabletSupermarktWählen.setVisible(false);
-                TabletSupermarktWählenLabel.setVisible(false);
-
-                TabletArtikelWählen.setVisible(true);
-                TabletArtikelWählenLabel.setVisible(true);
-
-                TabletFilialeWählen.setVisible(false);
-                TabletFilialeWählenLabel.setVisible(false);
-
-                TabletTypWählen.setVisible(false);
-                TabletTypWählenLabel.setVisible(false);
-
-                fillDropdownWithAllArticles(TabletArtikelWählen);
+                if (currentTabletFuntion.equals("shop") && shopName != null) {
+                    fillDropdownWithArticlesFromSupermarketFromShop(supermarket, shopName, TabletArtikelWählen);
+                }
             }
         });
 
@@ -644,6 +648,8 @@ public class GUI {
             }
         });
 
+        //Tablet ende
+
         schüpercardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -651,6 +657,7 @@ public class GUI {
                 Schüpercard.setVisible(true);
             }
         });
+
         ausloggenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -867,6 +874,7 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+
         zurückButtonFleisch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -930,7 +938,7 @@ public class GUI {
                 SupermarketChain supermarket = shop.getSupermarketChain();
 
                 if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
-                    System.out.println((Integer) ChiefSalaryField.getValue());
+                    System.out.println(ChiefSalaryField.getValue());
                     hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
                     ChiefMenuActionPanel.setVisible(false);
                     ChiefSalaryField.setVisible(false);
@@ -1049,6 +1057,7 @@ public class GUI {
 
             }
         });
+
         kündenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1058,6 +1067,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+
         arbeitVerlassenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1069,6 +1079,7 @@ public class GUI {
                 Dashboardpanel.setVisible(true);
             }
         });
+
         gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1087,6 +1098,7 @@ public class GUI {
                 RegaleErstellt.setVisible(true);
             }
         });
+
         zurückZumMenüButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1095,6 +1107,7 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+
         normaleKasseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1102,6 +1115,7 @@ public class GUI {
                 Kassen.setVisible(true);
             }
         });
+
         selfscannerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1118,6 +1132,7 @@ public class GUI {
                 Selfscanner.setVisible(true);
             }
         });
+
         scanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1146,6 +1161,7 @@ public class GUI {
                 }
             }
         });
+
         bezahlenButtonScan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1179,6 +1195,7 @@ public class GUI {
                 }
             }
         });
+
         zurückButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1187,6 +1204,7 @@ public class GUI {
                 Mitarbeiter.setVisible(true);
             }
         });
+
         convertSchüpperpointsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1251,6 +1269,7 @@ public class GUI {
                 PersonenHInzufügen.setVisible(true);
             }
         });
+
         zurückButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1260,17 +1279,18 @@ public class GUI {
                 Admin.setVisible(true);
             }
         });
+
         benutzerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
+                if (textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
                     getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
                             textFieldPasswort.getText(), textFieldPasswortRep.getText()));
                     textFieldPasswort.setText("");
                     textFieldPasswortRep.setText("");
                     textFieldBenutzernamen.setText("");
                     benutzerLabelRichtig.setVisible(true);
-                }else {
+                } else {
                     benutzerLabelFalsch.setVisible(true);
                 }
             }
@@ -1314,14 +1334,14 @@ public class GUI {
                     int earnings = Integer.parseInt(textFieldEarnings.getText());
                     String chiefname = textFieldChief.getText();
                     Person chief = new Person(chiefname, "123", "123");
-                    if(getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)){
+                    if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
-                    }else{
+                    } else {
                         labelFalschShop.setVisible(false);
                         labelRichtigShop.setVisible(false);
                     }
-                }catch(Exception a) {
+                } catch (Exception a) {
                     labelRichtigShop.setVisible(false);
                     labelFalschShop.setVisible(true);
                 }
@@ -1336,13 +1356,14 @@ public class GUI {
                 Admin.setVisible(true);
             }
         });
+
         ketteErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
                     labelKetteRichtig.setVisible(true);
                     labelKetteFalsch.setVisible(false);
-                }else {
+                } else {
                     labelKetteFalsch.setVisible(true);
                     labelKetteRichtig.setVisible(false);
                 }
@@ -1360,13 +1381,14 @@ public class GUI {
         changePasswordSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())){
+                if (getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())) {
                     passwordOutput.setText("Dein Passwort wurde geändert");
-                }else{
+                } else {
                     passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
                 }
             }
         });
+
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1376,6 +1398,7 @@ public class GUI {
                 safeToFile();
             }
         });
+
         ausloggenButtonAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1451,50 +1474,62 @@ public class GUI {
         }
     }
 
-    public void showPriceSelfScanner() {
-        for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
-            float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
-            JPanel panelNew = new JPanel();
-            JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
-                    + price);
-
-            labeNew.setFont(new Font("Serif", Font.PLAIN, 20));
-            labeNew.setVerticalAlignment(SwingConstants.CENTER);
-            panelNew.add(labeNew);
-            PreisGesamt.add(panelNew);
-        }
-    }
 
     public void fillDropdownWithSupermarkets(JComboBox comboBox) {
+        System.out.println(comboBox);
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+            System.out.println(key);
             comboBox.addItem(key);
+            addItemIfNotExists(key, comboBox);
         }
     }
 
-    public void fillDropdownWithArticlesFromSupermarket(String supermarketname, JComboBox comboBox) {
-        SupermarketChain supermarketChain = SystemHandler.getSupermarketChainMap().get(supermarketname);
+    public void fillDropdownWithArticlesFromSupermarket(String supermarketName, JComboBox comboBox) {
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
+        SupermarketChain supermarketChain = SystemHandler.getSupermarketChainMap().get(supermarketName);
         for (Article article : supermarketChain.getArticleMap().values()) {
-            comboBox.addItem(article.getName());
+            addItemIfNotExists(article.getName(), comboBox);
+        }
+    }
+
+    public static void addItemIfNotExists(String item, JComboBox comboBox) {
+        if (((DefaultComboBoxModel) comboBox.getModel()).getIndexOf(item) == -1) {
+            comboBox.addItem(item);
         }
     }
 
     public void fillDropdownWithArticlesFromSupermarketFromShop(String supermarketname, String shopName, JComboBox comboBox) {
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
         SupermarketChain supermarketChain = SystemHandler.getSupermarketChainMap().get(supermarketname);
         System.out.println(supermarketname + " " + shopName);
         for (Shelf shelf : supermarketChain.getShopMap().get(shopName).getShelfList().values()) {
             for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
-                comboBox.addItem(articlePair.getValue0().getName());
+                addItemIfNotExists(articlePair.getValue0().getName(), comboBox);
             }
         }
     }
 
     /* org.reflections:reflections:0.10.1*/
     public void fillDropdownWithArticlesByType(JComboBox comboBox) {
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
         try {
             Reflections reflections = new Reflections("SupermarketPackage.Articles");
             Set<Class<? extends Article>> classes = reflections.getSubTypesOf(Article.class);
             for (Class<? extends Article> subClass : classes) {
-                comboBox.addItem(subClass.getSimpleName());
+                addItemIfNotExists(subClass.getSimpleName(), comboBox);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -1502,12 +1537,13 @@ public class GUI {
     }
 
     public void fillDropdownWithAllArticles(JComboBox comboBox) {
+        comboBox.removeAllItems();
         for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
             for (Shop shop : supermarket.getShopMap().values()) {
                 for (Shelf shelf : shop.getShelfList().values()) {
                     for (Pair<Article, Integer> pair : shelf.getArticleList().values()) {
                         if (((DefaultComboBoxModel) comboBox.getModel()).getIndexOf(pair.getValue0().getName()) == -1) {
-                            comboBox.addItem(pair.getValue0().getName());
+                            addItemIfNotExists(pair.getValue0().getName(), comboBox);
                         }
                     }
                 }
@@ -1516,7 +1552,7 @@ public class GUI {
     }
 
     public static void main(String[] args) {
-        if(!new File("Data").isDirectory()){
+        if (!new File("Data").isDirectory()) {
             new File("Data").mkdirs();
         }
 
@@ -1537,7 +1573,7 @@ public class GUI {
         frame.setDefaultCloseOperation(3);
         frame.pack();
         frame.setSize(1000, 600);
-        frame.setLocationRelativeTo((Component) null);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         DigitalClock.main();
 
