@@ -288,28 +288,21 @@ public class GUI {
 
         this.bestätigenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                    //SystemHandler.setSelectedUser(SystemHandler.getPersonList().get(nameLogin.getText()));
-                    invisibler();
-                    labelFalsch.setVisible(false);
-                    Dashboardpanel.setVisible(true);
-                    setDashboardInformation();
-                    showSpecialButtons();
-                } else {
-                    labelFalsch.setVisible(true);
-                    if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                if (SystemHandler.adminCheck(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                    if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
+                        labelFalsch.setVisible(false);
                         Admin.setVisible(true);
+                    }
+                } else {
+                    if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                        invisibler();
+                        labelFalsch.setVisible(false);
+                        Dashboardpanel.setVisible(true);
+                        setDashboardInformation();
+                        showSpecialButtons();
                     } else {
-                        if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                            invisibler();
-                            labelFalsch.setVisible(false);
-                            Dashboardpanel.setVisible(true);
-                            setDashboardInformation();
-                            showSpecialButtons();
-                        } else {
-                            labelFalsch.setVisible(true);
-                        }
+                        labelFalsch.setVisible(true);
                     }
                 }
             }
@@ -320,111 +313,53 @@ public class GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
-                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                invisibler();
-                                Admin.setVisible(true);
-                            } else {
-                                if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
-                                    invisibler();
-                                    labelFalsch.setVisible(false);
-                                    Dashboardpanel.setVisible(true);
-                                    setDashboardInformation();
-                                    showSpecialButtons();
-                                } else {
-                                    labelFalsch.setVisible(true);
-                                }
-                            }
+                    if (SystemHandler.adminCheck(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                        if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                            invisibler();
+                            Admin.setVisible(true);
+                            labelFalsch.setVisible(false);
+                        }
+                    }else {
+                        if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                            invisibler();
+                            labelFalsch.setVisible(false);
+                            Dashboardpanel.setVisible(true);
+                            setDashboardInformation();
+                            showSpecialButtons();
+                        } else {
+                            labelFalsch.setVisible(true);
+                        }
                     }
                 }
                 super.keyPressed(e);
             }
         });
-        passwortLogin.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                invisibler();
-                                Admin.setVisible(true);
-                            } else {
-                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                    invisibler();
-                                    labelFalsch.setVisible(false);
-                                    Dashboardpanel.setVisible(true);
-                                    setDashboardInformation();
-                                    showSpecialButtons();
-                                } else {
-                                    labelFalsch.setVisible(true);
-                                }
-                            }
-                        }
-
-                    }
-
-                    super.keyPressed(e);
-                }
-
-            }
-        });
-
 
         //Falls der Benutzer schon beim Benutzernamen Enter drückt, oder diesen noch ändern muss
         nameLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                invisibler();
-                                Admin.setVisible(true);
-                            } else {
-                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                    invisibler();
-                                    labelFalsch.setVisible(false);
-                                    Dashboardpanel.setVisible(true);
-                                    setDashboardInformation();
-                                    showSpecialButtons();
-                                } else {
-                                    labelFalsch.setVisible(true);
-                                }
-                            }
+                    if (SystemHandler.adminCheck(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                        if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                            invisibler();
+                            Admin.setVisible(true);
+                            labelFalsch.setVisible(false);
+                        }
+                    }else {
+                        if (SystemHandler.login(nameLogin.getText(), new String(passwortLogin.getPassword()))) {
+                            invisibler();
+                            labelFalsch.setVisible(false);
+                            Dashboardpanel.setVisible(true);
+                            setDashboardInformation();
+                            showSpecialButtons();
+                        } else {
+                            labelFalsch.setVisible(true);
                         }
                     }
                 }
                 super.keyPressed(e);
             }
-        });
-        nameLogin.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                invisibler();
-                                Admin.setVisible(true);
-                            } else {
-                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                    invisibler();
-                                    labelFalsch.setVisible(false);
-                                    Dashboardpanel.setVisible(true);
-                                    setDashboardInformation();
-                                    showSpecialButtons();
-                                } else {
-                                    labelFalsch.setVisible(true);
-                                }
-                            }
-                        }
-
-                    }
-                    super.keyPressed(e);
-                }
-            }
-
         });
 
         //Der Kunde betritt die Filiale
