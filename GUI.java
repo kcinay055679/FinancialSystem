@@ -219,6 +219,9 @@ public class GUI {
     private JLabel benutzerLabelRichtig;
     private JLabel benutzerLabelFalsch;
     private JButton testTest;
+    private JComboBox comboBoxFirmaAdmin;
+    private JLabel labelRichtigShop;
+    private JLabel labelFalschShop;
     private JButton changePassword;
     private JPanel changePasswordPanel;
     private JButton backToDashboardPw;
@@ -229,6 +232,9 @@ public class GUI {
     private JTextField newPassword;
     private JTextField repeatPassword;
     private JButton resetButton;
+    private JLabel labelKetteRichtig;
+    private JLabel labelKetteFalsch;
+    private JButton ausloggenButtonAdmin;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -248,6 +254,10 @@ public class GUI {
     //Konstruktor indem alle Funktionen verwaltet werden
     public GUI() {
 
+        labelKetteFalsch.setVisible(false);
+        labelKetteRichtig.setVisible(false);
+        labelFalschShop.setVisible(false);
+        labelRichtigShop.setVisible(false);
         benutzerLabelRichtig.setVisible(false);
         benutzerLabelFalsch.setVisible(false);
         labelRichtigSchüp.setVisible(false);
@@ -258,7 +268,6 @@ public class GUI {
         labelUnkorrektFleisch.setVisible(false);
         labelFalschBuild.setVisible(false);
         labelInkorrektBuild.setVisible(false);
-
         labelFalschFleisch.setVisible(false);
         invisibler();
 
@@ -1271,6 +1280,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
                 ShopHinzufügen.setVisible(true);
             }
         });
@@ -1287,6 +1297,8 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                labelFalschShop.setVisible(false);
+                labelRichtigShop.setVisible(false);
                 Admin.setVisible(true);
             }
         });
@@ -1294,7 +1306,26 @@ public class GUI {
         shopErstellenButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                invisibler();
+                try {
+                    String shopname = textFieldShopname.getText();
+                    boolean selfCheckoutValue = Boolean.parseBoolean(selfCheckout.getText());
+                    String place = textFieldPlace.getText();
+                    int earnings = Integer.parseInt(textFieldEarnings.getText());
+                    String chiefname = textFieldChief.getText();
+                    Person chief = new Person(chiefname, "123", "123");
+                    if(getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)){
+                        labelRichtigShop.setVisible(true);
+                        labelFalschShop.setVisible(false);
+                    }else{
+                        labelFalschShop.setVisible(false);
+                        labelRichtigShop.setVisible(false);
+                    }
+                }catch(Exception a) {
+                    labelRichtigShop.setVisible(false);
+                    labelFalschShop.setVisible(true);
+                }
+                ShopHinzufügen.setVisible(true);
             }
         });
 
@@ -1308,7 +1339,13 @@ public class GUI {
         ketteErstellenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if(createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                    labelKetteRichtig.setVisible(true);
+                    labelKetteFalsch.setVisible(false);
+                }else {
+                    labelKetteFalsch.setVisible(true);
+                    labelKetteRichtig.setVisible(false);
+                }
             }
         });
 
@@ -1337,6 +1374,14 @@ public class GUI {
                 getSupermarketChainMap().clear();
                 SupermarketHandler.setUp();
                 safeToFile();
+            }
+        });
+        ausloggenButtonAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                logout();
+                Loginpanel.setVisible(true);
             }
         });
     }

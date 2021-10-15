@@ -84,9 +84,18 @@ public class SystemHandler implements java.io.Serializable{
         return supermarketChainMap;
     }
 
-    public static void createSupermarketChain(String name) {
-        supermarketChainMap.put(name, new SupermarketChain(name));
-        companyMap.put(name, supermarketChainMap.get(name));
+    public static boolean createSupermarketChain(String name) {
+        if (supermarketChainMap.get(name) == null) {
+            supermarketChainMap.put(name, new SupermarketChain(name));
+            companyMap.put(name, supermarketChainMap.get(name));
+            return true;
+
+        } else {
+            System.out.println("Kette konnte nicht erstellt werden, bitte wenden sie sich an ihren Systemadministrator "+name);
+            return false;
+        }
+//        supermarketChainMap.put(name, new SupermarketChain(name));
+//        companyMap.put(name, supermarketChainMap.get(name));
     }
 
     public static void setSelectedUser(Person selectedUser) {
