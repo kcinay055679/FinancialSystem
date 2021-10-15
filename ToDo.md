@@ -9,10 +9,12 @@ Im Mitarbeitermenu beim Hinzufügen eines neuen Artikels Minus Werte in Spinne v
 
 Im Mitarbeitermenu beim Hinzufügen eines neuen Artikels Standartwerte setzen
 
+Im Tablet wird ein Teil des Output Labels absgeschnitten
 
 Im Mitarbeitermenu beim Hinzufügen eines neuen Artikels mit Platzhalter arbeiten anstatt die Information direkt in das Feld zu schreiben
 
 Künden nach degradierung/nach hinzufügen von Artikeln/Regalen funtionieert nicht
+Tablet Design und Fehler bei Degradierung verbessern
 
 Grösse des Fensters soll fix sein
 
@@ -25,6 +27,6 @@ Im Tablet wird ein Teil des Output Labels absgeschnitten
 
 
 ---Features---
-Beim ABlaufdatum einen Kalender einbauen(Libary)
+Beim Ablaufdatum einen Kalender einbauen(Libary)
 Lohn im Dashboard anzeigen lassen
 Benutzer ohne Guthaben können nicht einkaufen gehen

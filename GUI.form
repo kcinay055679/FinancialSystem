@@ -1458,6 +1458,7 @@
             </constraints>
             <properties>
               <font size="18"/>
+              <text value="0.00"/>
             </properties>
           </component>
         </children>
@@ -1615,6 +1616,7 @@
             </constraints>
             <properties>
               <font size="18"/>
+              <text value="0.00"/>
             </properties>
           </component>
         </children>

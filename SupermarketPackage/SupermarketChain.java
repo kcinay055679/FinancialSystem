@@ -42,6 +42,7 @@ public class SupermarketChain extends Company implements java.io.Serializable{
                 chiefMap.put(chief.getName(), new Pair<>(chief, null));
                 shopMap.put(shopName, new Shop(shopName, selfCheckout, this, Place.valueOf(place.toUpperCase()), chiefMap.get(chief.getName()).getValue0(), earnings));
                 chiefMap.put(chief.getName(), new Pair<>(chief, shopMap.get(shopName)));
+                getShopMap().get(shopName).setChief(getChiefMap().get(chief.getName()).getValue0());
                 return true;
 
         } else {

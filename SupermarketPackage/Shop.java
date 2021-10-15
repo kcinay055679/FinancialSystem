@@ -147,20 +147,22 @@ public class Shop implements java.io.Serializable{
 
     public void promoteEmployee(String name){
         Person person = getPersonList().get(name);
+
+        Pair<Person, Shop> chiefPair = supermarketChain.getChiefMap().get(chief.getName());
+        //Pair<Person, Shop> collect = supermarketChain.getChiefMap().values().stream().filter(pair -> pair.getValue1() == this).collect(Collectors.toList()).get(0);
+
         person.setRank(Rank.CHIEF);
-        Pair<Person, Shop> collect = supermarketChain.getChiefMap().values().stream().filter(pair -> pair.getValue1() == this).collect(Collectors.toList()).get(0);
-        collect.getValue0().setRank(Rank.EMPLOYEE);
+        chiefPair.getValue0().setRank(Rank.EMPLOYEE);
 
         //Alter Chef wird als Mitarbeiter angestellt
-        hireEmployee(collect.getValue0().getName(),supermarketChain.getName(), this.name, collect.getValue0().getSalary());
+        hireEmployee(chiefPair.getValue0().getName(),supermarketChain.getName(), this.name, chiefPair.getValue0().getSalary());
 
         //Neuer Chef wird aus den Mitarbeiterlisten entfernt
-        supermarketChain.getEmployeeMap().remove(collect.getValue0().getName());
-        getEmployeeList().remove(person.getName());
+
 
         //Alter Chef wird aus der Chef Map entfernt
-        supermarketChain.getChiefMap().remove(collect.getValue0().getName());
+        supermarketChain.getChiefMap().remove(chiefPair.getValue0().getName());
        //Neuer Chef wird in die Chef Map aufgenommen
-        supermarketChain.getChiefMap().put(name, new Pair<>(person, collect.getValue1()));
+        supermarketChain.getChiefMap().put(name, new Pair<>(person, chiefPair.getValue1()));
     }
 }

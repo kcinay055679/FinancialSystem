@@ -279,7 +279,6 @@ public class GUI {
         labelInkorrektBuild.setVisible(false);
         labelFalschFleisch.setVisible(false);
         invisibler();
-
         Loginpanel.setVisible(true);
         ChiefMenu.setVisible(false);
 
@@ -314,572 +313,578 @@ public class GUI {
         });
 
         //Key listener wenn das Passwort angegeben wurde und Enter gedrückt wird
-        passwortLogin.addKeyListener(new
-                                             KeyAdapter() {
-                                                 @Override
-                                                 public void keyPressed(KeyEvent e) {
-                                                     if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                                         if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                                                 if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                                     invisibler();
-                                                                     Admin.setVisible(true);
-                                                                 } else {
-                                                                     if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                                         invisibler();
-                                                                         labelFalsch.setVisible(false);
-                                                                         Dashboardpanel.setVisible(true);
-                                                                         setDashboardInformation();
-                                                                         showSpecialButtons();
-                                                                     } else {
-                                                                         labelFalsch.setVisible(true);
-                                                                     }
-                                                                 }
-                                                             }
+        passwortLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                invisibler();
+                                Admin.setVisible(true);
+                            } else {
+                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                    invisibler();
+                                    labelFalsch.setVisible(false);
+                                    Dashboardpanel.setVisible(true);
+                                    setDashboardInformation();
+                                    showSpecialButtons();
+                                } else {
+                                    labelFalsch.setVisible(true);
+                                }
+                            }
+                        }
+                    }
+                }
+                super.keyPressed(e);
+            }
+        });
+        passwortLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                invisibler();
+                                Admin.setVisible(true);
+                            } else {
+                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                    invisibler();
+                                    labelFalsch.setVisible(false);
+                                    Dashboardpanel.setVisible(true);
+                                    setDashboardInformation();
+                                    showSpecialButtons();
+                                } else {
+                                    labelFalsch.setVisible(true);
+                                }
+                            }
+                        }
 
-                                                         }
+                    }
 
-                                                         super.keyPressed(e);
-                                                     }
+                    super.keyPressed(e);
+                }
 
-                                                 }
-                                             }
-        );
+            }
+    });
 
 
         //Falls der Benutzer schon beim Benutzernamen Enter drückt, oder diesen noch ändern muss
-        nameLogin.addKeyListener(new
+        nameLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                invisibler();
+                                Admin.setVisible(true);
+                            } else {
+                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                    invisibler();
+                                    labelFalsch.setVisible(false);
+                                    Dashboardpanel.setVisible(true);
+                                    setDashboardInformation();
+                                    showSpecialButtons();
+                                } else {
+                                    labelFalsch.setVisible(true);
+                                }
+                            }
+                        }
+                    }
+                }
+                super.keyPressed(e);
+            }
+        });
+        nameLogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                invisibler();
+                                Admin.setVisible(true);
+                            } else {
+                                if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                                    invisibler();
+                                    labelFalsch.setVisible(false);
+                                    Dashboardpanel.setVisible(true);
+                                    setDashboardInformation();
+                                    showSpecialButtons();
+                                } else {
+                                    labelFalsch.setVisible(true);
+                                }
+                            }
+                        }
 
-                                         KeyAdapter() {
-                                             @Override
-                                             public void keyPressed(KeyEvent e) {
-                                                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                                     if (SystemHandler.login(GUI.this.nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                                             if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                                 invisibler();
-                                                                 Admin.setVisible(true);
-                                                             } else {
-                                                                 if (SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                                                                     invisibler();
-                                                                     labelFalsch.setVisible(false);
-                                                                     Dashboardpanel.setVisible(true);
-                                                                     setDashboardInformation();
-                                                                     showSpecialButtons();
-                                                                 } else {
-                                                                     labelFalsch.setVisible(true);
-                                                                 }
-                                                             }
-                                                         }
-
-                                                     }
-                                                     super.keyPressed(e);
-                                                 }
-                                             }
+                    }
+                    super.keyPressed(e);
+                }
+            }
 
                                          });
 
         //Der Kunde betritt die Filiale
         //Nun hat der Kunde die Wahl in welcher Filiale er einkaufen gehen will
-        filialeBetretenButton.addActionListener(new
+        filialeBetretenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ButtonGroup g = new ButtonGroup();
+                PanelRadios.removeAll();
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    JRadioButton radioButtonNew = new JRadioButton(key);
+                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                    g.add(radioButtonNew);
+                    PanelRadios.add(radioButtonNew);
+                }
+                Filialebetreten.setVisible(true);
+            }
+        });
+        filialeBetretenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ButtonGroup g = new ButtonGroup();
+                PanelRadios.removeAll();
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    JRadioButton radioButtonNew = new JRadioButton(key);
+                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                    g.add(radioButtonNew);
+                    PanelRadios.add(radioButtonNew);
+                }
+                Filialebetreten.setVisible(true);
+            }
+        });
 
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                invisibler();
-                                                                ButtonGroup g = new ButtonGroup();
-                                                                PanelRadios.removeAll();
-                                                                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                                                                    JRadioButton radioButtonNew = new JRadioButton(key);
-                                                                    radioButtonNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                                                                    g.add(radioButtonNew);
-                                                                    PanelRadios.add(radioButtonNew);
-                                                                }
-                                                                Filialebetreten.setVisible(true);
-                                                            }
-                                                        });
-
-        tabletBenutzenButton.addActionListener(new
-
-                                                       ActionListener() {
-
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               //Hier gehts in den Aldi
-                                                               invisibler();
-                                                               Tablet.setVisible(true);
-                                                               TabletÜbersicht.setVisible(true);
-                                                           }
-                                                       });
-
+        tabletBenutzenButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Hier gehts in den Aldi
+                invisibler();
+                Tablet.setVisible(true);
+                TabletÜbersicht.setVisible(true);
+            }
+        });
         //Mit diesem Button fügt der Benutzer die Artikel in den Warenkorb ein
-        artikelInDenWarenkorbButton.addActionListener(new
-
-                                                              ActionListener() {
-                                                                  @Override
-                                                                  public void actionPerformed(ActionEvent e) {
-                                                                      for (String key : spinnerHashMap.keySet()) {
-                                                                          if ((Integer) spinnerHashMap.get(key).getValue() != 0) {
-                                                                              for (int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
-                                                                                  for (Pair<Article, Integer> key3Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().values()) {
-                                                                                      Article key3 = key3Pair.getValue0();
-                                                                                      if (key3.getName().equals(key)) {
-                                                                                          getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
-                                                                                          SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
-                                                                                          greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
-                                                                                      }
-                                                                                  }
-                                                                              }
-                                                                          }
-                                                                      }
-                                                                      generateProducts(getCurrentShop());
-                                                                      Gesamtwert.removeAll();
-                                                                      Gesamtwert.repaint();
-                                                                      Gesamtwert.revalidate();
-                                                                      JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
-                                                                      labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
-                                                                      Gesamtwert.add(labelNew);
-                                                                  }
-                                                              });
+        artikelInDenWarenkorbButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String key : spinnerHashMap.keySet()) {
+                    if ((Integer) spinnerHashMap.get(key).getValue() != 0) {
+                        for (int key2 : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().keySet()) {
+                            for (Pair<Article, Integer> key3Pair : SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().values()) {
+                                Article key3 = key3Pair.getValue0();
+                                if (key3.getName().equals(key)) {
+                                    getSelectedUser().getCart().addArticle(new Pair<>(SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0(), (Integer) spinnerHashMap.get(key).getValue()));
+                                    SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).takeArticle(key, (Integer) spinnerHashMap.get(key).getValue());
+                                    greatValue += SystemHandler.getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getShelfList().get(key2).getArticleList().get(key3.getName()).getValue0().getPrice() * (Integer) spinnerHashMap.get(key).getValue();
+                                }
+                            }
+                        }
+                    }
+                }
+                generateProducts(getCurrentShop());
+                Gesamtwert.removeAll();
+                Gesamtwert.repaint();
+                Gesamtwert.revalidate();
+                JLabel labelNew = new JLabel("Insgesamt: " + greatValue + "CHF");
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 30));
+                Gesamtwert.add(labelNew);
+            }
+        });
 
         /*Der anDieKasseGehenButton ist ein äusserst komplizierter Button. Er ist kaum nachvollziehbar
          * der Kunde wird gezwungen zu zahlen bar. Zahlt er mit Karte, landet er im Garte*/
-        anDieKasseGehenButton.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                invisibler();
-                                                                showPrice();
-                                                                Entscheidung.setVisible(true);
-                                                            }
-                                                        });
+        anDieKasseGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                showPrice();
+                Entscheidung.setVisible(true);
+            }
+        });
 
         //Dieser Button bestätigt die ausgewählte Filiale
-        bestätigenButton1.addActionListener(new
+        bestätigenButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setCurrentShop(comboBox1.getSelectedItem().toString());
+                generateProducts(comboBox1.getSelectedItem().toString());
 
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            setCurrentShop(comboBox1.getSelectedItem().toString());
-                                                            generateProducts(comboBox1.getSelectedItem().toString());
+                invisibler();
+                Warenkorb.setVisible(true);
+            }
+        });
 
-                                                            invisibler();
-                                                            Warenkorb.setVisible(true);
-                                                        }
-                                                    });
+        bezahlButtonKasse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                getSelectedUser().getCart().getArticleList().clear();
+                EinkaufAbschluss.setVisible(true);
+            }
+        });
 
-        bezahlButtonKasse.addActionListener(new
-
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            invisibler();
-                                                            getSelectedUser().getCart().getArticleList().clear();
-                                                            EinkaufAbschluss.setVisible(true);
-                                                        }
-                                                    });
-
-        backButton.addActionListener(new
-
-                                             ActionListener() {
-                                                 @Override
-                                                 public void actionPerformed(ActionEvent e) {
-                                                     getSelectedUser().decreaseMoney(greatValue);
-                                                     getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).increaseEarnings(greatValue);
-                                                     System.out.println(getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getEarnings());
-                                                     invisibler();
-                                                     greatValue = 0;
-                                                     labelRichtigSchüp.setVisible(false);
-                                                     labelFalschSchüp.setVisible(false);
-                                                     schüpercardMitPunktenAufladenButton.setVisible(true);
-                                                     Dashboardpanel.setVisible(true);
-                                                 }
-                                             });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSelectedUser().decreaseMoney(greatValue);
+                getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).increaseEarnings(greatValue);
+                System.out.println(getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getEarnings());
+                invisibler();
+                greatValue = 0;
+                labelRichtigSchüp.setVisible(false);
+                labelFalschSchüp.setVisible(false);
+                schüpercardMitPunktenAufladenButton.setVisible(true);
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
 
         //Tablet start
-        TabletMenuSupermarkt.addActionListener(new
+        TabletMenuSupermarkt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "supermarket";
+                fillDropdownWithSupermarkets(TabletSupermarktWählen);
 
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               currentTabletFuntion = "supermarket";
-                                                               fillDropdownWithSupermarkets(TabletSupermarktWählen);
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
 
-                                                               TabletÜbersicht.setVisible(false);
-                                                               TabletSelect.setVisible(true);
+                TabletSupermarktWählen.setVisible(true);
+                TabletSupermarktWählenLabel.setVisible(true);
 
-                                                               TabletSupermarktWählen.setVisible(true);
-                                                               TabletSupermarktWählenLabel.setVisible(true);
+                TabletArtikelWählen.setVisible(true);
+                TabletArtikelWählenLabel.setVisible(true);
 
-                                                               TabletArtikelWählen.setVisible(true);
-                                                               TabletArtikelWählenLabel.setVisible(true);
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
 
-                                                               TabletFilialeWählen.setVisible(false);
-                                                               TabletFilialeWählenLabel.setVisible(false);
+                TabletTypWählen.setVisible(false);
+                TabletTypWählenLabel.setVisible(false);
 
-                                                               TabletTypWählen.setVisible(false);
-                                                               TabletTypWählenLabel.setVisible(false);
+            }
+        });
 
-                                                           }
-                                                       });
+        TabletMenuTyp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "typ";
+                fillDropdownWithArticlesByType(TabletTypWählen);
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
 
-        TabletMenuTyp.addActionListener(new
+                TabletTypWählen.setVisible(true);
+                TabletTypWählenLabel.setVisible(true);
 
-                                                ActionListener() {
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e) {
-                                                        currentTabletFuntion = "typ";
-                                                        fillDropdownWithArticlesByType(TabletTypWählen);
-                                                        TabletÜbersicht.setVisible(false);
-                                                        TabletSelect.setVisible(true);
+                TabletSupermarktWählen.setVisible(false);
+                TabletSupermarktWählenLabel.setVisible(false);
 
-                                                        TabletTypWählen.setVisible(true);
-                                                        TabletTypWählenLabel.setVisible(true);
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
 
-                                                        TabletSupermarktWählen.setVisible(false);
-                                                        TabletSupermarktWählenLabel.setVisible(false);
-
-                                                        TabletFilialeWählen.setVisible(false);
-                                                        TabletFilialeWählenLabel.setVisible(false);
-
-                                                        TabletArtikelWählen.setVisible(false);
-                                                        TabletArtikelWählenLabel.setVisible(false);
+                TabletArtikelWählen.setVisible(false);
+                TabletArtikelWählenLabel.setVisible(false);
 
 
-                                                    }
-                                                });
+            }
+        });
 
-        TabletMenuFiliale.addActionListener(new
+        TabletMenuFiliale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "shop";
+                fillDropdownWithSupermarkets(TabletSupermarktWählen);
+                fillDropdownWithShops((String) TabletSupermarktWählen.getSelectedItem(), TabletFilialeWählen);
+                fillDropdownWithArticlesFromSupermarketFromShop((String) TabletSupermarktWählen.getSelectedItem(), (String) TabletFilialeWählen.getSelectedItem(), TabletArtikelWählen);
 
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            currentTabletFuntion = "shop";
-                                                            fillDropdownWithSupermarkets(TabletSupermarktWählen);
-                                                            fillDropdownWithShops((String) TabletSupermarktWählen.getSelectedItem(), TabletFilialeWählen);
-                                                            fillDropdownWithArticlesFromSupermarketFromShop((String) TabletSupermarktWählen.getSelectedItem(), (String) TabletFilialeWählen.getSelectedItem(), TabletArtikelWählen);
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
 
-                                                            TabletÜbersicht.setVisible(false);
-                                                            TabletSelect.setVisible(true);
+                TabletSupermarktWählen.setVisible(true);
+                TabletSupermarktWählenLabel.setVisible(true);
 
-                                                            TabletSupermarktWählen.setVisible(true);
-                                                            TabletSupermarktWählenLabel.setVisible(true);
+                TabletArtikelWählen.setVisible(true);
+                TabletArtikelWählenLabel.setVisible(true);
 
-                                                            TabletArtikelWählen.setVisible(true);
-                                                            TabletArtikelWählenLabel.setVisible(true);
+                TabletFilialeWählen.setVisible(true);
+                TabletFilialeWählenLabel.setVisible(true);
 
-                                                            TabletFilialeWählen.setVisible(true);
-                                                            TabletFilialeWählenLabel.setVisible(true);
-
-                                                            TabletTypWählen.setVisible(false);
-                                                            TabletTypWählenLabel.setVisible(false);
+                TabletTypWählen.setVisible(false);
+                TabletTypWählenLabel.setVisible(false);
 
 
-                                                        }
-                                                    });
+            }
+        });
 
-        TabletMenuName.addActionListener(new
+        TabletMenuName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentTabletFuntion = "name";
+                fillDropdownWithAllArticles(TabletArtikelWählen);
+                TabletÜbersicht.setVisible(false);
+                TabletSelect.setVisible(true);
 
-                                                 ActionListener() {
-                                                     @Override
-                                                     public void actionPerformed(ActionEvent e) {
-                                                         currentTabletFuntion = "name";
-                                                         fillDropdownWithAllArticles(TabletArtikelWählen);
-                                                         TabletÜbersicht.setVisible(false);
-                                                         TabletSelect.setVisible(true);
+                TabletSupermarktWählen.setVisible(false);
+                TabletSupermarktWählenLabel.setVisible(false);
 
-                                                         TabletSupermarktWählen.setVisible(false);
-                                                         TabletSupermarktWählenLabel.setVisible(false);
+                TabletArtikelWählen.setVisible(true);
+                TabletArtikelWählenLabel.setVisible(true);
 
-                                                         TabletArtikelWählen.setVisible(true);
-                                                         TabletArtikelWählenLabel.setVisible(true);
+                TabletFilialeWählen.setVisible(false);
+                TabletFilialeWählenLabel.setVisible(false);
 
-                                                         TabletFilialeWählen.setVisible(false);
-                                                         TabletFilialeWählenLabel.setVisible(false);
-
-                                                         TabletTypWählen.setVisible(false);
-                                                         TabletTypWählenLabel.setVisible(false);
+                TabletTypWählen.setVisible(false);
+                TabletTypWählenLabel.setVisible(false);
 
 
-                                                     }
-                                                 });
+            }
+        });
 
+        TabletSupermarktWählen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (TabletSupermarktWählen.getItemCount() > 0) {
+                    String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
 
-        TabletSupermarktWählen.addActionListener(new
+                    fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
+                }
+            }
+        });
 
-                                                         ActionListener() {
-                                                             @Override
-                                                             public void actionPerformed(ActionEvent e) {
-                                                                 if(TabletSupermarktWählen.getItemCount() > 0){
-                                                                     String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
+        TabletTypWählen.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentTabletFuntion = "typ";
+            TabletÜbersicht.setVisible(false);
+            TabletSelect.setVisible(true);
 
-                                                                     fillDropdownWithArticlesFromSupermarket(supermarket, TabletArtikelWählen);
-                                                                 }
-                                                             }
-                                                         });
+            TabletSupermarktWählen.setVisible(false);
+            TabletSupermarktWählenLabel.setVisible(false);
 
-        TabletTypWählen.addActionListener(new
+            TabletArtikelWählen.setVisible(false);
+            TabletArtikelWählenLabel.setVisible(false);
 
-                                                  ActionListener() {
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-                                                          currentTabletFuntion = "typ";
-                                                          TabletÜbersicht.setVisible(false);
-                                                          TabletSelect.setVisible(true);
+            TabletFilialeWählen.setVisible(false);
+            TabletFilialeWählenLabel.setVisible(false);
 
-                                                          TabletSupermarktWählen.setVisible(false);
-                                                          TabletSupermarktWählenLabel.setVisible(false);
+            TabletTypWählen.setVisible(true);
+            TabletTypWählenLabel.setVisible(true);
 
-                                                          TabletArtikelWählen.setVisible(false);
-                                                          TabletArtikelWählenLabel.setVisible(false);
+            fillDropdownWithArticlesByType(TabletTypWählen);
+        }
+    });
 
-                                                          TabletFilialeWählen.setVisible(false);
-                                                          TabletFilialeWählenLabel.setVisible(false);
+        TabletFilialeWählen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
+                String shopName = (String) TabletFilialeWählen.getSelectedItem();
+                System.out.println("tsets " + shopName);
+                TabletArtikelWählen.removeAllItems();
 
-                                                          TabletTypWählen.setVisible(true);
-                                                          TabletTypWählenLabel.setVisible(true);
+                if (currentTabletFuntion.equals("shop") && shopName != null) {
+                    fillDropdownWithArticlesFromSupermarketFromShop(supermarket, shopName, TabletArtikelWählen);
+                }
+            }
+        });
 
-                                                          fillDropdownWithArticlesByType(TabletTypWählen);
-                                                      }
-                                                  });
+        ButtonArtikelSuchen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SupermarketPackage.Tablet Tablet1 = new Tablet();
+                switch (currentTabletFuntion) {
+                    case "supermarket": {
+                        String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
+                        String articleName = (String) TabletArtikelWählen.getSelectedItem();
+                        List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
+                            String shopName = t.getValue0().getName();
+                            int amount = t.getValue2();
+                            int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
+                            output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden <br/>");
+                        }
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                        break;
+                    }
+                    case "typ": {
+                        String typ = (String) TabletTypWählen.getSelectedItem();
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
+                            for (Shop shop : supermarket.getShopMap().values()) {
+                                for (Shelf shelf : shop.getShelfList().values())
+                                    for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
+                                        if (articlePair.getValue0().getClass().getSimpleName().equals(typ)) {
 
-        TabletFilialeWählen.addActionListener(new
+                                            output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(articlePair.getValue0().getName()).append(" ").append(articlePair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
+                                        }
+                                    }
+                            }
+                        }
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                        break;
+                    }
+                    case "shop": {
+                        String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
+                        String shopName = (String) TabletFilialeWählen.getSelectedItem();
+                        String articleName = (String) TabletArtikelWählen.getSelectedItem();
+                        List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInShop(articleName, shopName, supermarketName);
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
 
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              String supermarket = (String) TabletSupermarktWählen.getSelectedItem();
-                                                              String shopName = (String) TabletFilialeWählen.getSelectedItem();
-                                                              System.out.println("tsets " + shopName);
-                                                              TabletArtikelWählen.removeAllItems();
+                            int amount = t.getValue2();
+                            int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
+                            output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden <br/>");
+                        }
 
-                                                              if (currentTabletFuntion.equals("shop") && shopName != null) {
-                                                                  fillDropdownWithArticlesFromSupermarketFromShop(supermarket, shopName, TabletArtikelWählen);
-                                                              }
-                                                          }
-                                                      });
-
-        ButtonArtikelSuchen.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              SupermarketPackage.Tablet Tablet1 = new Tablet();
-                                                              switch (currentTabletFuntion) {
-                                                                  case "supermarket": {
-                                                                      String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
-                                                                      String articleName = (String) TabletArtikelWählen.getSelectedItem();
-                                                                      List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInSystem(articleName, supermarketName);
-                                                                      StringBuilder output = new StringBuilder();
-                                                                      output.append("<html>");
-                                                                      for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
-                                                                          String shopName = t.getValue0().getName();
-                                                                          int amount = t.getValue2();
-                                                                          int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
-                                                                          output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden <br/>");
-                                                                      }
-                                                                      ArtikelFindenOutput.setText(output.append("</html>").toString());
-                                                                      break;
-                                                                  }
-                                                                  case "typ": {
-                                                                      String typ = (String) TabletTypWählen.getSelectedItem();
-                                                                      StringBuilder output = new StringBuilder();
-                                                                      output.append("<html>");
-                                                                      for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
-                                                                          for (Shop shop : supermarket.getShopMap().values()) {
-                                                                              for (Shelf shelf : shop.getShelfList().values())
-                                                                                  for (Pair<Article, Integer> articlePair : shelf.getArticleList().values()) {
-                                                                                      if (articlePair.getValue0().getClass().getSimpleName().equals(typ)) {
-
-                                                                                          output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(articlePair.getValue0().getName()).append(" ").append(articlePair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
-                                                                                      }
-                                                                                  }
-                                                                          }
-                                                                      }
-                                                                      ArtikelFindenOutput.setText(output.append("</html>").toString());
-                                                                      break;
-                                                                  }
-                                                                  case "shop": {
-                                                                      String supermarketName = (String) TabletSupermarktWählen.getSelectedItem();
-                                                                      String shopName = (String) TabletFilialeWählen.getSelectedItem();
-                                                                      String articleName = (String) TabletArtikelWählen.getSelectedItem();
-                                                                      List<Triplet<Shop, Article, Integer>> articleInSystemList = Tablet1.findArticleInShop(articleName, shopName, supermarketName);
-                                                                      StringBuilder output = new StringBuilder();
-                                                                      output.append("<html>");
-                                                                      for (Triplet<Shop, Article, Integer> t : articleInSystemList) {
-
-                                                                          int amount = t.getValue2();
-                                                                          int shelfId = Tablet1.findArticle(articleName, shopName, supermarketName);
-                                                                          output.append("In der Filiale ").append(shopName).append(" ist das Produkt ").append(articleName).append(" ").append(amount).append("x im Regal ").append(shelfId).append(" vorhanden <br/>");
-                                                                      }
-
-                                                                      ArtikelFindenOutput.setText(output.append("</html>").toString());
-                                                                      break;
-                                                                  }
-                                                                  case "name": {
-                                                                      String articleName = (String) TabletArtikelWählen.getSelectedItem();
-                                                                      StringBuilder output = new StringBuilder();
-                                                                      output.append("<html>");
-                                                                      for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
-                                                                          for (Shop shop : supermarket.getShopMap().values()) {
-                                                                              for (Shelf shelf : shop.getShelfList().values()) {
-                                                                                  for (Pair<Article, Integer> pair : shelf.getArticleList().values()) {
-                                                                                      assert articleName != null;
-                                                                                      if (articleName.equals(pair.getValue0().getName())) {
-                                                                                          output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(pair.getValue0().getName()).append(" ").append(pair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
-                                                                                      }
-                                                                                  }
-                                                                              }
-                                                                          }
-                                                                      }
-                                                                      ArtikelFindenOutput.setText(output.append("</html>").toString());
-                                                                      break;
-                                                                  }
-                                                              }
-                                                          }
-                                                      });
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                        break;
+                    }
+                    case "name": {
+                        String articleName = (String) TabletArtikelWählen.getSelectedItem();
+                        StringBuilder output = new StringBuilder();
+                        output.append("<html>");
+                        for (SupermarketChain supermarket : SystemHandler.getSupermarketChainMap().values()) {
+                            for (Shop shop : supermarket.getShopMap().values()) {
+                                for (Shelf shelf : shop.getShelfList().values()) {
+                                    for (Pair<Article, Integer> pair : shelf.getArticleList().values()) {
+                                        assert articleName != null;
+                                        if (articleName.equals(pair.getValue0().getName())) {
+                                            output.append("Im Supermarkt ").append(supermarket.getName()).append(" hat es in der Filiale ").append(shop.getName()).append(" das Produkt ").append(pair.getValue0().getName()).append(" ").append(pair.getValue1()).append("x im Regal ").append(shelf.getID()).append("<br/>");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ArtikelFindenOutput.setText(output.append("</html>").toString());
+                        break;
+                    }
+                }
+            }
+        });
 
         //Tablet ende
 
-        schüpercardButton.addActionListener(new
+        schüpercardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Schüpercard.setVisible(true);
+            }
+        });
 
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            invisibler();
-                                                            Schüpercard.setVisible(true);
-                                                        }
-                                                    });
-
-        ausloggenButton.addActionListener(new
-
-                                                  ActionListener() {
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-                                                          invisibler();
-                                                          Loginpanel.setVisible(true);
-                                                          labelFalsch.setVisible(false);
-                                                          nameLogin.setText("");
-                                                          passwortLogin.setText("");
-                                                          SystemHandler.logout();
-                                                      }
-                                                  });
+        ausloggenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Loginpanel.setVisible(true);
+                labelFalsch.setVisible(false);
+                nameLogin.setText("");
+                passwortLogin.setText("");
+                SystemHandler.logout();
+            }
+        });
 
         //Alle Zurückbuttons welche wir brauchen um das Programm dynamisch zu gestalten
-        zurückButton.addActionListener(new
+        zurückButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
-                                               ActionListener() {
-                                                   @Override
-                                                   public void actionPerformed(ActionEvent e) {
-                                                       invisibler();
-                                                       Dashboardpanel.setVisible(true);
-                                                   }
-                                               });
+        zurückButtonFiliale1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filialebetreten.setVisible(true);
+            }
+        });
 
-        zurückButtonFiliale1.addActionListener(new
+        zurückButtonKasse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Warenkorb.setVisible(true);
+            }
+        });
 
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               Filialebetreten.setVisible(true);
-                                                           }
-                                                       });
+        zurückButtonWarenkorb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Filiale.setVisible(true);
+            }
+        });
 
-        zurückButtonKasse.addActionListener(new
+        zurückButtonSchüpercard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            invisibler();
-                                                            Warenkorb.setVisible(true);
-                                                        }
-                                                    });
+        Zurück.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
-        zurückButtonWarenkorb.addActionListener(new
+        buttonZurückTablet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Tablet.setVisible(true);
+                TabletÜbersicht.setVisible(true);
+            }
+        });
 
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                invisibler();
-                                                                Filiale.setVisible(true);
-                                                            }
-                                                        });
+        schüpercardErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SchüpercardNummer.removeAll();
+                getSelectedUser().addSchüppercard();
 
-        zurückButtonSchüpercard.addActionListener(new
+                JLabel labelNew = new JLabel("Ihre Schüpercardnummer: " + getSelectedUser().getCard().getCardnumber());
+                labelNew.setFont(new Font("Serif", Font.PLAIN, 26));
+                labelNew.setHorizontalAlignment(SwingConstants.CENTER);
 
-                                                          ActionListener() {
-                                                              @Override
-                                                              public void actionPerformed(ActionEvent e) {
-                                                                  invisibler();
-                                                                  Dashboardpanel.setVisible(true);
-                                                              }
-                                                          });
+                SchüpercardNummer.repaint();
+                SchüpercardNummer.revalidate();
+                schüpercardErstellenButton.setVisible(false);
+                invisibler();
+                SchüpercardNummer.add(labelNew);
+                SchüperkarteErstellt.setVisible(true);
+                showSpecialButtons();
+            }
+        });
 
-        Zurück.addActionListener(new
+        zurückButtonSchüpperkarteErstellt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
-                                         ActionListener() {
-                                             @Override
-                                             public void actionPerformed(ActionEvent e) {
-                                                 invisibler();
-                                                 Dashboardpanel.setVisible(true);
-                                             }
-                                         });
-
-        buttonZurückTablet.addActionListener(new
-
-                                                     ActionListener() {
-                                                         @Override
-                                                         public void actionPerformed(ActionEvent e) {
-                                                             invisibler();
-                                                             Tablet.setVisible(true);
-                                                             TabletÜbersicht.setVisible(true);
-                                                         }
-                                                     });
-
-        schüpercardErstellenButton.addActionListener(new
-
-                                                             ActionListener() {
-                                                                 @Override
-                                                                 public void actionPerformed(ActionEvent e) {
-                                                                     SchüpercardNummer.removeAll();
-                                                                     getSelectedUser().addSchüppercard();
-
-                                                                     JLabel labelNew = new JLabel("Ihre Schüpercardnummer: " + getSelectedUser().getCard().getCardnumber());
-                                                                     labelNew.setFont(new Font("Serif", Font.PLAIN, 26));
-                                                                     labelNew.setHorizontalAlignment(SwingConstants.CENTER);
-
-                                                                     SchüpercardNummer.repaint();
-                                                                     SchüpercardNummer.revalidate();
-                                                                     schüpercardErstellenButton.setVisible(false);
-                                                                     invisibler();
-                                                                     SchüpercardNummer.add(labelNew);
-                                                                     SchüperkarteErstellt.setVisible(true);
-                                                                     showSpecialButtons();
-                                                                 }
-                                                             });
-
-        zurückButtonSchüpperkarteErstellt.addActionListener(new
-
-                                                                    ActionListener() {
-                                                                        @Override
-                                                                        public void actionPerformed(ActionEvent e) {
-                                                                            invisibler();
-                                                                            Dashboardpanel.setVisible(true);
-                                                                        }
-                                                                    });
-
-        arbeitenGehenButton.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              invisibler();
-                                                              Mitarbeiter.setVisible(true);
-                                                              startWorkTime = DigitalClock.SimpleDigitalClock.realTime;
-                                                          }
-                                                      });
+        arbeitenGehenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+                startWorkTime = DigitalClock.SimpleDigitalClock.realTime;
+            }
+        });
 
 //        kündenButton.addActionListener(new ActionListener() {
 //            @Override
@@ -896,549 +901,491 @@ public class GUI {
 //                }
 //            }
 //        });
-        regalHinzufügenButton.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                invisibler();
-                                                                SpinnerModel sm = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
-                                                                spinnerAnzRegale = new JSpinner(sm);
-                                                                Component mySpinnerEditor = spinnerAnzRegale.getEditor();
-                                                                JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
-                                                                jftf.setColumns(25);
-                                                                spinnerAnzRegale.setFont(new Font("Serif", Font.PLAIN, 22));
-                                                                SpinnerPanelRegal.add(spinnerAnzRegale);
-                                                                RegalHinzufügen.setVisible(true);
-                                                            }
-                                                        });
-
-        produktHinzufügenButton.addActionListener(new
-
-                                                          ActionListener() {
-                                                              @Override
-                                                              public void actionPerformed(ActionEvent e) {
-                                                                  comboBoxProduktart.removeAllItems();
-                                                                  invisibler();
-                                                                  fillDropdownWithArticlesByType(comboBoxProduktart);
-
-                                                                  System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
-                                                                  SpinnerModel sm = new SpinnerNumberModel(1, 1, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
-                                                                  spinnerRegal = new JSpinner(sm);
-                                                                  spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
-                                                                  Dimension dimension = new Dimension(800, 35);
-                                                                  SpinnerPanelProdukte.removeAll();
-                                                                  spinnerRegal.setPreferredSize(dimension);
-                                                                  SpinnerPanelProdukte.add(spinnerRegal);
-                                                                  ProduktHinzufügen.setVisible(true);
-                                                                  ProduktHinzufügen.repaint();
-                                                                  ProduktHinzufügen.revalidate();
-                                                              }
-                                                          });
-
-        eingebenButton.addActionListener(new
-
-                                                 ActionListener() {
-                                                     @Override
-                                                     public void actionPerformed(ActionEvent e) {
-                                                         fillDropdownsTrueFalsePro();
-                                                         if (comboBoxProduktart.getSelectedItem().equals("Food")) {
-                                                             Arrays.asList(Fleischsorten.values())
-                                                                     .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
-                                                             invisibler();
-                                                             FoodPanel.setVisible(true);
-
-                                                         } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
-                                                             Arrays.asList(Material.values())
-                                                                     .forEach(material -> comboBoxMaterial.addItem(material));
-                                                             invisibler();
-                                                             BuildingMatPanel.setVisible(true);
-                                                         } else {
-                                                             System.out.println("Siuuur");
-                                                         }
-                                                         //Preisfelder formatieren
-                                                         NumberFormat format = DecimalFormat.getInstance();
-                                                         format.setMinimumFractionDigits(2);
-                                                         format.setMaximumFractionDigits(2);
-                                                         format.setRoundingMode(RoundingMode.HALF_UP);
-                                                         InternationalFormatter formatter = new InternationalFormatter(format);
-                                                         formatter.setAllowsInvalid(false);
-                                                         formatter.setMinimum(0.0);
-                                                         formatter.setMaximum(1000.00);
-                                                         DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
-                                                         formattedTextFieldPreisFleisch.setFormatterFactory(factory);
-                                                         formattedTextFieldPreisMat.setFormatterFactory(factory);
-
-                                                         //Spinnermodel mit spinnern
-                                                         SpinnerModel sm = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
-                                                         spinnerMengeFleisch.setModel(sm);
-                                                         spinnerMengeMat.setModel(sm);
-                                                         spinnerTonnen.setModel(sm);
-
-                                                     }
-                                                 });
-
-        ChiefMenu.addActionListener(new
-
-                                            ActionListener() {
-                                                @Override
-                                                public void actionPerformed(ActionEvent e) {
-                                                    invisibler();
-                                                    ChiefPanel.setVisible(true);
-                                                    ChiefMenuActionPanel.setVisible(false);
-                                                    ChiefSalaryField.setVisible(false);
-                                                    ChiefHireSalaryLabel.setVisible(false);
-                                                }
-                                            });
-
-        GetAllEmployeesOfShop.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                ChiefOutput.setVisible(true);
-                                                                ChiefMenuActionPanel.setVisible(false);
-                                                                ChiefOutput.setText("<html>");
-                                                                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
-                                                                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
-                                                                        if (pair.getValue0() == getSelectedUser()) {
-                                                                            for (String p : pair.getValue1().getPresentEmployees().keySet()) {
-                                                                                ChiefOutput.setText(ChiefOutput.getText() + p + "<br/>");
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
-
-                                                            }
-                                                        });
-
-        zurückButtonHinzufügen.addActionListener(new
-
-                                                         ActionListener() {
-                                                             @Override
-                                                             public void actionPerformed(ActionEvent e) {
-                                                                 invisibler();
-                                                                 Mitarbeiter.setVisible(true);
-                                                             }
-                                                         });
-
-        zurückButtonFleisch.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              clearDropdownsTrueFalsePro();
-                                                              invisibler();
-                                                              ProduktHinzufügen.setVisible(true);
-                                                          }
-                                                      });
-
-        produktErstellenButton.addActionListener(new
-
-                                                         ActionListener() {
-                                                             @Override
-                                                             public void actionPerformed(ActionEvent e) {
-                                                                 if (produktnameTextField.getText().equals("") || formattedTextFieldPreisFleisch.getText().equals("")
-                                                                         || comboBoxBarcodeFleisch.getSelectedItem().equals("") || DatumTextField.getText().equals("") ||
-                                                                         comboBoxFleisch.getSelectedItem() == null) {
-                                                                     labelFalschFleisch.setVisible(true);
-                                                                 } else {
-                                                                     try {
-                                                                         String produktname = produktnameTextField.getText();
-                                                                         float preis = Float.parseFloat(formattedTextFieldPreisFleisch.getText());
-                                                                         boolean barcode = Boolean.parseBoolean(comboBoxBarcodeFleisch.getSelectedItem().toString());
-                                                                         Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
-                                                                         String date = DatumTextField.getText();
-                                                                         SupermarketHandler.createFood(produktname, preis, (Integer) spinnerMengeFleisch.getValue(), barcode, date,
-                                                                                 getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue(), fleisch);
-                                                                         invisibler();
-                                                                         ProduktErstellt.setVisible(true);
-                                                                         clearDropdownsTrueFalsePro();
-                                                                         labelFalschFleisch.setVisible(false);
-                                                                     } catch (Exception a) {
-                                                                         labelUnkorrektFleisch.setVisible(true);
-                                                                     }
-                                                                 }
-                                                             }
-                                                         });
-
-        HireEmployee.addActionListener(new
-
-                                               ActionListener() {
-                                                   @Override
-                                                   public void actionPerformed(ActionEvent e) {
-                                                       ChiefOutput.setVisible(false);
-                                                       ChiefHireSalaryLabel.setVisible(true);
-                                                       ChiefMenuActionPanel.setVisible(true);
-                                                       ChiefMenuComboBox.removeAllItems();
-                                                       ChiefSalaryField.setVisible(true);
-                                                       NumberFormat format = NumberFormat.getIntegerInstance();
-                                                       NumberFormatter formatter = new NumberFormatter(format);
-                                                       formatter.setValueClass(Integer.class);
-                                                       formatter.setMinimum(0);
-                                                       formatter.setMaximum(Integer.MAX_VALUE);
-                                                       formatter.setAllowsInvalid(false);
-                                                       DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
-                                                       ChiefSalaryField.setFormatterFactory(factory);
-
-                                                       ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
-                                                       getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
-                                                   }
-                                               });
-
-        ChiefMenuEnter.addActionListener(new
-
-                                                 ActionListener() {
-                                                     @Override
-                                                     public void actionPerformed(ActionEvent e) {
-
-                                                         Shop shop = getSelectedUser().getCurrentShopWork();
-                                                         SupermarketChain supermarket = shop.getSupermarketChain();
-
-                                                         if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
-                                                             System.out.println(ChiefSalaryField.getValue());
-                                                             hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
-                                                             ChiefMenuActionPanel.setVisible(false);
-                                                             ChiefSalaryField.setVisible(false);
-                                                             ChiefHireSalaryLabel.setVisible(false);
-                                                             ChiefMenuComboBox.removeAllItems();
-                                                         } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
-                                                             fireEmployee((String) ChiefMenuComboBox.getSelectedItem());
-                                                             ChiefMenuActionPanel.setVisible(false);
-                                                             ChiefMenuComboBox.removeAllItems();
-                                                         } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
-                                                             getSelectedUser().getCurrentShopWork().promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
-
-                                                             ChiefOutput.setVisible(false);
-                                                             ChiefMenuActionPanel.setVisible(false);
-                                                             ChiefMenuComboBox.removeAllItems();
-                                                             invisibler();
-                                                             Dashboardpanel.setVisible(true);
-                                                             showSpecialButtons();
-                                                         }
-                                                     }
-                                                 });
-
-        mitarbeiterKündigenButton.addActionListener(new
-
-                                                            ActionListener() {
-                                                                @Override
-                                                                public void actionPerformed(ActionEvent e) {
-                                                                    ChiefOutput.setVisible(false);
-                                                                    ChiefMenuActionPanel.setVisible(true);
-                                                                    ChiefMenuComboBox.removeAllItems();
-                                                                    ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um ihr zu kündigen");
-                                                                    Company company = null;
-                                                                    Shop shop = null;
-                                                                    for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
-                                                                        for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
-                                                                            if (pair.getValue0() == getSelectedUser()) {
-                                                                                shop = pair.getValue1();
-                                                                                company = shop.getSupermarketChain();
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    shop.getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
-                                                                }
-                                                            });
-
-        zurückButtonMaterial.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               ProduktHinzufügen.setVisible(true);
-                                                           }
-                                                       });
-
-        zurückZumMenuButton.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              ChiefOutput.setVisible(false);
-                                                              ChiefMenuActionPanel.setVisible(false);
-                                                              ChiefMenuComboBox.removeAllItems();
-                                                              invisibler();
-                                                              Dashboardpanel.setVisible(true);
-                                                          }
-                                                      });
-
-        ChiefMenuALLEmployees.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                ChiefOutput.setVisible(true);
-                                                                ChiefMenuActionPanel.setVisible(false);
-                                                                ChiefOutput.setText("<html>");
-                                                                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
-                                                                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
-                                                            }
-                                                        });
-
-        zurückZumMenüButton.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              invisibler();
-                                                              Mitarbeiter.setVisible(true);
-                                                          }
-                                                      });
-
-        produktErstellenBuildingMat.addActionListener(new
-
-                                                              ActionListener() {
-                                                                  @Override
-                                                                  public void actionPerformed(ActionEvent e) {
-                                                                      if (produktnamenBuild.getText().equals("") || formattedTextFieldPreisMat.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
-                                                                              || comboBoxBarcode.getSelectedItem().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
-                                                                          labelInkorrektBuild.setVisible(true);
-                                                                      } else {
-                                                                          try {
-                                                                              String produktname = produktnamenBuild.getText();
-                                                                              float preis = Float.parseFloat(formattedTextFieldPreisMat.getText());
-                                                                              int menge = (Integer) spinnerMengeMat.getValue();
-                                                                              boolean barcode = Boolean.parseBoolean(comboBoxBarcode.getSelectedItem().toString());
-                                                                              int tonnen = (Integer) spinnerTonnen.getValue();
-                                                                              String mat = comboBoxMaterial.getSelectedItem().toString();
-
-                                                                              SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
-                                                                                      getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
-
-                                                                              invisibler();
-                                                                              ProduktErstellt.setVisible(true);
-                                                                              clearDropdownsTrueFalsePro();
-                                                                              labelFalschBuild.setVisible(false);
-                                                                          } catch (Exception a) {
-                                                                              labelFalschBuild.setVisible(true);
-                                                                          }
-                                                                      }
-                                                                  }
-                                                              });
-
-        promoteEmployeeButton.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                ChiefOutput.setVisible(false);
-                                                                ChiefMenuActionPanel.setVisible(true);
-                                                                ChiefMenuComboBox.removeAllItems();
-                                                                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
-                                                                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
-
-                                                            }
-                                                        });
-
-        kündenButton.addActionListener(new
-
-                                               ActionListener() {
-                                                   @Override
-                                                   public void actionPerformed(ActionEvent e) {
-                                                       fireEmployee(getSelectedUser().getName());
-                                                       invisibler();
-                                                       showSpecialButtons();
-                                                       Dashboardpanel.setVisible(true);
-                                                   }
-                                               });
-
-        arbeitVerlassenButton.addActionListener(new
-
-                                                        ActionListener() {
-                                                            @Override
-                                                            public void actionPerformed(ActionEvent e) {
-                                                                invisibler();
-                                                                Dashboardpanel.setVisible(true);
-                                                                long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
-                                                                int test = getSelectedUser().receiveSalary(hours);
-                                                                getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
-                                                                Dashboardpanel.setVisible(true);
-                                                            }
-                                                        });
-
-        gewählteAnzahlHinzufügenButton.addActionListener(new
-
-                                                                 ActionListener() {
-                                                                     @Override
-                                                                     public void actionPerformed(ActionEvent e) {
-                                                                         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
-                                                                             for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
-                                                                                 for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
-                                                                                     if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
-                                                                                         for (int i = 0; i < (Integer) spinnerAnzRegale.getValue(); i++) {
-                                                                                             SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
-                                                                                         }
-                                                                                     }
-                                                                                 }
-                                                                             }
-                                                                         }
-                                                                         invisibler();
-                                                                         RegaleErstellt.setVisible(true);
-                                                                     }
-                                                                 });
-
-        zurückZumMenüButton1.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               SpinnerPanelRegal.removeAll();
-                                                               Mitarbeiter.setVisible(true);
-                                                           }
-                                                       });
-
-        normaleKasseButton.addActionListener(new
-
-                                                     ActionListener() {
-                                                         @Override
-                                                         public void actionPerformed(ActionEvent e) {
-                                                             invisibler();
-                                                             Kassen.setVisible(true);
-                                                         }
-                                                     });
-
-        selfscannerButton.addActionListener(new
-
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            invisibler();
-                                                            for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
-                                                                float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
-                                                                JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
-                                                                        + price + ", ");
-
-                                                                String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
-                                                                        + price + ", ";
-                                                                ProdukteWarenkorbComb.addItem(value);
-                                                            }
-                                                            Selfscanner.setVisible(true);
-                                                        }
-                                                    });
-
-        scanButton.addActionListener(new
-
-                                             ActionListener() {
-                                                 @Override
-                                                 public void actionPerformed(ActionEvent e) {
-                                                     if (ProdukteWarenkorbComb.getSelectedItem() == null) {
-                                                         ErrorMessageScan.setVisible(true);
-                                                         model.clear();
-                                                     } else {
-                                                         produkteGescanntList.removeAll();
-                                                         model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
-                                                         JList listNew = new JList(model);
-                                                         listNew.setFont(new Font("Serif", Font.PLAIN, 24));
-                                                         produkteGescanntList.add(listNew);
-
-                                                         PreisGesamt.removeAll();
-                                                         greatPrice += getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
-                                                                 ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
-                                                                 ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue1();
-
-                                                         ProdukteWarenkorbComb.removeItem(ProdukteWarenkorbComb.getSelectedItem());
-                                                         JLabel labelNew = new JLabel("Kosten Betragen: " + greatPrice);
-                                                         labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
-                                                         labelNew.setVerticalAlignment(SwingConstants.CENTER);
-                                                         PreisGesamt.add(labelNew);
-                                                         ProdukteWarenkorbComb.repaint();
-                                                         ProdukteWarenkorbComb.revalidate();
-                                                     }
-                                                 }
-                                             });
-
-        bezahlenButtonScan.addActionListener(new
-
-                                                     ActionListener() {
-                                                         @Override
-                                                         public void actionPerformed(ActionEvent e) {
-                                                             produkteGescanntList.removeAll();
-                                                             ProdukteWarenkorbComb.removeAllItems();
-                                                             model.clear();
-                                                             getSelectedUser().getCart().getArticleList().clear();
-                                                             invisibler();
-
-                                                             EinkaufAbschluss.setVisible(true);
-                                                         }
-                                                     });
-
-        auswählenButton.addActionListener(new
-
-                                                  ActionListener() {
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-                                                          if (aldiRadioButton.isSelected()) {
-                                                              setCurrentCompany("aldi");
-                                                          } else if (migrosRadioButton.isSelected()) {
-                                                              setCurrentCompany("migros");
-                                                          } else if (coopRadioButton.isSelected()) {
-                                                              setCurrentCompany("coop");
-                                                          }
-                                                          if (getCurrentCompany() == null) {
-                                                              labelFalschRadio.setVisible(true);
-                                                          } else {
-                                                              invisibler();
-                                                              Filiale.setVisible(true);
-                                                              fillDropdownWithShops(getCurrentCompany(), comboBox1);
-                                                              labelFalschRadio.setVisible(false);
-                                                          }
-                                                      }
-                                                  });
-
-        zurückButton2.addActionListener(new
-
-                                                ActionListener() {
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e) {
-                                                        SpinnerPanelRegal.removeAll();
-                                                        invisibler();
-                                                        Mitarbeiter.setVisible(true);
-                                                    }
-                                                });
-
-        convertSchüpperpointsButton.addActionListener(new
-
-                                                              ActionListener() {
-                                                                  @Override
-                                                                  public void actionPerformed(ActionEvent e) {
-                                                                      getSelectedUser().convertSchüpperPoints();
-                                                                      setDashboardInformation();
-                                                                  }
-                                                              });
-
-        schüpercardMitPunktenAufladenButton.addActionListener(new
-
-                                                                      ActionListener() {
-                                                                          @Override
-                                                                          public void actionPerformed(ActionEvent e) {
-                                                                              if (textFieldSchüpercard.getText().equals("")) {
-                                                                                  labelFalschSchüp.setVisible(true);
-                                                                              } else {
-                                                                                  try {
-                                                                                      if ((Integer.parseInt(textFieldSchüpercard.getText()) > 9999 || Integer.parseInt(textFieldSchüpercard.getText()) < 1000)) {
-                                                                                          labelFalschSchüp.setVisible(true);
-                                                                                      } else {
-                                                                                          if (getSelectedUser().getCard().getCardnumber() == Integer.parseInt(textFieldSchüpercard.getText())) {
-                                                                                              getSelectedUser().getCard().increasePoints(greatValue);
-                                                                                              schüpercardMitPunktenAufladenButton.setVisible(false);
-                                                                                              labelFalschSchüp.setVisible(false);
-                                                                                              labelRichtigSchüp.setVisible(true);
-
-                                                                                          } else {
-                                                                                              labelFalschSchüp.setVisible(true);
-                                                                                          }
-                                                                                      }
-                                                                                  } catch (Exception a) {
-                                                                                      labelFalschSchüp.setVisible(true);
-                                                                                  }
-                                                                              }
-                                                                          }
-                                                                      });
+        regalHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
+                spinnerAnzRegale = new JSpinner(sm);
+                Component mySpinnerEditor = spinnerAnzRegale.getEditor();
+                JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
+                jftf.setColumns(25);
+                spinnerAnzRegale.setFont(new Font("Serif", Font.PLAIN, 22));
+                SpinnerPanelRegal.add(spinnerAnzRegale);
+                RegalHinzufügen.setVisible(true);
+            }
+        });
+
+        produktHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comboBoxProduktart.removeAllItems();
+                invisibler();
+                fillDropdownWithArticlesByType(comboBoxProduktart);
+
+                System.out.println(getSelectedUser().getCurrentShopWork().getShelfList().size());
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, getSelectedUser().getCurrentShopWork().getShelfList().size(), 1);
+                spinnerRegal = new JSpinner(sm);
+                spinnerRegal.setFont(new Font("Serif", Font.PLAIN, 22));
+                Dimension dimension = new Dimension(800, 35);
+                SpinnerPanelProdukte.removeAll();
+                spinnerRegal.setPreferredSize(dimension);
+                SpinnerPanelProdukte.add(spinnerRegal);
+                ProduktHinzufügen.setVisible(true);
+                ProduktHinzufügen.repaint();
+                ProduktHinzufügen.revalidate();
+            }
+        });
+
+        eingebenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fillDropdownsTrueFalsePro();
+                if (comboBoxProduktart.getSelectedItem().equals("Food")) {
+                    Arrays.asList(Fleischsorten.values())
+                            .forEach(fleisch -> comboBoxFleisch.addItem(fleisch));
+                    invisibler();
+                    FoodPanel.setVisible(true);
+
+                } else if (comboBoxProduktart.getSelectedItem().equals("BuildingMaterial")) {
+                    Arrays.asList(Material.values())
+                            .forEach(material -> comboBoxMaterial.addItem(material));
+                    invisibler();
+                    BuildingMatPanel.setVisible(true);
+                } else {
+                    System.out.println("Siuuur");
+                }
+                //Preisfelder formatieren
+                NumberFormat format = DecimalFormat.getInstance();
+                format.setMinimumFractionDigits(2);
+                format.setMaximumFractionDigits(2);
+                format.setRoundingMode(RoundingMode.HALF_UP);
+                InternationalFormatter formatter = new InternationalFormatter(format);
+                formatter.setAllowsInvalid(false);
+                formatter.setMinimum(0.0);
+                formatter.setMaximum(1000.00);
+                DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
+                formattedTextFieldPreisFleisch.setFormatterFactory(factory);
+                formattedTextFieldPreisMat.setFormatterFactory(factory);
+
+                //Spinnermodel mit spinnern
+                SpinnerModel sm = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
+                spinnerMengeFleisch.setModel(sm);
+                spinnerMengeMat.setModel(sm);
+                spinnerTonnen.setModel(sm);
+
+            }
+        });
+
+        ChiefMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ChiefPanel.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefSalaryField.setVisible(false);
+                ChiefHireSalaryLabel.setVisible(false);
+            }
+        });
+
+        GetAllEmployeesOfShop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefOutput.setText("<html>");
+                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
+                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
+                        if (pair.getValue0() == getSelectedUser()) {
+                            for (String p : pair.getValue1().getPresentEmployees().keySet()) {
+                                ChiefOutput.setText(ChiefOutput.getText() + p + "<br/>");
+                            }
+                        }
+                    }
+                }
+                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
+
+            }
+        });
+
+        zurückButtonHinzufügen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+
+        zurückButtonFleisch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearDropdownsTrueFalsePro();
+                invisibler();
+                ProduktHinzufügen.setVisible(true);
+            }
+        });
+
+        produktErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (produktnameTextField.getText().equals("") || formattedTextFieldPreisFleisch.getText().equals("")
+                        || comboBoxBarcodeFleisch.getSelectedItem().equals("") || DatumTextField.getText().equals("") ||
+                        comboBoxFleisch.getSelectedItem() == null) {
+                    labelFalschFleisch.setVisible(true);
+                } else {
+                    try {
+                        String produktname = produktnameTextField.getText();
+                        float preis = Float.parseFloat(formattedTextFieldPreisFleisch.getText());
+                        boolean barcode = Boolean.parseBoolean(comboBoxBarcodeFleisch.getSelectedItem().toString());
+                        Fleischsorten fleisch = Fleischsorten.valueOf(comboBoxFleisch.getSelectedItem().toString());
+                        String date = DatumTextField.getText();
+                        SupermarketHandler.createFood(produktname, preis, (Integer) spinnerMengeFleisch.getValue(), barcode, date,
+                                getSelectedUser().getCurrentShopWork().getName(), getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue(), fleisch);
+                        invisibler();
+                        ProduktErstellt.setVisible(true);
+                        clearDropdownsTrueFalsePro();
+                        labelFalschFleisch.setVisible(false);
+                    } catch (Exception a) {
+                        labelUnkorrektFleisch.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        HireEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefHireSalaryLabel.setVisible(true);
+                ChiefMenuActionPanel.setVisible(true);
+                ChiefMenuComboBox.removeAllItems();
+                ChiefSalaryField.setVisible(true);
+                NumberFormat format = NumberFormat.getIntegerInstance();
+                NumberFormatter formatter = new NumberFormatter(format);
+                formatter.setValueClass(Integer.class);
+                formatter.setMinimum(0);
+                formatter.setMaximum(Integer.MAX_VALUE);
+                formatter.setAllowsInvalid(false);
+                DefaultFormatterFactory factory = new DefaultFormatterFactory(formatter);
+                ChiefSalaryField.setFormatterFactory(factory);
+
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie einzustellen");
+                getPersonList().values().stream().filter(p -> p.getRank() == Rank.UNEMPLOYED).forEach(p -> ChiefMenuComboBox.addItem(p.getName()));
+            }
+        });
+
+        ChiefMenuEnter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Shop shop = getSelectedUser().getCurrentShopWork();
+                SupermarketChain supermarket = shop.getSupermarketChain();
+
+                if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie einzustellen") && ChiefMenuComboBox.getItemCount() > 0) {
+                    System.out.println(ChiefSalaryField.getValue());
+                    hireEmployee((String) ChiefMenuComboBox.getSelectedItem(), supermarket.getName(), shop.getName(), (Integer) ChiefSalaryField.getValue());
+                    ChiefMenuActionPanel.setVisible(false);
+                    ChiefSalaryField.setVisible(false);
+                    ChiefHireSalaryLabel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um ihr zu kündigen") && ChiefMenuComboBox.getItemCount() > 0) {
+                    fireEmployee((String) ChiefMenuComboBox.getSelectedItem());
+                    ChiefMenuActionPanel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                } else if (ChiefMenuActionPanelLabel.getText().equals("Bitte wähle eine Person um sie zum Chef zu befördern") && ChiefMenuComboBox.getItemCount() > 0) {
+                    getSelectedUser().getCurrentShopWork().promoteEmployee((String) ChiefMenuComboBox.getSelectedItem());
+
+                    ChiefOutput.setVisible(false);
+                    ChiefMenuActionPanel.setVisible(false);
+                    ChiefMenuComboBox.removeAllItems();
+                    invisibler();
+                    Dashboardpanel.setVisible(true);
+                    showSpecialButtons();
+                }
+            }
+        });
+
+        mitarbeiterKündigenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(true);
+                ChiefMenuComboBox.removeAllItems();
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um ihr zu kündigen");
+                Company company = null;
+                Shop shop = null;
+                for (SupermarketChain supermarket : getSupermarketChainMap().values()) {
+                    for (Pair<Person, Shop> pair : supermarket.getChiefMap().values()) {
+                        if (pair.getValue0() == getSelectedUser()) {
+                            shop = pair.getValue1();
+                            company = shop.getSupermarketChain();
+                        }
+                    }
+                }
+                shop.getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
+            }
+        });
+
+        zurückButtonMaterial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                ProduktHinzufügen.setVisible(true);
+            }
+        });
+
+        zurückZumMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefMenuComboBox.removeAllItems();
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+
+        ChiefMenuALLEmployees.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(true);
+                ChiefMenuActionPanel.setVisible(false);
+                ChiefOutput.setText("<html>");
+                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefOutput.setText(ChiefOutput.getText() + person.getName() + "<br/>"));
+                ChiefOutput.setText(ChiefOutput.getText() + "</html>");
+            }
+        });
+
+        zurückZumMenüButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+
+        produktErstellenBuildingMat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (produktnamenBuild.getText().equals("") || formattedTextFieldPreisMat.getText().equals("") || (Integer) spinnerMengeMat.getValue() == 0
+                        || comboBoxBarcode.getSelectedItem().equals("") || (Integer) spinnerTonnen.getValue() == 0) {
+                    labelInkorrektBuild.setVisible(true);
+                } else {
+                    try {
+                        String produktname = produktnamenBuild.getText();
+                        float preis = Float.parseFloat(formattedTextFieldPreisMat.getText());
+                        int menge = (Integer) spinnerMengeMat.getValue();
+                        boolean barcode = Boolean.parseBoolean(comboBoxBarcode.getSelectedItem().toString());
+                        int tonnen = (Integer) spinnerTonnen.getValue();
+                        String mat = comboBoxMaterial.getSelectedItem().toString();
+
+                        SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
+                                getSelectedUser().getCurrentCompanyWork().getName(), (Integer) spinnerRegal.getValue());
+
+                        invisibler();
+                        ProduktErstellt.setVisible(true);
+                        clearDropdownsTrueFalsePro();
+                        labelFalschBuild.setVisible(false);
+                    } catch (Exception a) {
+                        labelFalschBuild.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        promoteEmployeeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChiefOutput.setVisible(false);
+                ChiefMenuActionPanel.setVisible(true);
+                ChiefMenuComboBox.removeAllItems();
+                ChiefMenuActionPanelLabel.setText("Bitte wähle eine Person um sie zum Chef zu befördern");
+                getSelectedUser().getCurrentShopWork().getEmployeeList().values().forEach(person -> ChiefMenuComboBox.addItem(person.getName()));
+
+            }
+        });
+
+        kündenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fireEmployee(getSelectedUser().getName());
+                invisibler();
+                showSpecialButtons();
+                Dashboardpanel.setVisible(true);
+            }
+        });
+
+        arbeitVerlassenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+                long hours = ChronoUnit.HOURS.between(startWorkTime, DigitalClock.SimpleDigitalClock.realTime);
+                int test = getSelectedUser().receiveSalary(hours);
+                getSelectedUser().getCurrentShopWork().decreaseEarnings(test);
+                Dashboardpanel.setVisible(true);
+            }
+        });
+
+        gewählteAnzahlHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
+                    for (String key2 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().keySet()) {
+                        for (String key3 : SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().keySet()) {
+                            if (SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).getEmployeeList().get(key3).getName().equals(getSelectedUser().getName())) {
+                                for (int i = 0; i < (Integer) spinnerAnzRegale.getValue(); i++) {
+                                    SystemHandler.getSupermarketChainMap().get(key).getShopMap().get(key2).createShelf();
+                                }
+                            }
+                        }
+                    }
+                }
+                invisibler();
+                RegaleErstellt.setVisible(true);
+            }
+        });
+
+        zurückZumMenüButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                SpinnerPanelRegal.removeAll();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+
+        normaleKasseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Kassen.setVisible(true);
+            }
+        });
+
+        selfscannerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                for (String key2 : getSelectedUser().getCart().getArticleList().keySet()) {
+                    float price = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(key2).getValue1();
+                    JLabel labeNew = new JLabel(getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                            + price + ", ");
+
+                    String value = getSelectedUser().getCart().getArticleList().get(key2).getValue0().getName() + "(" + getSelectedUser().getCart().getArticleList().get(key2).getValue1() + "x) "
+                            + price + ", ";
+                    ProdukteWarenkorbComb.addItem(value);
+                }
+                Selfscanner.setVisible(true);
+            }
+        });
+
+        scanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ProdukteWarenkorbComb.getSelectedItem() == null) {
+                    ErrorMessageScan.setVisible(true);
+                    model.clear();
+                } else {
+                    produkteGescanntList.removeAll();
+                    model.addElement(ProdukteWarenkorbComb.getSelectedItem().toString());
+                    JList listNew = new JList(model);
+                    listNew.setFont(new Font("Serif", Font.PLAIN, 24));
+                    produkteGescanntList.add(listNew);
+
+                    PreisGesamt.removeAll();
+                    greatPrice += getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
+                            ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue0().getPrice() * getSelectedUser().getCart().getArticleList().get(ProdukteWarenkorbComb.getSelectedItem().toString().substring(0,
+                            ProdukteWarenkorbComb.getSelectedItem().toString().indexOf("("))).getValue1();
+
+                    ProdukteWarenkorbComb.removeItem(ProdukteWarenkorbComb.getSelectedItem());
+                    JLabel labelNew = new JLabel("Kosten Betragen: " + greatPrice);
+                    labelNew.setFont(new Font("Serif", Font.PLAIN, 20));
+                    labelNew.setVerticalAlignment(SwingConstants.CENTER);
+                    PreisGesamt.add(labelNew);
+                    ProdukteWarenkorbComb.repaint();
+                    ProdukteWarenkorbComb.revalidate();
+                }
+            }
+        });
+
+        bezahlenButtonScan.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                produkteGescanntList.removeAll();
+                ProdukteWarenkorbComb.removeAllItems();
+                model.clear();
+                getSelectedUser().getCart().getArticleList().clear();
+                invisibler();
+
+                EinkaufAbschluss.setVisible(true);
+            }
+        });
+
+        auswählenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (aldiRadioButton.isSelected()) {
+                    setCurrentCompany("aldi");
+                } else if (migrosRadioButton.isSelected()) {
+                    setCurrentCompany("migros");
+                } else if (coopRadioButton.isSelected()) {
+                    setCurrentCompany("coop");
+                }
+                if (getCurrentCompany() == null) {
+                    labelFalschRadio.setVisible(true);
+                } else {
+                    invisibler();
+                    Filiale.setVisible(true);
+                    fillDropdownWithShops(getCurrentCompany(), comboBox1);
+                    labelFalschRadio.setVisible(false);
+                }
+            }
+        });
+
+        zurückButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SpinnerPanelRegal.removeAll();
+                invisibler();
+                Mitarbeiter.setVisible(true);
+            }
+        });
+
+        convertSchüpperpointsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSelectedUser().convertSchüpperPoints();
+                setDashboardInformation();
+            }
+        });
+
+        schüpercardMitPunktenAufladenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (textFieldSchüpercard.getText().equals("")) {
+                    labelFalschSchüp.setVisible(true);
+                } else {
+                    try {
+                        if ((Integer.parseInt(textFieldSchüpercard.getText()) > 9999 || Integer.parseInt(textFieldSchüpercard.getText()) < 1000)) {
+                            labelFalschSchüp.setVisible(true);
+                        } else {
+                            if (getSelectedUser().getCard().getCardnumber() == Integer.parseInt(textFieldSchüpercard.getText())) {
+                                getSelectedUser().getCard().increasePoints(greatValue);
+                                schüpercardMitPunktenAufladenButton.setVisible(false);
+                                labelFalschSchüp.setVisible(false);
+                                labelRichtigSchüp.setVisible(true);
+
+                            } else {
+                                labelFalschSchüp.setVisible(true);
+                            }
+                        }
+                    } catch (Exception a) {
+                        labelFalschSchüp.setVisible(true);
+                    }
+                }
+            }
+        });
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent winEvt) {
@@ -1446,191 +1393,163 @@ public class GUI {
             }
         });
 
-        changePasswordButton.addActionListener(new
+        changePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                changePasswordPanel.setVisible(true);
+            }
+        });
 
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               changePasswordPanel.setVisible(true);
-                                                           }
-                                                       });
+        backToDashboardPw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Dashboardpanel.setVisible(true);
+            }
+        });
 
-        backToDashboardPw.addActionListener(new
+        personHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                PersonenHInzufügen.setVisible(true);
+            }
+        });
 
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            invisibler();
-                                                            Dashboardpanel.setVisible(true);
-                                                        }
-                                                    });
+        zurückButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                benutzerLabelRichtig.setVisible(false);
+                benutzerLabelFalsch.setVisible(false);
+                Admin.setVisible(true);
+            }
+        });
 
-        personHinzufügenButton.addActionListener(new
+        benutzerHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
+                    getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
+                            textFieldPasswort.getText(), textFieldPasswortRep.getText()));
+                    textFieldPasswort.setText("");
+                    textFieldPasswortRep.setText("");
+                    textFieldBenutzernamen.setText("");
+                    benutzerLabelRichtig.setVisible(true);
+                } else {
+                    benutzerLabelFalsch.setVisible(true);
+                }
+            }
+        });
 
-                                                         ActionListener() {
-                                                             @Override
-                                                             public void actionPerformed(ActionEvent e) {
-                                                                 invisibler();
-                                                                 PersonenHInzufügen.setVisible(true);
-                                                             }
-                                                         });
+        shopErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
+                comboBoxSelfCheckout.addItem(true);
+                comboBoxSelfCheckout.addItem(false);
+                ShopHinzufügen.setVisible(true);
+            }
+        });
 
-        zurückButton1.addActionListener(new
+        supermarktketteErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                SupermarktketteHinzufügen.setVisible(true);
+            }
+        });
 
-                                                ActionListener() {
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e) {
-                                                        invisibler();
-                                                        benutzerLabelRichtig.setVisible(false);
-                                                        benutzerLabelFalsch.setVisible(false);
-                                                        Admin.setVisible(true);
-                                                    }
-                                                });
+        zurückButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comboBoxSelfCheckout.removeAllItems();
+                invisibler();
+                labelFalschShop.setVisible(false);
+                labelRichtigShop.setVisible(false);
+                Admin.setVisible(true);
+            }
+        });
 
-        benutzerHinzufügenButton.addActionListener(new
+        shopErstellenButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                try {
+                    String shopname = textFieldShopname.getText();
+                    boolean selfCheckoutValue = Boolean.parseBoolean(selfCheckout.getText());
+                    String place = textFieldPlace.getText();
+                    int earnings = Integer.parseInt(textFieldEarnings.getText());
+                    String chiefname = textFieldChief.getText();
+                    Person chief = new Person(chiefname, "123", "123");
+                    if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
+                        labelRichtigShop.setVisible(true);
+                        labelFalschShop.setVisible(false);
+                    } else {
+                        labelFalschShop.setVisible(false);
+                        labelRichtigShop.setVisible(false);
+                    }
+                } catch (Exception a) {
+                    labelRichtigShop.setVisible(false);
+                    labelFalschShop.setVisible(true);
+                }
+                ShopHinzufügen.setVisible(true);
+            }
+        });
 
-                                                           ActionListener() {
-                                                               @Override
-                                                               public void actionPerformed(ActionEvent e) {
-                                                                   if (textFieldPasswort.getText().equals(textFieldPasswortRep.getText())) {
-                                                                       getPersonList().put(textFieldBenutzernamen.getText(), new Person(textFieldBenutzernamen.getText(),
-                                                                               textFieldPasswort.getText(), textFieldPasswortRep.getText()));
-                                                                       textFieldPasswort.setText("");
-                                                                       textFieldPasswortRep.setText("");
-                                                                       textFieldBenutzernamen.setText("");
-                                                                       benutzerLabelRichtig.setVisible(true);
-                                                                   } else {
-                                                                       benutzerLabelFalsch.setVisible(true);
-                                                                   }
-                                                               }
-                                                           });
+        zurückButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                Admin.setVisible(true);
+            }
+        });
+        ketteErstellenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                    labelKetteRichtig.setVisible(true);
+                    labelKetteFalsch.setVisible(false);
+                } else {
+                    labelKetteFalsch.setVisible(true);
+                    labelKetteRichtig.setVisible(false);
+                }
+            }
+        });
 
-        shopErstellenButton.addActionListener(new
+        changePasswordSubmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())) {
+                    passwordOutput.setText("Dein Passwort wurde geändert");
+                } else {
+                    passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
+                }
+            }
+        });
 
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              invisibler();
-                                                              fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
-                                                              comboBoxSelfCheckout.addItem(true);
-                                                              comboBoxSelfCheckout.addItem(false);
-                                                              ShopHinzufügen.setVisible(true);
-                                                          }
-                                                      });
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getPersonList().clear();
+                getSupermarketChainMap().clear();
+                SupermarketHandler.setUp();
+                safeToFile();
+            }
+        });
 
-        supermarktketteErstellenButton.addActionListener(new
-
-                                                                 ActionListener() {
-                                                                     @Override
-                                                                     public void actionPerformed(ActionEvent e) {
-                                                                         invisibler();
-                                                                         SupermarktketteHinzufügen.setVisible(true);
-                                                                     }
-                                                                 });
-
-        zurückButton3.addActionListener(new
-
-                                                ActionListener() {
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e) {
-                                                        comboBoxSelfCheckout.removeAllItems();
-                                                        invisibler();
-                                                        labelFalschShop.setVisible(false);
-                                                        labelRichtigShop.setVisible(false);
-                                                        Admin.setVisible(true);
-                                                    }
-                                                });
-
-        shopErstellenButton1.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               try {
-                                                                   String shopname = textFieldShopname.getText();
-                                                                   boolean selfCheckoutValue = Boolean.parseBoolean(selfCheckout.getText());
-                                                                   String place = textFieldPlace.getText();
-                                                                   int earnings = Integer.parseInt(textFieldEarnings.getText());
-                                                                   String chiefname = textFieldChief.getText();
-                                                                   Person chief = new Person(chiefname, "123", "123");
-                                                                   if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
-                                                                       labelRichtigShop.setVisible(true);
-                                                                       labelFalschShop.setVisible(false);
-                                                                   } else {
-                                                                       labelFalschShop.setVisible(false);
-                                                                       labelRichtigShop.setVisible(false);
-                                                                   }
-                                                               } catch (Exception a) {
-                                                                   labelRichtigShop.setVisible(false);
-                                                                   labelFalschShop.setVisible(true);
-                                                               }
-                                                               ShopHinzufügen.setVisible(true);
-                                                           }
-                                                       });
-
-        zurückButton4.addActionListener(new
-
-                                                ActionListener() {
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e) {
-                                                        invisibler();
-                                                        Admin.setVisible(true);
-                                                    }
-                                                });
-        ketteErstellenButton.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
-                                                                   labelKetteRichtig.setVisible(true);
-                                                                   labelKetteFalsch.setVisible(false);
-                                                               } else {
-                                                                   labelKetteFalsch.setVisible(true);
-                                                                   labelKetteRichtig.setVisible(false);
-                                                               }
-                                                           }
-                                                       });
-
-        changePasswordSubmit.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               if (getSelectedUser().changePassword(oldPassword.getText(), newPassword.getText(), repeatPassword.getText())) {
-                                                                   passwordOutput.setText("Dein Passwort wurde geändert");
-                                                               } else {
-                                                                   passwordOutput.setText("Ein Fehler ist aufgetreten, bitte versuche es noch einmal");
-                                                               }
-                                                           }
-                                                       });
-
-        resetButton.addActionListener(new
-
-                                              ActionListener() {
-                                                  @Override
-                                                  public void actionPerformed(ActionEvent e) {
-                                                      getPersonList().clear();
-                                                      getSupermarketChainMap().clear();
-                                                      SupermarketHandler.setUp();
-                                                      safeToFile();
-                                                  }
-                                              });
-
-        ausloggenButtonAdmin.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               invisibler();
-                                                               nameLogin.setText("");
-                                                               passwortLogin.setText("");
-                                                               logout();
-                                                               Loginpanel.setVisible(true);
-                                                           }
-                                                       });
+        ausloggenButtonAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                invisibler();
+                nameLogin.setText("");
+                passwortLogin.setText("");
+                logout();
+                Loginpanel.setVisible(true);
+            }
+        });
     }
 
     public void fillDropdownWithShops(String supermarketname, JComboBox comboBox) {
@@ -1700,7 +1619,7 @@ public class GUI {
 
 
     public void fillDropdownWithSupermarkets(JComboBox comboBox) {
-        System.out.println("created");
+        System.out.println(comboBox);
         if (comboBox.getItemCount() > 0) {
             comboBox.removeAllItems();
         }
@@ -1792,7 +1711,6 @@ public class GUI {
             SupermarketHandler.setUp();
         }
 
-
         frame.setResizable(true);
         frame.setContentPane((new GUI()).panelMain);
         frame.setDefaultCloseOperation(3);
@@ -1881,3 +1799,6 @@ public class GUI {
         }
     }
 }
+
+
+
