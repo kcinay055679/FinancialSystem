@@ -298,18 +298,20 @@ public class GUI {
         passwortLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                    invisibler();
-                    Admin.setVisible(true);
-                } else {
-                    if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
-                        labelFalsch.setVisible(false);
-                        Dashboardpanel.setVisible(true);
-                        setDashboardInformation();
-                        showSpecialButtons();
-                    }else {
-                        labelFalsch.setVisible(true);
+                        Admin.setVisible(true);
+                    } else {
+                        if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                            invisibler();
+                            labelFalsch.setVisible(false);
+                            Dashboardpanel.setVisible(true);
+                            setDashboardInformation();
+                            showSpecialButtons();
+                        }else {
+                            labelFalsch.setVisible(true);
+                        }
                     }
                 }
                 super.keyPressed(e);
@@ -321,18 +323,20 @@ public class GUI {
         nameLogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
-                    invisibler();
-                    Admin.setVisible(true);
-                } else {
-                    if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (SystemHandler.adminCheck(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
                         invisibler();
-                        labelFalsch.setVisible(false);
-                        Dashboardpanel.setVisible(true);
-                        setDashboardInformation();
-                        showSpecialButtons();
-                    }else {
-                        labelFalsch.setVisible(true);
+                        Admin.setVisible(true);
+                    } else {
+                        if(SystemHandler.login(nameLogin.getText(), new String(GUI.this.passwortLogin.getPassword()))) {
+                            invisibler();
+                            labelFalsch.setVisible(false);
+                            Dashboardpanel.setVisible(true);
+                            setDashboardInformation();
+                            showSpecialButtons();
+                        }else {
+                            labelFalsch.setVisible(true);
+                        }
                     }
                 }
                 super.keyPressed(e);
@@ -1356,14 +1360,6 @@ public class GUI {
                     labelKetteFalsch.setVisible(true);
                     labelKetteRichtig.setVisible(false);
                 }
-            }
-        });
-
-        testTest.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                invisibler();
-                Admin.setVisible(true);
             }
         });
 
