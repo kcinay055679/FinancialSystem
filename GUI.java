@@ -462,6 +462,8 @@ public class GUI {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                getSelectedUser().getCart().getArticleList().clear();
+                Cart.removeAll();
                 getSelectedUser().decreaseMoney(greatValue);
                 getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).increaseEarnings(greatValue);
                 System.out.println(getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getEarnings());
@@ -773,6 +775,7 @@ public class GUI {
                 getSelectedUser().getCart().getArticleList().clear();
 
                 invisibler();
+                Cart.removeAll();
                 Filiale.setVisible(true);
             }
         });
@@ -1451,12 +1454,16 @@ public class GUI {
                 invisibler();
                 try {
                     String shopname = textFieldShopname.getText();
-                    boolean selfCheckoutValue = Boolean.parseBoolean(selfCheckout.getText());
+                    boolean selfCheckoutValue = Boolean.parseBoolean(comboBoxSelfCheckout.getSelectedItem().toString());
                     String place = textFieldPlace.getText();
                     int earnings = Integer.parseInt(textFieldEarnings.getText());
                     String chiefname = textFieldChief.getText();
                     Person chief = new Person(chiefname, "123", "123");
                     if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
+                        textFieldShopname.setText("");
+                        textFieldChief.setText("");
+                        textFieldPlace.setText("");
+                        textFieldEarnings.setText("");
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
                     } else {
@@ -1466,6 +1473,7 @@ public class GUI {
                 } catch (Exception a) {
                     labelRichtigShop.setVisible(false);
                     labelFalschShop.setVisible(true);
+                    System.out.println("Ok hello");
                 }
                 ShopHinzufügen.setVisible(true);
             }
@@ -1482,6 +1490,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                    textFieldSupermarktkettenName.setText("");
                     labelKetteRichtig.setVisible(true);
                     labelKetteFalsch.setVisible(false);
                 } else {
