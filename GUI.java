@@ -1426,7 +1426,7 @@ public class GUI {
                 invisibler();
                 fillDropdownWithPlaces(comboBoxOrteShop);
                 fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
-                fillDropdownWithChiefs(comboBoxChief);
+                fillDropdownWithChiefs(comboBoxChief, comboBoxFirmaAdmin.getSelectedItem().toString());
                 comboBoxSelfCheckout.addItem(true);
                 comboBoxSelfCheckout.addItem(false);
                 ShopHinzufügen.setVisible(true);
@@ -1473,7 +1473,7 @@ public class GUI {
                     if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
                         textFieldShopname.setText("");
                         textFieldEarnings.setText("");
-                        fillDropdownWithChiefs(comboBoxChief);
+                        fillDropdownWithChiefs(comboBoxChief, comboBoxFirmaAdmin.getSelectedItem().toString());
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
                     } else {
@@ -1545,6 +1545,13 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 invisibler();
                 Dashboardpanel.setVisible(true);
+            }
+        });
+        comboBoxFirmaAdmin.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                comboBoxChief.removeAllItems();
+                fillDropdownWithChiefs(comboBoxChief, comboBoxFirmaAdmin.getSelectedItem().toString());
             }
         });
     }
@@ -1633,15 +1640,17 @@ public class GUI {
                 .forEach(place -> comboBox.addItem(place.toString()));
     }
 
-    public void fillDropdownWithChiefs(JComboBox comboBox) {
+    public void fillDropdownWithChiefs(JComboBox comboBox, String companyname) {
         if (comboBox.getItemCount() > 0) {
             comboBox.removeAllItems();
         }
 
         for (String key : SystemHandler.getPersonList().keySet()) {
-            if(SystemHandler.getPersonList().get(key).getRank().equals(Rank.EMPLOYEE)) {
+            if(SystemHandler.getPersonList().get(key).getRank().equals(Rank.EMPLOYEE) && SystemHandler.getPersonList().get(key).getCurrentCompanyWork().getName().equals(companyname)) {
                 comboBox.addItem(key);
                 addItemIfNotExists(key, comboBox);
+                comboBox.repaint();
+                comboBox.revalidate();
             }
         }
     }
@@ -1753,6 +1762,9 @@ public class GUI {
         } else {
             schüpperpunkte.setText("Keine Schüperkarte verfügbar");
         }
+    }
+
+    public void actualizeEmployees() {
 
     }
 

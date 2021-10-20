@@ -62,6 +62,10 @@ public class SupermarketHandler implements java.io.Serializable{
         SupermarketHandler.addPerson("Mar1", "password", "password");
         hireEmployee("Mar1", "coop", "FoodPalace", 4500);
 
+        SupermarketHandler.addPerson("Heidu", "password", "password");
+        hireEmployee("Heidu", "migros", "FoodPalace", 4500);
+        employeeEnter("Heidu");
+
         System.out.println("Error: All Variables are resettet");
     }
 
