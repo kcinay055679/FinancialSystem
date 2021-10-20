@@ -1429,12 +1429,16 @@ public class GUI {
                 invisibler();
                 try {
                     String shopname = textFieldShopname.getText();
-                    boolean selfCheckoutValue = Boolean.parseBoolean(selfCheckout.getText());
+                    boolean selfCheckoutValue = Boolean.parseBoolean(comboBoxSelfCheckout.getSelectedItem().toString());
                     String place = textFieldPlace.getText();
                     int earnings = Integer.parseInt(textFieldEarnings.getText());
                     String chiefname = textFieldChief.getText();
                     Person chief = new Person(chiefname, "123", "123");
                     if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
+                        textFieldShopname.setText("");
+                        textFieldChief.setText("");
+                        textFieldPlace.setText("");
+                        textFieldEarnings.setText("");
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
                     } else {
@@ -1444,6 +1448,7 @@ public class GUI {
                 } catch (Exception a) {
                     labelRichtigShop.setVisible(false);
                     labelFalschShop.setVisible(true);
+                    System.out.println("Ok hello");
                 }
                 ShopHinzufügen.setVisible(true);
             }
@@ -1460,6 +1465,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (createSupermarketChain(textFieldSupermarktkettenName.getText())) {
+                    textFieldSupermarktkettenName.setText("");
                     labelKetteRichtig.setVisible(true);
                     labelKetteFalsch.setVisible(false);
                 } else {
