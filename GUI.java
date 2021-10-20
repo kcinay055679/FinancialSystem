@@ -709,6 +709,12 @@ public class GUI {
         schüpercardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(getSelectedUser().getCard() == null){
+                    convertSchüpperpointsButton.setVisible(false);
+                }else{
+                    convertSchüpperpointsButton.setVisible(true);
+                }
+
                 invisibler();
                 Schüpercard.setVisible(true);
             }
@@ -754,6 +760,22 @@ public class GUI {
         zurückButtonWarenkorb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Shop shop = getSupermarketChainMap().get(getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName()).getShopMap().get(getSelectedUser().getCurrentShopWork().getName());
+
+                for (Pair<Article, Integer> v : getSelectedUser().getCart().getArticleList().values()) {
+                    int shelfId = shop.getArticlePositionList().get(v.getValue0().getName());
+                    boolean barcode = v.getValue0().isBarcode();
+                    String articleType = v.getValue0().getArticleType();
+                    if(articleType.equals("Food")){
+                        shop.getSupermarketChain().getShopMap().get(shop.getName()).getShelfById(shelfId).increaseArticleAmountFood(v.getValue0().getName(), v.getValue1());
+                    }else if (articleType.equals("BuildingMaterial")){
+                        shop.getSupermarketChain().getShopMap().get(shop.getName()).getShelfById(shelfId).increaseArticleAmountBuildingMaterial(v.getValue0().getName(), v.getValue1());
+                    }
+                }
+
+                getSelectedUser().getCart().setFullPrice(0);
+                getSelectedUser().getCart().getArticleList().clear();
+
                 invisibler();
                 Cart.removeAll();
                 Filiale.setVisible(true);
@@ -1097,7 +1119,7 @@ public class GUI {
                         int menge = (Integer) spinnerMengeMat.getValue();
                         boolean barcode = Boolean.parseBoolean(comboBoxBarcode.getSelectedItem().toString());
                         int tonnen = (Integer) spinnerTonnen.getValue();
-                        String mat = comboBoxMaterial.getSelectedItem().toString();
+                        String mat = Objects.requireNonNull(comboBoxMaterial.getSelectedItem()).toString();
 
                         SupermarketHandler.createBuildingMaterial(produktname, preis, menge, barcode, getSelectedUser().getCurrentShopWork().getName(), tonnen, mat,
                                 getSupermarketChainMap().get(getSelectedUser().getCurrentCompanyWork().getName()).getName(), (Integer) spinnerRegal.getValue());
@@ -1690,7 +1712,8 @@ public class GUI {
     public static void main(String[] args) {
         if (new File("Data").mkdirs()) {
             System.out.println("Der Ordner \"Data\" wurde erstellt");
-        } else if (new File("Data/persons.ser").exists() && new File("Data/supermarketChains.ser").exists()) {
+        }
+        if (new File("Data/persons.ser").exists() && new File("Data/supermarketChains.ser").exists()) {
             try {
                 loadFromFile();
             } catch (Exception e) {
@@ -1710,11 +1733,11 @@ public class GUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         DigitalClock.main();
-        Container glassPane = (Container) frame.getGlassPane();
-        DigitalClock.SimpleDigitalClock simpleDigitalClock = new DigitalClock.SimpleDigitalClock();
-
-        glassPane.add(simpleDigitalClock);
-        glassPane.setVisible(false);
+//        Container glassPane = (Container) frame.getGlassPane();
+//        DigitalClock.SimpleDigitalClock simpleDigitalClock = new DigitalClock.SimpleDigitalClock();
+//
+//        glassPane.add(simpleDigitalClock);
+//        glassPane.setVisible(false);
     }
 
     public void setDashboardInformation() {
@@ -1742,7 +1765,7 @@ public class GUI {
 
     public void clearDropdownsTrueFalsePro() {
         comboBoxBarcode.removeAllItems();
-        ;
+
         comboBoxBarcodeFleisch.removeAllItems();
     }
 
@@ -1794,6 +1817,3 @@ public class GUI {
         }
     }
 }
-
-
-

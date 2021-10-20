@@ -6,6 +6,7 @@ import SupermarketPackage.SupermarketChain;
 import org.javatuples.Pair;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,9 +143,17 @@ public class SystemHandler implements java.io.Serializable{
 
             //supermarkets
             FileOutputStream fileOutSupermarkets = new FileOutputStream("Data/supermarketChains.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOutSupermarkets);
-            out.writeObject(supermarketChainMap);
-            out.close();
+            ObjectOutputStream outSupermarket = new ObjectOutputStream(fileOutSupermarkets);
+            outSupermarket.writeObject(supermarketChainMap);
+
+            FileOutputStream fileOutTIme = new FileOutputStream("Data/time.ser");
+            ObjectOutputStream outTime = new ObjectOutputStream(fileOutTIme);
+            outTime.writeObject(DigitalClock.SimpleDigitalClock.realTime);
+
+
+            fileOutTIme.close();
+            outTime.close();
+            outSupermarket.close();
             fileOutSupermarkets.close();
             outPerson.close();
             fileOutPerson.close();
@@ -165,6 +174,11 @@ public class SystemHandler implements java.io.Serializable{
             FileInputStream fileInSupermarket = new FileInputStream("Data/supermarketChains.ser");
             ObjectInputStream inSupermarket = new ObjectInputStream(fileInSupermarket);
             supermarketChainMap = (Map<String, SupermarketChain>) inSupermarket.readObject();
+
+            FileInputStream fileInTime = new FileInputStream("Data/time.ser");
+            ObjectInputStream inTIme = new ObjectInputStream(fileInTime);
+            DigitalClock.SimpleDigitalClock.realTime = (LocalDateTime) inTIme.readObject();
+
 
             inSupermarket.close();
             fileInSupermarket.close();
