@@ -22,7 +22,7 @@ public class DigitalClock {
     public static class SimpleDigitalClock extends JPanel {
         Thread t = new Thread();
         String timeString = "";
-        public static LocalDateTime realTime = LocalDateTime.from(LocalDateTime.of(1, 1, 1, 5, 1, 1));
+        public static LocalDateTime realTime = LocalDateTime.from(LocalDateTime.of(1, 1, 1, 0, 0,0, 0));
 
         public void setStringTime(String abc) {
             this.timeString = abc;

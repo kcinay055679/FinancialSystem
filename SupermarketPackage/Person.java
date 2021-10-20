@@ -15,7 +15,7 @@ public class Person implements java.io.Serializable{
     private int money;
     private final String name;
     private byte[] hashedPassword;
-    private String pw;
+
 
     private Company currentCompanyWork;
     private Shop currentShopWork;
@@ -59,7 +59,6 @@ public class Person implements java.io.Serializable{
         //Todo: pw wieder entfernen
 
         if (password.equals(repeatPassword)) {
-            pw = password;
             hashedPassword = hashPassword(password);
         } else {
             throw new SecurityException();
@@ -78,7 +77,6 @@ public class Person implements java.io.Serializable{
     public boolean changePassword(String oldPassword, String newPassword, String newPasswordRepeat) {
         if (Arrays.equals(hashPassword(oldPassword), hashedPassword) && newPassword.equals(newPasswordRepeat)) {
             hashedPassword = hashPassword(newPassword);
-            pw = newPassword;
             System.out.println("Dein Passwort wurde geändert");
             return true;
         }else{

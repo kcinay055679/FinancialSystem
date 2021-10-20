@@ -72,10 +72,6 @@ public class SupermarketHandler implements java.io.Serializable{
         }
     }
 
-
-
-
-
     public static void takeArticle(String personName, String articleName, int amount, int shelfId) {
         getPersonList().get(personName).takeArticle(articleName, amount, shelfId);
     }
