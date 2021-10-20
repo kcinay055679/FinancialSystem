@@ -158,7 +158,7 @@ public class Shop implements java.io.Serializable{
 
         //Neuer Chef wird aus den Mitarbeiterlisten entfernt
         supermarketChain.getEmployeeMap().remove(name);
-
+        employeeList.remove(name);
 
         //Alter Chef wird aus der Chef Map entfernt
         supermarketChain.getChiefMap().remove(chiefPair.getValue0().getName());
