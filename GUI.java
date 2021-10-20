@@ -253,6 +253,8 @@ public class GUI {
     private JButton zurückButton5;
     private JComboBox comboBoxOhneBarcode;
     private JButton manuelHinzufügenButton;
+    private JComboBox comboBoxOrteShop;
+    private JComboBox comboBoxChief;
     private JList gescannteProdukteList;
 
     //Hashmap für die Produkte in einem Laden
@@ -1400,7 +1402,9 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                fillDropdownWithPlaces(comboBoxOrteShop);
                 fillDropdownWithSupermarkets(comboBoxFirmaAdmin);
+                fillDropdownWithChiefs(comboBoxChief);
                 comboBoxSelfCheckout.addItem(true);
                 comboBoxSelfCheckout.addItem(false);
                 ShopHinzufügen.setVisible(true);
@@ -1433,15 +1437,21 @@ public class GUI {
                 try {
                     String shopname = textFieldShopname.getText();
                     boolean selfCheckoutValue = Boolean.parseBoolean(comboBoxSelfCheckout.getSelectedItem().toString());
-                    String place = textFieldPlace.getText();
+                    String place = comboBoxOrteShop.getSelectedItem().toString();
                     int earnings = Integer.parseInt(textFieldEarnings.getText());
-                    String chiefname = textFieldChief.getText();
-                    Person chief = new Person(chiefname, "123", "123");
+                    String chiefname = comboBoxChief.getSelectedItem().toString();
+                    Person chief = null;
+                    for(String key : SystemHandler.getPersonList().keySet()) {
+                        if(chiefname.equals(key)) {
+                            chief = SystemHandler.getPersonList().get(key);
+                            chief.setRank(Rank.CHIEF);
+                            break;
+                        }
+                    }
                     if (getSupermarketChainMap().get(comboBoxFirmaAdmin.getSelectedItem().toString()).createSubsidiary(shopname, chief, selfCheckoutValue, place, earnings)) {
                         textFieldShopname.setText("");
-                        textFieldChief.setText("");
-                        textFieldPlace.setText("");
                         textFieldEarnings.setText("");
+                        fillDropdownWithChiefs(comboBoxChief);
                         labelRichtigShop.setVisible(true);
                         labelFalschShop.setVisible(false);
                     } else {
@@ -1451,7 +1461,6 @@ public class GUI {
                 } catch (Exception a) {
                     labelRichtigShop.setVisible(false);
                     labelFalschShop.setVisible(true);
-                    System.out.println("Ok hello");
                 }
                 ShopHinzufügen.setVisible(true);
             }
@@ -1590,6 +1599,28 @@ public class GUI {
         for (String key : SystemHandler.getSupermarketChainMap().keySet()) {
             comboBox.addItem(key);
             addItemIfNotExists(key, comboBox);
+        }
+    }
+
+    public void fillDropdownWithPlaces(JComboBox comboBox) {
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
+        EnumSet.allOf(Place.class)
+                .forEach(place -> comboBox.addItem(place.toString()));
+    }
+
+    public void fillDropdownWithChiefs(JComboBox comboBox) {
+        if (comboBox.getItemCount() > 0) {
+            comboBox.removeAllItems();
+        }
+
+        for (String key : SystemHandler.getPersonList().keySet()) {
+            if(SystemHandler.getPersonList().get(key).getRank().equals(Rank.EMPLOYEE)) {
+                comboBox.addItem(key);
+                addItemIfNotExists(key, comboBox);
+            }
         }
     }
 
