@@ -1682,7 +1682,8 @@ public class GUI {
         if (new File("Data").mkdirs()) {
             System.out.println("Der Ordner \"Data\" wurde erstellt");
         }
-        if (new File("Data/persons.ser").exists() && new File("Data/supermarketChains.ser").exists()) {
+
+        if (new File("Data/persons.ser").exists() && new File("Data/supermarketChains.ser").exists() && new File("Data/time.ser").exists()) {
             try {
                 loadFromFile();
             } catch (Exception e) {
@@ -1690,7 +1691,6 @@ public class GUI {
             }
         } else {
             SupermarketHandler.setUp();
-            System.out.println("test");
         }
 
         frame.setResizable(true);

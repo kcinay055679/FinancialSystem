@@ -53,7 +53,6 @@ public class SystemHandler implements java.io.Serializable{
         supermarketChain.getEmployeeMap().put(p.getName(), new Pair<>(p, supermarketChain.getShopMap().get(shopName)));
         shop.getEmployeeList().put(p.getName(), p);
         p.setSalary(salary);
-        System.out.println(shop +" hire "+personName);
     }
 
     public static void fireEmployee(String person) {
