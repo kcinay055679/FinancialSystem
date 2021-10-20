@@ -462,6 +462,8 @@ public class GUI {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                getSelectedUser().getCart().getArticleList().clear();
+                Cart.removeAll();
                 getSelectedUser().decreaseMoney(greatValue);
                 getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).increaseEarnings(greatValue);
                 System.out.println(getSupermarketChainMap().get(getCurrentCompany()).getShopMap().get(getCurrentShop()).getEarnings());
@@ -751,6 +753,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 invisibler();
+                Cart.removeAll();
                 Filiale.setVisible(true);
             }
         });
