@@ -169,7 +169,6 @@ public class SystemHandler implements java.io.Serializable{
             ObjectInputStream inPerson = new ObjectInputStream(fileInPerson);
             personList = (Map<String, Person>) inPerson.readObject();
 
-
             FileInputStream fileInSupermarket = new FileInputStream("Data/supermarketChains.ser");
             ObjectInputStream inSupermarket = new ObjectInputStream(fileInSupermarket);
             supermarketChainMap = (Map<String, SupermarketChain>) inSupermarket.readObject();

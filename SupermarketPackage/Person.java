@@ -56,8 +56,6 @@ public class Person implements java.io.Serializable{
 
     public void setPassword(String password, String repeatPassword) {
 
-        //Todo: pw wieder entfernen
-
         if (password.equals(repeatPassword)) {
             hashedPassword = hashPassword(password);
         } else {

@@ -65,7 +65,6 @@ public class Tablet implements java.io.Serializable{
 
     public List<Triplet<Shop, Article, Integer>> findArticleInShop(String articleName, String shopName,String supermarketChainName) {
         List<Triplet<Shop, Article, Integer>> foundArticles = new ArrayList<>();
-
             for (Shelf s : getSupermarketChainMap().get(supermarketChainName).getShopMap().get(shopName).getShelfList().values()) {
                 for (Pair<Article, Integer> a : s.getArticleList().values()) {
                     if (a.getValue0().getName().equals(articleName)) {

@@ -69,7 +69,6 @@ public class SupermarketHandler implements java.io.Serializable{
         System.out.println("Error: All Variables are resettet");
     }
 
-
     public static void addPerson(String name, String password, String repeatPassword) {
         if (password.equals(repeatPassword)) {
             getPersonList().put(name, new Person(name, password, repeatPassword));
@@ -112,10 +111,6 @@ public class SupermarketHandler implements java.io.Serializable{
         SupermarketChain supermarket = getSupermarketChainMap().get(supermarketChainName);
         Shop shop = supermarket.getShopMap().get(shopName);
         shop.createShelf();
-    }
-
-    public static void checkOut(String customerName, String shopName) {
-        getPersonList().get(customerName).getCurrentShopWork().getSupermarketChain().getShopMap().get(shopName).checkOut(getPersonList().get(customerName));
     }
 
 

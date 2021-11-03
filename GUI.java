@@ -1764,9 +1764,7 @@ public class GUI {
         }
     }
 
-    public void actualizeEmployees() {
 
-    }
 
     public void fillDropdownsTrueFalsePro() {
         comboBoxBarcode.addItem(true);
